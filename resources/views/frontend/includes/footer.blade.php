@@ -57,24 +57,27 @@
 	</div>
 	<div class="copyright-area">
 	  <div class="container">
-	    <div class="row align-items-center d-flex">
-	      <div class="col-lg-6 col-md-6">
+	    <div class="row align-items-center d-flex justify-content-center">
+	      <div class="col-lg-2 col-md-2 text-center">
 	        <div class="copyright">
 	          <div>
 	            <p class="text-white mb-sm-0 mb-3">© 2021 961Freelancer</p>
 	          </div>
 	        </div>
 	      </div>
-	      <div class="col-lg-6 col-md-6">
+	      <!-- <div class="col-lg-6 col-md-6">
 	        <div class="widget-link d-flex align-items-center">
 	          <p class="text-white">Secured With: </p>
 	          <ul>
 	            <li>
-	              <a href="javascript:void(0);"><img src="https://493143-1557358-raikfcquaxqncofqfm.stackpathdns.com/assets/img/paypal.png" alt=""></a>
+	              <a href="javascript:void(0);">
+	              	Escrow
+	              	<img src="https://493143-1557358-raikfcquaxqncofqfm.stackpathdns.com/assets/img/paypal.png" alt="">
+	              </a>
 	            </li>
 	          </ul>
 	        </div>
-	      </div>
+	      </div> -->
 	    </div>
 	  </div>
 	</div>

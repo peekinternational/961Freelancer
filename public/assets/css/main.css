@@ -1337,7 +1337,7 @@ body.wt-login .wt-userlogedin{display: block;}
     height: 100%;
     content: '';
     position: absolute;
-    background: rgba(50,50,50,0.40);
+    background: rgb(0 166 81 / 43%);
 }
 .wt-bannerimages{
 	float: left;
@@ -1566,7 +1566,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	overflow: hidden;
 	position: relative;
 	text-align: center;
-	border:1px solid #eff2f5;
+	border:2px solid #00a651;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;

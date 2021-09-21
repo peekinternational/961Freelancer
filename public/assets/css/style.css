@@ -511,7 +511,7 @@ a{
   bottom: -3px;
   right: -10px;
   animation: checkAnim 2s infinite;
-  box-shadow: 0 0 0 5px rgb(42 65 232 / 10%);
+  box-shadow: 0 0 0 5px rgb(0 166 81 / 16%);
 }
 .counters-container {
   display: flex;
