@@ -15,7 +15,7 @@
               <ul class="mb-0">
                 <li><a href="">Home</a></li>
                 <li><a href="">How it Works</a></li>
-                <li><a href="">Browse Jobs</a></li>
+                <li><a href="{{ route('job-listings') }}">Browse Jobs</a></li>
                 <li><a href="">Browse Freelancers</a></li>
               </ul>
             </div>

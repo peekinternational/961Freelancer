@@ -28,8 +28,8 @@
 									<span>Insights</span>
 								</a>
 								<ul class="sub-menu">
-									<li><hr><a href="dashboard-insights.html">Insights</a></li>
-									<li><hr><a href="dashboard-insightsuser.html">Insights User</a></li>
+									<li><hr><a href="">Insights</a></li>
+									<li><hr><a href="">Insights User</a></li>
 								</ul>
 							</li>
 							<li class="wt-active">
@@ -44,14 +44,14 @@
 									<span>All Jobs</span>
 								</a>
 								<ul class="sub-menu">
-									<li><hr><a href="dashboard-completejobs.html">Completed Jobs</a></li>
-									<li><hr><a href="dashboard-canceljobs.html">Cancelled Jobs</a></li>
-									<li><hr><a href="dashboard-ongoingjob.html">Ongoing Jobs</a></li>
-									<li><hr><a href="dashboard-ongoingsingle.html">Ongoing Single</a></li>
+									<li><hr><a href="">Completed Jobs</a></li>
+									<li><hr><a href="">Cancelled Jobs</a></li>
+									<li><hr><a href="">Ongoing Jobs</a></li>
+									<li><hr><a href="">Ongoing Single</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="dashboard-managejobs.html">
+								<a href="">
 									<i class="fal fa-megaphone"></i>
 									<span>Manage Jobs</span>
 								</a>
@@ -62,54 +62,54 @@
 									<span>Messages</span>
 								</a>
 								<ul class="sub-menu">
-									<li><hr><a href="dashboard-messages.html">Messages</a></li>
-									<li><hr><a href="dashboard-messages2.html">Messages V 2</a></li>
+									<li><hr><a href="">Messages</a></li>
+									<li><hr><a href="">Messages V 2</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="dashboard-saveitems.html">
+								<a href="">
 									<i class="fal fa-heart"></i>
 									<span>My Saved Items</span>
 								</a>
 							</li>
 							<li>
-								<a href="dashboard-invocies.html">
+								<a href="">
 									<i class="fal fa-file"></i>
 									<span>Invoices</span>
 								</a>
 							</li>
 							<li>
-								<a href="dashboard-category.html">
+								<a href="">
 									<i class="fal fa-clone"></i>
 									<span>Category</span>
 								</a>
 							</li>
 							<li>
-								<a href="dashboard-packages.html">
+								<a href="">
 									<i class="fal fa-dollar-sign"></i>
 									<span>Packages</span>
 								</a>
 							</li>
 							<li>
-								<a href="dashboard-proposals.html">
+								<a href="">
 									<i class="fal fa-save"></i>
 									<span>Proposals</span>
 								</a>
 							</li>
 							<li>
-								<a href="dashboard-accountsettings.html">
+								<a href="">
 									<i class="fal fa-anchor"></i>
 									<span>Account Settings</span>
 								</a>
 							</li>
 							<li>
-								<a href="dashboard-helpsupport.html">
+								<a href="">
 									<i class="fal fa-tag"></i>
 									<span>Help &amp; Support</span>
 								</a>
 							</li>
 							<li>
-								<a href="index-2.html">
+								<a href="">
 									<i class="fal fa-arrow-to-right"></i>
 									<span>Logout</span>
 								</a>

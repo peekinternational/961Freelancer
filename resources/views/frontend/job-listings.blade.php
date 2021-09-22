@@ -328,7 +328,7 @@
 						<div class="listings-container mt-5">
 							
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
@@ -360,7 +360,7 @@
 							</a>		
 
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
@@ -393,7 +393,7 @@
 							
 
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
@@ -425,7 +425,7 @@
 							</a>
 
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
@@ -456,7 +456,7 @@
 								</div>
 							</a>
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
@@ -487,7 +487,7 @@
 								</div>
 							</a>
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
@@ -518,7 +518,7 @@
 								</div>
 							</a>
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
@@ -549,7 +549,7 @@
 								</div>
 							</a>
 							<!-- Job Listing -->
-							<a href="single-job-page.html" class="job-listing">
+							<a href="{{ route('job-single')}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">

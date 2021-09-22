@@ -142,32 +142,6 @@
 								</ul>
 							</div>
 						</div>
-						<div class="wt-widget wt-reportjob">
-							<div class="wt-widgettitle">
-								<h2>Report This Job</h2>
-							</div>
-							<div class="wt-widgetcontent">
-								<form class="wt-formtheme wt-formreport">
-									<fieldset>
-										<div class="form-group">
-											<span class="wt-select">
-												<select>
-													<option value="Reason">Select Reason</option>
-													<option value="Reason1">Reason 1</option>
-													<option value="Reason2">Reason 2</option>
-												</select>
-											</span>
-										</div>
-										<div class="form-group">
-											<textarea class="form-control" placeholder="Description"></textarea>
-										</div>
-										<div class="form-group wt-btnarea">
-											<a href="javascrip:void(0);" class="wt-btn">Submit</a>
-										</div>
-									</fieldset>
-								</form>
-							</div>
-						</div>
 					</aside>
 				</div>
 			</div>

@@ -24,7 +24,7 @@ Route::get('/login', function () {
 })->name('login');
 Route::get('/job-listings', function () {
     return view('frontend.job-listings');
-})->name('job-listing');
+})->name('job-listings');
 Route::get('/dashboard', function () {
     return view('frontend.dashboard');
 })->name('dashboard');
