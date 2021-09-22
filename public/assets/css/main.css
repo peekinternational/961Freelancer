@@ -251,12 +251,12 @@ address { font-style: italic; }
 	z-index: 2;
 	color: #666;
 	display: block;
-	content: '\e874';
+	content: '\f078';
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
 	line-height: 50px;
-	font-family: 'Linearicons-Free';
+	font-family: 'Font Awesome 5 Pro';
 }
 .wt-select select {
 	z-index: 1;
@@ -339,14 +339,14 @@ address { font-style: italic; }
     opacity: 0;
     width: 20px;
     height: 20px;
-    color: #00cc8d;
+    color: #00a651;
     font-size: 10px;
     content: '\f00c';
     line-height: 20px;
     position: absolute;
     text-align: center;
     visibility: hidden;
-    font-family:'FontAwesome';
+    font-family:'Font Awesome 5 Pro';
 }
 .wt-checkbox input[type=checkbox]:checked + label:after,
 .wt-radio input[type=radio]:checked + label:after {
@@ -381,7 +381,7 @@ address { font-style: italic; }
 	content: '\f14a';
 	font-size: 16px;
 }
-.wt-checkbox input[type=checkbox]:checked + label:before{border-color: #00cc8d;}
+.wt-checkbox input[type=checkbox]:checked + label:before{border-color: #00a651;}
 /* Theme Global Elements */
 .wt-haslayout {
 	width:100%;
@@ -768,7 +768,7 @@ li.wt-rss a { background:#ff6600; }
 	font-size: inherit;
 	line-height: inherit;
 }
-.wt-open > .wt-dropdowarrow > i:before{content: '\e874';}
+.wt-open > .wt-dropdowarrow > i:before{content: '\f078';}
 .menu-item-has-children,
 .menu-item-has-mega-menu{ position: relative; }
 
@@ -1325,10 +1325,11 @@ body.wt-login .wt-userlogedin{display: block;}
 }
 /* Banner Style */
 .wt-bannerholder{
-	background-image: url(../images/home/banner-img.jpg);
+	/*background-image: url(../images/home/banner-img.jpg);*/
 	background-size:cover;
     background-repeat: no-repeat;
     position: relative;
+    background: #00a651;
 }
 .wt-bannerholder:before{
 	top: 0;
@@ -1337,7 +1338,7 @@ body.wt-login .wt-userlogedin{display: block;}
     height: 100%;
     content: '';
     position: absolute;
-    background: rgb(0 166 81 / 43%);
+    /*background: rgb(0 166 81 / 43%);*/
 }
 .wt-bannerimages{
 	float: left;
@@ -3186,7 +3187,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	vertical-align: baseline;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
-	background:#3498db !important;
+	background:#ed1c24 !important;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{width: 4px;}
 .mCSB_scrollTools .mCSB_draggerRail{

@@ -22,3 +22,12 @@ Route::get('/register', function () {
 Route::get('/login', function () {
     return view('frontend.signin');
 })->name('login');
+Route::get('/job-listings', function () {
+    return view('frontend.job-listings');
+})->name('job-listing');
+Route::get('/dashboard', function () {
+    return view('frontend.dashboard');
+})->name('dashboard');
+Route::get('/job-single', function () {
+    return view('frontend.single-job');
+})->name('job-single');

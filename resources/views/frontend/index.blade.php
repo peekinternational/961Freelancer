@@ -17,7 +17,7 @@
         <div class="wt-bannercontent">
           <div class="wt-bannerhead">
             <div class="wt-title">
-              <h1><span>Hire expert freelancers</span> for any job, Online</h1>
+              <h1><span>Hire Lebanese freelancers</span> for any job, Online</h1>
             </div>
             <div class="wt-description">
               <p>Consectetur adipisicing elit sed dotem eiusmod tempor incuntes ut labore etdolore maigna aliqua enim.</p>
@@ -238,7 +238,7 @@
     </div>
   </div>
   <!--Limitless Experience End-->
-  <div class="section gray pt-5 pb-5" style="display: none;">
+  <div class="section gray pt-5 pb-5">
     
     <div class="container">
       <div class="row">
@@ -261,7 +261,7 @@
         <div><h3>5</h3></div>
       </div> -->
       <div class="testimonial-carousel testimonials">
-        <button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="">Previous</button>
+        <!-- <button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="">Previous</button> -->
 
         <!-- Item -->
         
@@ -340,7 +340,7 @@
         </div>
         </div>
       <!-- </div> -->
-      <button class="slick-next slick-arrow" aria-label="Next" type="button" style="">Next</button>
+      <!-- <button class="slick-next slick-arrow" aria-label="Next" type="button" style="">Next</button> -->
     </div>
     </div>
     <!-- Categories Carousel / End -->

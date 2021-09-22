@@ -13,12 +13,15 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/fontawesome.min.css') }}">
+	@yield('style')
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/main.css') }}">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/slick.css') }}">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/color.css') }}">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/responsive.css') }}">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/transitions.css') }}">
+	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/scrollbar.css') }}">
+	@yield('dashboardstyle')
 </head>
 <body>
 	{{ View::make('frontend.includes.navbar') }}
@@ -29,6 +32,9 @@
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 	<!-- <script src="{{ asset('assets/js/all.min.js') }}"></script> -->
 	<script src="{{ asset('assets/js/slick.js') }}"></script>
+	<script src="{{ asset('assets/js/scrollbar.min.js') }}"></script>
+	<script src="{{ asset('assets/js/tilt.jquery.js') }}"></script>
+	@yield('script')
 	<script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 </html>
