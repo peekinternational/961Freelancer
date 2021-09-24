@@ -22,16 +22,6 @@
 					</div>
 					<nav id="wt-navdashboard" class="wt-navdashboard">
 						<ul>
-							<li class="menu-item-has-children">
-								<a href="javascript:void(0);">
-									<i class="fal fa-tachometer-slow"></i>
-									<span>Insights</span>
-								</a>
-								<ul class="sub-menu">
-									<li><hr><a href="">Insights</a></li>
-									<li><hr><a href="">Insights User</a></li>
-								</ul>
-							</li>
 							<li class="wt-active">
 								<a href="dashboard-profile.html">
 									<i class="fal fa-briefcase"></i>
@@ -51,20 +41,16 @@
 								</ul>
 							</li>
 							<li>
-								<a href="">
+								<a href="{{route('manage-jobs')}}">
 									<i class="fal fa-megaphone"></i>
 									<span>Manage Jobs</span>
 								</a>
 							</li>
-							<li class="wt-notificationicon menu-item-has-children">
+							<li class="wt-notificationicon">
 								<a href="javascript:void(0);">
 									<i class="fal fa-edit"></i>
 									<span>Messages</span>
 								</a>
-								<ul class="sub-menu">
-									<li><hr><a href="">Messages</a></li>
-									<li><hr><a href="">Messages V 2</a></li>
-								</ul>
 							</li>
 							<li>
 								<a href="">
@@ -72,24 +58,24 @@
 									<span>My Saved Items</span>
 								</a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="">
 									<i class="fal fa-file"></i>
 									<span>Invoices</span>
 								</a>
-							</li>
-							<li>
+							</li> -->
+							<!-- <li>
 								<a href="">
 									<i class="fal fa-clone"></i>
 									<span>Category</span>
 								</a>
-							</li>
-							<li>
+							</li> -->
+							<!-- <li>
 								<a href="">
 									<i class="fal fa-dollar-sign"></i>
 									<span>Packages</span>
 								</a>
-							</li>
+							</li> -->
 							<li>
 								<a href="">
 									<i class="fal fa-save"></i>
@@ -97,19 +83,19 @@
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="{{route('account-setting')}}">
 									<i class="fal fa-anchor"></i>
 									<span>Account Settings</span>
 								</a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="">
 									<i class="fal fa-tag"></i>
 									<span>Help &amp; Support</span>
 								</a>
-							</li>
+							</li> -->
 							<li>
-								<a href="">
+								<a href="{{route('home')}}">
 									<i class="fal fa-arrow-to-right"></i>
 									<span>Logout</span>
 								</a>

@@ -18,7 +18,7 @@
 								<li><span><i class="far fa-clock"></i> Duration: 15 Days</span></li>
 							</ul>
 						</div>
-						<div class="wt-btnarea"><a href="javascrip:void(0);" class="wt-btn">Send Proposal</a></div>
+						<div class="wt-btnarea"><a href="{{route('job-proposal')}}" class="wt-btn">Send Proposal</a></div>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">

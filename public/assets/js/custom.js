@@ -129,19 +129,49 @@ if(jQuery('.wt-horizontalthemescrollbar').length > 0){
 		_this.parents('li').removeClass('wt-skillsaddinfo');
 	});
 	/* Dashboard Slider */
-	var _wt_postedsilder = jQuery("#wt-postedsilder")
-	_wt_postedsilder.owlCarousel({
+	// var _wt_postedsilder = jQuery("#wt-postedsilder")
+	// _wt_postedsilder.owlCarousel({
+	// 	item: 6,
+	// 	loop:true,
+	// 	nav:true,
+	// 	margin: 10,
+	// 	autoplay:false,
+	// 	responsiveClass:true,
+	// 	navClass: ['wt-prev', 'wt-next'],
+	// 	navContainerClass: 'wt-slidernav',
+	// 	navText: ['<span class="lnr lnr-chevron-left"></span>', '<span class="lnr lnr-chevron-right"></span>'],
+	// 	responsive:{
+	// 		0:{items:1,},
+	// 		720:{items:2,},
+	// 	}
+	// });
+	/*  PROGRESS BAR */
+	try {
+		$('#wt-ourskill').appear(function () {
+			jQuery('.wt-skillholder').each(function () {
+				alert('test');
+				jQuery(this).find('.wt-skillbar').animate({
+					width: jQuery(this).attr('data-percent')
+				}, 2500);
+			});
+		});
+	} catch (err) {}
+
+	/* Team Slider */
+	var _wt_categoriesslider = jQuery("#wt-categoriesslider")
+	_wt_categoriesslider.owlCarousel({
 		item: 6,
 		loop:true,
-		nav:true,
-		margin: 10,
+		nav:false,
+		margin: 0,
 		autoplay:false,
+		center: true,
 		responsiveClass:true,
-		navClass: ['wt-prev', 'wt-next'],
-		navContainerClass: 'wt-slidernav',
-		navText: ['<span class="lnr lnr-chevron-left"></span>', '<span class="lnr lnr-chevron-right"></span>'],
 		responsive:{
 			0:{items:1,},
-			720:{items:2,},
+			481:{items:2,},
+			768:{items:3,},
+			1440:{items:4,},
+			1760:{items:6,}
 		}
 	});

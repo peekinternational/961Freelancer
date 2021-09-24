@@ -729,7 +729,7 @@ li.wt-rss a { background:#ff6600; }
 	line-height: 16px;
 	position: absolute;
 	letter-spacing: 4px;
-	font-family: 'FontAwesome';
+	font-family: 'Font Awesome 5 Pro';
 	color: rgba(218, 218, 218, .8);
 	content: '\f005 \f005 \f005 \f005 \f005';
 }
@@ -908,7 +908,7 @@ li.wt-rss a { background:#ff6600; }
 .wt-breadcrumb li:after {
 	top: 0;
 	left: -3px;
-	color:#999;
+	color:#ed1c24;
 	content: '/';
 	position: absolute;
 	font-size: inherit;
@@ -921,7 +921,7 @@ li.wt-rss a { background:#ff6600; }
 	color: #fff;
 	display: block;
 }
-.wt-breadcrumb li.wt-active { color:#999;}
+.wt-breadcrumb li.wt-active { color:#ed1c24;}
 /* Theme Styling */
 .wt-main {padding: 20px 0;}
 .wt-footer {background:#323232;}
@@ -1823,6 +1823,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	-webkit-align-content: center;
 	-ms-flex-line-pack: center;
 	position: relative;
+	background-color: #00a651;
 }
 .wt-innerbannerholder:before{
 	top: 0;
@@ -1831,7 +1832,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	height: 100%;
 	content: '';
 	position: absolute;
-	background: rgba(50,50,50,0.40);
+	background: rgba(50,50,50,0);
 }
 .wt-innerbannercontent{
 	float: left;
@@ -2091,7 +2092,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	content: '\f00c';
 	margin: -7px 0 0px;
 	position: absolute;
-	font-family:'FontAwesome';
+	font-family:'Font Awesome 5 Pro';
 }
 .wt-articlesingle-content .wt-description ul li span{
 	font-size: inherit; 
@@ -4176,7 +4177,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	content: '\f110';
 	line-height: 16px;
 	position:absolute;
-	font-family: 'FontAwesome';
+	font-family: 'Font Awesome 5 Pro';
 	-webkit-animation: fa-spin 2s infinite linear;
     animation: fa-spin 2s infinite linear;
 }
@@ -4189,6 +4190,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-innerbannerholdervtwo{
 	background-image: url(../images/bannerimg/img-03.jpg);
 	height: 400px;
+	background: #ed1c24;
 }
 .wt-userprofileholder{
 	float: left;
@@ -4295,7 +4297,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-profilecounter{
 	width: auto;
 	float: right;
-	max-width: 270px;
+	max-width: 327px;
 	margin: -30px 0 -55px;
 	text-align: center;
 	border-left: 1px solid #f2f2f2;
@@ -4380,7 +4382,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	position: absolute;
 	opacity: 0.10; 
 	content: '';
-	background: url(../images/img-skills.png);
+	background: url(/assets/images/img-skills.png);
 	background-repeat: repeat;
 	background-size: cover;
 	-webkit-animation: move 2s linear infinite;
@@ -5254,7 +5256,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	margin: -6px 0 0;
 	line-height: 12px;
 	position: absolute;
-	font-family: 'FontAwesome';
+	font-family: 'Font Awesome 5 Pro';
 }
 .wt-paymentmethod li a i{
 	width: 70px;
