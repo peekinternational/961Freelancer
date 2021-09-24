@@ -130,18 +130,12 @@
 									</form>
 								</div>
 							</div>
-							<div class="wt-widget wt-effectiveholder">
+							<!-- <div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Location</h2>
 								</div>
 								<div class="wt-widgetcontent">
 									<form class="wt-formtheme wt-formsearch">
-										<!-- <fieldset>
-											<div class="form-group">
-												<input type="text" name="fullname" class="form-control" placeholder="Search Location">
-												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-											</div>
-										</fieldset> -->
 										<fieldset>
 											<div class="wt-checkboxholder wt-verticalscrollbar">
 												<span class="wt-checkbox">
@@ -176,7 +170,7 @@
 										</fieldset>
 									</form>
 								</div>
-							</div>
+							</div> -->
 							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Hourly Rate</h2>

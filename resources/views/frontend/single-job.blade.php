@@ -129,7 +129,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="wt-widget wt-sharejob">
+						<!-- <div class="wt-widget wt-sharejob">
 							<div class="wt-widgettitle">
 								<h2>Share This Job</h2>
 							</div>
@@ -141,7 +141,7 @@
 									<li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i>Share on Google Plus</a></li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 					</aside>
 				</div>
 			</div>
