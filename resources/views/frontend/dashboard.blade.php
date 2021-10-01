@@ -494,8 +494,8 @@
 								  							<div class="form-group">
 								  								<textarea name="project_desc" id="project_desc{{$project->id}}" class="form-control" placeholder="Project Description">{{$project->project_desc}}</textarea>
 								  							</div>
-								  							<div class="form-group wt-btnarea">
-								  								<button onclick="editProject({{$project->id}})" class="wt-btn">Save</button>
+								  							<div class="form-group wt-btnarea text-end">
+								  								<button onclick="editProject({{$project->id}})" class="wt-btn">Edit Project</button>
 								  							</div>
 								  						</fieldset>
 								  					</div>
@@ -525,7 +525,7 @@
 								  					<div class="form-group">
 								  						<textarea name="certificate_desc" id="" class="form-control" placeholder="Certificate Description"></textarea>
 								  					</div>
-								  					<div class="form-group wt-btnarea">
+								  					<div class="form-group wt-btnarea text-end">
 								  						<button type="submit" class="wt-btn">Save</button>
 								  					</div>
 								  				</fieldset>
@@ -559,8 +559,8 @@
 								  							<div class="form-group">
 								  								<textarea name="certificate_desc" id="certificate_desc{{$certificate->id}}" id="" class="form-control" placeholder="Certificate Description">{{$certificate->certificate_desc}}</textarea>
 								  							</div>
-								  							<div class="form-group wt-btnarea">
-								  								<button onclick="editCertificate({{$certificate->id}})" class="wt-btn">Save</button>
+								  							<div class="form-group wt-btnarea text-end">
+								  								<button onclick="editCertificate({{$certificate->id}})" class="wt-btn">Edit Certificate</button>
 								  							</div>
 								  						</fieldset>
 								  					</div>
