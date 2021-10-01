@@ -98,7 +98,9 @@ class JobsController extends Controller
         }
       }
       $job->job_attachement = implode(",",$images);
-      $job->save();
+      $jobSave = $job->save();
+      return redirect('job-detail/'.$job->job_id);
+
     }
 
     /**

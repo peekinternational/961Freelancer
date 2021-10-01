@@ -23,7 +23,9 @@
 								@endif
 							</ul>
 						</div>
+						@if($job->user_id != Auth::user()->id)
 						<div class="wt-btnarea"><a href="{{route('job-proposal')}}" class="wt-btn">Send Proposal</a></div>
+						@endif
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
