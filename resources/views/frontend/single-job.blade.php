@@ -10,12 +10,17 @@
 					<div class="wt-proposalholder">
 						<span class="wt-featuredtag"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
 						<div class="wt-proposalhead">
-							<h2>Webpage Takes Many Seconds to Load, I Want to Reduce it to 3 or 4 Seconds Max</h2>
+							<h2>{{$job->job_title}}</h2>
 							<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
-								<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Professional</span></li>
+								<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{$job->service_level}}</span></li>
 								<li><span><img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description">  United States</span></li>
-								<li><span><i class="far fa-folder"></i> Type: Fixed</span></li>
-								<li><span><i class="far fa-clock"></i> Duration: 15 Days</span></li>
+								<li><span class="text-capitalize"><i class="far fa-folder"></i> Type: {{$job->job_type}}</span></li>
+								<li><span><i class="far fa-clock"></i> Duration: {{$job->job_duration}}</span></li>
+								@if($job->job_type == 'fixed')
+								<li><span> Fixed price: <i class="far fa-dollar-sign"></i>{{$job->fixed_price}}</span></li>
+								@else
+								<li><span> Hourly: <font class="fw-bold"><i class="far fa-dollar-sign"></i>{{$job->hourly_min_price}} - <i class="far fa-dollar-sign"></i>{{$job->hourly_max_price}}</font></span></li>
+								@endif
 							</ul>
 						</div>
 						<div class="wt-btnarea"><a href="{{route('job-proposal')}}" class="wt-btn">Send Proposal</a></div>
@@ -28,24 +33,7 @@
 								<h3>Project Detail</h3>
 							</div>
 							<div class="wt-description">
-								<p>Excepteur sint occaecat cupidatat non proident, saeunt in culpa qui officia deserunt mollit anim laborum. Seden utem perspiciatis undesieu omnis voluptatem accusantium doque laudantium, totam rem aiam eaqueiu ipsa quae ab illoion inventore veritatisetm quasitea architecto beataea dictaed quia couuntur magni dolores eos aquist ratione vtatem seque nesnt. Neque porro quamest quioremas ipsum quiatem dolor sitem ameteism conctetur adipisci velit sedate quianon.</p>
-								<p>Laborum sed ut perspiciatis unde omnis iste natus error sitems voluptatem accusantium doloremque laudantium, totam rem aiam eaque ipsa quae ab illo inventore veritatis etna quasi architecto beatae vitae dictation explicabo. nemo enim ipsam fugit.</p>
-								<ul class="wt-projectliststyle">
-									<li><span><i class="fa fa-check"></i>Nemo enim ipsam voluptatem quia</span></li>
-									<li><span><i class="fa fa-check"></i>Adipisci velit, sed quia non numquam eius modi tempora</span></li>
-									<li><span><i class="fa fa-check"></i>Eaque ipsa quae ab illo inventore veritatis et quasi architecto</span></li>
-									<li><span><i class="fa fa-check"></i>qui dolorem ipsum quia dolor sit amet</span></li>
-								</ul>
-								<p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porrom quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nonae numquam eius modi tempora incidunt labore.</p>
-								<p>Eomnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt.</p>
-								<ul class="wt-projectliststyle">
-									<li><span><i class="fa fa-check"></i>Adipisci velit, sed quia non numquam eius modi tempora</span></li>
-									<li><span><i class="fa fa-check"></i>Eaque ipsa quae ab illo inventore veritatis et quasi architecto</span></li>
-									<li><span><i class="fa fa-check"></i>Qui dolorem ipsum quia dolor sit amet</span></li>
-									<li><span><i class="fa fa-check"></i>Nemo enim ipsam voluptatem quia</span></li>
-								</ul>
-								<p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porrom quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nonae numquam eius modi tempora incidunt labore ste natus error voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-								<p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porrom quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nonae numquam eius modi tempora incidunt labore.</p>
+								<p>{{$job->job_description}}</p>
 							</div>
 						</div>
 						<div class="wt-skillsrequired">
@@ -53,13 +41,11 @@
 								<h3>Skills Required</h3>
 							</div>
 							<div class="wt-tag wt-widgettag">
-								<a href="javascript:void(0);">PHP Developer</a>
-								<a href="javascript:void(0);">PHP</a>
-								<a href="javascript:void(0);">My SQL</a>
-								<a href="javascript:void(0);">Business</a>
-								<a href="javascript:void(0);">Website Development</a>
-								<a href="javascript:void(0);">Collaboration</a>
-								<a href="javascript:void(0);">Decent</a>
+								@if ($job->job_skills != "")
+									@foreach(explode(',',$job->job_skills) as $skill)
+									<a href="javascript:void(0);">{{$skill}}</a>
+									@endforeach
+								@endif
 							</div>
 						</div>
 						<div class="wt-attachments">
@@ -67,18 +53,14 @@
 								<h3>Attachments</h3>
 							</div>
 							<ul class="wt-attachfile">
-								<li>
-									<span>Wireframe Document.doc</span>
-									<em>File size: 512 kb<a href="javascript:void(0);"><i class="lnr lnr-download"></i></a></em>
-								</li>
-								<li>
-									<span>Requirments.pdf</span>
-									<em>File size: 110 kb<a href="javascript:void(0);"><i class="lnr lnr-download"></i></a></em>
-								</li>
-								<li>
-									<span>Company Intro.docx</span>
-									<em>File size: 224 kb<a href="javascript:void(0);"><i class="lnr lnr-download"></i></a></em>
-								</li>
+								@if ($job->job_attachement != "")
+									@foreach(explode(',',$job->job_attachement) as $attach)
+									<li>
+										<span>{{$attach}}</span>
+										<em><a href="{{asset('assets/images/jobs/'.$attach)}}" download><i class="fal fa-download"></i></a></em>
+									</li>
+									@endforeach
+								@endif
 							</ul>
 						</div>
 					</div>
@@ -89,25 +71,25 @@
 							<div class="wt-proposalsrcontent">
 								<span class="wt-proposalsicon"><i class="fa fa-angle-double-down"></i><i class="fa fa-newspaper"></i></span>
 								<div class="wt-title">
-									<h3>150</h3>
+									<h3>0</h3>
 									<span>Proposals Received Till<em>June 27, 2018</em></span>
 								</div>
 							</div>
 							<div class="wt-clicksavearea">
-								<span>Job ID: tQu5DW9F2G</span>
+								<span>Job ID: {{$job->job_id}}</span>
 								<a href="javascrip:void(0);" class="wt-clicksavebtn"><i class="far fa-heart"></i> Click to save</a>
 							</div>
 						</div>
 						<div class="wt-widget wt-companysinfo-jobsingle">
 							<div class="wt-companysdetails">
 								<figure class="wt-companysimg">
-									<img src="{{asset('assets/images/company/img-01.jpg')}}" alt="img description">
+									<img src="{{asset('assets/images/user/cover/'.$job->clientInfo->cover_image)}}" alt="img description">
 								</figure>
 								<div class="wt-companysinfo">
-									<figure><img src="{{asset('assets/images/company/img-01.png')}}" alt="img description"></figure>
+									<figure><img src="{{asset('assets/images/user/profile/'.$job->clientInfo->profile_image)}}" alt="img description"></figure>
 									<div class="wt-title">
-										<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a>
-										<h2>Angry Creative Studio</h2>
+										<!-- <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a> -->
+										<h2>{{$job->clientInfo->first_name}} {{$job->clientInfo->last_name}}</h2>
 									</div>
 									<ul class="wt-postarticlemeta">
 										<li>

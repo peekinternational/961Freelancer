@@ -321,21 +321,24 @@
 						</div>
 						<div class="listings-container mt-5">
 							
+							@foreach($jobs as $job)
 							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
+							<a href="{{ route('job.show',$job->job_id)}}" class="job-listing">
 
 								<!-- Job Listing Details -->
 								<div class="job-listing-details">
 									<!-- Logo -->
-									<div class="job-listing-company-logo">
+									<!-- <div class="job-listing-company-logo">
 										<img src="images/company-logo-01.png" alt="">
-									</div>
+									</div> -->
 
 									<!-- Details -->
 									<div class="job-listing-description">
-										<h4 class="job-listing-company">Hexagon <span class="verified-badge" data-tippy-placement="top" data-tippy="" data-original-title="Verified Employer"></span></h4>
-										<h3 class="job-listing-title">Bilingual Event Support Specialist</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
+										<!-- <h4 class="job-listing-company">Hexagon 
+											<span class="verified-badge" data-tippy-placement="top" data-tippy="" data-original-title="Verified Employer"></span>
+										</h4> -->
+										<h3 class="job-listing-title">{{$job->job_title}}</h3>
+										<p class="job-listing-text">{{$job->job_description}}</p>
 									</div>
 
 									<!-- Bookmark -->
@@ -346,235 +349,19 @@
 								<div class="job-listing-footer">
 									<ul>
 										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
+										<li class="text-capitalize"><i class="fal fa-briefcase"></i> {{$job->job_type}}</li>
+										@if($job->job_type == 'fixed')
+										<li><i class="fal fa-wallet"></i> ${{$job->fixed_price}} Fixed-price</li>
+										@else
+										<li><i class="fal fa-wallet"></i>${{$job->hourly_min_price}}-${{$job->hourly_max_price}} Hourly</li>
+										@endif
+										<li><i class="fal fa-clock"></i> {{$job->job_duration}}</li>
+										<li><i class="fal fa-ribbon"></i> {{$job->service_level}}</li>
 									</ul>
 								</div>
 							</a>		
-
-							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
-
-								<!-- Job Listing Details -->
-								<div class="job-listing-details">
-									<!-- Logo -->
-									<div class="job-listing-company-logo">
-										<img src="images/company-logo-02.png" alt="">
-									</div>
-
-									<!-- Details -->
-									<div class="job-listing-description">
-										<h4 class="job-listing-company">Coffee</h4>
-										<h3 class="job-listing-title">Barista and Cashier</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
-									</div>
-
-									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
-								</div>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</a>
+							@endforeach
 							
-
-							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
-
-								<!-- Job Listing Details -->
-								<div class="job-listing-details">
-									<!-- Logo -->
-									<div class="job-listing-company-logo">
-										<img src="images/company-logo-03.png" alt="">
-									</div>
-
-									<!-- Details -->
-									<div class="job-listing-description">
-										<h4 class="job-listing-company">King <span class="verified-badge" data-tippy-placement="top" data-tippy="" data-original-title="Verified Employer"></span></h4>
-										<h3 class="job-listing-title">Restaurant General Manager</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
-									</div>
-
-									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
-								</div>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</a>
-
-							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
-
-								<!-- Job Listing Details -->
-								<div class="job-listing-details">
-									<!-- Logo -->
-									<div class="job-listing-company-logo">
-										<img src="images/company-logo-04.png" alt="">
-									</div>
-
-									<!-- Details -->
-									<div class="job-listing-description">
-										<h4 class="job-listing-company">Mates</h4>
-										<h3 class="job-listing-title">Administrative Assistant</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
-									</div>
-
-									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
-								</div>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</a>
-							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
-
-								<!-- Job Listing Details -->
-								<div class="job-listing-details">
-									<!-- Logo -->
-									<div class="job-listing-company-logo">
-										<img src="images/company-logo-04.png" alt="">
-									</div>
-
-									<!-- Details -->
-									<div class="job-listing-description">
-										<h4 class="job-listing-company">Mates</h4>
-										<h3 class="job-listing-title">Administrative Assistant</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
-									</div>
-
-									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
-								</div>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</a>
-							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
-
-								<!-- Job Listing Details -->
-								<div class="job-listing-details">
-									<!-- Logo -->
-									<div class="job-listing-company-logo">
-										<img src="images/company-logo-04.png" alt="">
-									</div>
-
-									<!-- Details -->
-									<div class="job-listing-description">
-										<h4 class="job-listing-company">Mates</h4>
-										<h3 class="job-listing-title">Administrative Assistant</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
-									</div>
-
-									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
-								</div>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</a>
-							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
-
-								<!-- Job Listing Details -->
-								<div class="job-listing-details">
-									<!-- Logo -->
-									<div class="job-listing-company-logo">
-										<img src="images/company-logo-04.png" alt="">
-									</div>
-
-									<!-- Details -->
-									<div class="job-listing-description">
-										<h4 class="job-listing-company">Mates</h4>
-										<h3 class="job-listing-title">Administrative Assistant</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
-									</div>
-
-									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
-								</div>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</a>
-							<!-- Job Listing -->
-							<a href="{{ route('job-single')}}" class="job-listing">
-
-								<!-- Job Listing Details -->
-								<div class="job-listing-details">
-									<!-- Logo -->
-									<div class="job-listing-company-logo">
-										<img src="images/company-logo-04.png" alt="">
-									</div>
-
-									<!-- Details -->
-									<div class="job-listing-description">
-										<h4 class="job-listing-company">Mates</h4>
-										<h3 class="job-listing-title">Administrative Assistant</h3>
-										<p class="job-listing-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value.</p>
-									</div>
-
-									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
-								</div>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
-										<li><i class="fal fa-briefcase"></i> Full Time</li>
-										<li><i class="fal fa-wallet"></i> $35000-$38000</li>
-										<li><i class="fal fa-clock"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</a>
-
-
 							<!-- Pagination -->
 							<div class="clearfix"></div>
 							<div class="row">

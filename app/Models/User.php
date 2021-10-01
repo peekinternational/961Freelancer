@@ -18,11 +18,36 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'username',
         'email',
+        'mobile_number',
         'password',
+        'profile_image',
+        'cover_image',
+        'user_status',
+        'country',
+        'state',
+        'city',
+        'tagline',
+        'description',
+        'birth_date',
+        'gender',
+        'address',
+        'account_type',
+        'hourly_rate',
+        'skills_id',
+        'facebook_id',
+        'google_id',
     ];
 
+    public function userInfo(){
+        return $this->hasMany(UserExperience::class, 'id');
+    }
+    public function user(){
+        return $this->hasMany(UserEducation::class, 'id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -891,8 +891,8 @@ body{background:#f2f3fa;}
 	text-align: center;
 }
 .wt-myskills li .wt-rightarea a + a{margin-left:10px; }
-.wt-addinfo{background: #3fabf3;}
-.wt-deleteinfo{background: #ff5851;}
+.wt-addinfo{background: #00a651;}
+.wt-deleteinfo{background: #ed1c24;}
 .wt-myskills li .wt-rightarea a:hover,
 .wt-myskills li .wt-rightarea a:focus{color: #fff;}
 .wt-dragdroptool{
@@ -1769,10 +1769,10 @@ table.wt-tablecategories tbody tr td figure img{
 	text-transform: capitalize;
 }
 .wt-userformvtwo .form-group select{padding-right: 30px;}
-.wt-userformvtwo .form-group:nth-child(2) select{padding-left:115px; }
-.wt-userformvtwo .form-group:nth-child(3) select{padding-left:85px; }
-.wt-userformvtwo .form-group:nth-child(4) select{padding-left:110px; }
-.wt-userformvtwo .form-group:nth-child(5) select{padding-left:110px; }
+.wt-userformvtwo .form-group:nth-child(2) select{padding-left:120px; }
+.wt-userformvtwo .form-group:nth-child(3) select{padding-left:90px; }
+.wt-userformvtwo .form-group:nth-child(6) select{padding-left:135px; }
+.wt-userformvtwo .form-group:nth-child(7) select{padding-left:120px; }
 .wt-userformvtwo .form-group select{color: #323232;}
 .wt-jobdescription{
 	float: left;
@@ -2166,7 +2166,7 @@ li.collapsed .wt-msgbtns .wt-msgbtn i.lnr-chevron-up:before{content: "\e874";}
     line-height: 14px;
     position: absolute;
     width: 100% !important;
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Pro';
     text-align: center !important;
     line-height: 14px !important;
 }
@@ -2186,12 +2186,12 @@ li.collapsed .wt-msgbtns .wt-msgbtn i.lnr-chevron-up:before{content: "\e874";}
 	z-index: 2;
 	color: #666;
 	display: block;
-	content: '\e874';
+	content: '\f078';
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
 	line-height: 50px;
-	font-family: 'Linearicons-Free';
+	font-family: 'Font Awesome 5 Pro';
 }
 .wt-chatpopup{
 	z-index: 99;

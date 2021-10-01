@@ -28,10 +28,7 @@
 								<div class="wt-dashboardtabs">
 									<ul class="wt-tabstitle nav navbar-nav" id="pills-tab" role="tablist">
 										<li class="nav-item">
-											<a class="active" id="wt-security-tab" data-bs-toggle="pill" data-bs-target="#wt-security" type="button" role="tab" aria-controls="wt-security" aria-selected="true">Settings</a>
-										</li>
-										<li class="nav-item">
-											<a class="" id="wt-password-tab" data-bs-toggle="pill" data-bs-target="#wt-password" type="button" role="tab" aria-controls="wt-password" aria-selected="true">Password</a>
+											<a class="active" id="wt-password-tab" data-bs-toggle="pill" data-bs-target="#wt-password" type="button" role="tab" aria-controls="wt-password" aria-selected="true">Password</a>
 										</li>
 										<li class="nav-item">
 											<a class="" id="wt-emailnoti-tab" data-bs-toggle="pill" data-bs-target="#wt-emailnoti" type="button" role="tab" aria-controls="wt-emailnoti" aria-selected="true">Email Notifications</a>
@@ -42,46 +39,7 @@
 									</ul>
 								</div>
 								<div class="wt-tabscontent tab-content" id="nav-tabContent">
-									<div class="wt-securityhold tab-pane active fade show" id="wt-security" role="tabpanel" aria-labelledby="wt-security-tab">
-										<div class="wt-location wt-tabsinfo">
-											<div class="wt-tabscontenttitle">
-												<h2>Language &amp; Currency</h2>
-											</div>
-											<form class="wt-formtheme wt-userform">
-												<fieldset>
-													<div class="form-group form-group-half">
-														<span class="wt-select">
-															<select>
-																<option value="">Select System Language</option>
-																<option value="">English</option>
-																<option value="">French</option>
-																<option value="">Spanish</option>
-																<option value="">Japanese</option>
-																<option value="">Arabic </option>
-															</select>
-														</span>
-													</div>
-													<div class="form-group form-group-half">
-														<span class="wt-select">
-															<select>
-																<option value="">Select Currency</option>
-																<option value="">Brazilian Real</option>
-																<option value="">US Dollar</option>
-																<option value="">Yuan Renminbi</option>
-																<option value="">Colombian Peso</option>
-																<option value="">Euro</option>
-																<option value="">Hong Kong Dollar</option>
-															</select>
-														</span>
-													</div>
-													<div class="form-group mt-4 text-end">
-														<button class="wt-btn" type="submit">Save</button>
-													</div>
-												</fieldset>
-											</form>
-										</div>
-									</div>
-									<div class="wt-passwordholder tab-pane fade" id="wt-password" role="tabpanel" aria-labelledby="wt-password-tab">
+									<div class="wt-passwordholder tab-pane fade active show" id="wt-password" role="tabpanel" aria-labelledby="wt-password-tab">
 										<div class="wt-changepassword">
 											<div class="wt-tabscontenttitle">
 												<h2>Change Your Password</h2>

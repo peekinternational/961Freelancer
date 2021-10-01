@@ -9,21 +9,33 @@
 				<div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
 					<div class="wt-companysdetails wt-usersidebar">
 						<figure class="wt-companysimg">
+							@if(Auth::user()->cover_image != '')
+							<img src="{{asset('assets/images/user/cover/'.Auth::user()->cover_image)}}" alt="img description">
+							@else
 							<img src="{{asset('assets/images/sidebar/img-01.jpg')}}" alt="img description">
+							@endif
 						</figure>
 						<div class="wt-companysinfo">
-							<figure><img src="{{asset('assets/images/sidebar/img-02.jpg')}}" alt="img description"></figure>
+							<figure>
+							@if(Auth::user()->profile_image != '')
+								<img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" alt="img description">
+							@else
+								<img src="{{asset('assets/images/user-login.png')}}" alt="img description">
+							@endif
+							</figure>
 							<div class="wt-title">
-								<h2><a href="javascript:void(0);"> Louanne Mattioli</a></h2>
-								<span>Amento Tech</span>
+								<h2><a href="javascript:void(0);"> {{Auth::user()->username}}</a></h2>
+								<span>{{Auth::user()->tagline}}</span>
 							</div>
-							<div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div>
+							@if(Auth::user()->account_type == 'Client')
+							<div class="wt-btnarea"><a href="{{ route('job.create')}}" class="wt-btn">Post a Job</a></div>
+							@endif
 						</div>
 					</div>
 					<nav id="wt-navdashboard" class="wt-navdashboard">
 						<ul>
 							<li class="wt-active">
-								<a href="dashboard-profile.html">
+								<a href="{{url('profile')}}">
 									<i class="fal fa-briefcase"></i>
 									<span>My Profile</span>
 								</a>
@@ -40,12 +52,14 @@
 									<li><hr><a href="">Ongoing Single</a></li>
 								</ul>
 							</li>
+							@if(Auth::user()->account_type == 'Client')
 							<li>
 								<a href="{{route('manage-jobs')}}">
 									<i class="fal fa-megaphone"></i>
 									<span>Manage Jobs</span>
 								</a>
 							</li>
+							@endif
 							<li class="wt-notificationicon">
 								<a href="javascript:void(0);">
 									<i class="fal fa-edit"></i>
@@ -95,7 +109,7 @@
 								</a>
 							</li> -->
 							<li>
-								<a href="{{route('home')}}">
+								<a href="{{route('logout')}}">
 									<i class="fal fa-arrow-to-right"></i>
 									<span>Logout</span>
 								</a>

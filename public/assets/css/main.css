@@ -1215,9 +1215,9 @@ li.wt-rss a { background:#ff6600; }
 }
 body.wt-login .wt-loginarea{display: none;}
 .wt-userlogedin{
-	float:right;
+	/*float:right;*/
 	padding:20px;
-	display: none;
+	/*display: none;*/
 	cursor:pointer;
 	position:relative;
 	padding-right:0;
@@ -3533,7 +3533,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-proposalhead{
 	float: left;
 	width: auto;
-	max-width: 800px;
+	max-width: 900px;
 }
 .wt-proposalhead h2{
 	font-size: 28px;
@@ -3991,19 +3991,19 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-alertbtn:focus{color: #fff;}
 .wt-alertbtn.warning{background:#d89d49;}
 .wt-jobalerts .alert .close{font-size: 12px;padding: 17px;}
-.alert-warning{border-color: #faebcc !important;}
-.alert-success{border-color: #b8f3e0 !important; background: #ecfff9 !important;}
+/*.alert-warning{border-color: #faebcc !important;}*/
+/*.alert-success{border-color: #b8f3e0 !important; background: #ecfff9 !important;}*/
 .alert-success span{color: #01a774;}
 .alert-success em{color: #01a774;}
 .alert-warning em,
 .alert-warning span{color: #8a6d3b;}
 .alert-warning span h4{color: #8a6d3b;}
-.alert-primary{border-color: #bce8f1 !important;}
+/*.alert-primary{border-color: #bce8f1 !important;}*/
 .alert-primary em,
 .alert-primary span h4,
 .alert-primary span{color: #31708f;}
 .wt-alertbtn.primary{background: #31708f;}
-.alert-danger{border-color: #ebccd1 !important;}
+/*.alert-danger{border-color: #ebccd1 !important;}*/
 .alert-danger span h4,
 .alert-danger em,
 .alert-danger span{color: #a94442;}

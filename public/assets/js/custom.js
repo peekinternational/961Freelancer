@@ -129,22 +129,7 @@ if(jQuery('.wt-horizontalthemescrollbar').length > 0){
 		_this.parents('li').removeClass('wt-skillsaddinfo');
 	});
 	/* Dashboard Slider */
-	// var _wt_postedsilder = jQuery("#wt-postedsilder")
-	// _wt_postedsilder.owlCarousel({
-	// 	item: 6,
-	// 	loop:true,
-	// 	nav:true,
-	// 	margin: 10,
-	// 	autoplay:false,
-	// 	responsiveClass:true,
-	// 	navClass: ['wt-prev', 'wt-next'],
-	// 	navContainerClass: 'wt-slidernav',
-	// 	navText: ['<span class="lnr lnr-chevron-left"></span>', '<span class="lnr lnr-chevron-right"></span>'],
-	// 	responsive:{
-	// 		0:{items:1,},
-	// 		720:{items:2,},
-	// 	}
-	// });
+
 	/*  PROGRESS BAR */
 	try {
 		$('#wt-ourskill').appear(function () {
@@ -175,3 +160,4 @@ if(jQuery('.wt-horizontalthemescrollbar').length > 0){
 			1760:{items:6,}
 		}
 	});
+	

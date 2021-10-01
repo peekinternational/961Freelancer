@@ -1,27 +1,42 @@
 @extends('frontend.layouts.app')
 @section('content')
+<?php
+   $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
+   $package_id = Request::input('package_id') != '' ? Request::input('package_id') : '';
+   // dd($next,$package_id);
+   ?>
 <section class="login-signup">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-6">
 				<div class="login-signup-wrapper login-wrapper">
 					<div class="login-signup-header border-bottom">
-						<h3 class="text-center">Login to 961 Freelancer</h3>
+						<h3 class="text-center mb-0">Login to 961 Freelancer</h3>
 						<!-- <p class="text-center">Don't have an account? <a href="{{ route('register')}}">Sign Up</a></p> -->
 					</div>
 					<div class="login-with-credentials">
-						<form action="" method="POST">
+						<form action="{{route('login'.$next)}}" method="POST">
+							@if ($errors->any())
+							 <div class="alert alert-danger">
+							    <ul>
+							       @foreach ($errors->all() as $error)
+							       <li>{{ $error }}</li>
+							       @endforeach
+							    </ul>
+							 </div>
+							@endif
+							@csrf
 							<div class="mb-3">
-								<label class="control-label">Username or Email</label>
-								<input class="form-control" type="text" placeholder="Enter Username or Email" name="seller_user_name" value="">
+								<label class="control-label">Username</label>
+								<input class="form-control" type="text" placeholder="Enter Username" name="username" value="">
 								<!--  -->
-								<span class="form-text text-danger"></span>
+								<span class="text-danger">{{ $errors->first('username') }}</span>
 							</div>
 							<div class="mb-3">
 								<label class="control-label">Password</label>
-								<input class="form-control" type="password" name="seller_pass" value="" placeholder="Enter Password">
+								<input class="form-control" type="password" name="password" value="" placeholder="Enter Password">
 								<!--  -->
-								<span class="form-text text-danger"></span>
+								<span class="text-danger">{{ $errors->first('password') }}</span>
 							</div>
 							<div class="mb-3 d-flex flex-row align-items-center justify-content-between">
 								<div class="custom-control custom-checkbox">
@@ -29,7 +44,7 @@
 									<label class="custom-control-label" for="customCheck1">Remember me</label>
 									<!--  -->
 								</div>
-								<a class="fogot-password" href="javascript:void(0);" data-toggle="modal" data-target="#forgot-modal" data-dismiss="modal">Forgot password?</a>
+								<a class="fogot-password" href="{{route('forgot-password')}}">Forgot password?</a>
 							</div>
 							<div class="mb-3">
 								<button class="login-button text-white w-100" role="button" type="submit" name="login">Sign in</button>
