@@ -18,18 +18,22 @@
 			<div class="row justify-content-center">	
 				<div class="col-12 col-sm-12 col-md-11 col-lg-11">
 					<div class="wt-userprofileholder row">
-						<span class="wt-featuredtag"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+						<!-- <span class="wt-featuredtag"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span> -->
 						<div class="col-12 col-sm-12 col-md-12 col-lg-3 float-left">
 							<div class="row">
 								<div class="wt-userprofile">
 									<figure>
-										<img src="{{asset('assets/images/profile/img-01.jpg')}}" alt="img description">
+										@if($freelancer->profile_image != '')
+										<img src="{{asset('assets/images/user/profile/'.$freelancer->profile_image)}}" alt="img description">
+										@else
+										<img src="{{asset('assets/images/user-login.png')}}" alt="img description">
+										@endif
 										<div class="wt-userdropdown wt-online">
 										</div>
 									</figure>
 									<div class="wt-title">
-										<h3><i class="fa fa-check-circle"></i> Valentine Mehring</h3>
-										<span>5.0/5 <a class="javascript:void(0);">(860 Feedback)</a> <br>Member since May 30, 2013 <br><a href="javascript:void(0);">@valentine20658</a> </span>
+										<h3><i class="fa fa-check-circle"></i> {{$freelancer->first_name}} {{$freelancer->last_name}}</h3>
+										<span>5.0/5 <a class="javascript:void(0);">(0 Feedback)</a> <br>Member since {{$freelancer->created_at->format('F j, Y')}}<br><a href="javascript:void(0);">@ {{$freelancer->username}}</a> </span>
 									</div>
 								</div>
 							</div>
@@ -37,34 +41,31 @@
 						<div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
 							<div class="row">
 								<div class="wt-proposalhead wt-userdetails">
-									<h2>Classified Posting, Data Entry, Typing Expert</h2>
+									<h2>{{$freelancer->tagline}}</h2>
 									<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
-										<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-										<li><span><img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description">  United States</span></li>
+										<li><span><i class="far fa-money-bill-alt"></i> ${{$freelancer->hourly_rate}}.00 / hr</span></li>
+										<li><span><!-- <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> -->  {{$freelancer->country}}</span></li>
 										<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
 									</ul>
 									<div class="wt-description">
-										<p>Excepteur sint occaecat cupidatat non proident, saeunt in culpa qui officia deserunt mollit anim id est laborum. Seden utem perspiciatis undesieu omnis iste natus error sit voluptatem.</p>
-										<p>Accusantium doque laudantium, totam rem aiam eaqueiu ipsa quae ab illoion inventore veritatisetm quasitea architecto beataea dictaed quia couuntur magni dolores eos quist ratione vtatem seque nesnt. Neque porro quamest quioremas ipsum quiatem dolor sitem amet conctetur adipisci velit sedate quianon.</p>
-										<p>Excepteur sint occaecat cupidatat non proident, saeunt in culpa qui officia deserunt mollit anim id est laborum. Seden utem perspiciatis undesieu omnis iste natus error sit voluptatem.</p>
-										<p>Accusantium doque laudantium, totam rem aiam eaqueiu ipsa quae ab illoion inventore veritatisetm quasitea architecto beataea dictaed quia couuntur magni dolores eos quist ratione vtatem seque nesnt. Neque porro quamest quioremas ipsum quiatem dolor sitem amet conctetur adipisci velit sedate quianon.</p>
+										<p>{{$freelancer->description}}</p>
 									</div>
 								</div>
 								<div id="wt-statistics" class="wt-statistics wt-profilecounter">
 									<div class="wt-statisticcontent wt-countercolor1">
-										<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">03</h3>
+										<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">00</h3>
 										<h4>Ongoing <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor2">
-										<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">1503</h3>
+										<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">00</h3>
 										<h4>Completed <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor4">
-										<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">02</h3>
+										<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">00</h3>
 										<h4>Cancelled <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor3">
-										<h3 data-from="0" data-to="25" data-speed="8000" data-refresh-interval="100">25</h3>
+										<h3 data-from="0" data-to="25" data-speed="8000" data-refresh-interval="100">00</h3>
 										<em>k</em>
 										<h4>Served <br>Hours</h4>
 									</div>
@@ -160,268 +161,131 @@
 								<a href="javascript:void(0);" class="wt-btn">Load More</a>
 							</div>
 						</div>
+						@if($freelancer->userProjects != '')
 						<div class="wt-craftedprojects">
 							<div class="wt-usertitle">
 								<h2>Projects</h2>
 							</div>
 							<div class="wt-projects">
+								@foreach($freelancer->userProjects as $project)
 								<div class="wt-project">
 									<figure>
-										<img src="{{asset('assets/images/projects/img-01.jpg')}}" alt="img description">
+										<img src="{{asset('assets/images/projects/'.$project->project_img)}}" alt="img description" style="height: 140px;">
 									</figure>
 									<div class="wt-projectcontent">
-										<h3>Develop Website</h3>
-										<a href="javascript:void(0);">www.web.net</a>
+										<h3><a href="{{$project->project_url}}" class="text-reset">{{$project->project_title}}</a></h3>
+										<!-- <a href="{{$project->project_url}}">{{$project->project_url}}</a> -->
 									</div>
 								</div>
-								<div class="wt-project">
-									<figure>
-										<img src="{{asset('assets/images/projects/img-02.jpg')}}" alt="img description">
-									</figure>
-									<div class="wt-projectcontent">
-										<h3>Videohive</h3>
-										<a href="javascript:void(0);">www.videohive.net</a>
-									</div>
-								</div>
-								<div class="wt-project">
-									<figure>
-										<img src="{{asset('assets/images/projects/img-03.jpg')}}" alt="img description">
-									</figure>
-									<div class="wt-projectcontent">
-										<h3>Codecanyon</h3>
-										<a href="javascript:void(0);">www.codecanyon.net</a>
-									</div>
-								</div>
-								<div class="wt-project">
-									<figure>
-										<img src="{{asset('assets/images/projects/img-04.jpg')}}" alt="img description">
-									</figure>
-									<div class="wt-projectcontent">
-										<h3>Graphicriver</h3>
-										<a href="javascript:void(0);">www.graphicriver.net</a>
-									</div>
-								</div>
-								<div class="wt-project">
-									<figure>
-										<img src="{{asset('assets/images/projects/img-05.jpg')}}" alt="img description">
-									</figure>
-									<div class="wt-projectcontent">
-										<h3>Photodune</h3>
-										<a href="javascript:void(0);">www.photodune.net</a>
-									</div>
-								</div>
-								<div class="wt-project">
-									<figure>
-										<img src="{{asset('assets/images/projects/img-06.jpg')}}" alt="img description">
-									</figure>
-									<div class="wt-projectcontent">
-										<h3>Audiojungle</h3>
-										<a href="javascript:void(0);">www.audiojungle.net</a>
-									</div>
-								</div>
-								<div class="wt-btnarea">
+								@endforeach
+								
+								<!-- <div class="wt-btnarea">
 									<a href="javascript:void(0);" class="wt-btn">Load More</a>
-								</div>
+								</div> -->
 							</div>
 						</div>
+						@endif
+						@if($freelancer->userInfo != '')
 						<div class="wt-experience">
 							<div class="wt-usertitle">
 								<h2>Experience</h2>
 							</div>
 							<div class="wt-experiencelisting-hold">
+								@foreach($freelancer->userInfo as $key=>$experience)
 								<div class="wt-experiencelisting wt-bgcolor">
 									<div class="wt-title">
-										<h3>Web &amp; Apps Project Manager</h3>
+										<h3>{{$experience->job_title}}</h3>
 									</div>
 									<div class="wt-experiencecontent">
 										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-building"></i> Amento Tech</span></li>
-											<li><span><i class="far fa-calendar"></i> Aug 2017 - Till Now</span></li>
+											<li><span><i class="far fa-building"></i> {{$experience->company_title}}</span></li>
+											<li><span><i class="far fa-calendar"></i>  {{ \Carbon\Carbon::parse($experience->start_date)->format('F Y')}} - 
+												@if($experience->end_date == '')
+												Till Now
+												@else
+												{{ \Carbon\Carbon::parse($experience->end_date)->format('F Y')}}
+												@endif
+											</span></li>
 										</ul>
 										<div class="wt-description">
-											<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
+											<p>{{$experience->job_description}}</p>
 										</div>
 									</div>
 								</div>
-								<div class="wt-experiencelisting">
-									<div class="wt-title">
-										<h3>Sr. PHP &amp; Laravel Developer</h3>
-									</div>
-									<div class="wt-experiencecontent">
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-building"></i> Amento Tech</span></li>
-											<li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2018</span></li>
-										</ul>
-										<div class="wt-description">
-											<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-										</div>
-									</div>
-								</div>
-								<div class="wt-experiencelisting wt-bgcolor">
-									<div class="wt-title">
-										<h3>PHP Developer</h3>
-									</div>
-									<div class="wt-experiencecontent">
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-building"></i> Amento Tech</span></li>
-											<li><span><i class="far fa-calendar"></i> Apr 2016 - Jul 2017</span></li>
-										</ul>
-										<div class="wt-description">
-											<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-										</div>
-									</div>
-								</div>
+								@endforeach
 								<div class="divheight"></div>
 							</div>
 						</div>
+						@endif
+						@if($freelancer->education != '')
 						<div class="wt-experience wt-education">
 							<div class="wt-usertitle">
 								<h2>Education</h2>
 							</div>
 							<div class="wt-experiencelisting-hold">
+								@foreach($freelancer->education as $key=>$education)
 								<div class="wt-experiencelisting wt-bgcolor">
 									<div class="wt-title">
-										<h3>Web &amp; Apps Project Manager</h3>
+										<h3>{{$education->degree}}</h3>
 									</div>
 									<div class="wt-experiencecontent">
 										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-building"></i> Amento Tech</span></li>
-											<li><span><i class="far fa-calendar"></i> Aug 2017 - Till Now</span></li>
+											<li><span><i class="far fa-building"></i> {{$education->institute}}</span></li>
+											<li><span><i class="far fa-calendar"></i> {{\Carbon\Carbon::parse($education->start_date)->format('F Y')}} - {{\Carbon\Carbon::parse($education->end_date)->format('F Y')}}</span></li>
 										</ul>
 										<div class="wt-description">
-											<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
+											<p>“ {{$education->description}} ”</p>
 										</div>
 									</div>
 								</div>
-								<div class="wt-experiencelisting">
-									<div class="wt-title">
-										<h3>Sr. PHP &amp; Laravel Developer</h3>
-									</div>
-									<div class="wt-experiencecontent">
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-building"></i> Amento Tech</span></li>
-											<li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2018</span></li>
-										</ul>
-										<div class="wt-description">
-											<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-										</div>
-									</div>
-								</div>
-								<div class="wt-experiencelisting wt-bgcolor">
-									<div class="wt-title">
-										<h3>PHP Developer</h3>
-									</div>
-									<div class="wt-experiencecontent">
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-building"></i> Amento Tech</span></li>
-											<li><span><i class="far fa-calendar"></i> Apr 2016 - Jul 2017</span></li>
-										</ul>
-										<div class="wt-description">
-											<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-										</div>
-									</div>
-								</div>
+								@endforeach
 								<div class="divheight"></div>
 							</div>
 						</div>
+						@endif
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left">
 					<aside id="wt-sidebar" class="wt-sidebar">
+						@if($freelancer->userSkills != '')
 						<div id="wt-ourskill" class="wt-widget">
 							<div class="wt-widgettitle">
 								<h2>My Skills</h2>
 							</div>
 							<div class="wt-widgetcontent wt-skillscontent">
-								<div class="wt-skillholder" data-percent="90%">
-									<span>PHP <em>90%</em></span>
+								@foreach($freelancer->userSkills as $key=>$skill)
+								<div class="wt-skillholder" data-percent="{{$skill->skill_rate}}%">
+									<span>{{ App\Models\User::skillTitle($skill->skill_id)->skill_name }} <em>{{$skill->skill_rate}}%</em></span>
 									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
 								</div>
-								<div class="wt-skillholder" data-percent="55%">
-									<span>Website Design <em>55%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="99%">
-									<span>HTML 5 <em>99%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="80%">
-									<span>Graphic Design <em>80%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="75%">
-									<span>WordPress <em>75%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="35%">
-									<span>SEO <em>35%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="40%">
-									<span>My SQL <em>40%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="80%">
-									<span>Content Writing <em>80%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="80%">
-									<span>CSS <em>80%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-skillholder" data-percent="75%">
-									<span>Jquery <em>75%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
-								</div>
-								<div class="wt-btnarea">
+								@endforeach
+								<!-- <div class="wt-btnarea">
 									<a href="javascript:void(0)">View More</a>
-								</div>
+								</div> -->
 							</div>
 						</div>
+						@endif
+						@if($freelancer->certificates != '')
 						<div class="wt-widget wt-widgetarticlesholder wt-articlesuser">
 							<div class="wt-widgettitle">
 								<h2>Awards &amp; Certifications</h2>
 							</div>
 							<div class="wt-widgetcontent">
+								@foreach($freelancer->certificates as $key=>$certificate)
 								<div class="wt-particlehold">
 									<figure>
 										<img src="{{asset('assets/images/thumbnail/img-07.jpg')}}" alt="image description">
 									</figure>
 									<div class="wt-particlecontent">
-										<h3><a href="javascript:void(0);">Top PHP Excel Skills</a></h3>
-										<span><i class="fal fa-calendar"></i> Jun 27, 2018</span>
+										<h3><a href="javascript:void(0);">{{$certificate->certificate_title}}</a></h3>
+										<span><i class="fal fa-calendar"></i> {{\Carbon\Carbon::parse($certificate->issue_date)->format('F Y')}}</span>
 									</div>
 								</div>
-								<div class="wt-particlehold">
-									<figure>
-										<img src="{{asset('assets/images/thumbnail/img-08.jpg')}}" alt="image description">
-									</figure>
-									<div class="wt-particlecontent">
-										<h3><a href="javascript:void(0);">Monster Developer Award</a></h3>
-										<span><i class="fal fa-calendar"></i> Apr 27, 2018</span>
-									</div>
-								</div>
-								<div class="wt-particlehold">
-									<figure>
-										<img src="{{asset('assets/images/thumbnail/img-09.jpg')}}" alt="image description">
-									</figure>
-									<div class="wt-particlecontent">
-										<h3><a href="javascript:void(0);">Best Communication 2015</a></h3>
-										<span><i class="fal fa-calendar"></i> May 27, 2018</span>
-									</div>
-								</div>
-								<div class="wt-particlehold">
-									<figure>
-										<img src="{{asset('assets/images/thumbnail/img-10.jpg')}}" alt="image description">
-									</figure>
-									<div class="wt-particlecontent">
-										<h3><a href="javascript:void(0);">Best Logo Design Winner</a></h3>
-										<span><i class="fal fa-calendar"></i> Aug 27, 2018</span>
-									</div>
-								</div>
+								@endforeach
 							</div>
 						</div>
-						<div class="wt-widget">
+						@endif
+						<!-- <div class="wt-widget">
 							<div class="wt-widgettitle">
 								<h2>Similar Freelancers</h2>
 							</div>
@@ -436,7 +300,7 @@
 									<a href="javascript:void(0);">Decent</a>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- <div class="wt-widget wt-sharejob">
 							<div class="wt-widgettitle">
 								<h2>Share This User</h2>
@@ -458,4 +322,6 @@
 	</div>
 </main>
 <!--Main End-->
+@endsection
+@section('script')
 @endsection

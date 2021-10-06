@@ -131,16 +131,16 @@ if(jQuery('.wt-horizontalthemescrollbar').length > 0){
 	/* Dashboard Slider */
 
 	/*  PROGRESS BAR */
-	try {
-		$('#wt-ourskill').appear(function () {
+	// try {
+		// $('#wt-ourskill').appear(function () {
 			jQuery('.wt-skillholder').each(function () {
-				alert('test');
+				// alert('test');
 				jQuery(this).find('.wt-skillbar').animate({
 					width: jQuery(this).attr('data-percent')
 				}, 2500);
 			});
-		});
-	} catch (err) {}
+		// });
+	// } catch (err) {}
 
 	/* Team Slider */
 	var _wt_categoriesslider = jQuery("#wt-categoriesslider")
@@ -160,4 +160,14 @@ if(jQuery('.wt-horizontalthemescrollbar').length > 0){
 			1760:{items:6,}
 		}
 	});
+
+	/* SHORT DESCRIPTION */
+	// var _readmore = jQuery('.wt-userdetails .wt-description');
+	// _readmore.readmore({
+	// 	speed: 500,
+	// 	collapsedHeight: 230,
+	// 	moreLink: '<a class="wt-btntext" href="#">Read More</a>',
+	// 	lessLink: '<a class="wt-btntext" href="#">Less</a>',
+	// });
+
 	

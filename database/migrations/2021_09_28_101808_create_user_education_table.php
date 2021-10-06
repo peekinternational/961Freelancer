@@ -21,7 +21,7 @@ class CreateUserEducationTable extends Migration
             $table->string('end_date')->nullable();
             $table->string('degree')->nullable();
             $table->string('area_of_study')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

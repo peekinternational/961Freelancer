@@ -20,7 +20,7 @@ class CreateUserExperiencesTable extends Migration
             $table->string('start_date');
             $table->string('end_date')->nullable();
             $table->string('job_title');
-            $table->string('job_description')->nullable();
+            $table->longText('job_description')->nullable();
             $table->timestamps();
         });
     }

@@ -79,7 +79,22 @@
 							</div>
 							<div class="wt-clicksavearea">
 								<span>Job ID: {{$job->job_id}}</span>
-								<a href="javascrip:void(0);" class="wt-clicksavebtn"><i class="far fa-heart"></i> Click to save</a>
+								<a href="javascrip:void(0);" onclick="saveJob({{$job->id}})" class="wt-clicksavebtn save{{$job->id}}" >
+								<!-- @if($job->saveJobs != '')
+									@foreach($job->saveJobs as $save)
+										@if($save->user_id == Auth::user()->id && $save->status == 1)
+										<i class="fa fa-heart"></i> Saved
+										@endif
+										@if($save->user_id == Auth::user()->id && $save->status == 0)
+											<i class="far fa-heart"></i> Click to save
+										@endif
+									@endforeach
+									@else
+
+								@endif -->
+									<i class="far fa-heart"></i> Click to save
+
+								</a>
 							</div>
 						</div>
 						<div class="wt-widget wt-companysinfo-jobsingle">
@@ -134,4 +149,35 @@
 	</div>
 </main>
 <!--Main End-->
+@endsection
+@section('script')
+<script>
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+	function saveJob(id){
+   	$.ajax({
+	    url:"{{ url('save-job') }}",
+	    method:"POST",
+	    data:{
+	    	"_token": CSRF_TOKEN,
+        "job_id": id,
+        "save_type": 'Job',
+      },
+	    success:function(data){
+	    	console.log(data);
+	    	if (data == 1) {
+	    		$('.save'+id).html('<i class="fa fa-heart"></i> Saved');
+	    	}
+	    	if(data == 2){
+	    		$('.save'+id).html('<i class="far fa-heart"></i> Click to save');
+	    	}
+	    	// $("#add-project-form")[0].reset();
+	    	// $('#pills-home-tab').removeClass('active');
+	    	// $('#pills-profile-tab').addClass('active');
+	    	// $('#pills-home').removeClass('show active');
+	    	// $('#pills-profile').addClass('show active');
+    	}
+   	})
+	}
+</script>
 @endsection

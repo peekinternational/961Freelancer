@@ -296,22 +296,34 @@
 									</li>
 								</ul>
 							</div> -->
-							<div class="wt-userlistinghold wt-featured">
-								<span class="wt-featuredtag"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+							@foreach($freelancers as $freelancer)
+							<div class="wt-userlistinghold">
 								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/user/userlisting/img-01.jpg')}}" alt="image description">
+									@if($freelancer->profile_image != '')
+									<img src="{{asset('assets/images/user/profile/'.$freelancer->profile_image)}}" alt="image description">
+									@else
+									<img src="{{asset('assets/images/user-login.png')}}" alt="image description">
+									@endif
 								</figure>
 								<div class="wt-userlistingcontent">
 									<div class="wt-contenthead">
 										<div class="wt-title">
-											<a href="{{route('user')}}"><i class="fa fa-check-circle"></i> Alfredo Bossard
+											<a href="{{ route('freelancers.show',$freelancer->username)}}"><i class="fa fa-check-circle"></i> {{$freelancer->first_name}} {{$freelancer->last_name}}
 											</a>
-											<h2>Classifieds Posting, Data Entry, Typing</h2>
+											<h2>{{$freelancer->tagline}}</h2>
 										</div>
 										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description">  United States</span></li>
-											<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
+											<li><span><i class="far fa-money-bill-alt"></i> ${{$freelancer->hourly_rate}}.00 / hr</span></li>
+											<li><span><!-- <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> -->  {{$freelancer->country}}</span></li>
+											@if(Auth::user())
+											<li><a href="javascript:void(0);" onclick="saveUser({{$freelancer->id}})" class="wt-clicksave save{{$freelancer->id}}">
+												
+													<i class="fal fa-heart"></i> Save
+													
+											</a></li>
+											@else
+											<li><a href="javascript:void(0);" class="wt-clicksave save{{$freelancer->id}}"><i class="fal fa-heart"></i> Save</a></li>
+											@endif
 										</ul>
 									</div>
 									<div class="wt-rightarea">
@@ -326,260 +338,17 @@
 									</div>
 								</div>
 								<div class="wt-description">
-									<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
+									<p>{{ \Illuminate\Support\Str::limit($freelancer->description, 200, $end='...') }}</p>
 								</div>
 								<div class="wt-tag wt-widgettag">
-									<a href="javascript:void(0);">PHP</a>
-									<a href="javascript:void(0);">HTML</a>
-									<a href="javascript:void(0);">JavaScript</a>
-									<a href="javascript:void(0);">WordPress</a>
-									<a href="javascript:void(0);">Team Management</a>
-									<a href="javascript:void(0);">JQuery</a>
-									<a href="javascript:void(0);">...</a>
+									@foreach($freelancer->userSkills as $skill)
+									<a href="javascript:void(0);">{{ App\Models\User::skillTitle($skill->skill_id)->skill_name }}</a>
+									@endforeach
 								</div>
 							</div>
-							<div class="wt-userlistinghold wt-featured">
-								<span class="wt-featuredtag wt-featuredtagcolor1"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/user/userlisting/img-02.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="{{route('user')}}"><i class="fa fa-check-circle"></i> Marcelene Westerberg</a>
-											<h2>SEO/PPC Social Media Marketing Expert</h2>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-05.png')}}" alt="img description">  United Emirates</span></li>
-											<li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
-										</ul>
-									</div>
-									<div class="wt-rightarea">
-										<span class="wt-starsvtwo">
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star"></i>
-										</span>
-										<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
-									</div>
-								</div>
-								<div class="wt-description">
-									<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
-								</div>
-								<div class="wt-tag wt-widgettag">
-									<a href="javascript:void(0);">PHP</a>
-									<a href="javascript:void(0);">HTML</a>
-									<a href="javascript:void(0);">JavaScript</a>
-									<a href="javascript:void(0);">WordPress</a>
-									<a href="javascript:void(0);">Team Management</a>
-									<a href="javascript:void(0);">JQuery</a>
-									<a href="javascript:void(0);">...</a>
-								</div>
-							</div>
-							<div class="wt-userlistinghold wt-featured">
-								<span class="wt-featuredtag wt-featuredtagcolor2"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/user/userlisting/img-03.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="{{route('user')}}"><i class="fa fa-check-circle"></i>Vance Applebaum</a>
-											<h2>Skilled Full Stack Web Developer</h2>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-01.png')}}" alt="img description">  Australia</span></li>
-											<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
-										</ul>
-									</div>
-									<div class="wt-rightarea">
-										<span class="wt-starsvtwo">
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star"></i>
-										</span>
-										<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
-									</div>
-								</div>
-								<div class="wt-description">
-									<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
-								</div>
-								<div class="wt-tag wt-widgettag">
-									<a href="javascript:void(0);">PHP</a>
-									<a href="javascript:void(0);">HTML</a>
-									<a href="javascript:void(0);">JavaScript</a>
-									<a href="javascript:void(0);">WordPress</a>
-									<a href="javascript:void(0);">Team Management</a>
-									<a href="javascript:void(0);">JQuery</a>
-									<a href="javascript:void(0);">...</a>
-								</div>
-							</div>
-							<div class="wt-userlistinghold">
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/user/userlisting/img-01.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="{{route('user')}}"><i class="fa fa-check-circle"></i> Herlinda Hundley
-											</a>
-											<h2>Pioneers Of eCommerce Data Entry</h2>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-04.png')}}" alt="img description">  England</span></li>
-											<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
-										</ul>
-									</div>
-									<div class="wt-rightarea">
-										<span class="wt-starsvtwo">
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star"></i>
-										</span>
-										<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
-									</div>
-								</div>
-								<div class="wt-description">
-									<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
-								</div>
-								<div class="wt-tag wt-widgettag">
-									<a href="javascript:void(0);">PHP</a>
-									<a href="javascript:void(0);">HTML</a>
-									<a href="javascript:void(0);">JavaScript</a>
-									<a href="javascript:void(0);">WordPress</a>
-								</div>
-							</div>
-							<div class="wt-userlistinghold">
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/user/userlisting/img-04.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="{{route('user')}}"><i class="fa fa-check-circle"></i> Valentine Mehring</a>
-											<h2>SEO Expert &amp; Consultant</h2>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-03.png')}}" alt="img description">  Canada</span></li>
-											<li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
-										</ul>
-									</div>
-									<div class="wt-rightarea">
-										<span class="wt-starsvtwo">
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star"></i>
-										</span>
-										<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
-									</div>
-								</div>
-								<div class="wt-description">
-									<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
-								</div>
-								<div class="wt-tag wt-widgettag">
-									<a href="javascript:void(0);">PHP</a>
-									<a href="javascript:void(0);">HTML</a>
-									<a href="javascript:void(0);">Team Management</a>
-									<a href="javascript:void(0);">JQuery</a>
-								</div>
-							</div>
-							<div class="wt-userlistinghold">
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/user/userlisting/img-05.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="{{route('user')}}"><i class="fa fa-check-circle"></i> Herlinda Hundley</a>
-											<h2>Pioneers Of eCommerce Data Entry</h2>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description">  United States</span></li>
-											<li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
-										</ul>
-									</div>
-									<div class="wt-rightarea">
-										<span class="wt-starsvtwo">
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</span>
-										<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
-									</div>
-								</div>
-								<div class="wt-description">
-									<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
-								</div>
-								<div class="wt-tag wt-widgettag">
-									<a href="javascript:void(0);">PHP</a>
-									<a href="javascript:void(0);">HTML</a>
-									<a href="javascript:void(0);">JQuery</a>
-								</div>
-							</div>
-							<div class="wt-userlistinghold">
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/user/userlisting/img-06.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="{{route('user')}}"><i class="fa fa-check-circle"></i> Valentine Mehring</a>
-											<h2>SEO Expert &amp; Consultant</h2>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="far fa-money-bill-alt"></i> $44.00 / hr</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-03.png')}}" alt="img description">  Canada</span></li>
-											<li><a href="javascript:void(0);"><i class="fa fa-heart"></i> Click to Save</a></li>
-										</ul>
-									</div>
-									<div class="wt-rightarea">
-										<span class="wt-starsvtwo">
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</span>
-										<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
-									</div>
-								</div>
-								<div class="wt-description">
-									<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris...</p>
-								</div>
-								<div class="wt-tag wt-widgettag">
-									<a href="javascript:void(0);">PHP</a>
-									<a href="javascript:void(0);">HTML</a>
-									<a href="javascript:void(0);">JavaScript</a>
-									<a href="javascript:void(0);">WordPress</a>
-								</div>
-							</div>
-							<nav class="wt-pagination">
-								<ul>
-									<li class="wt-prevpage"><a href="javascrip:void(0);"><i class="fal fa-chevron-left"></i></a></li>
-									<li><a href="javascrip:void(0);">1</a></li>
-									<li><a href="javascrip:void(0);">2</a></li>
-									<li><a href="javascrip:void(0);">3</a></li>
-									<li><a href="javascrip:void(0);">4</a></li>
-									<li><a href="javascrip:void(0);">...</a></li>
-									<li><a href="javascrip:void(0);">50</a></li>
-									<li class="wt-nextpage"><a href="javascrip:void(0);"><i class="fal fa-chevron-right"></i></a></li>
-								</ul>
-							</nav>
+							@endforeach
+							
+							{{ $freelancers->links('frontend.pagination.freelancers') }}
 						</div>
 					</div>
 				</div>
@@ -592,4 +361,33 @@
 @endsection
 @section('script')
 <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+<script>
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+	function saveUser(id){
+   	$.ajax({
+	    url:"{{ url('save-freelancer') }}",
+	    method:"POST",
+	    data:{
+	    	"_token": CSRF_TOKEN,
+        "freelancer_id": id,
+        "save_type": 'Freelancer',
+      },
+	    success:function(data){
+	    	console.log(data);
+	    	if (data == 1) {
+	    		$('.save'+id).html('<i class="fa fa-heart"></i> Saved');
+	    	}
+	    	if(data == 2){
+	    		$('.save'+id).html('<i class="fal fa-heart"></i> Save');
+	    	}
+	    	// $("#add-project-form")[0].reset();
+	    	// $('#pills-home-tab').removeClass('active');
+	    	// $('#pills-profile-tab').addClass('active');
+	    	// $('#pills-home').removeClass('show active');
+	    	// $('#pills-profile').addClass('show active');
+    	}
+   	})
+	}
+</script>
 @endsection

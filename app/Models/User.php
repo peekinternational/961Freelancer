@@ -43,10 +43,27 @@ class User extends Authenticatable
     ];
 
     public function userInfo(){
-        return $this->hasMany(UserExperience::class, 'id');
+        return $this->hasMany(UserExperience::class, 'user_id');
     }
-    public function user(){
-        return $this->hasMany(UserEducation::class, 'id');
+    public function education(){
+        return $this->hasMany(UserEducation::class, 'user_id');
+    }
+    public function userSkills(){
+        return $this->hasMany(UserSkill::class, 'user_id');
+    }
+    public function userProjects(){
+        return $this->hasMany(UserProject::class, 'user_id');
+    }
+    public function certificates(){
+        return $this->hasMany(UserCertification::class, 'user_id');
+    }
+    public function saveInfo()
+    {
+      return $this->hasMany(SaveItem::class, 'freelancer_id');
+    }
+    public static function skillTitle($id)
+    {
+        return Skills::find($id);
     }
     /**
      * The attributes that should be hidden for serialization.

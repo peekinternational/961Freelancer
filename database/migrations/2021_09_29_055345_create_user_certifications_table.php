@@ -18,7 +18,7 @@ class CreateUserCertificationsTable extends Migration
             $table->integer('user_id');
             $table->string('certificate_title');
             $table->string('issue_date');
-            $table->string('expire_date');
+            $table->string('expire_date')->nullable();
             $table->longText('certificate_desc');
             $table->timestamps();
         });

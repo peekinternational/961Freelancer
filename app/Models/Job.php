@@ -27,4 +27,7 @@ class Job extends Model
     public function clientInfo(){
       return $this->belongsTo(User::class, 'user_id');
     }
+    public function saveJobs(){
+      return $this->hasMany(SaveItem::class, 'job_id');
+    }
 }

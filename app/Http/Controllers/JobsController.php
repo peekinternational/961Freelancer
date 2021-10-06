@@ -23,7 +23,8 @@ class JobsController extends Controller
      */
     public function index()
     {
-      $jobs = Job::get();
+      $jobs = Job::with('saveJobs')->orderBy('created_at', 'DESC')->paginate(10);
+      
       return View::make('frontend.job-listings')->with([
         'jobs' => $jobs
       ]);
@@ -111,7 +112,7 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-      $job = Job::with('clientInfo')->wherejob_id($id)->first();
+      $job = Job::with('clientInfo','saveJobs')->wherejob_id($id)->first();
       return \View::make('frontend.single-job')->with([
         'job' => $job
       ]);
@@ -149,5 +150,16 @@ class JobsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // Manage Jobs
+
+    public function manageJobs(Request $request){
+      $user_id = auth()->user()->id;
+      $myJobs = Job::with('clientInfo')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
+     
+      return View::make('frontend.manage-jobs')->with([
+        'myJobs' => $myJobs
+      ]);
     }
 }

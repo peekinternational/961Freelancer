@@ -36,6 +36,7 @@
 	<script src="{{ asset('assets/js/scrollbar.min.js') }}"></script>
 	<script src="{{ asset('assets/js/chosen.jquery.js') }}"></script>
 	<script src="{{ asset('assets/js/tilt.jquery.js') }}"></script>
+	<script src="{{ asset('assets/js/readmore.js') }}"></script>
 	@yield('script')
 	<script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>

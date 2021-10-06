@@ -4494,6 +4494,12 @@ body.wt-login .wt-userlogedin{display: block;}
 	font-weight: 400;
 	line-height: 16px;
 }
+.wt-projectcontent h3 a{
+	margin: 0 0 8px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 16px;
+}
 .wt-projectcontent a{
 	display: block;
 	font-size: 13px;

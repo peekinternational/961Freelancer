@@ -338,11 +338,23 @@
 											<span class="verified-badge" data-tippy-placement="top" data-tippy="" data-original-title="Verified Employer"></span>
 										</h4> -->
 										<h3 class="job-listing-title">{{$job->job_title}}</h3>
-										<p class="job-listing-text">{{$job->job_description}}</p>
+										<p class="job-listing-text">{{ \Illuminate\Support\Str::limit($job->job_description, 200, $end='...') }}</p>
 									</div>
 
 									<!-- Bookmark -->
-									<span class="bookmark-icon"></span>
+									@if($job->saveJobs != '')
+										@foreach($job->saveJobs as $save)
+											@if($save->user_id == Auth::user()->id && $save->status == 1)
+												<span class="bookmark-icon" style="color: red;" onclick="saveJob({{$job->id}})"></span>
+											@endif
+											@if($save->user_id == Auth::user()->id && $save->status == 0)
+												<span class="bookmark-icon" onclick="saveJob({{$job->id}})"></span>
+											@endif
+										@endforeach
+									@endif
+									@if($job->saveJobs == '')
+										<span class="bookmark-icon" onclick="saveJob({{$job->id}})"></span>
+									@endif
 								</div>
 
 								<!-- Job Listing Footer -->
@@ -364,23 +376,7 @@
 							
 							<!-- Pagination -->
 							<div class="clearfix"></div>
-							<div class="row">
-								<div class="col-md-12">
-									<!-- Pagination -->
-									<div class="pagination-container mt-3 mb-5">
-										<nav class="pagination justify-content-center">
-											<ul>
-												<li class="pagination-arrow"><a href="#"><i class="fal fa-chevron-left"></i></a></li>
-												<li><a href="#">1</a></li>
-												<li><a href="#" class="current-page">2</a></li>
-												<li><a href="#">3</a></li>
-												<li><a href="#">4</a></li>
-												<li class="pagination-arrow"><a href="#"><i class="fal fa-chevron-right"></i></a></li>
-											</ul>
-										</nav>
-									</div>
-								</div>
-							</div>
+							{{ $jobs->links('frontend.pagination.jobs')}}
 							<!-- Pagination / End -->
 						</div>
 					</div>
@@ -394,4 +390,33 @@
 @endsection
 @section('script')
 <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
+<script>
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+	function saveJob(id){
+   	$.ajax({
+	    url:"{{ url('save-job') }}",
+	    method:"POST",
+	    data:{
+	    	"_token": CSRF_TOKEN,
+        "job_id": id,
+        "save_type": 'Freelancer',
+      },
+	    success:function(data){
+	    	console.log(data);
+	    	if (data == 1) {
+	    		$('.save'+id).html('<i class="fa fa-heart"></i> Saved');
+	    	}
+	    	if(data == 2){
+	    		$('.save'+id).html('<i class="fal fa-heart"></i> Save');
+	    	}
+	    	// $("#add-project-form")[0].reset();
+	    	// $('#pills-home-tab').removeClass('active');
+	    	// $('#pills-profile-tab').addClass('active');
+	    	// $('#pills-home').removeClass('show active');
+	    	// $('#pills-profile').addClass('show active');
+    	}
+   	})
+	}
+</script>
 @endsection

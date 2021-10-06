@@ -54,7 +54,7 @@
 							</li>
 							@if(Auth::user()->account_type == 'Client')
 							<li>
-								<a href="{{route('manage-jobs')}}">
+								<a href="{{route('job.manage-jobs')}}">
 									<i class="fal fa-megaphone"></i>
 									<span>Manage Jobs</span>
 								</a>
@@ -67,7 +67,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="{{ route('freelancers.saved-items') }}">
 									<i class="fal fa-heart"></i>
 									<span>My Saved Items</span>
 								</a>
