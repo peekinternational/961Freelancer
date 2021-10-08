@@ -1,4 +1,4 @@
-<!-- ========== Left Sidebar Start ========== -->
+========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
 
     <div data-simplebar class="h-100">
@@ -32,8 +32,8 @@
                         <span>Skills</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="layouts-light-sidebar">Skills</a></li>
-                        <li><a href="layouts-horizontal">Add Skills</a></li>
+                        <li><a href="{{route('admin.skills.index')}}">Skills</a></li>
+                        <li><a href="{{route('admin.skills.create')}}">Add Skills</a></li>
                     </ul>
                 </li>
 
@@ -44,7 +44,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('admin.projects.index')}}">Project</a></li>
-                        <li><a href="projects-create">Create New</a></li>
+                        <li><a href="{{route('admin.projects.create')}}">Create New</a></li>
                     </ul>
                 </li>
 
@@ -56,7 +56,8 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('admin.freelancers-list')}}">Freelancers</a></li>
                         <li><a href="{{route('admin.clients-list')}}">Clients</a></li>
-                        <li><a href="contacts-profile">Profile</a></li>
+                        <!-- <li><a href="contacts-profile">Profile</a></li> -->
+                        <li><a href="{{route('admin.users.create')}}">Add User</a></li>
                     </ul>
                 </li>
 
@@ -115,4 +116,4 @@
         <!-- Sidebar -->
     </div>
 </div>
-<!-- Left Sidebar End -->
+<!-- Left Sidebar End

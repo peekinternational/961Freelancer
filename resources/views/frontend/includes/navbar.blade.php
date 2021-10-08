@@ -25,7 +25,7 @@
               <a href="{{ route('register') }}">Join Now</a>
             </div>
             @else
-            <div class="wt-userlogedin d-none d-sm-block">
+            <div class="wt-userlogedin d-none {{ Auth::user()->account_type === "Freelancer" ? "d-sm-block" : "d-sm-flex align-items-center" }}">
               <figure class="wt-userimg">
                 @if(Auth::user()->profile_image != '')
                   <img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" alt="img description">
@@ -34,8 +34,10 @@
                 @endif
               </figure>
               <div class="wt-username">
-                <h3>{{Auth::user()->username}}</h3>
-                <span>{{Auth::user()->tagline}}</span>
+                <h3 class="mb-0">{{Auth::user()->username}}</h3>
+                @if(Auth::user()->account_type != 'Client')
+                <span class="pt-1">{{Auth::user()->tagline}}</span>
+                @endif
               </div>
               <nav class="wt-usernav">
                 <ul>

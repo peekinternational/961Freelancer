@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,11 +96,13 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
         return view('admin.index');
       });
 
+      Route::resource('users','\App\Http\Controllers\Admin\AdminController');
       Route::get('/freelancers-list', [AdminController::class, 'index'])->name('freelancers-list');
       Route::get('/clients-list', [AdminController::class, 'clientsList'])->name('clients-list');
       Route::resource('projects','\App\Http\Controllers\Admin\ProjectController');
       Route::resource('categories','\App\Http\Controllers\Admin\CategoriesController');
-      // Route::get('projects',[ProjectController::class, 'index']);
+      Route::resource('skills','\App\Http\Controllers\Admin\SkillController');
+      
 
       Route::get('/form-layouts', function(){
         return view('admin.form-layouts');

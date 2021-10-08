@@ -21,6 +21,8 @@ class Job extends Model
       'is_featured',
       'job_description',
       'job_skills',
+      'job_cat',
+      'job_location',
       'job_attachement',
     ];
 

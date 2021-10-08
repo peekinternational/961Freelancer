@@ -8,6 +8,7 @@
         <meta content="961Freelancer - Admin Dashboarde" name="description" />
         <meta content="Zeeshan" name="author" />
         <!-- App favicon -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
         @include('admin.layouts.head')
         <style>

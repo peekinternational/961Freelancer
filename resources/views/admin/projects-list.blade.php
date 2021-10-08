@@ -42,14 +42,9 @@
               </td>
               <td><span class="badge badge-primary">Completed</span></td>
               <td>
-                <div class="dropdown">
-                  <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                    <i class="mdi mdi-dots-horizontal font-size-18"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Edit</a>
-                    <a class="dropdown-item" href="#">Delete</a>
-                  </div>
+                <div>
+                  <a href="{{url('admin/projects/'.$project->id.'/edit')}}" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-success rounded"><i class="bx bx-edit"></i></a>
+                  <button class="btn btn-primary rounded" data-toggle="modal" onclick="deleteProject({{$project->id}})" data-placement="top" title="Delete"><i class="bx bx-trash-alt"></i></button>
                 </div>
               </td>
             </tr>
@@ -60,13 +55,72 @@
     </div>
   </div>
 </div>
-  
+<!-- Modal effects -->
+<div class="modal" id="deleteModel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-content-demo">
+      <div class="modal-header">
+        <h6 class="modal-title">Alert</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <form id="deleteData" > 
+        @csrf
+         @method('DELETE')
+      <input type="hidden" name="projectId" id="projectId">
+      <div class="modal-body">
+        <h6></h6>
+        <p>Are you sure you want to delete the record ?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn ripple btn-danger" id="confirmDelete" type="submit"> Delete </button>
+        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Close</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal effects-->
 @endsection
 @section('script-bottom')
 <script>
     $(document).ready(function() {
         $('#project-list-table').DataTable();
     } );
-    
+    $('#deleteData').on('submit' , function(event){
+      event.preventDefault();
+      var data = $("#deleteData").serialize();
+      $projectId = $("#projectId").val();
+      console.log($projectId)
+
+         $.ajax({
+          url: '/admin/projects/'+$projectId,
+          type: 'DELETE',
+          data: data,
+          processData: false,
+
+          success: (response)=>{
+              
+              if (response.status == 'true') {
+
+                  $.notify(response.message , 'success'  );
+                  window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/admin/projects";
+
+              }else{
+                  $.notify(response.message , 'error');
+
+              }
+          },
+          error: (errorResponse)=>{
+              $.notify( errorResponse, 'error'  );
+
+
+          }
+      })
+
+    });
+
+    function deleteProject(id) {
+      $("#deleteModel").modal('show');
+      $("#projectId").val(id);
+    }
 </script>
 @endsection

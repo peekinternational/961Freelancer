@@ -13,7 +13,7 @@
 							<h2>{{$job->job_title}}</h2>
 							<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
 								<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{$job->service_level}}</span></li>
-								<li><span><img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description">  United States</span></li>
+								<li><span><!-- <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> --> {{$job->job_location}}</span></li>
 								<li><span class="text-capitalize"><i class="far fa-folder"></i> Type: {{$job->job_type}}</span></li>
 								<li><span><i class="far fa-clock"></i> Duration: {{$job->job_duration}}</span></li>
 								@if($job->job_type == 'fixed')
@@ -21,6 +21,7 @@
 								@else
 								<li><span> Hourly: <font class="fw-bold"><i class="far fa-dollar-sign"></i>{{$job->hourly_min_price}} - <i class="far fa-dollar-sign"></i>{{$job->hourly_max_price}}</font></span></li>
 								@endif
+								
 							</ul>
 						</div>
 						@if($job->user_id != Auth::user()->id)

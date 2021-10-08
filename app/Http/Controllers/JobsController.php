@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Models\Skills;
 use App\Models\Job;
+use App\Models\Category;
+use App\Models\Countries;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -38,7 +40,9 @@ class JobsController extends Controller
     public function create()
     {
         $skills = Skills::get();
-        return \View::make('frontend.post-job',compact('skills'));
+        $categories = Category::get();
+        $countries = Countries::get();
+        return \View::make('frontend.post-job',compact('skills','categories','countries'));
     }
 
     /**
@@ -49,7 +53,6 @@ class JobsController extends Controller
      */
     public function store(Request $request)
     {
-
       $this->validate($request,[
         'job_title' => 'required',
         'service_level' => 'required',
@@ -57,6 +60,7 @@ class JobsController extends Controller
         'job_duration' => 'required',
         'job_description' => 'required',
         'job_skills' => 'required',
+        'job_cat' => 'required',
 
       ],[
 
@@ -66,6 +70,7 @@ class JobsController extends Controller
         'job_duration.required' => 'Select job duration',
         'job_description.required' => 'Enter job description',
         'job_skills.required' => 'Select at least one skill to continue',
+        'job_cat.required' => 'Select at least one category to continue',
       ]);
       // dd($request->all());
       $job = new Job();
@@ -79,12 +84,19 @@ class JobsController extends Controller
       $job->fixed_price = $request->input('fixed_price');
       $job->job_duration = $request->input('job_duration');
       $job->job_description = $request->input('job_description');
+      $job->job_location = $request->input('job_location');
       $job_skills = $request->input('job_skills');
       $skills = array();
       foreach ($job_skills as $key => $skill) {
         $skills[] = $skill;
       }
       $job->job_skills = implode(",",$skills);
+      $job->job_cat = $request->input('job_cat');
+      // $categories = array();
+      // foreach ($job_cat as $key => $cat) {
+      //   $categories[] = $cat;
+      // }
+      // $job->job_cat = implode(",",$categories);
       $images=array();
       if($files=$request->file('job_attachement')){
         foreach($files as $file){

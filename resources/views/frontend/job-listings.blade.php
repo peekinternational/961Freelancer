@@ -360,7 +360,7 @@
 								<!-- Job Listing Footer -->
 								<div class="job-listing-footer">
 									<ul>
-										<li><i class="fal fa-map-marker-alt"></i> San Francissco</li>
+										<li><i class="fal fa-map-marker-alt"></i> {{$job->job_location}}</li>
 										<li class="text-capitalize"><i class="fal fa-briefcase"></i> {{$job->job_type}}</li>
 										@if($job->job_type == 'fixed')
 										<li><i class="fal fa-wallet"></i> ${{$job->fixed_price}} Fixed-price</li>
@@ -369,6 +369,7 @@
 										@endif
 										<li><i class="fal fa-clock"></i> {{$job->job_duration}}</li>
 										<li><i class="fal fa-ribbon"></i> {{$job->service_level}}</li>
+										<li><i class="fal fa-ribbon"></i> {{$job->job_cat}}</li>
 									</ul>
 								</div>
 							</a>		

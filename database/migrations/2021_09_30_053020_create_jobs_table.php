@@ -27,6 +27,8 @@ class CreateJobsTable extends Migration
             $table->integer('is_featured')->nullable();
             $table->longText('job_description');
             $table->longText('job_skills');
+            $table->longText('job_cat');
+            $table->longText('job_location');
             $table->longText('job_attachement');
             $table->timestamps();
         });

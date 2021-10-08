@@ -17,7 +17,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title mb-4">Create New Category</h4>
-        <form method="post" action="{{route('admin.categories.store')}}" enctype="multipart/form-data" id="create-category-form">
+        <form enctype="multipart/form-data" id="create-category-form">
           @csrf
           <div class="form-group row mb-4">
             <label for="projectname" class="col-form-label col-lg-2">Category Name</label>
@@ -84,5 +84,32 @@
       }
       
     }
+  $('#create-category-form').on('submit', function(event){
+      event.preventDefault();
+    $.ajax({
+        url: "{{route('admin.categories.store')}}",
+        type: 'POST',
+        data: new FormData(this),
+        contentType: false,
+        processData: false,
+
+        success: (response)=>{
+            if (response.status == 'true') {
+                $.notify(response.message , 'success'  );
+                  window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/admin/categories/";
+                
+                
+            }else{
+                $.notify(response.message , 'error');
+
+            }
+        },
+        error: (errorResponse)=>{
+            $.notify( errorResponse, 'error'  );
+
+
+        }
+    })
+  })
 </script>
 @endsection

@@ -8,6 +8,7 @@
         <meta content="961Freelancer - Admin Dashboard" name="description" />
         <meta content="Zeeshan" name="author" />
         <!-- App favicon -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
         @include('admin.layouts.head')
         <style>
@@ -17,6 +18,11 @@
                 border-radius: 35px;
             }
             .btn-primary:hover {
+                color: #fff;
+                background-color: #00a651;
+                border-color: #00a651;
+            }
+            .btn-success {
                 color: #fff;
                 background-color: #00a651;
                 border-color: #00a651;

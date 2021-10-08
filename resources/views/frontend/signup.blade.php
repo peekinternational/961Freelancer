@@ -129,6 +129,7 @@ var phone_number = window.intlTelInput(document.querySelector("#phone"), {
   separateDialCode: true,
   hiddenInput: "full",
   utilsScript: "assets/js/utils.js"
+  excludeCountries: ["il"]
 });
   // var input = document.querySelector("#phone");
   // window.intlTelInput(input, {

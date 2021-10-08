@@ -4,10 +4,26 @@
 <link rel="stylesheet" media="screen" href="{{ asset('assets/css/dashboard.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('assets/css/dbresponsive.css') }}">
 <script src="{{asset('assets/js/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
+<link href="{{URL::asset('admin-assets/assets/css/select2.min.css')}}" rel="stylesheet" />
 <style>
 	.home-header{
 		z-index: 29;
 		background: #fff;
+	}
+	.select2-container{
+		height: 50px;
+	}
+	.select2-container .select2-selection--single{
+		height: 50px;
+	}
+	.select2-container--default .select2-selection--single .select2-selection__rendered{
+		line-height: 50px;
+	}
+	.select2-results__option{
+		list-style: none;
+	}
+	.select2-container--default .select2-selection--single .select2-selection__arrow{
+		display: none;
 	}
 </style>
 @endsection
@@ -35,11 +51,21 @@
 										<h2>Job Description</h2>
 									</div>
 									<form class="wt-formtheme wt-userform wt-userformvtwo" method="post" action="{{ route('job.store') }}" enctype="multipart/form-data" id="job-post-form">
+										@if ($errors->any())
+			               <div class="alert alert-danger">
+			                  <ul>
+			                     @foreach ($errors->all() as $error)
+			                     <li>{{ $error }}</li>
+			                     @endforeach
+			                  </ul>
+			               </div>
+			              @endif
 										@csrf
 										<fieldset>
 											<div class="form-group">
 												<input type="text" name="job_title" class="form-control" placeholder="Job Title">
 											</div>
+											
 											<div class="form-group form-group-half wt-formwithlabel">
 												<span class="wt-select">
 													<label for="selectoption">Service Level:</label>
@@ -96,6 +122,44 @@
 											</div> -->
 										</fieldset>
 									</form>
+								</div>
+								<div class="wt-jobdetails wt-tabsinfo">
+									<div class="wt-tabscontenttitle">
+										<h2>Job Categories</h2>
+									</div>
+									<div class="wt-formtheme wt-userform wt-userformvtwo">
+										<fieldset style="overflow: initial;">
+											<div class="form-group">
+												<span class="wt-select">
+													<!-- <label for="selectoption">Job Category:</label> -->
+													<select name="job_cat" form="job-post-form" class="chosen-select Skills">
+														@foreach($categories as $category)
+														<option value="{{$category->category_name}}">{{$category->category_name}}</option>
+														@endforeach
+													</select>
+												</span>
+											</div>
+										</fieldset>
+									</div>
+								</div>
+								<div class="wt-jobdetails wt-tabsinfo">
+									<div class="wt-tabscontenttitle">
+										<h2>Job Location</h2>
+									</div>
+									<div class="wt-formtheme wt-userform wt-userformvtwo">
+										<fieldset style="overflow: initial;">
+											<div class="form-group">
+												<span class="wt-select">
+													<!-- <label for="selectoption">Job Category:</label> -->
+													<select name="job_location" form="job-post-form" class="select2 Skills">
+														@foreach($countries as $country)
+														<option value="{{$country->name}}">{{$country->name}}</option>
+														@endforeach
+													</select>
+												</span>
+											</div>
+										</fieldset>
+									</div>
 								</div>
 								<div class="wt-jobdetails wt-tabsinfo">
 									<div class="wt-tabscontenttitle">
@@ -166,7 +230,9 @@
 </div>
 @endsection
 @section('script')
+<script src="{{ URL::asset('admin-assets/assets/js/select2.min.js')}}"></script>
 <script>
+	$('.select2').select2();
 	var config = {
 		'.chosen-select'           : {},
 		'.chosen-select-deselect'  : {allow_single_deselect:true},

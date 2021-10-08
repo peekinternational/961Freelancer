@@ -38,9 +38,11 @@
 									  <li class="nav-item" role="presentation">
 									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Experience &amp; Education</a>
 									  </li>
+									  @if(Auth::user()->account_type != 'Client')
 									  <li class="nav-item" role="presentation">
 									    <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Projects &amp; Certifications</a>
 									  </li>
+									  @endif
 									</ul>
 								</div>
 
@@ -202,6 +204,7 @@
 								  			</fieldset>
 								  		</div>
 								  	</div>
+								  	@if(Auth::user()->account_type != 'Client')
 								  	<div class="wt-skills">
 								  		<div class="wt-tabscontenttitle">
 								  			<h2>My Skills</h2>
@@ -250,6 +253,7 @@
 								  			</div>
 								  		</div>
 								  	</div>
+								  	@endif
 								  	<div class="wt-updatall shadow-none mt-5">
 								  		<button type="submit" id="update_profile" form="edit-profile-form" class="wt-btn">Save &amp; Update</button>
 								  	</div>

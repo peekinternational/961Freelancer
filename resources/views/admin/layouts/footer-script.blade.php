@@ -14,6 +14,7 @@
          <script src="{{asset('admin-assets/assets/datatable/jquery.dataTables.min.js')}}"></script>
          <script src="{{asset('admin-assets/assets/datatable/dataTables.bootstrap4.min.js')}}"></script>
          <script src="{{asset('admin-assets/assets/js/datatable.js')}}"></script>
+         <script src="{{ URL::asset('assets/js/notify.js') }}"></script>
         <!-- App js -->
         <script src="{{ URL::asset('admin-assets/assets/js/app.js')}}"></script>
         

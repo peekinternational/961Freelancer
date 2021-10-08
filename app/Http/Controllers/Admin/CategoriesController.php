@@ -38,7 +38,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return \View::make('admin.create-category');
+        return \View::make('admin.category-create');
     }
 
     /**
@@ -64,13 +64,13 @@ class CategoriesController extends Controller
        }
 
        $category->cat_desc = $request->input('cat_desc');
-       $category->save();
 
-       $categories = Category::get();
-       // dd($categories);
-       return \View::make('admin.categories-list')->with([
-           "categories" => $categories
-       ]);
+       if ($category->save()) {
+           return response()->json(['status'=>'true' , 'message' => 'Category added successfully'] , 200);
+       }else{
+            return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+       }
+       
     }
 
     /**
@@ -92,7 +92,9 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+      $getSingleData = Category::find($id);
+      
+      return \View::make('admin.category-update' , compact('getSingleData'));
     }
 
     /**
@@ -104,7 +106,27 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $findData = Category::find($id);
+      $findData->category_name = $request->input('category_name');
+      $cat_icon = $request->file('cat_icon');
+      if($cat_icon != ''){
+        $filename= $cat_icon->getClientOriginalName();
+        $imagename= 'cat-'.rand(000000,999999).'.'.$cat_icon->getClientOriginalExtension();
+        $extension= $cat_icon->getClientOriginalExtension();
+         // $imagename= $filename;
+        $destinationpath= public_path('assets/images/categories/');
+        $cat_icon->move($destinationpath, $imagename);
+        $findData->cat_icon = $imagename;
+      }
+
+      $findData->cat_desc = $request->input('cat_desc');
+
+      if ($findData->save()) {
+          return response()->json(['status'=>'true' , 'message' => 'Category updated successfully'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
+      
     }
 
     /**
@@ -115,6 +137,13 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = Category::find($id);
+      if($deleteData->delete()){
+          return response()->json(['status'=>'true' , 'message' => 'Category deleted successfully'] , 200);
+
+      }else{
+          return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
     }
 }
