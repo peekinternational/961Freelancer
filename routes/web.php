@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\FreelancerController;
-use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -22,9 +22,9 @@ use App\Http\Controllers\Admin\SkillController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('home');
+
+Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/categories',[HomeController::class, 'allCategories'])->name('categories');
 
 Route::match(['get','post'],'/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/login', [RegisterController::class, 'accountLogin'])->name('login');
@@ -168,27 +168,9 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
        ]);
    		})->name('logout');
 
-      Route::get('pages-login', [AdminController::class,'index']);
-      Route::get('pages-login-2', [AdminController::class,'index']);
-      Route::get('pages-register', [AdminController::class,'index']);
-      Route::get('pages-register-2', [AdminController::class,'index']);
-      Route::get('pages-recoverpw', [AdminController::class,'index']);
-      Route::get('pages-recoverpw-2', [AdminController::class,'index']);
-      Route::get('pages-lock-screen', [AdminController::class,'index']);
-      Route::get('pages-lock-screen-2', [AdminController::class,'index']);
-      Route::get('pages-404', [AdminController::class,'index']);
-      Route::get('pages-500', [AdminController::class,'index']);
-      Route::get('pages-maintenance', [AdminController::class,'index']);
-      Route::get('pages-comingsoon', [AdminController::class,'index']);
-
-      Route::post('keep-live', [AdminController::class,'live']);
       
     });
 
-
-    // Route::get('/', [HomeController::class, 'root']);
-
-    // Route::get('{any}', [HomeController::class, 'index']);
 });
 
 
