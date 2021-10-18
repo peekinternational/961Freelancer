@@ -24,8 +24,8 @@
 							@endif
 							</figure>
 							<div class="wt-title">
-								<h2><a href="javascript:void(0);"> {{Auth::user()->username}}</a></h2>
-								<span>{{Auth::user()->tagline}}</span>
+								<h2 class="text-white"><a href="javascript:void(0);" class="text-white"> {{Auth::user()->username}}</a></h2>
+								<span class="text-white">{{Auth::user()->tagline}}</span>
 							</div>
 							@if(Auth::user()->account_type == 'Client')
 							<div class="wt-btnarea"><a href="{{ route('job.create')}}" class="wt-btn">Post a Job</a></div>
@@ -46,10 +46,9 @@
 									<span>All Jobs</span>
 								</a>
 								<ul class="sub-menu">
-									<li><hr><a href="">Completed Jobs</a></li>
-									<li><hr><a href="">Cancelled Jobs</a></li>
-									<li><hr><a href="">Ongoing Jobs</a></li>
-									<li><hr><a href="">Ongoing Single</a></li>
+									<li><hr><a href="{{route('job.completed-jobs')}}">Completed Jobs</a></li>
+									<li><hr><a href="{{route('job.cancelled-jobs')}}">Cancelled Jobs</a></li>
+									<li><hr><a href="{{route('job.ongoing-jobs')}}">Ongoing Jobs</a></li>
 								</ul>
 							</li>
 							@if(Auth::user()->account_type == 'Client')
@@ -60,12 +59,12 @@
 								</a>
 							</li>
 							@endif
-							<li class="wt-notificationicon">
+							<!-- <li class="wt-notificationicon">
 								<a href="javascript:void(0);">
 									<i class="fal fa-edit"></i>
 									<span>Messages</span>
 								</a>
-							</li>
+							</li> -->
 							<li>
 								<a href="{{ route('freelancers.saved-items') }}">
 									<i class="fal fa-heart"></i>
@@ -91,7 +90,7 @@
 								</a>
 							</li> -->
 							<li>
-								<a href="">
+								<a href="{{route('proposals')}}">
 									<i class="fal fa-save"></i>
 									<span>Proposals</span>
 								</a>
@@ -117,7 +116,7 @@
 						</ul>
 					</nav>
 					<div class="wt-navdashboard-footer">
-						<span>961Freelancer. © 2021 All Rights Reserved.</span>
+						<span class="text-white">961Freelancer. © 2021 All Rights Reserved.</span>
 					</div>
 				</div>
 			</div>

@@ -8,12 +8,12 @@
 			<div id="wt-twocolumns" class="row wt-twocolumns wt-haslayout">
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
 					<div class="wt-proposalholder">
-						<span class="wt-featuredtag"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+						<!-- <span class="wt-featuredtag"><img src="{{asset('assets/images/joblisting/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span> -->
 						<div class="wt-proposalhead">
 							<h2>{{$job->job_title}}</h2>
 							<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
 								<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{$job->service_level}}</span></li>
-								<li><span><!-- <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> --> {{$job->job_location}}</span></li>
+								<li><span><i class="fal fa-map-marker-alt"></i> {{$job->job_location}}</span></li>
 								<li><span class="text-capitalize"><i class="far fa-folder"></i> Type: {{$job->job_type}}</span></li>
 								<li><span><i class="far fa-clock"></i> Duration: {{$job->job_duration}}</span></li>
 								@if($job->job_type == 'fixed')
@@ -25,7 +25,11 @@
 							</ul>
 						</div>
 						@if($job->user_id != Auth::user()->id)
-						<div class="wt-btnarea"><a href="{{route('job-proposal')}}" class="wt-btn">Send Proposal</a></div>
+							@if (App\Models\Proposal::isBidAvailable(auth()->id(), $job->job_id))
+							<div class="wt-btnarea"><a href="javascript:void(0)" class="wt-btn rounded-pill">Already applied</a></div>
+							@else
+							<div class="wt-btnarea"><a href="{{url('job-proposal/'.$job->job_id)}}" class="wt-btn rounded-pill">Send Proposal</a></div>
+							@endif
 						@endif
 					</div>
 				</div>
@@ -74,13 +78,13 @@
 							<div class="wt-proposalsrcontent">
 								<span class="wt-proposalsicon"><i class="fa fa-angle-double-down"></i><i class="fa fa-newspaper"></i></span>
 								<div class="wt-title">
-									<h3>0</h3>
-									<span>Proposals Received Till<em>June 27, 2018</em></span>
+									<h3>{{$bidsOnProjCount}}</h3>
+									<span>Proposals Received Till<em>{{date('F d, Y');}}</em></span>
 								</div>
 							</div>
 							<div class="wt-clicksavearea">
 								<span>Job ID: {{$job->job_id}}</span>
-								<a href="javascrip:void(0);" onclick="saveJob({{$job->id}})" class="wt-clicksavebtn save{{$job->id}}" >
+								<a href="javascrip:void(0);" onclick="saveJob({{$job->id}})" class="wt-clicksavebtn rounded-pill save{{$job->id}}" >
 								<!-- @if($job->saveJobs != '')
 									@foreach($job->saveJobs as $save)
 										@if($save->user_id == Auth::user()->id && $save->status == 1)

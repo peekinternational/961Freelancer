@@ -18,7 +18,7 @@ class CreateMilestonesTable extends Migration
             $table->string('proposal_id');
             $table->string('job_id');
             $table->integer('user_id');
-            $table->string('budget');
+            $table->string('milestone_amount');
             $table->longText('detail');
             $table->string('due_date');
             $table->string('status');

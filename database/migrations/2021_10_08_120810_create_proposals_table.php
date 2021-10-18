@@ -19,7 +19,7 @@ class CreateProposalsTable extends Migration
             $table->integer('user_id');
             $table->string('budget');
             $table->longText('cover_letter');
-            $table->string('type');
+            $table->string('proposal_type');
             $table->string('duration');
             $table->longText('attachments');
             $table->string('status');

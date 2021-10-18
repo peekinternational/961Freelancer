@@ -28,7 +28,10 @@
 	{{ View::make('frontend.includes.navbar') }}
 	@yield('content')
 	{{ View::make('frontend.includes.footer') }}
-
+	<audio id="messagetone" muted>
+    <source src="{{ asset('bell.mp3')}}" type="audio/ogg">
+    <source src="{{ asset('bell.mp3')}}" type="audio/mpeg">
+  </audio>
 	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 	<!-- <script src="{{ asset('assets/js/all.min.js') }}"></script> -->
@@ -37,7 +40,41 @@
 	<script src="{{ asset('assets/js/chosen.jquery.js') }}"></script>
 	<script src="{{ asset('assets/js/tilt.jquery.js') }}"></script>
 	<script src="{{ asset('assets/js/readmore.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/notify.js') }}"></script>
 	@yield('script')
 	<script src="{{ asset('assets/js/custom.js') }}"></script>
+	<script>
+		@if (Session::has('success'))
+		   $.notify("{{ session('error') }}" , 'success'  );
+		@endif
+
+		@if (Session::has('error'))
+		    $.notify("{{ session('error') }}" , 'error'  );
+		@endif
+	</script>
+	<script src="https://peekvideochat.com:22000/socket.io/socket.io.js"></script>
+	@if(auth()->user())
+	<script type="text/javascript">
+	    const socket = io.connect('https://peekvideochat.com:22000');
+	    var user_id = "{{auth()->user()->id}}";
+	    // alert(user_id);
+	    socket.on('birdsreceivemsg', function(data) {
+	      // console.log(data);
+	      if( user_id == data.message_receiver){
+	        var messagetone = document.getElementById("messagetone");
+	        messagetone.play();
+	        messagetone.muted = false;
+	         $.ajax({
+	              url: "{{url('/messsageCount')}}/"+user_id,
+	              type: "GET"
+	            }).then(function(res) {
+	              $('.messageCount').html(res);
+	            })
+
+	      }
+
+	    });
+	</script>
+	@endif
 </body>
 </html>

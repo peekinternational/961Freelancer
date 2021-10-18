@@ -46,7 +46,7 @@
 													</div>
 													<ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
 														<li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> {{$job->service_level}}</span></li>
-														<li><span><img src="{{asset('assets/images/flag/img-04.png')}}" alt="img description"> England</span></li>
+														<li><span><i class="fal fa-map-marker-alt text-danger"></i> {{$job->job_location}}</span></li>
 														<li><a href="javascript:void(0);" class="wt-clicksavefolder text-capitalize"><i class="far fa-folder"></i> Type: {{$job->job_type}}</a></li>
 														<li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: {{$job->job_duration}}</span></li>															
 													</ul>
@@ -56,9 +56,12 @@
 														<a href="{{ route('job.show',$job->job_id)}}" class="wt-btn">VIEW DETAILS</a>
 													</div>
 													<div class="wt-hireduserstatus">
-														<h4>00</h4><span>Proposals</span>
+														<h4>{{App\Models\Proposal::getProposalCount($job->job_id)}}</h4><span>Proposals</span>
 														<ul class="wt-hireduserimgs">
-															<li><figure><img src="{{asset('assets/images/user/userlisting/img-05.jpg')}}" alt="img description"></figure></li>
+															@foreach($job->proposal as $proposalUser)
+															<li><figure><img src="{{asset('assets/images/user/profile/'.App\Models\Proposal::freelancer($proposalUser->user_id)->profile_image)}}" alt="img description" class="mCS_img_loaded"></figure></li>
+															@endforeach
+															<!-- <li><figure><img src="{{asset('assets/images/user/userlisting/img-05.jpg')}}" alt="img description"></figure></li> -->
 														</ul>
 													</div>
 												</div>
@@ -79,7 +82,7 @@
 										<img src="{{asset('assets/images/thumbnail/img-17.png')}}" alt="image">
 									</figure>
 									<div class="wt-title">
-										<h3>0</h3>
+										<h3>{{App\Models\Job::clientOngoingCount(Auth::user()->id)}}</h3>
 										<span>Total Ongoing Jobs</span>
 									</div>
 								</div> 
@@ -90,7 +93,7 @@
 										<img src="{{asset('assets/images/thumbnail/img-16.png')}}" alt="image">
 									</figure>
 									<div class="wt-title">
-										<h3>0</h3>
+										<h3>{{App\Models\Job::clientCompletedCount(Auth::user()->id)}}</h3>
 										<span>Total Completed Jobs</span>
 									</div>
 								</div> 
@@ -101,7 +104,7 @@
 										<img src="{{asset('assets/images/thumbnail/img-15.png')}}" alt="image">
 									</figure>
 									<div class="wt-title">
-										<h3>0</h3>
+										<h3>{{App\Models\Job::clientCancelledCount(Auth::user()->id)}}</h3>
 										<span>Total Cancelled Jobs</span>
 									</div>
 								</div> 

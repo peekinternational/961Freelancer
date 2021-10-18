@@ -15,7 +15,7 @@ body{background:#f2f3fa;}
 	width: 270px;
 	height: 100%;
 	position: fixed;
-	background: #fff;
+	background: #00a651;
 	margin-top: 76px;
 	-webkit-backface-visibility: hidden;
 	   -moz-backface-visibility: hidden;
@@ -24,6 +24,9 @@ body{background:#f2f3fa;}
 			backface-visibility: hidden;
 		-webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,0.10);
 	box-shadow: 0 0 15px 0 rgba(0,0,0,0.10);
+}
+.wt-companysdetails.wt-usersidebar{
+	background: #00a651;
 }
 .wt-sidebarwrapper.wt-fixednav{margin-top:0 !important; }
 .wt-verticalscrollbar{height: 100%;}
@@ -73,7 +76,7 @@ body{background:#f2f3fa;}
 	cursor: pointer;
 	font-size: 16px;
 	margin-left:-20px; 
-	background: #fff;
+	background: #00a651;
 	line-height: 40px;
 	position: absolute;
 	text-align: center;
@@ -101,14 +104,14 @@ body{background:#f2f3fa;}
 	list-style-type: none;
 }
 .wt-navdashboard > ul > li > a {
-	color: #767676;
+	color: #fff;
 	width: 100%;
 	float: left;
 	line-height: inherit;
 }
 .wt-navdashboard > ul > li:hover > a,
 .wt-navdashboard ul li.wt-active > a,
-.wt-navdashboard .menu-item-has-children .sub-menu li.wt-active a{color: #323232;}
+.wt-navdashboard .menu-item-has-children .sub-menu li.wt-active a{color: #000;}
 .wt-navdashboard ul li a i,
 .wt-navdashboard ul li a span{
 	float: left;
@@ -117,7 +120,7 @@ body{background:#f2f3fa;}
 .wt-navdashboard ul li.wt-active > a,
 .wt-navdashboard ul li a:focus,
 .wt-navdashboard ul li a:hover,
-.wt-navdashboard ul li.wt-open{background: #fcfcfc;}
+.wt-navdashboard ul li.wt-open{background: #00a651;}
 .wt-navdashboard ul li.wt-open ul li a:focus,
 .wt-navdashboard ul li.wt-open ul li a:active,
 .wt-navdashboard ul li.wt-open ul li a:hover{background: transparent;}
@@ -131,7 +134,7 @@ body{background:#f2f3fa;}
 .wt-navdashboard .wt-dropdowarrow{ 
 	top: 12px;
 	display: block;
-	color: #767676;
+	color: #fff;
 	font-size: 10px;
 	background: transparent;
 }
@@ -168,7 +171,7 @@ body{background:#f2f3fa;}
 	position: relative;
 }
 .wt-navdashboard .menu-item-has-children .sub-menu li a{
-	color: #767676;	
+	color: #fff;	
 	display: block;
 	line-height: inherit;
 }
@@ -277,7 +280,7 @@ body{background:#f2f3fa;}
 .menu-icon em{
   position: absolute;
   border-radius: 2px;
-  background-color:#2d3e50;
+  background-color:#ffffff;
   transition: .3s cubic-bezier(.8, .5, .2, 1.4);
 }
 .menu-icon em:nth-child(1),
@@ -1336,7 +1339,7 @@ table.wt-tablecategories tbody tr td figure img{
     position: relative;
     background: #fffdf3;
 }	
-.wt-dashboardsavetag{border-top:40px solid  #ff5851;}
+.wt-dashboardsavetag{border-top:40px solid  #ed1c24;}
 .wt-saveitem-breadcrumb{line-height: 15px;}
 .wt-saveitem-breadcrumb li + li{border-left: 1px solid #767676;}
 .wt-saveitem-breadcrumb li span, .wt-saveitem-breadcrumb li a{color: #323232;}
@@ -1346,9 +1349,9 @@ table.wt-tablecategories tbody tr td figure img{
 	padding: 0 20px;
 }
 .wt-dashboradsaveitem .wt-userlistinghold + .wt-userlistinghold{margin-top: 20px;}
-.wt-saveitem-breadcrumb li .wt-dashboraddoller i{color: #00cc8d;}
+.wt-saveitem-breadcrumb li .wt-dashboraddoller i{color: #00a651;}
 .wt-saveitem-breadcrumb li .wt-clicksavefolder i{color: #3498db;}
-.wt-saveitem-breadcrumb li .wt-dashboradclock i{color: #ff5851;}
+.wt-saveitem-breadcrumb li .wt-dashboradclock i{color: #ed1c24;}
 .wt-dashboradsavebg{background: #fcfcfc;}
 .wt-dashboardsave{
 	width: 100%;
@@ -1839,7 +1842,7 @@ table.wt-tablecategories tbody tr td figure img{
     height: 100%;
     position: absolute;
     background-repeat: no-repeat;
-    background-image: url(../images/complete-job.png);
+    background-image: url(../images/projects/complete-job.png);
 }
 .wt-canceljobholder{
 	width: 100%;

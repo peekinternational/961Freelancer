@@ -6,6 +6,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\FreelancerController;
+use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -55,33 +57,49 @@ Route::middleware(['auth'])->group(function () {
 	Route::delete('/delete-certificate/{id}', [ProfileController::class, 'deleteCertificate']);
 	Route::post('/edit-certificate', [ProfileController::class, 'editCertificate']);
 
+  Route::get('/account-setting', function () {
+    return view('frontend.account-setting');
+  })->name('account-setting');
 	// Jobs
 	Route::resource('job',JobsController::class);
 	Route::get('job-detail/{id}',[JobsController::class, 'show'])->name('job.show');
 	Route::get('manage-jobs',[JobsController::class, 'manageJobs'])->name('job.manage-jobs');
 
+  Route::get('completed-jobs',[JobsController::class, 'completedJobs'])->name('job.completed-jobs');
+  Route::get('cancelled-jobs',[JobsController::class, 'cancelledJobs'])->name('job.cancelled-jobs');
+  Route::get('ongoing-jobs',[JobsController::class, 'onGoingJobs'])->name('job.ongoing-jobs');
+  // Route::get('/completed-jobs', function () {
+  //   return view('frontend.completed-jobs');
+  // })->name('completed-jobs');
+
 	Route::post('save-freelancer',[FreelancerController::class, 'saveFreelancer']);
 	Route::post('save-job',[FreelancerController::class, 'saveJob']);
+
+  Route::get('saved-items',[FreelancerController::class, 'savedItems'])->name('freelancers.saved-items');
+
+  // Proposal 
+  Route::resource('proposal', ProposalController::class);
+  Route::get('/job-proposal/{id}', [ProposalController::class, 'jobProposal']);
+  Route::get('/proposals', [ProposalController::class, 'allProposalClient'])->name('proposals');
+  Route::post('/hire-freelancer', [ProposalController::class, 'hireFreelancer'])->name('hire-freelancer');
+  
+  // Chat Controller
+  Route::get('messages',[ChatController::class,'index'])->name('messages');
+  Route::get('friendsList/{id}', [ChatController::class, 'friendsList']);
+  Route::post('add-friend', [ChatController::class, 'addFriend'])->name('add-friend');
+  Route::post('singleChat', [ChatController::class, 'singleChat']);
+  Route::post('send-message', [ChatController::class, 'send']);
+  Route::post('seenMessage',[ChatController::class, 'seenMessage']);
+  Route::get('messsageCount/{id}',[ChatController::class,'messsageCount']);
+
 });
 
 Route::resource('freelancers',FreelancerController::class);
 Route::get('freelancer/{username}',[FreelancerController::class, 'show'])->name('freelancers.show');
-Route::get('saved-items',[FreelancerController::class, 'savedItems'])->name('freelancers.saved-items');
 
 
-Route::get('/job-listings', function () {
-    return view('frontend.job-listings');
-})->name('job-listings');
-Route::get('/job-single', function () {
-    return view('frontend.single-job');
-})->name('job-single');
-Route::get('/job-proposal', function () {
-    return view('frontend.job-proposal');
-})->name('job-proposal');
 
-Route::get('/account-setting', function () {
-    return view('frontend.account-setting');
-})->name('account-setting');
+
 
 
 Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){

@@ -10,6 +10,7 @@ use App\Models\Skills;
 use App\Models\Job;
 use App\Models\Category;
 use App\Models\Countries;
+use App\Models\Proposal;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -125,8 +126,12 @@ class JobsController extends Controller
     public function show($id)
     {
       $job = Job::with('clientInfo','saveJobs')->wherejob_id($id)->first();
+      // $bidsSeleProjCount = Bid::where('project_id', $id)->orWhere('status', '=', 2)->orWhere('status', '=', 3)->get();
+      $bidsOnProjCount = Proposal::where('job_id', $id)->where('status', 1)->count();
+     
       return \View::make('frontend.single-job')->with([
-        'job' => $job
+        'job' => $job,
+        'bidsOnProjCount' => $bidsOnProjCount,
       ]);
     }
 
@@ -168,10 +173,49 @@ class JobsController extends Controller
 
     public function manageJobs(Request $request){
       $user_id = auth()->user()->id;
-      $myJobs = Job::with('clientInfo')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
-     
+      $myJobs = Job::with('proposal','clientInfo')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
+      // $bidsOnProjCount = Proposal::where('job_id', $id)->where('status', 1)->count();
       return View::make('frontend.manage-jobs')->with([
-        'myJobs' => $myJobs
+        'myJobs' => $myJobs,
+        // 'bidsOnProjCount' => $bidsOnProjCount,
+      ]);
+    }
+
+    // Completed Job
+    public function completedJobs(Request $request){
+      $user_id = auth()->user()->id;
+      $clientjobs = Job::with('proposal','clientInfo')->whereuser_id($user_id)->wherejob_status(4)->orderBy('created_at','DESC')->paginate(5);
+
+      $freelancerJobs = Proposal::with('job')->whereuser_id($user_id)->wherestatus(5)->orderBy('created_at','DESC')->paginate(5);
+      // dd($proposals);
+      return View::make('frontend.completed-jobs')->with([
+        'clientCompletedJobs' => $clientjobs,
+        'freelancerCompletedJobs' => $freelancerJobs
+      ]);
+    }
+    // Cacelled Job
+    public function cancelledJobs(Request $request){
+      $user_id = auth()->user()->id;
+      $clientjobs = Job::with('proposal','clientInfo')->whereuser_id($user_id)->wherejob_status(3)->orderBy('created_at','DESC')->paginate(5);
+
+      $freelancerJobs = Proposal::with('job')->whereuser_id($user_id)->where('status',3)->orWhere('status',4)->orderBy('created_at','DESC')->paginate(5);
+      // dd($proposals);
+      return View::make('frontend.cancelled-jobs')->with([
+        'clientCancelledJobs' => $clientjobs,
+        'freelancerCancelledJobs' => $freelancerJobs
+      ]);
+    }
+    // Ongoing Job
+    public function onGoingJobs(Request $request){
+      $user_id = auth()->user()->id;
+      $clientjobs = Job::with('proposal','clientInfo')->whereuser_id($user_id)->wherejob_status(2)->orderBy('created_at','DESC')->paginate(5);
+
+      $freelancerJobs = Proposal::with('job')->whereuser_id($user_id)->wherestatus(2)->orderBy('created_at','DESC')->paginate(5);
+
+      // dd($proposals);
+      return View::make('frontend.ongoing-jobs')->with([
+        'clientOngoingJobs' => $clientjobs,
+        'freelancerOngoingJobs' => $freelancerJobs
       ]);
     }
 }

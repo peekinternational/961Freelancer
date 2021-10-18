@@ -44,13 +44,60 @@
 											<div class="wt-tabscontenttitle">
 												<h2>Change Your Password</h2>
 											</div>
-											<form class="wt-formtheme wt-userform">
+											@if(Session::has('verify'))
+											<div class="alert alert-success">
+											  {{ Session::get('verify') }}
+											  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											    <span aria-hidden="true">&times;</span>
+											  </button>
+											</div>
+											@endif
+											@if(Session::has('resetAlert'))
+											<div class="alert alert-danger">
+											  {{ Session::get('resetAlert') }}
+											  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											    <span aria-hidden="true">&times;</span>
+											  </button>
+											</div>
+											@endif
+											
+											@if(Session::has('resetSuccess'))
+											<div class="alert alert-success">
+											  {{ Session::get('resetSuccess') }}
+											  <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-right: 30px;margin-top: 59px;color: black;">
+											    <span aria-hidden="true">&times;</span>
+											  </button>
+											</div>
+											@endif
+											<form class="wt-formtheme wt-userform" action="{{ url('/reset-password') }}" method="post">
+												@csrf
+												@if ($errors->any())
+												<div class="alert alert-danger">
+												  <ul>
+												    @foreach ($errors->all() as $error)
+												    <li>{{ $error }}</li>
+												    @endforeach
+												  </ul>
+												</div>
+												@endif
+												<input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
 												<fieldset>
 													<div class="form-group form-group-half">
-														<input type="password" name="password" class="form-control" placeholder="Last Remember Password">
+														<input type="password" id="current-password" name="password" class="form-control" placeholder="New Password">
+														@if ($errors->has('current-password'))
+														<span class="help-block">
+														  <strong>{{ $errors->first('current-password') }}</strong>
+														</span>
+														@endif
 													</div>
 													<div class="form-group form-group-half">
-														<input type="password" name="password" class="form-control" placeholder="New Password">
+														<input type="password" id="confirm_pass" name="confirm_password" class="form-control" placeholder="Confirm Password">
+														@if ($errors->has('new-password'))
+														<span class="help-block">
+														  <strong>{{ $errors->first('new-password') }}</strong>
+														</span>
+														@endif
+														<span id="match" class="pl-3"></span>
 													</div>
 													<!-- <div class="form-group">
 														<span class="wt-checkbox">
@@ -149,4 +196,12 @@
 </div>
 @endsection
 @section('script')
+<script>
+  $('#confirm_pass').on('keyup', function () {
+    if ($('#current-password').val() == $('#confirm_pass').val()) {
+      $('#match').html('Password Match').css('color', 'green');
+    } else 
+      $('#match').html('Password Not Matching').css('color', 'red');
+  });
+</script>
 @endsection

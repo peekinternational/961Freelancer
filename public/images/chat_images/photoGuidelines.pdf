@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="j_idt3">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge" /><link type="text/css" rel="stylesheet" href="/e-id/javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo" /><link type="text/css" rel="stylesheet" href="/e-id/javax.faces.resource/components.css.xhtml?ln=primefaces&amp;v=6.2" /><script type="text/javascript" src="/e-id/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=6.2"></script><script type="text/javascript" src="/e-id/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=6.2"></script><script type="text/javascript" src="/e-id/javax.faces.resource/core.js.xhtml?ln=primefaces&amp;v=6.2"></script><script type="text/javascript" src="/e-id/javax.faces.resource/primefaces-extensions.js.xhtml?ln=primefaces-extensions&amp;v=6.2"></script><link type="text/css" rel="stylesheet" href="/e-id/javax.faces.resource/blockui/blockui.css.xhtml?ln=primefaces-extensions&amp;v=6.2" /><script type="text/javascript" src="/e-id/javax.faces.resource/blockui/blockui.js.xhtml?ln=primefaces-extensions&amp;v=6.2"></script><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='en_US';}</script>  
+	<title>PAK IDENTITY</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="/e-id/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/e-id/css/ionicons.css" />
+	<link rel="stylesheet" type="text/css" href="/e-id/css/shortcodes.css" />		
+	<link rel="stylesheet" type="text/css" href="/e-id/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/e-id/style/font-nadra.css" />
+	<link rel="stylesheet" type="text/css" href="/e-id/css/responsive.css" />
+	<link rel="stylesheet" type="text/css" href="/e-id/css/animate.css" />
+	<link rel="stylesheet" type="text/css" href="/e-id/css/custom.css" />
+	<link rel="stylesheet" type="text/css" href="/e-id/css/primefaces.css" />
+	
+	
+	<link rel="stylesheet" type="text/css" href="/e-id/css/errormsg.css" />
+	<!--     &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/e-id/css/iconmoon.css&quot;&gt;&lt;/link&gt; -->
+
+	<!-- Favicon and touch icons  -->
+	<link href="/e-id/images/favicon.ico" rel="shortcut icon" />
+
+	<link rel="stylesheet" type="text/css" href="/e-id/css/font-awesome.min.css" />
+	<noscript>
+		<meta http-equiv="refresh" content="0;noJS.xhtml" />
+	</noscript>
+
+	<link rel="shortcut icon" href="./images/2.fw.ico" />
+	
+	<!-- Javascript 
+    &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;-->
+	<script type="text/javascript" src="/e-id/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/e-id/js/waypoints.min.js"></script>
+
+	<script type="text/javascript" src="/e-id/js/main.js" defer="defer"></script>
+	<script type="text/javascript" src="/e-id/js/custom.js"></script>
+
+
+	<!-- Including Java Script(s)  -->
+	<script type="text/javascript" src="/e-id/js/validations.js"></script>
+	<script type="text/javascript" src="/e-id/js/detectInterentConnectivity.js"></script>
+	
+	<script type="text/javascript" src="/e-id/js/template.js"></script>
+	<!-- END -->
+
+
+	<!--For HELP ToolTip -->
+	<link rel="stylesheet" type="text/css" href="plugins/tooltipster/tooltipster.css" />
+	<script type="text/javascript" src="js/tooltips.js"></script>
+	<script src="plugins/tooltipster/jquery.tooltipster.js"></script>
+
+	<script src="js/bowser.js"></script>
+
+	<style type="text/css">
+		body {
+			font: 14px/24px "Poppins", sans-serif !important;
+		    background-color: #fff;
+		    color: #666666;
+		}
+		
+		.preview__header {
+			font-size: 12px;
+			min-height: 35px;
+			background-color: #44aa68;
+			z-index: 100;
+			color: #fff;
+		}
+		
+		@media (max-width: 767px) {
+			.banner-hide-xs {
+				display: none !important;
+			}
+		}
+	</style></head><body onload="doesConnectionExist();"><div id="j_idt8_content" style="display: none;"><table>
+<tbody>
+<tr>
+<td><img src="/e-id/images/ajax-loading.gif" style="margin-right: 12px; vertical-align: middle;" /></td>
+<td><span style="white-space: nowrap;">Please wait...</span></td>
+</tr>
+</tbody>
+</table>
+</div><script id="j_idt8_s" type="text/javascript">$(function(){PrimeFaces.cw("ExtBlockUI","blockUIWidget",{id:"j_idt8",source:"j_idt7",autoShow:false,centerX:true,centerY:true,content:"#j_idt8_content",contentExtern:false,namingContSep:":",regEx:/javax.faces.source=j_idt7(.)*$/});});</script>
+	
+	<div class="row">
+		<div class="col-md-12 col-sm-12 banner-hide-xs preview__header" id="infoHeader" style="display: none !important;">
+			<div class="col-md-11 col-sm-11 text-center">
+				<p style="margin-top: 7px;padding-left: 228px;font-weight: bold;font-size: 14px;">
+					PAK IDENTITY IS CROSS BROWSER COMPATIBLE. HOWEVER, FOR OPTIMAL EXPERIENCE RECOMMENDED BROWSER IS GOOGLE CHROME. 
+				</p>
+			</div>
+			<div class="col-md-1 col-sm-1 text-right">
+				<span onclick="closeInfoBar();" style="cursor: pointer;line-height: 35px;">X</span>
+			</div>
+		</div>
+	</div>
+		
+	<div class="boxed">
+		<div class="preloader">
+			<div class="clear-loading loading-effect-2">
+				<span></span>
+			</div>
+		</div>
+<form id="j_idt14" name="j_idt14" method="post" action="/e-id/viewExpired-beta.xhtml" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt14" value="j_idt14" />
+
+<script type="text/javascript" src="/e-id/js/browser.js"></script>
+<script type="text/javascript" src="/e-id/js/detectInterentConnectivity.js"></script>
+	<script>
+		doesConnectionExist();
+	</script>
+	<div id="connectionLostDiv">
+	<div id="connectionLostMessage">
+		<img src="/e-id/images/connecting.gif" /> <br /><br />
+		<span>Connection Lost. Trying to reconnect...</span> 
+	</div>
+	</div>
+	<header id="header" class="header bg-color">
+	<style>
+		#header.ui-widget-content {
+		    background: #fff !important;
+		    border: none;
+		}
+	</style><div id="j_idt14:j_idt16_content" style="display: none;"><table>
+<tbody>
+<tr>
+<td><img src="/e-id/images/ajax-loading.gif" style="margin-right: 12px; vertical-align: middle;" /></td>
+<td><span style="white-space: nowrap;">Please wait...</span></td>
+</tr>
+</tbody>
+</table>
+</div><script id="j_idt14:j_idt16_s" type="text/javascript">$(function(){PrimeFaces.cw("ExtBlockUI","blockUIWidgetMenu",{id:"j_idt14:j_idt16",source:"j_idt14",autoShow:false,centerX:true,centerY:true,content:"#j_idt14\\:j_idt16_content",contentExtern:false,namingContSep:":",regEx:/javax.faces.source=j_idt14(.)*$/});});</script>
+			<div class="container" style="height: 70px;">
+				<div class="row">
+				
+				
+					<div class="header-wrap">
+						<div class="col-md-4 col-xs-10">
+							<div id="logo" class="logo">
+<script type="text/javascript" src="/e-id/javax.faces.resource/jsf.js.xhtml?ln=javax.faces"></script>
+<a href="#" onclick="jsf.util.chain(this,event,'PF(\'blockUIWidgetMenu\').block()','mojarra.jsfcljs(document.getElementById(\'j_idt14\'),{\'j_idt14:j_idt21\':\'j_idt14:j_idt21\'},\'\')');return false"><img src="/e-id/images/login-logo.png" style="height:50px;" /></a>
+								 
+							</div><!-- /#logo -->                            
+						</div><!-- /.col-md-2 -->
+						<div class="col-md-8 col-xs-2">	
+                          
+							<div class="nav-wrap">
+                                <div class="btn-menu">
+                                    <span></span>
+                                </div><!-- //mobile menu button -->								
+								<nav id="mainnav" class="mainnav">
+									<ul class="menu">
+										<li><a href="#" onclick="jsf.util.chain(this,event,'PF(\'blockUIWidgetMenu\').block()','mojarra.jsfcljs(document.getElementById(\'j_idt14\'),{\'j_idt14:j_idt26\':\'j_idt14:j_idt26\'},\'\')');return false" class="urduLang urduFont">Home</a>  
+										</li>
+										
+										<li><a href="https://id.nadra.gov.pk" target="_blank">Guidelines</a>
+										</li>
+										
+										<li><a href="https://id.nadra.gov.pk/downloads/" target="_blank">Downloads</a>
+										</li>
+										
+										<li><a href="https://id.nadra.gov.pk/faq/" target="_blank">FAQ</a>
+										</li>
+										
+										<li><a href="https://id.nadra.gov.pk/contact-us/" target="_blank">Contact Us</a>
+										</li>
+									</ul>
+								</nav>														
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="4gPp2rZjeMsTiN4w0SLDGb0dWn1TDWmR9U6MOEeCsFbH6h1y5DWXEYqOSNxKuZAVrWvl8OA4k1ekgBido38SHos2FtUkN20ErQCcL+gd8he+xcxQQsMbc+rOMJ54peZmmYqGjnxD9F94RvpgwNyGXw+UIc/ti88xhgtYISDA9FLzJDUVZZWgneseQ/qu/IweKl8MyiZVAe9gmygMPR2EXrk0iLw/g3xblPw47knm0IU/2qzM9gHH0TD8mefzo6zqjM+HUmSGKDNXCzQAUeGsLs+G5lq5//ROtMXXCnAHoa7YhE2nxxtKS9VIEajudrGLhyefvgErMAZ0zK8knaf76z9L+XTJpmRhS1HfczXybwFbqipfyiij5S5xHL69HbsbLSAtDUOiA4UWw7xT2O/Vs1RYvI41UamjN76hRYVNvSwLsgEtPkEa8fot2g+tGu9Y" autocomplete="off" />
+</form>
+		
+		<section class="flat-row">
+			<div class="container">
+		<div class="row pd-contact-v2">
+<form id="j_idt46" name="j_idt46" method="post" action="/e-id/viewExpired-beta.xhtml" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt46" value="j_idt46" />
+
+				<div class="col-md-8  col-md-offset-2 animated slideInUp fadeOutDown">
+					<article class="post style2">
+						<div class="content-post">
+							<div class="main-box-icon  animated slideInUp">
+								<i class="icon ion-android-remove-circle"></i>
+							</div>
+							<h2 class="title-post text-center">
+								<a href="#">Error - View Expired</a>
+							</h2>
+							<hr />
+							<div class="row text-left urduLang" style="margin:0 auto;">
+								<div class="row " style="margin:0 auto;">
+									<h4><span class="urduLang">What could have caused this?</span>
+									</h4>
+								</div>
+								<p><i class="fa fa-caret-right"></i>  You have not logged in yet.</p>
+								<p><i class="fa fa-caret-right"></i>  If you were logged in but closed the browser.</p>
+								<p><i class="fa fa-caret-right"></i>  you were logged in but your session expired.</p>
+								<br />
+							</div>
+							<br />
+							<div class="row text-center" style="margin:0 auto; text-align: center;">
+								<a href="/e-id/" class="btn btn-success  btn-lg button-submit" style="width:212px;">Home</a>
+							</div>
+							<br />
+							
+						</div>
+					</article>
+				</div><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="4gPp2rZjeMsTiN4w0SLDGb0dWn1TDWmR9U6MOEeCsFbH6h1y5DWXEYqOSNxKuZAVrWvl8OA4k1ekgBido38SHos2FtUkN20ErQCcL+gd8he+xcxQQsMbc+rOMJ54peZmmYqGjnxD9F94RvpgwNyGXw+UIc/ti88xhgtYISDA9FLzJDUVZZWgneseQ/qu/IweKl8MyiZVAe9gmygMPR2EXrk0iLw/g3xblPw47knm0IU/2qzM9gHH0TD8mefzo6zqjM+HUmSGKDNXCzQAUeGsLs+G5lq5//ROtMXXCnAHoa7YhE2nxxtKS9VIEajudrGLhyefvgErMAZ0zK8knaf76z9L+XTJpmRhS1HfczXybwFbqipfyiij5S5xHL69HbsbLSAtDUOiA4UWw7xT2O/Vs1RYvI41UamjN76hRYVNvSwLsgEtPkEa8fot2g+tGu9Y" autocomplete="off" />
+</form>
+		</div>
+			</div>
+		</section>
+	</div>
+	<div id="wrapper">
+
+		<div id="connectionLostDiv" style="height:100%; width:100%; position:fixed; opacity:0.9; background-color:#B6B6B4; top:0px; left:0px; margin:0px; z-index:2000; vertical-align:middle; text-align:center; display: none;">
+			<div id="connectionLostMessage" style="height:50%; width:50%; position:fixed; color:#000; top:25%; left:25%; margin:0px; z-index:3000; vertical-align:middle; text-align:center; font-size: 32px;">
+				<img src="/e-id/images/connecting.gif" /> <br />
+				<br /> <span>Connection Lost. Trying to reconnect...</span>
+			</div>
+		</div>
+	</div>
+		<footer id="footer">
+			<div class="footer-bottom visible-lg visible-md visible-sm">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center" id="footerCredits" style="float: none; margin:0 auto;">
+							<div class="copyright text-uppercase text-center">
+								<p class="urdufooter" style="width: 100%; margin-bottom:0;">COPYRIGHT © 2015 -
+								
+									2021
+									 
+									NATIONAL DATABASE &amp; REGISTRATION AUTHORITY - All rights reserved</p>
+								<p class="urdufooter text-center" style="width: 100%; display:none;">version: 2.6.1</p>
+		
+							</div>
+							<!-- /.menu-footer -->
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="footer-bottom visible-xs">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center" id="footerCredits" style="float: none; margin:0 auto;">
+							<div class="copyright text-uppercase text-center">
+								<p class="urdufooter" style="width: 100%; margin-bottom:0;">COPYRIGHT © 2015 - 
+								
+									2021
+								
+									NATIONAL DATABASE &amp; REGISTRATION AUTHORITY</p>
+								<p class="urdufooter text-center" style="width: 100%; display:none;">version: 2.6.1</p>
+		
+							</div>
+							<!-- /.menu-footer -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	<!-- /#footer -->
+	<div class="button-go-top">
+		<a href="#" class="go-top"> <i class="fa fa-chevron-up"></i>
+		</a>
+	</div>
+	
+	<script type="text/javascript" src="/e-id/js/payme.js"></script>
+	<script type="text/javascript" src="/e-id/js/eid.js"></script>
+	<script type="text/javascript" src="/e-id/js/google-analytics.js"></script>
+	<script type="text/javascript" src="/e-id/js/topbar-scroll.js"></script></body>
+</html>

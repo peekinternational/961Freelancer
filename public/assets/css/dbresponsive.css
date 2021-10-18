@@ -33,7 +33,7 @@
 	.wt-wrapper.wt-openmenu .wt-sidebarwrapper{width:270px;}
 	.wt-openmenu .wt-companysdetails.wt-usersidebar .wt-companysimg img{
 		width: auto;
-		height: auto;
+		/*height: auto;*/
 	}
 	.wt-openmenu .wt-usersidebar .wt-companysinfo .wt-title,
 	.wt-openmenu .wt-usersidebar .wt-companysinfo .wt-btnarea{

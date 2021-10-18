@@ -30,6 +30,7 @@ class CreateJobsTable extends Migration
             $table->longText('job_cat');
             $table->longText('job_location');
             $table->longText('job_attachement');
+            
             $table->timestamps();
         });
     }

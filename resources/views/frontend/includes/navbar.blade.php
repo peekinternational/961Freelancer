@@ -17,6 +17,13 @@
                 <li><a href="">How it Works</a></li>
                 <li><a href="{{ route('job.index') }}">Browse Jobs</a></li>
                 <li><a href="{{ route('freelancers.index') }}">Browse Freelancers</a></li>
+                @if(Auth::user())
+                <li>
+                  <a href="{{ route('messages') }}" class="position-relative">Messages
+                    <span class="badge badge-danger messageCount badge-notification position-absolute top-0 translate-middle p-1 bg-danger border border-light rounded-circle">{{ App\Models\ChatMessages::getUnseenMsg() }}</span>
+                  </a> 
+                </li>
+                @endif
               </ul>
             </div>
             @if(Auth::user() == '')

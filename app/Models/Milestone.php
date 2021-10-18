@@ -12,7 +12,7 @@ class Milestone extends Model
       'job_id',
       'proposal_id',
       'user_id',
-      'budget',
+      'milestone_amount',
       'detail',
       'due_date',
       'status',
