@@ -107,8 +107,8 @@
 								<figure class="wt-companysimg">
 									<img src="{{asset('assets/images/user/cover/'.$job->clientInfo->cover_image)}}" alt="img description">
 								</figure>
-								<div class="wt-companysinfo">
-									<figure><img src="{{asset('assets/images/user/profile/'.$job->clientInfo->profile_image)}}" alt="img description"></figure>
+								<div class="wt-companysinfo w-100">
+									<figure><img src="{{asset('assets/images/user/profile/'.$job->clientInfo->profile_image)}}" alt="img description" crossorigin="w-100 h-100"></figure>
 									<div class="wt-title">
 										<!-- <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a> -->
 										<h2>{{$job->clientInfo->first_name}} {{$job->clientInfo->last_name}}</h2>
