@@ -104,10 +104,10 @@
 						</div>
 						<div class="wt-widget wt-companysinfo-jobsingle">
 							<div class="wt-companysdetails">
-								<figure class="wt-companysimg">
-									<img src="{{asset('assets/images/user/cover/'.$job->clientInfo->cover_image)}}" alt="img description">
+								<figure class="wt-companysimg w-100">
+									<img src="{{asset('assets/images/user/cover/'.$job->clientInfo->cover_image)}}" class="w-100 h-100" alt="img description">
 								</figure>
-								<div class="wt-companysinfo w-100">
+								<div class="wt-companysinfo">
 									<figure><img src="{{asset('assets/images/user/profile/'.$job->clientInfo->profile_image)}}" alt="img description" crossorigin="w-100 h-100"></figure>
 									<div class="wt-title">
 										<!-- <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a> -->
