@@ -56,8 +56,10 @@
 													<div class="wt-btnarea">
 														<span class="text-start ps-3"> Project Complete</span>
 														<a href="{{url('job-detail/'.$job->job_id)}}" class="wt-btn">VIEW DETAILS</a>
-														@if($job->job_id == $job->clientRating->job_id)
-														<a href="javascript:void(0);" class="wt-btn">Already Rated</a>
+														@if($job->clientRating)
+															@if($job->job_id == $job->clientRating->job_id)
+															<a href="javascript:void(0);" class="wt-btn">Already Rated</a>
+															@endif
 														@else
 														<a href="{{url('rating/'.$job->job_id)}}" class="wt-btn">Rate</a>
 														@endif
@@ -163,7 +165,14 @@
 													<div class="wt-btnarea">
 														<span class="text-start ps-3"> Project Complete</span>
 														<a href="{{url('job-detail/'.$completejob->job->job_id)}}" class="wt-btn">VIEW DETAILS</a>
+														
+														@if($completejob->freelancerRating)
+															@if($completejob->job_id == $completejob->freelancerRating->job_id)
+															<a href="javascript:void(0);" class="wt-btn">Already Rated</a>
+															@endif
+														@else
 														<a href="{{url('rating/'.$completejob->job->job_id)}}" class="wt-btn">Rate Client</a>
+														@endif
 													</div>
 													
 												</div>

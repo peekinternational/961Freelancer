@@ -90,7 +90,7 @@
 								<div class="wt-freelancerholder wt-tabsinfo">
 									<form class="wt-formtheme wt-formfeedback" id="feedback_form">
 										@csrf
-										<input type="hidden" name="rating_to" value="{{$proposal_user}}">
+										<input type="hidden" name="rating_to" value="{{$job_user}}">
 										<input type="hidden" name="job_id" value="{{$job_id}}">
 										<input type="hidden" name="proposal_id" value="{{$proposal_id}}">
 										

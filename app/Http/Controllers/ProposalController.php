@@ -187,6 +187,19 @@ class ProposalController extends Controller
       }
     }
 
+    public function rejectFreelancer(Request $request){
+      $id = $request->proposal_id;
+      $job_id = $request->job_id;
+      $findData = Proposal::find($id);
+      $findData->status = 3;
+      Job::where('job_id',$job_id)->update(['job_status'=>1]);
+      if ($findData->save()) {
+          return response()->json(['status'=>'true' , 'message' => 'Freelancer proposal rejected'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
+    }
+
 
     public function projectStatus(Request $request){
 
@@ -204,7 +217,7 @@ class ProposalController extends Controller
       $findData->status = $proposal_status;
       Job::where('job_id',$job_id)->update(['job_status'=>$request->project_status]);
       if ($findData->save()) {
-          return response()->json(['status'=>'true' , 'message' => 'Project Status updated', 'job_id' => $job_id] , 200);
+          return response()->json(['status'=>'true' , 'message' => 'Project Status updated', 'job_id' => $job_id, 'job_status' => $proposal_status] , 200);
       }else{
            return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
       }

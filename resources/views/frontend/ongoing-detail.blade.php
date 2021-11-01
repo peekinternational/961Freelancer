@@ -34,6 +34,7 @@
 										<h2>Hired Freelancer</h2>
 									</div>
 									<div class="wt-jobdetailscontent">
+										@if($ongoingJob > 0)
 										<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
 											<div class="wt-userlistingcontent">
 												<div class="wt-contenthead">
@@ -66,8 +67,12 @@
 												</div>
 											</div>	
 										</div>
+										@else
+
+										@endif
 									</div>
 								</div>
+								@if($ongoingJob > 0)
 								<div class="wt-rcvproposalholder wt-hiredfreelancer wt-tabsinfo">
 									<div class="wt-tabscontenttitle">
 										<h2>Hired Freelancer</h2>
@@ -195,6 +200,7 @@
 										</div>
 									</div>
 								</div>
+								@endif
 								<!-- <div class="wt-projecthistory">
 									<div class="wt-tabscontenttitle">
 										<h2>Project History</h2>
@@ -391,7 +397,12 @@
 	    success: (response)=>{
 	        if (response.status == 'true') {
 	            $.notify(response.message , 'success'  );
-	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/ongoing-job/"+response.job_id;
+	            if(response.job_status == 3){
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/cancelled-job/";
+	            }
+	            if(response.job_status == 5){
+	            	window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/completed-jobs/";
+	            }
 	            
 	            
 	        }else{

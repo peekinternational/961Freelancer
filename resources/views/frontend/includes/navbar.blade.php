@@ -48,6 +48,13 @@
               </div>
               <nav class="wt-usernav">
                 <ul>
+                  @if(Auth::user()->account_type == 'Freelancer')
+                  <li>
+                    <a href="{{url('freelancer/'.Auth::user()->username)}}">
+                      <span>View Profile</span>
+                    </a>
+                  </li>
+                  @endif
                   <li>
                     <a href="{{url('profile')}}">
                       <span>My Profile</span>

@@ -24,12 +24,20 @@
 								
 							</ul>
 						</div>
-						@if($job->user_id != Auth::user()->id)
-							@if (App\Models\Proposal::isBidAvailable(auth()->id(), $job->job_id))
-							<div class="wt-btnarea"><a href="javascript:void(0)" class="wt-btn rounded-pill">Already applied</a></div>
-							@else
-							<div class="wt-btnarea"><a href="{{url('job-proposal/'.$job->job_id)}}" class="wt-btn rounded-pill">Send Proposal</a></div>
+						@if($job->job_status == 1)
+							@if($job->user_id != Auth::user()->id)
+								@if (App\Models\Proposal::isBidAvailable(auth()->id(), $job->job_id))
+								<div class="wt-btnarea"><a href="javascript:void(0)" class="wt-btn rounded-pill">Already applied</a></div>
+								@else
+								<div class="wt-btnarea"><a href="{{url('job-proposal/'.$job->job_id)}}" class="wt-btn rounded-pill">Send Proposal</a></div>
+								@endif
 							@endif
+						@elseif($job->job_status == 2)
+								<div class="wt-btnarea"><a href="javascript:void(0)" class="wt-btn rounded-pill">In Progress</a></div>
+						@elseif($job->job_status == 3)
+								<div class="wt-btnarea"><a href="javascript:void(0)" class="wt-btn rounded-pill">Job Closed</a></div>
+						@elseif($job->job_status == 4)
+								<div class="wt-btnarea"><a href="javascript:void(0)" class="wt-btn rounded-pill">Completed</a></div>
 						@endif
 					</div>
 				</div>

@@ -88,6 +88,7 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/job-proposal/{id}', [ProposalController::class, 'jobProposal']);
   Route::get('/proposals', [ProposalController::class, 'allProposalClient'])->name('proposals');
   Route::post('/hire-freelancer', [ProposalController::class, 'hireFreelancer'])->name('hire-freelancer');
+  Route::post('/reject-freelancer', [ProposalController::class, 'rejectFreelancer'])->name('reject-freelancer');
 
   Route::post('/update-project-status', [ProposalController::class, 'projectStatus'])->name('update-project-status');
   

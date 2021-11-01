@@ -27,7 +27,7 @@ class JobsController extends Controller
      */
     public function index()
     {
-      $jobs = Job::with('saveJobs')->orderBy('created_at', 'DESC')->paginate(10);
+      $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
       
       return View::make('frontend.job-listings')->with([
         'jobs' => $jobs
@@ -200,7 +200,7 @@ class JobsController extends Controller
       $user_id = auth()->user()->id;
       $clientjobs = Job::with('proposal','clientInfo','clientRating')->whereuser_id($user_id)->wherejob_status(4)->orderBy('created_at','DESC')->paginate(5);
       // dd($clientjobs);
-      $freelancerJobs = Proposal::with('job')->whereuser_id($user_id)->wherestatus(5)->orderBy('created_at','DESC')->paginate(5);
+      $freelancerJobs = Proposal::with('job','freelancerRating')->whereuser_id($user_id)->wherestatus(5)->orderBy('created_at','DESC')->paginate(5);
       // dd($freelancerJobs);
       return View::make('frontend.completed-jobs')->with([
         'clientCompletedJobs' => $clientjobs,
@@ -236,6 +236,7 @@ class JobsController extends Controller
     // Ongoing Job Detail
     public function onGoingJobsDetail(Request $request,$id){
       $jobData = Proposal::with('job')->wherejob_id($id)->wherestatus(2)->first();
+
       $user_rating = Rating::where('rating_to',$jobData->user_id)->get();
       $rating_count = $user_rating->count();
       $rating_avg = 0.0;

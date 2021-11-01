@@ -29,6 +29,7 @@
 							<div class="wt-dashboardboxtitle">
 								<h2>Manage Jobs</h2>
 							</div>
+							@if(count($jobData) > 0)
 							@foreach($jobData as $job)
 							<div class="wt-dashboardboxcontent wt-rcvproposala">
 								<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
@@ -84,11 +85,22 @@
 											</div>
 											<div class="wt-rightarea">
 												<div class="wt-btnarea">
-													@if($proposal->status == 1)
+													@if($proposal->status == 1 && $job->status == 1)
 													<a href="javascript:void(0);" onclick="hireNow('{{$proposal->id}}' ,'{{$proposal->job_id}}')" class="wt-btn rounded-pill">Hire Now</a>
+													<a href="javascript:void(0);" onclick="rejectNow('{{$proposal->id}}' ,'{{$proposal->job_id}}')" class="wt-btn rounded-pill">Reject</a>
 													@endif
 													@if($proposal->status == 2)
+													<a href="{{url('ongoing-job/'.$proposal->job->job_id)}}">View Job</a>
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Hired</a>
+													@endif
+													@if($proposal->status == 3)
+													<a href="javascript:void(0);" class="wt-btn rounded-pill">Rejected</a>
+													@endif
+													@if($proposal->status == 4)
+													<a href="javascript:void(0);" class="wt-btn rounded-pill">Expired</a>
+													@endif
+													@if($proposal->status == 5)
+													<a href="javascript:void(0);" class="wt-btn rounded-pill">Completed</a>
 													@endif
 													<form id="createChat{{$proposal->id}}" class="d-inline">
 														@csrf
@@ -225,6 +237,17 @@
 								</div>
 							</div>
 							@endforeach
+							@else
+							<div class="wt-dashboardboxcontent wt-rcvproposala">
+								<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+									<div class="wt-userlistingcontent">
+										<div class="wt-contenthead">
+											<h4>Yet you didn't receive any proposal on your posted jobs</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
 							{{ $jobData->links('frontend.pagination.manage-jobs') }}								
 						</div>
 					</div>
@@ -277,6 +300,7 @@
 							<div class="wt-dashboardboxtitle">
 								<h2>Proposals</h2>
 							</div>
+							@if(count($proposals) > 0)
 							@foreach($proposals as $proposal)
 							<div class="wt-dashboardboxcontent wt-rcvproposala">
 								<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
@@ -322,11 +346,12 @@
 											</div>
 											<div class="wt-rightarea">
 												<div class="wt-btnarea">
-													@if($proposal->status == 1)
+													@if($proposal->status == 1 && $proposal->job->job_status == 1)
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Active</a>
 													@endif
 													@if($proposal->status == 2)
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Hired</a>
+													<a href="{{url('ongoing-job/'.$proposal->job->job_id)}}">View Job</a>
 													@endif
 													@if($proposal->status == 3)
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Reject</a>
@@ -336,6 +361,9 @@
 													@endif
 													@if($proposal->status == 5)
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Completed</a>
+													@endif
+													@if($proposal->job->job_status == 4)
+													<a href="javascript:void(0);" class="wt-btn rounded-pill">Job Close</a>
 													@endif
 												</div>												
 												<div class="wt-hireduserstatus">
@@ -446,6 +474,17 @@
 								</div>
 							</div>
 							@endforeach
+							@else
+							<div class="wt-dashboardboxcontent wt-rcvproposala">
+								<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
+									<div class="wt-userlistingcontent">
+										<div class="wt-contenthead">
+											<h4>You haven't sent proposal to any job.</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
 							{{ $proposals->links('frontend.pagination.manage-jobs') }}								
 						</div>
 					</div>
@@ -505,6 +544,30 @@
 	function hireNow(id,job_id){
 		$.ajax({
 	    url: "{{route('hire-freelancer')}}",
+	    type: 'POST',
+	    data: {"proposal_id": id,"job_id": job_id},
+
+	    success: (response)=>{
+	        if (response.status == 'true') {
+	            $.notify(response.message , 'success'  );
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
+	            
+	            
+	        }else{
+	            $.notify(response.message , 'error');
+
+	        }
+	    },
+	    error: (errorResponse)=>{
+	        $.notify( errorResponse, 'error'  );
+
+
+	    }
+		})
+	}
+	function rejectNow(id,job_id){
+		$.ajax({
+	    url: "{{route('reject-freelancer')}}",
 	    type: 'POST',
 	    data: {"proposal_id": id,"job_id": job_id},
 

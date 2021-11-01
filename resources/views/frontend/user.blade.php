@@ -44,7 +44,7 @@
 									<h2>{{$freelancer->tagline}}</h2>
 									<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
 										<li><span><i class="far fa-money-bill-alt"></i> ${{$freelancer->hourly_rate}}.00 / hr</span></li>
-										<li><span><!-- <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> -->  {{$freelancer->country}}</span></li>
+										<li><span><i class="fal fa-map-marker-alt"></i> {{$freelancer->country}}</span></li>
 										<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
 									</ul>
 									<div class="wt-description">
@@ -53,15 +53,15 @@
 								</div>
 								<div id="wt-statistics" class="wt-statistics wt-profilecounter">
 									<div class="wt-statisticcontent wt-countercolor1">
-										<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">00</h3>
+										<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">{{App\Models\Proposal::freelancerOngoingCount(Auth::user()->id)}}</h3>
 										<h4>Ongoing <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor2">
-										<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">00</h3>
+										<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">{{App\Models\Proposal::freelancerCompletedCount(Auth::user()->id)}}</h3>
 										<h4>Completed <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor4">
-										<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">00</h3>
+										<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">{{App\Models\Proposal::freelancerCancelledCount(Auth::user()->id)}}</h3>
 										<h4>Cancelled <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor3">

@@ -45,6 +45,9 @@ class Proposal extends Model
     public function rating(){
       return $this->hasMany(Rating::class, 'rating_to', 'user_id');
     }
+    public function freelancerRating(){
+      return $this->belongsTo(Rating::class, 'user_id', 'rating_by');
+    }
 
     public static function freelancerCompletedCount($user_id)
     {

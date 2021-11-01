@@ -74,11 +74,13 @@ class RatingController extends Controller
      */
     public function show($id)
     {
-      $proposal = Proposal::wherejob_id($id)->wherestatus(5)->first();
+      $proposal = Proposal::with('job')->wherejob_id($id)->wherestatus(5)->first();
+      
       return View::make('frontend.rating')->with([
         "job_id" => $id,
         "proposal_id" => $proposal->id,
         "proposal_user" => $proposal->user_id,
+        "job_user" => $proposal->job->user_id,
       ]);
     }
 
