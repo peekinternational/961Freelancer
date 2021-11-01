@@ -85,7 +85,7 @@
 											</div>
 											<div class="wt-rightarea">
 												<div class="wt-btnarea">
-													@if($proposal->status == 1 && $job->status == 1)
+													@if($proposal->status == 1 && $job->job_status == 1)
 													<a href="javascript:void(0);" onclick="hireNow('{{$proposal->id}}' ,'{{$proposal->job_id}}')" class="wt-btn rounded-pill">Hire Now</a>
 													<a href="javascript:void(0);" onclick="rejectNow('{{$proposal->id}}' ,'{{$proposal->job_id}}')" class="wt-btn rounded-pill">Reject</a>
 													@endif
