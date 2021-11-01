@@ -96,6 +96,12 @@
 								</a>
 							</li>
 							<li>
+								<a href="{{url('transactions')}}">
+									<i class="fal fa-save"></i>
+									<span>Transactions</span>
+								</a>
+							</li>
+							<li>
 								<a href="{{route('account-setting')}}">
 									<i class="fal fa-anchor"></i>
 									<span>Account Settings</span>

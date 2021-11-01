@@ -40,7 +40,17 @@
                   ${{$project->hourly_min_price}} - ${{$project->hourly_max_price}} /hr
                 @endif
               </td>
-              <td><span class="badge badge-primary">Completed</span></td>
+              <td>
+                @if($project->job_status == 2)
+                <span class="badge badge-primary">In Progress</span>
+                @elseif($project->job_status == 3)
+                <span class="badge badge-danger">Cancelled</span>
+                @elseif($project->job_status == 4)
+                <span class="badge badge-success">Completed</span>
+                @else
+                <span class="badge badge-success">Active</span>
+                @endif
+              </td>
               <td>
                 <div>
                   <a href="{{url('admin/projects/'.$project->id.'/edit')}}" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-success rounded"><i class="bx bx-edit"></i></a>

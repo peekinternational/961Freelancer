@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use App\Models\Category;
+use App\Models\Contact;
 use Hash;
 use Session;
 use Mail;
@@ -46,7 +47,29 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contact = new Contact;
+        $contact->name = $request->input('name');
+        $contact->email = $request->input('email');
+        $contact->subject = $request->input('subject');
+        $contact->comments = $request->input('comments');
+         
+
+        if ($contact->save()) {
+            $contact->id;
+            $new_user = Contact::find($contact->id);
+            $toemail = 'peek.zeeshan@gmail.com';
+            Mail::send('mail.contact-email',['user' =>$new_user],
+            function ($message) use ($toemail)
+            {
+
+              $message->subject('961Freelancer - Contact Us');
+              $message->from('support@961freelancer.com', '961Freelancer');
+              $message->to($toemail);
+            });
+          return response()->json(['status'=>'true' , 'message' => 'Your message sent successfully'] , 200);
+        }else{
+          return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+        }
     }
 
     /**
@@ -101,5 +124,15 @@ class HomeController extends Controller
       return View::make('frontend.categories')->with([
         "categories" => $categories
       ]);
+    }
+
+    // Contact Us
+    public function contactUs(Request $request){
+        return View::make('frontend.contact-us');
+    }
+    
+    // About Us
+    public function aboutUs(Request $request){
+        return View::make('frontend.about');
     }
 }

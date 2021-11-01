@@ -52,8 +52,11 @@
 											</div>
 											<div class="wt-rightarea">
 												<div class="wt-btnarea">
-													<a href="javascript:void(0);" class="wt-btn">Repost</a>
-													<a href="javascript:void(0);" class="wt-cancelbtn">Delete</a>
+													
+														<input type="hidden" name="id" value="{{$job->id}}">
+														<a class="wt-btn" href="javascript:void(0);" onclick="repostJob({{$job->id}})">Repost</a>
+													
+														<a class="wt-cancelbtn" href="javascript:void(0);" onclick="deleteBatch({{$job->id}})">Delete</a>
 												</div>
 											</div>
 										</div>
@@ -124,7 +127,7 @@
 							<div class="wt-dashboardboxcontent wt-jobdetailsholder">
 								<div class="wt-completejobholder">
 									<div class="wt-tabscontenttitle">
-										<h2>Completed Jobs</h2>
+										<h2>Cancelled Jobs</h2>
 									</div>
 									<div class="wt-managejobcontent">
 										@if(count($freelancerCancelledJobs) > 0)
@@ -214,6 +217,28 @@
 		<!--Main End-->
 	</div>
 </div>
+<div class="modal" id="deleteModel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-content-demo">
+      <div class="modal-header">
+        <h6 class="modal-title">Alert</h6><button aria-label="Close" class="close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <form id="deleteData" > 
+        @csrf
+         @method('DELETE')
+      <input type="hidden" name="projectId" id="projectId">
+      <div class="modal-body">
+        <h6></h6>
+        <p>Are you sure you want to delete the record ?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn ripple btn-danger" id="confirmDelete" type="submit"> Delete </button>
+        <button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
 @endsection
 @section('script')
 <script>
@@ -222,57 +247,70 @@
 	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	    }
 	});
-	function hireNow(id,job_id){
-		$.ajax({
-	    url: "{{route('hire-freelancer')}}",
-	    type: 'POST',
-	    data: {"proposal_id": id,"job_id": job_id},
+	function repostJob(id){
+		alert(id);
+	  $.ajax({
+	      url: "{{url('job')}}/"+id,
+	      type: 'PATCH',
+	      data: {'id':id},
+	      // contentType: false,
+	      processData: false,
 
-	    success: (response)=>{
-	        if (response.status == 'true') {
-	            $.notify(response.message , 'success'  );
-	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
-	            
-	            
-	        }else{
-	            $.notify(response.message , 'error');
+	      success: (response)=>{
+	          if (response.status == 'true') {
+	              $.notify(response.message , 'success'  );
+	                window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/cancelled-jobs";
+	              
+	              
+	          }else{
+	              $.notify(response.message , 'error');
 
-	        }
-	    },
-	    error: (errorResponse)=>{
-	        $.notify( errorResponse, 'error'  );
+	          }
+	      },
+	      error: (errorResponse)=>{
+	          $.notify( errorResponse, 'error'  );
 
 
-	    }
-		})
+	      }
+	  })
 	}
 
+	$('#deleteData').on('submit' , function(event){
+	  event.preventDefault();
+	  var data = $("#deleteData").serialize();
+	  $projectId = $("#projectId").val();
+	  console.log($projectId)
 
-	function createChat(id){
-		let createFormData = $('#createChat'+id).serialize();
+	     $.ajax({
+	      url: "{{url('job')}}/"+$projectId,
+	      type: 'DELETE',
+	      data: data,
+	      processData: false,
 
-		$.ajax({
-	    url: "{{url('add-friend')}}",
-	    type: 'POST',
-	    data: createFormData,
+	      success: (response)=>{
+	          
+	          if (response.status == 'true') {
 
-	    success: (response)=>{
-	        if (response.status == 'true') {
-	            $.notify(response.message , 'success'  );
-	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/messages?conversation="+response.conversation_id;
-	            
-	            
-	        }else{
-	            $.notify(response.message , 'error');
+	              $.notify(response.message , 'success'  );
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/cancelled-jobs";
 
-	        }
-	    },
-	    error: (errorResponse)=>{
-	        $.notify( errorResponse, 'error'  );
+	          }else{
+	              $.notify(response.message , 'error');
+
+	          }
+	      },
+	      error: (errorResponse)=>{
+	          $.notify( errorResponse, 'error'  );
 
 
-	    }
-		})
+	      }
+	  })
+
+	});
+
+	function deleteBatch(id) {
+	  $("#deleteModel").modal('show');
+	  $("#projectId").val(id);
 	}
 </script>
 @endsection

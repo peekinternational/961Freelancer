@@ -19,6 +19,8 @@ class CreateMilestonesTable extends Migration
             $table->string('job_id');
             $table->integer('user_id');
             $table->string('milestone_amount');
+            $table->string('milestone_service_fee');
+            $table->string('milestone_receive_amount');
             $table->longText('detail');
             $table->string('due_date');
             $table->string('status');

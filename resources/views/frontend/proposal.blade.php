@@ -79,7 +79,7 @@
 													<span class="wt-starsvtwo">
 														<i class="fa fa-star fill"></i>
 													</span>
-													<span class="wt-starcontent"> 4.5/<i>5</i> <em> (860 Feedback)</em></span>
+													<span class="wt-starcontent"> {{App\Models\Job::getFeedbackAvg($proposal->user_id)}}/<i>5</i> <em> ({{App\Models\Job::getFreelancerFeedback($proposal->user_id)}} Feedback)</em></span>
 												</div>													
 											</div>
 											<div class="wt-rightarea">
@@ -174,7 +174,7 @@
 																<th class="text-white">Amount</th>
 																<th class="text-white">Due Date</th>
 																<th class="text-white">Status</th>
-																<th class="text-white">Action</th>
+																<th class="text-white"></th>
 															</tr>
 														</thead>
 														<tbody>
@@ -187,8 +187,29 @@
 																<td>{{$milestone->status}}</td>
 																<td>
 																	<div>
-																		<button class="btn milestone-btn accept-btn rounded-pill">Accept</button>
+																		@if($milestone->status == 'request')
+																		<form method="post" action="{{url('pay-now')}}">
+																			@csrf
+																			<input type="hidden" name="freelancer_firstname" value="{{App\Models\Proposal::freelancer($proposal->user_id)->first_name}}">
+																			<input type="hidden" name="freelancer_lastname" value="{{App\Models\Proposal::freelancer($proposal->user_id)->last_name}}">
+																			<input type="hidden" name="freelancer_email" value="{{App\Models\Proposal::freelancer($proposal->user_id)->email}}">
+																			<input type="hidden" name="freelancer_country" value="{{App\Models\Proposal::freelancer($proposal->user_id)->country}}">
+																			<input type="hidden" name="freelancer_phone" value="{{App\Models\Proposal::freelancer($proposal->user_id)->mobile_number}}">
+																			<input type="hidden" name="proposal_id" value="{{$proposal->id}}">
+																			<input type="hidden" name="milestone_id" value="{{$milestone->id}}">
+																			<input type="hidden" name="milestone_amount" value="{{$milestone->milestone_amount}}">
+																			<input type="hidden" name="milestone_service_fee" value="{{$milestone->milestone_service_fee}}">
+																			<input type="hidden" name="milestone_receive_amount" value="{{$milestone->milestone_receive_amount}}">
+																			<input type="hidden" name="milestone_detail" value="{{$milestone->detail}}">
+																			<input type="hidden" name="milestone_job_id" value="{{$milestone->job_id}}">
+																			<input type="hidden" name="freelancer_id" value="{{$milestone->user_id}}">
+																		<button type="submit" class="btn milestone-btn accept-btn rounded-pill">Accept</button>
+																		</form>
 																		<button class="btn milestone-btn reject-btn rounded-pill">Reject</button>
+																		@endif
+																		@if($milestone->status == 'accept')
+																		<button class="btn milestone-btn accept-btn rounded-pill">Deposit</button>
+																		@endif
 																	</div>
 																</td>
 															</tr>
@@ -296,7 +317,7 @@
 													<span class="wt-starsvtwo">
 														<i class="fa fa-star fill"></i>
 													</span>
-													<span class="wt-starcontent"> 4.5/<i>5</i> <em> (860 Feedback)</em></span>
+													<span class="wt-starcontent"> {{$rating}}/<i>5</i> <em> ({{$proposal->rating_count}} Feedback)</em></span>
 												</div>													
 											</div>
 											<div class="wt-rightarea">
@@ -312,6 +333,9 @@
 													@endif
 													@if($proposal->status == 4)
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Job Closed</a>
+													@endif
+													@if($proposal->status == 5)
+													<a href="javascript:void(0);" class="wt-btn rounded-pill">Completed</a>
 													@endif
 												</div>												
 												<div class="wt-hireduserstatus">
@@ -372,6 +396,51 @@
 												</div>
 												<!-- End Modal -->
 											</div>
+											@if($proposal->proposal_type == 'by_milestone')
+											<div class="wt-userlistinghold wt-featured wt-proposalitem">
+												<div class="wt-tabscontenttitle">
+													<h2>Milestones</h2>
+												</div>
+												<div class="table-responive">
+													<table class="table">
+														<thead>
+															<tr style="background-color: #e11a22;">
+																<th class="text-white">#</th>
+																<th class="text-white">Name</th>
+																<th class="text-white">Amount</th>
+																<th class="text-white">Due Date</th>
+																<th class="text-white">Status</th>
+																<th class="text-white"></th>
+															</tr>
+														</thead>
+														<tbody>
+															@foreach(App\Models\Proposal::milestones($proposal->id) as $key=>$milestone)
+															<tr>
+																<td>{{$key+1}}</td>
+																<td>{{$milestone->detail}}</td>
+																<td>{{$milestone->milestone_amount}}</td>
+																<td>{{date('F d, Y', strtotime($milestone->due_date))}} </td>
+																<td>{{$milestone->status}}</td>
+																<td>
+																	<div>
+																		@if($milestone->status == 'request')
+																		<button class="btn milestone-btn accept-btn rounded-pill w-75">Requested</button>
+																		@endif
+																		@if($milestone->status == 'accept')
+																		<button class="btn milestone-btn accept-btn rounded-pill w-75">Accepted</button>
+																		@endif
+																		@if($milestone->status == 'reject')
+																		<button class="btn milestone-btn reject-btn rounded-pill w-75">Rejected</button>
+																		@endif
+																	</div>
+																</td>
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>
+											</div>
+											@endif
 										</div>	
 									</div>										
 								</div>

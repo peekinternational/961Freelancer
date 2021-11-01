@@ -18,6 +18,8 @@ class CreateProposalsTable extends Migration
             $table->string('job_id');
             $table->integer('user_id');
             $table->string('budget');
+            $table->string('budget_receive');
+            $table->string('service_fee');
             $table->longText('cover_letter');
             $table->string('proposal_type');
             $table->string('duration');

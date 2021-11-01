@@ -560,7 +560,7 @@
                 </li>
                 <li>
                   <button class="icon-btn btn-danger button-effect btn-lg is-animating cancelcall" @click="o2ostopKCall(3)">
-                    <i class="fa fa-phone"></i>
+                    <i class="fa fa-phone-slash"></i>
                   </button>
                 </li>
               </ul>

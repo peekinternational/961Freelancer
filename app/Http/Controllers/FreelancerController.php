@@ -27,8 +27,8 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        $freelancers = User::with('userSkills','saveInfo')->whereaccount_type('Freelancer')->paginate(10);
-
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+        
         return View::make('frontend.freelancers')->with([
             'freelancers' => $freelancers
         ]);
@@ -64,10 +64,18 @@ class FreelancerController extends Controller
     public function show($id)
     {
         $username = $id;
-        $freelancer = User::with('userInfo','education','userSkills','userProjects','certificates')->whereusername($username)->first();
-
+        $freelancer = User::with('userInfo','education','userSkills','userProjects','certificates','freelancerRating')->withCount('freelancerRating')->whereusername($username)->first();
+        // dd($freelancer);
+        $rating_avg = 0.0;
+        $total = 0;
+        foreach($freelancer->freelancerRating as $rating){
+          $total = $total + $rating->general_rating;
+          $rating_avg = $total/$freelancer->freelancer_rating_count;
+        }
+        
         return View::make('frontend.user')->with([
-            'freelancer' => $freelancer
+            'freelancer' => $freelancer,
+            'rating_avg' => $rating_avg
         ]);
     }
 

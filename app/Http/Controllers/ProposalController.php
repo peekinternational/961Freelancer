@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Countries;
 use App\Models\Proposal;
 use App\Models\Milestone;
+use App\Models\Rating;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -57,6 +58,8 @@ class ProposalController extends Controller
       $proposal->job_id = $request->input('job_id');
       $proposal->user_id = auth()->user()->id;
       $proposal->budget = $request->input('budget');
+      $proposal->budget_receive = $request->input('budget_receive');
+      $proposal->service_fee = $request->input('service_fee');
       $proposal->cover_letter = $request->input('cover_letter');
       $proposal->proposal_type = $request->input('proposal_type');
       $proposal->duration = $request->input('duration');
@@ -155,11 +158,19 @@ class ProposalController extends Controller
       $user_id = auth()->user()->id;
       $job = Job::with('proposal','clientInfo')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
 
-      $proposals = Proposal::with('job')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
-      // dd($proposals);
+      $proposals = Proposal::with('job','rating')->withCount('rating')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
+
+      $freelancerrating = Rating::where('rating_to',$user_id)->get();
+      $rating_avg = 0.0;
+      $total = 0;
+      foreach($freelancerrating as $rate){
+        $total += $rate->general_rating;
+        $rating_avg = $total/count($freelancerrating);
+      }
       return View::make('frontend.proposal')->with([
         'jobData' => $job,
-        'proposals' => $proposals
+        'proposals' => $proposals,
+        'rating' => $rating_avg
       ]);
     }
 
@@ -171,6 +182,29 @@ class ProposalController extends Controller
       Job::where('job_id',$job_id)->update(['job_status'=>2]);
       if ($findData->save()) {
           return response()->json(['status'=>'true' , 'message' => 'Freelancer Hired'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
+    }
+
+
+    public function projectStatus(Request $request){
+
+      // dd($request->all());
+      $proposal_id = $request->proposal_id;
+      $job_id = $request->job_id;
+      $findData = Proposal::find($proposal_id);
+      if($request->project_status == 2){
+        $proposal_status = 2;
+      }else if($request->project_status == 3){
+        $proposal_status = 3;
+      }else{
+        $proposal_status = 5;
+      }
+      $findData->status = $proposal_status;
+      Job::where('job_id',$job_id)->update(['job_status'=>$request->project_status]);
+      if ($findData->save()) {
+          return response()->json(['status'=>'true' , 'message' => 'Project Status updated', 'job_id' => $job_id] , 200);
       }else{
            return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
       }

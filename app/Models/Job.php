@@ -36,16 +36,38 @@ class Job extends Model
     public function proposal(){
       return $this->hasMany(Proposal::class, 'job_id', 'job_id');
     }
-
+    public function clientRating(){
+      return $this->belongsTo(Rating::class, 'user_id', 'rating_by');
+    }
+    
     public static function client($user_id)
     {
         return User::where('id', $user_id)->first();
     }
     public static function selectProposal($job_id)
     {
-        return Proposal::where('job_id', $job_id)->where('status',2)->first();
+        return Proposal::where('job_id', $job_id)->first();
     }
 
+    public static function jobData($job_id)
+    {
+        return Job::where('job_id', $job_id)->first();
+    }
+    public static function getFreelancerFeedback($user_id)
+    {
+      return Rating::where('rating_to', $user_id)->count();
+    }
+    public static function getFeedbackAvg($user_id)
+    {
+      $ratings = Rating::where('rating_to', $user_id)->get();
+      $rating_avg = 0.0;
+      $total = 0;
+      foreach($ratings as $rating){
+        $total = $total + $rating->general_rating;
+        $rating_avg = $total/count($ratings);
+      } 
+      return $rating_avg;
+    }
     public static function clientCompletedCount($user_id)
     {
         return Job::where('user_id', $user_id)->where('job_status',4)->count();

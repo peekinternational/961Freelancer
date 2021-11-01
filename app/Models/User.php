@@ -61,6 +61,10 @@ class User extends Authenticatable
     {
       return $this->hasMany(SaveItem::class, 'freelancer_id');
     }
+    public function freelancerRating()
+    {
+      return $this->hasMany(Rating::class, 'rating_to');
+    }
     public static function skillTitle($id)
     {
         return Skills::find($id);

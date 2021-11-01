@@ -110,13 +110,15 @@
 								<div class="form-group">
 									<span>( <i class="fa fa-dollar-sign"></i> )</span>
 									<input type="number" name="budget" onkeyup="getBudget(this)" form="propsalSubmit" class="form-control" placeholder="Enter Your Proposal Amount">
+									<input type="hidden" name="budget_receive" form="propsalSubmit" value="">
+									<input type="hidden" name="service_fee" form="propsalSubmit" value="">
 									<a href="javascript:void(0);" class="collapsed" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fal fa-chevron-up"></i></a>
 									<em>Total amount the client will see on your proposal</em>
 								</div>
 								<ul class="wt-totalamount collapse show" id="collapseOne" aria-labelledby="headingOne">
 									<li>
-										<h3>( <i class="fa fa-dollar-sign"></i> ) <em>- 00.00</em></h3>
-										<span><strong>“ 961Freelancer ”</strong> Service Fee<i class="fal fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
+										<h3>( <i class="fa fa-dollar-sign"></i> ) <em class="service_fee">- 00.00</em></h3>
+										<span><strong>5% “ 961Freelancer ”</strong> Service Fee<i class="fal fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
 									</li>
 									<li>
 										<h3>( <i class="fa fa-dollar-sign"></i> ) <em class="total_budget">- 00.00</em></h3>
@@ -141,25 +143,29 @@
 										</div>
 										<div class="col-3">
 											<label class="mb-0 fw-bold">Amount</label>
-											<input type="text" name="milestone_amount[]" form="propsalSubmit" class="form-control p-2 amount" onkeyup="milestoneAmount(this)" placeholder="$">
+											<input type="text" name="milestone_amount[]" form="propsalSubmit" class="form-control p-2 amount" placeholder="$">
 										</div>
+										
 									</div>
 									<div class="milstone-added">
 										
 									</div>
 									<p class="mb-0 fw-bold add-milestone ps-3" style="cursor: pointer;color: #00a651;">+ Add milestone</p>
 								</div>
+								<input type="hidden" name="budget" value="">
+								<input type="hidden" name="service_fee" value="">
+								<input type="hidden" name="budget_receive" value="">
 								<ul class="wt-totalamount collapse show" id="collapseOne" aria-labelledby="headingOne">
 									<li>
 										<h3>( <i class="fa fa-dollar-sign"></i> ) <em class="total_amount">- 00.00</em></h3>
 										<span>This includes all milestones, and is the amount your client will see.</span>
 									</li>
 									<li>
-										<h3>( <i class="fa fa-dollar-sign"></i> ) <em>- 00.00</em></h3>
-										<span><strong>“ 961Freelancer ”</strong> Service Fee<i class="fal fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
+										<h3>( <i class="fa fa-dollar-sign"></i> ) <em class="service_fee">- 00.00</em></h3>
+										<span><strong>5% “ 961Freelancer ”</strong> Service Fee<i class="fal fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
 									</li>
 									<li>
-										<h3>( <i class="fa fa-dollar-sign"></i> ) <em>- 00.00</em></h3>
+										<h3>( <i class="fa fa-dollar-sign"></i> ) <em class="total_budget">- 00.00</em></h3>
 										<span>Amount You’ll Recive after <strong>“ 961Freelancer ”</strong> Service Fee deduction<i class="fal fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
 									</li>
 								</ul>
@@ -181,14 +187,16 @@
 								<label class="fw-bold mb-0">Hourly Rate</label>
 							<div class="form-group">
 								<span>( <i class="fa fa-dollar-sign"></i> )</span>
-								<input type="number" name="budget" onkeyup="getBudget(this)" form="propsalSubmit" class="form-control" placeholder="Enter Your Proposal Amount">
+								<input type="number" onkeyup="getBudget(this)" form="propsalSubmit" class="form-control" name="budget" placeholder="Enter Your Proposal Amount">
+								<input type="hidden" name="budget_receive" form="propsalSubmit" value="">
+								<input type="hidden" name="service_fee" form="propsalSubmit" value="">
 								<a href="javascript:void(0);" class="collapsed" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fal fa-chevron-up"></i></a>
 								<em>Total amount the client will see on your proposal</em>
 							</div>
 							<ul class="wt-totalamount collapse show" id="collapseOne" aria-labelledby="headingOne">
 								<li>
-									<h3>( <i class="fa fa-dollar-sign"></i> ) <em >- 00.00</em>/hr</h3>
-									<span><strong>“ 961Freelancer ”</strong> Service Fee<i class="fal fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
+									<h3>( <i class="fa fa-dollar-sign"></i> ) <em  class="service_fee">- 00.00</em>/hr</h3>
+									<span><strong>5% “ 961Freelancer ”</strong> Service Fee<i class="fal fa-exclamation-circle template-content tipso_style" data-tipso="Plus Member"></i></span>
 								</li>
 								<li>
 									<h3>( <i class="fa fa-dollar-sign"></i> ) <em class="total_budget">- 00.00</em>/hr</h3>
@@ -271,7 +279,7 @@
 		var i = 2;
 	$('.add-milestone').click(function(){
 		// i++;
-		$('.milstone-added').append('<div class="row d-flex align-items-center mb-4 milestone-'+ i +'"><div class="col-1"><p class="mb-0 fw-bold text-center pt-4">'+ i +'</p></div><div class="col-5"><label class="mb-0 fw-bold">Description</label><input type="text" name="milestone_detail[]" form="propsalSubmit" class="form-control p-2"></div><div class="col-3"><label class="mb-0 fw-bold">Due Date</label><input type="date" name="milestone_due_date[]" form="propsalSubmit" class="form-control p-2"></div><div class="col-2"><label class="mb-0 fw-bold">Amount</label><input type="text" name="milestone_amount[]" onkeyup="milestoneAmount(this)" form="propsalSubmit" class="form-control p-2 amount" placeholder="$"></div><div class="col-1"><p class="mb-0 fw-bold text-center pt-4" onclick="removeMilestone('+ i +')" style="cursor: pointer;color: #00a651;">X</p></div></div>');
+		$('.milstone-added').append('<div class="row d-flex align-items-center mb-4 milestone-'+ i +'"><div class="col-1"><p class="mb-0 fw-bold text-center pt-4">'+ i +'</p></div><div class="col-5"><label class="mb-0 fw-bold">Description</label><input type="text" name="milestone_detail[]" form="propsalSubmit" class="form-control p-2"></div><div class="col-3"><label class="mb-0 fw-bold">Due Date</label><input type="date" name="milestone_due_date[]" form="propsalSubmit" class="form-control p-2"></div><div class="col-2"><label class="mb-0 fw-bold">Amount</label><input type="text" name="milestone_amount[]" form="propsalSubmit" class="form-control p-2 amount" placeholder="$"></div><div class="col-1"><p class="mb-0 fw-bold text-center pt-4" onclick="removeMilestone('+ i +')" style="cursor: pointer;color: #00a651;">X</p></div></div>');
 		i++;
 	});
 
@@ -311,23 +319,57 @@
 		}
 
 		function getBudget(input){
-			$('.total_budget').html('- ' + input.value +'.00');
+			var multiply = 5 * input.value;
+			var fee = multiply/100;
+			// alert(fee);
+			var budget = input.value - fee;
+			// alert(budget);
+			$('.service_fee').html('- ' + fee);
+			$('.total_budget').html('- ' + budget);
+			$('input[name="budget_receive"]').val(budget);
+			$('input[name="service_fee"]').val(fee);
 		}
 
 		
 
-		var total = 0;
-		function milestoneAmount(e) {
-		    // $('input.amount').each(function() {
-		    	console.log(e.value);
-		    total += (parseInt(e.value));
-		    // });
-		    
-		    // total = numIn - numOut;
+		// var total = 0;
+		// function milestoneAmount(e) {
+		//     // $('input.amount').each(function() {
+		//     	console.log(e.value);
+		//     var total = total + e.value;
+		//     alert(total);
+		//     // });
+		//     var multiply = 5 * total;
+		//     var fee = multiply/100;
+		//     var budget = total - fee;
+		//     // total = numIn - numOut;
 
+		//     $('.total_amount').html('- ' + total +'.00');
+		//     $('.total_amount').fadeIn(250);
+		//     $('input[name="budget"]').val(total);
+		//     $('input[name="budget_receive"]').val(budget);
+		// 	$('input[name="service_fee"]').val(fee);
+		//     // return false;
+		// }
+
+		$(document).on("change", ".amount", function() {
+		    var total = 0;
+		    var multiply = 0;
+		    var fee = 0;
+		    var budget = 0;
+		    $(".amount").each(function(){
+		        total += +$(this).val();
+		        multiply = 5 * total;
+		        fee = multiply/100;
+		        budget = total - fee;
+		    });
 		    $('.total_amount').html('- ' + total +'.00');
-		    $('.total_amount').fadeIn(250);
-		    // return false;
-		}
+		    $('.service_fee').html('- ' + fee);
+			$('.total_budget').html('- ' + budget);
+	        $('.total_amount').fadeIn(250);
+	        $('input[name="budget"]').val(total);
+	        $('input[name="budget_receive"]').val(budget);
+	    	$('input[name="service_fee"]').val(fee);
+		});
 </script>
 @endsection

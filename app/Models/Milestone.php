@@ -13,6 +13,8 @@ class Milestone extends Model
       'proposal_id',
       'user_id',
       'milestone_amount',
+      'milestone_receive_amount',
+      'milestone_service_fee',
       'detail',
       'due_date',
       'status',

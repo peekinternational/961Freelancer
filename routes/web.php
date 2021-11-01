@@ -8,10 +8,13 @@ use App\Http\Controllers\JobsController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\SupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,9 @@ use App\Http\Controllers\Admin\SkillController;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 Route::get('/categories',[HomeController::class, 'allCategories'])->name('categories');
+Route::get('/contact-us',[HomeController::class, 'contactUs'])->name('contact-us');
+Route::post('/contactStore',[HomeController::class, 'store'])->name('contact.store');
+Route::get('/about-us',[HomeController::class, 'aboutUs'])->name('about-us');
 
 Route::match(['get','post'],'/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/login', [RegisterController::class, 'accountLogin'])->name('login');
@@ -68,9 +74,9 @@ Route::middleware(['auth'])->group(function () {
   Route::get('completed-jobs',[JobsController::class, 'completedJobs'])->name('job.completed-jobs');
   Route::get('cancelled-jobs',[JobsController::class, 'cancelledJobs'])->name('job.cancelled-jobs');
   Route::get('ongoing-jobs',[JobsController::class, 'onGoingJobs'])->name('job.ongoing-jobs');
-  // Route::get('/completed-jobs', function () {
-  //   return view('frontend.completed-jobs');
-  // })->name('completed-jobs');
+  
+  
+  Route::get('ongoing-job/{id}',[JobsController::class, 'onGoingJobsDetail'])->name('job.ongoing-job');
 
 	Route::post('save-freelancer',[FreelancerController::class, 'saveFreelancer']);
 	Route::post('save-job',[FreelancerController::class, 'saveJob']);
@@ -82,6 +88,8 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/job-proposal/{id}', [ProposalController::class, 'jobProposal']);
   Route::get('/proposals', [ProposalController::class, 'allProposalClient'])->name('proposals');
   Route::post('/hire-freelancer', [ProposalController::class, 'hireFreelancer'])->name('hire-freelancer');
+
+  Route::post('/update-project-status', [ProposalController::class, 'projectStatus'])->name('update-project-status');
   
   // Chat Controller
   Route::get('messages',[ChatController::class,'index'])->name('messages');
@@ -91,6 +99,15 @@ Route::middleware(['auth'])->group(function () {
   Route::post('send-message', [ChatController::class, 'send']);
   Route::post('seenMessage',[ChatController::class, 'seenMessage']);
   Route::get('messsageCount/{id}',[ChatController::class,'messsageCount']);
+
+
+  Route::resource('transactions',PaymentController::class);
+  Route::post('pay-now',[PaymentController::class,'payNow']);
+  Route::post('transaction-agree',[PaymentController::class,'agreeTransaction']);
+  Route::get('transaction-link/{id}',[PaymentController::class,'linkTransaction']);
+
+  Route::get('rating/{job_id}',[RatingController::class,'show']);
+  Route::post('add-rating',[RatingController::class,'store'])->name('add-rating');
 
 });
 
@@ -120,64 +137,8 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
       Route::resource('projects','\App\Http\Controllers\Admin\ProjectController');
       Route::resource('categories','\App\Http\Controllers\Admin\CategoriesController');
       Route::resource('skills','\App\Http\Controllers\Admin\SkillController');
+      Route::resource('supports','\App\Http\Controllers\Admin\SupportController');
       
-
-      Route::get('/form-layouts', function(){
-        return view('admin.form-layouts');
-      });
-      Route::get('/form-advanced', function(){
-        return view('admin.form-advanced');
-      });
-      Route::get('/form-uploads', function(){
-        return view('admin.form-uploads');
-      });
-      Route::get('/form-elements', function(){
-        return view('admin.form-elements');
-      });
-      Route::get('/tables-basic', function(){
-        return view('admin.tables-basic');
-      });
-      Route::get('/tables-datatable', function(){
-        return view('admin.tables-datatable');
-      });
-      Route::get('/tables-editable', function(){
-        return view('admin.tables-editable');
-      });
-      Route::get('/tables-responsive', function(){
-        return view('admin.tables-responsive');
-      });
-      Route::get('/tasks-create', function(){
-        return view('admin.tasks-create');
-      });
-      Route::get('/tasks-list', function(){
-        return view('admin.tasks-list');
-      });
-      Route::get('/contacts-grid', function(){
-        return view('admin.contacts-grid');
-      });
-      
-      Route::get('/icons-boxicons', function(){
-        return view('admin.icons-boxicons');
-      });
-      Route::get('/icons-dripicons', function(){
-        return view('admin.icons-dripicons');
-      });
-      Route::get('/icons-materialdesign', function(){
-        return view('admin.icons-materialdesign');
-      });
-      Route::get('/icons-fontawesome', function(){
-        return view('admin.icons-fontawesome');
-      });
-
-      Route::get('/projects-create', function(){
-        return view('admin.projects-create');
-      });
-      Route::get('/projects-overview', function(){
-        return view('admin.projects-overview');
-      });
-
-
-
       Route::post('/logout',function(){
        Auth::guard('admin')->logout();
        return redirect()->action([
@@ -190,7 +151,3 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
     });
 
 });
-
-
-
-

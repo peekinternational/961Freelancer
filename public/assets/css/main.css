@@ -2559,10 +2559,10 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-signupcontent{
 	float: left;
 	width: 100%;
-	padding:68px 0 68px 35px;
+	padding:80px 0 80px 35px;
 }
 .wt-signupcontent .wt-title h2{
-	color: #fff;
+	color: #ed1c24;
 	display: block;
 	font-size: 60px;
 	margin: 0 0 20px;
@@ -2573,7 +2573,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	font-weight: 400;
 }
 .wt-signupcontent .wt-description p{
-	color: #fff;
+	color: #ed1c24;
 	font-size: 18px;
 	line-height: 28px;
 }
@@ -2582,11 +2582,12 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-signupholder{
 	float: left;
 	width: 100%;
-	background: url(../images/signup.jpg);
-	background-size:cover;
+	background: url(../images/about-banner.jpg);
+	/*background-size:cover;*/
+	background-size:100% 100%;
 	background-repeat:no-repeat;  
 }
-.wt-btnvtwo{background:#323232 !important;}
+.wt-btnvtwo{background:#ed1c24 !important;}
 /* Brands Style */
 .wt-brandimg{
 	margin: 0;

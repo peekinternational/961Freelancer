@@ -52,9 +52,10 @@
 											</div>
 											<div class="wt-rightarea">
 												<div class="wt-btnarea">
-													<a href="javascript:void(0);" class="wt-btn">Repost</a>
-													<a href="javascript:void(0);" class="wt-cancelbtn">Delete</a>
+													<!-- <span> Project Complete</span> -->
+													<a href="{{url('ongoing-job/'.$job->job_id)}}" class="wt-btn">VIEW DETAILS</a>
 												</div>
+												
 											</div>
 										</div>
 										@endforeach
@@ -128,26 +129,26 @@
 									</div>
 									<div class="wt-managejobcontent">
 										@if(count($freelancerOngoingJobs) > 0)
-										@foreach($freelancerOngoingJobs as $completejob)
+										@foreach($freelancerOngoingJobs as $job)
 										<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
 											<div class="wt-userlistingcontent wt-userlistingcontentvtwo">
 												<div class="wt-contenthead">
 													<div class="wt-title">
-														<a href="javascript:void(0)"><i class="fa fa-check-circle"></i> {{App\Models\Job::client($completejob->job->user_id)->first_name}} {{App\Models\Job::client($completejob->job->user_id)->last_name}}
+														<a href="javascript:void(0)"><i class="fa fa-check-circle"></i> {{App\Models\Job::client($job->job->user_id)->first_name}} {{App\Models\Job::client($job->job->user_id)->last_name}}
 														</a>
-														<h2>{{$completejob->job->job_title}}</h2>
+														<h2>{{$job->job->job_title}}</h2>
 													</div>
 													<ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
-														<li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> {{$completejob->job->service_level}}</span></li>
-														<li><span class="wt-dashboradclock"><i class="fal fa-map-marker-alt"></i> {{$completejob->job->job_location}}</span></li>
-														<li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: {{$completejob->job->job_type}}</a></li>
-														<li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: {{$completejob->job->job_duration}}</span></li>															
+														<li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> {{$job->job->service_level}}</span></li>
+														<li><span class="wt-dashboradclock"><i class="fal fa-map-marker-alt"></i> {{$job->job->job_location}}</span></li>
+														<li><a href="javascript:void(0);" class="wt-clicksavefolder"><i class="far fa-folder"></i> Type: {{$job->job->job_type}}</a></li>
+														<li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: {{$job->job->job_duration}}</span></li>															
 													</ul>
 												</div>
 												<div class="wt-rightarea">
 													<div class="wt-btnarea">
 														<!-- <span> Project Complete</span> -->
-														<a href="{{url('job-detail/'.$completejob->job->job_id)}}" class="wt-btn">VIEW DETAILS</a>
+														<a href="{{url('ongoing-job/'.$job->job->job_id)}}" class="wt-btn">VIEW DETAILS</a>
 													</div>
 													
 												</div>

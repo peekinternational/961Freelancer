@@ -986,3 +986,102 @@ span.bookmark-icon {
   left: 83%;
   font-size: 10px;
 }
+/*Contact Us*/
+.contact-location-info {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 3%);
+}
+.contact-location-info .contact-address, .contact-location-info #single-job-map-container {
+  flex: 1;
+}
+.contact-location-info .contact-address {
+  border: 1px solid #e0e0e0;
+  border-right: 0;
+  border-radius: 4px 0 0 4px;
+}
+.contact-location-info .contact-address > ul {
+  align-self: center;
+  padding: 40px;
+  margin: 0;
+  list-style: none;
+  font-size: 18px;
+  color: #808080;
+}
+.contact-location-info .contact-address ul li {
+  padding: 2px 0;
+  list-style: none;
+}
+.contact-address-headline {
+  color: #333;
+  font-weight: 600;
+}
+.contact-address-headline:after {
+  content: "";
+  height: 2px;
+  width: 25px;
+  background-color: #ed1c24;
+  position: relative;
+  display: block;
+  margin: 15px 0;
+  border-radius: 3px;
+}
+.contact-location-info .freelancer-socials {
+  margin-top: 10px;
+  margin-left: -8px;
+  transform: scale(0.9);
+}
+.freelancer-socials ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  cursor: default;
+  margin: 0 0 -5px -8px;
+}
+.freelancer-socials ul li {
+  display: inline-block;
+  font-size: 24px;
+}
+.freelancer-socials ul li a {
+  color: #00a651;
+  padding: 0 8px;
+}
+.input-with-icon-left {
+  position: relative;
+}
+#contact div input {
+  margin-bottom: 22px;
+}
+#contact input.with-border,#contact input[type="text"].with-border, #contact input[type="password"].with-border, #contact input[type="email"].with-border, #contact input[type="number"].with-border, #contact textarea.with-border, #contact select.with-border {
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 4px 0px rgb(0 0 0 / 5%);
+}
+.input-with-icon-left i {
+  position: absolute;
+  top: 0;
+  color: #a0a0a0;
+  text-align: center;
+  line-height: 48px;
+  width: 48px;
+  height: 50px;
+  font-size: 19px;
+  background-color: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 4px 0 0 4px;
+}
+.input-with-icon-left input {
+  padding-left: 65px;
+}
+.submit.button{
+  background-color: #00a651;
+  border: 2px solid #00a651;
+  height: 60px;
+  border-radius: 35px;
+}
+.rating-star .fa-star{
+  color: #fdd003;
+}

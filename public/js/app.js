@@ -71822,7 +71822,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_c("i", { staticClass: "fa fa-phone" })]
+                            [_c("i", { staticClass: "fa fa-phone-slash" })]
                           )
                         ])
                       ]

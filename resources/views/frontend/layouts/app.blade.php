@@ -34,6 +34,7 @@
   </audio>
 	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
 	<!-- <script src="{{ asset('assets/js/all.min.js') }}"></script> -->
 	<script src="{{ asset('assets/js/slick.js') }}"></script>
 	<script src="{{ asset('assets/js/scrollbar.min.js') }}"></script>
@@ -41,9 +42,16 @@
 	<script src="{{ asset('assets/js/tilt.jquery.js') }}"></script>
 	<script src="{{ asset('assets/js/readmore.js') }}"></script>
 	<script src="{{ URL::asset('assets/js/notify.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/ckeditor/adapters/jquery.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/jRate.js') }}"></script>
 	@yield('script')
 	<script src="{{ asset('assets/js/custom.js') }}"></script>
 	<script>
+		$(window).on('load', function (){
+			$('#width-tinymceeditor').ckeditor();
+			CKEDITOR.replace('wt-tinymceeditor');
+		});
 		@if (Session::has('success'))
 		   $.notify("{{ session('error') }}" , 'success'  );
 		@endif
@@ -74,6 +82,10 @@
 	      }
 
 	    });
+	    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+	      return new bootstrap.Tooltip(tooltipTriggerEl)
+	    })
 	</script>
 	@endif
 </body>

@@ -33,7 +33,7 @@
 									</figure>
 									<div class="wt-title">
 										<h3><i class="fa fa-check-circle"></i> {{$freelancer->first_name}} {{$freelancer->last_name}}</h3>
-										<span>5.0/5 <a class="javascript:void(0);">(0 Feedback)</a> <br>Member since {{$freelancer->created_at->format('F j, Y')}}<br><a href="javascript:void(0);">@ {{$freelancer->username}}</a> </span>
+										<span>{{$rating_avg}}/5 <a class="javascript:void(0);">({{$freelancer->freelancer_rating_count}} Feedback)</a> <br>Member since {{$freelancer->created_at->format('F j, Y')}}<br><a href="javascript:void(0);">@ {{$freelancer->username}}</a> </span>
 									</div>
 								</div>
 							</div>
@@ -85,7 +85,7 @@
 						<div class="wt-clientfeedback">
 							<div class="wt-usertitle wt-titlewithselect">
 								<h2>Client Feedback</h2>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<span class="wt-select">
 										<select>
 											<option value="Show All">Show All</option>
@@ -93,26 +93,9 @@
 											<option value="Two Page">Two Page</option>
 										</select>
 									</span>
-								</div>
+								</div> -->
 							</div>
-							<div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">	
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/client/img-01.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Themeforest Company</a>
-											<h3>Translation and Proof Reading (Multi Language)</h3>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="fa fa-dollar-sign"></i> Beginner</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-04.png')}}" alt="img description"> England</span></li>
-											<li><span><i class="fal fa-spinner fa-spin"></i> In Progress</span></li>
-										</ul>
-									</div>
-								</div>
-							</div>
+							@foreach($freelancer->freelancerRating as $rating)
 							<div class="wt-userlistinghold wt-userlistingsingle">	
 								<figure class="wt-userlistingimg">
 									<img src="{{asset('assets/images/client/img-02.jpg')}}" alt="image description">
@@ -120,46 +103,65 @@
 								<div class="wt-userlistingcontent">
 									<div class="wt-contenthead">
 										<div class="wt-title">
-											<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Videohive Studio</a>
-											<h3>Need help translating app stringlist from English to Arabic</h3>
+											<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> {{App\Models\Job::client($rating->rating_by)->first_name}} {{App\Models\Job::client($rating->rating_by)->last_name}}</a>
+											<h3>{{App\Models\Job::jobData($rating->job_id)->job_title}}</h3>
 										</div>
 										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Intermediate</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-03.png')}}" alt="img description">  Canada</span></li>
-											<li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2017</span></li>
-											<li><span class="wt-stars"><span></span></span></li>
+											<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> {{App\Models\Job::jobData($rating->job_id)->service_level}}</span></li>
+											<li><span><i class="fal fa-map-marker-alt"></i>  {{App\Models\Job::jobData($rating->job_id)->job_location}}</span></li>
+											<li><span><i class="far fa-calendar"></i> Completed</span></li>
+											<li>
+												<span class="rating-star">
+													@if($rating->general_rating == 5)
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													@elseif($rating->general_rating == 4)
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fal fa-star"></i>
+													@elseif($rating->general_rating == 3)
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													@elseif($rating->general_rating == 2)
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													@elseif($rating->general_rating == 1)
+													<i class="fa fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													@else
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													<i class="fal fa-star"></i>
+													@endif
+												</span>
+											</li>
 										</ul>
 									</div>
 								</div>
 								<div class="wt-description">
-									<p>“ Eiusmod tempor incididunt ut labore et dolore magna quis nostrud exercitation ullamco laboris. ”</p>
+									<p>“ {{$rating->feedback}} ”</p>
 								</div>
 							</div>
-							<div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">	
-								<figure class="wt-userlistingimg">
-									<img src="{{asset('assets/images/client/img-03.jpg')}}" alt="image description">
-								</figure>
-								<div class="wt-userlistingcontent">
-									<div class="wt-contenthead">
-										<div class="wt-title">
-											<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Photodune Professionals</a>
-											<h3>Blog Post Writing in English Language</h3>
-										</div>
-										<ul class="wt-userlisting-breadcrumb">
-											<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Professional</span></li>
-											<li><span><img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</span></li>
-											<li><span><i class="far fa-calendar"></i>  Jun 2017</span></li>
-											<li><span class="wt-stars"><span></span></span></li>
-										</ul>
-									</div>
-								</div>
-								<div class="wt-description">
-									<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-								</div>
-							</div>
-							<div class="wt-btnarea">
+							@endforeach
+							<!-- <div class="wt-btnarea">
 								<a href="javascript:void(0);" class="wt-btn">Load More</a>
-							</div>
+							</div> -->
 						</div>
 						@if($freelancer->userProjects != '')
 						<div class="wt-craftedprojects">

@@ -63,7 +63,7 @@
 
 
 
-                <!-- <li>
+               <!--  <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="bx bxs-eraser"></i>
                         <span class="badge badge-pill badge-danger float-right">10</span>
@@ -94,21 +94,21 @@
                         <li><a href="tables-responsive">Responsive Table</a></li>
                         <li><a href="tables-editable">Editable Table</a></li>
                     </ul>
-                </li>
+                </li> -->
 
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="{{route('admin.supports.index')}}" class="waves-effect">
                         <i class="bx bx-aperture"></i>
-                        <span>Icons</span>
+                        <span>Supports</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
+                    <!-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href="icons-boxicons">Boxicons</a></li>
                         <li><a href="icons-materialdesign">Material Design</a></li>
                         <li><a href="icons-dripicons">Dripicons</a></li>
                         <li><a href="icons-fontawesome">Font awesome</a></li>
-                    </ul>
-                </li> -->
+                    </ul> -->
+                </li>
 
 
             </ul>

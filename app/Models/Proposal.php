@@ -12,6 +12,8 @@ class Proposal extends Model
       'job_id',
       'user_id',
       'budget',
+      'budget_receive',
+      'service_fee',
       'cover_letter',
       'proposal_type',
       'duration',
@@ -38,6 +40,10 @@ class Proposal extends Model
 
     public function job(){
       return $this->belongsTo(Job::class, 'job_id', 'job_id');
+    }
+
+    public function rating(){
+      return $this->hasMany(Rating::class, 'rating_to', 'user_id');
     }
 
     public static function freelancerCompletedCount($user_id)

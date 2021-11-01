@@ -334,7 +334,15 @@
 											<i class="fa fa-star fill"></i>
 											<i class="fa fa-star fill"></i>
 										</span>
-										<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
+										<?php 
+											$rating_avg = 0.0;
+							        $total = 0;
+						          foreach($freelancer->freelancerRating as $rating){
+						            $total = $total + $rating->general_rating;
+						            $rating_avg = $total/$freelancer->freelancer_rating_count;
+						          }
+										?>
+										<span class="wt-starcontent">{{$rating_avg}}/<sub>5</sub> <em>({{$freelancer->freelancer_rating_count}} Feedback)</em></span>
 									</div>
 								</div>
 								<div class="wt-description">

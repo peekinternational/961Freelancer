@@ -11,6 +11,7 @@ use App\Models\Job;
 use App\Models\Category;
 use App\Models\Countries;
 use App\Models\Proposal;
+use App\Models\Rating;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -155,7 +156,13 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $job = Job::find($id);
+      $job->job_status = 1;
+      if ($job->save()) {
+          return response()->json(['status'=>'true' , 'message' => 'Project updated successfully'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
     /**
@@ -166,7 +173,14 @@ class JobsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = Job::find($id);
+      if($deleteData->delete()){
+          return response()->json(['status'=>'true' , 'message' => 'Project deleted successfully'] , 200);
+
+      }else{
+          return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
     }
 
     // Manage Jobs
@@ -184,10 +198,10 @@ class JobsController extends Controller
     // Completed Job
     public function completedJobs(Request $request){
       $user_id = auth()->user()->id;
-      $clientjobs = Job::with('proposal','clientInfo')->whereuser_id($user_id)->wherejob_status(4)->orderBy('created_at','DESC')->paginate(5);
-
+      $clientjobs = Job::with('proposal','clientInfo','clientRating')->whereuser_id($user_id)->wherejob_status(4)->orderBy('created_at','DESC')->paginate(5);
+      // dd($clientjobs);
       $freelancerJobs = Proposal::with('job')->whereuser_id($user_id)->wherestatus(5)->orderBy('created_at','DESC')->paginate(5);
-      // dd($proposals);
+      // dd($freelancerJobs);
       return View::make('frontend.completed-jobs')->with([
         'clientCompletedJobs' => $clientjobs,
         'freelancerCompletedJobs' => $freelancerJobs
@@ -216,6 +230,24 @@ class JobsController extends Controller
       return View::make('frontend.ongoing-jobs')->with([
         'clientOngoingJobs' => $clientjobs,
         'freelancerOngoingJobs' => $freelancerJobs
+      ]);
+    }
+
+    // Ongoing Job Detail
+    public function onGoingJobsDetail(Request $request,$id){
+      $jobData = Proposal::with('job')->wherejob_id($id)->wherestatus(2)->first();
+      $user_rating = Rating::where('rating_to',$jobData->user_id)->get();
+      $rating_count = $user_rating->count();
+      $rating_avg = 0.0;
+      $total = 0;
+      foreach($user_rating as $rating){
+        $total = $total + $rating->general_rating;
+        $rating_avg = $total/$rating_count;
+      }
+      return View::make('frontend.ongoing-detail')->with([
+        'ongoingJob' => $jobData,
+        'rating_count' => $rating_count,
+        'rating_avg' => $rating_avg
       ]);
     }
 }
