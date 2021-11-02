@@ -273,6 +273,9 @@ class JobsController extends Controller
       if($sort_by == 'newest'){
         $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
       }
+      if($sort_by == 'random'){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->inRandomOrder()->paginate(10);
+      }
 
       if($category != ''){
         $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_cat','like','%'.$category.'%')->orderBy('created_at', 'DESC')->paginate(10);
@@ -288,7 +291,7 @@ class JobsController extends Controller
       
       
       if($min != null && $max !=null){
-        $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_type','hourly')->where('hourly_min_price',$min)->whereBetween('hourly_max_price',[(int)$min,(int)$max])->orderBy('created_at', 'DESC')->paginate(10);
+        $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_type','hourly')->whereBetween('hourly_min_price',[0,(int)$min])->whereBetween('hourly_max_price',[(int)$min,(int)$max])->orderBy('created_at', 'DESC')->paginate(10);
       }
 
       if($duration != '' && $duration != null){

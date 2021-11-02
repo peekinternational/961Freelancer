@@ -70,10 +70,10 @@
 													<input id="hourly" type="radio" name="job_type" value="hourly">
 													<label for="hourly"> Hourly Based Project</label>
 												</span>
-												<div id="wt-productrangeslider" class="wt-productrangeslider wt-themerangeslider"></div>
+												<!-- <div id="wt-productrangeslider" class="wt-productrangeslider wt-themerangeslider"></div>
 												<div class="wt-amountbox">
 													<input type="text" id="wt-consultationfeeamount" readonly>
-												</div>
+												</div> -->
 												<span class="wt-radio">
 													<input id="fixed" type="radio" name="job_type" value="fixed">
 													<label for="fixed"> Fixed Price Project</label>
