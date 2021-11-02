@@ -34,6 +34,13 @@ Route::get('/contact-us',[HomeController::class, 'contactUs'])->name('contact-us
 Route::post('/contactStore',[HomeController::class, 'store'])->name('contact.store');
 Route::get('/about-us',[HomeController::class, 'aboutUs'])->name('about-us');
 
+Route::get('/privacy-policy', function () {
+  return view('frontend.privacy-policy');
+})->name('privacy-policy');
+Route::get('/terms-conditions', function () {
+  return view('frontend.terms-conditions');
+})->name('terms-conditions');
+
 Route::match(['get','post'],'/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/login', [RegisterController::class, 'accountLogin'])->name('login');
 Route::post('/login', [RegisterController::class, 'checkLogin']);

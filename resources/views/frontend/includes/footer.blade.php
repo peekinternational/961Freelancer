@@ -6,16 +6,16 @@
 	        <div class="widget-item">
 	          <h4 class="text-white">For Clients</h4>
 	          <a href="">Our Story</a>
-	          <a href="">About Us</a>
+	          <a href="{{route('about-us')}}">About Us</a>
 	        </div>
 	      </div>
 	      <div class="col-lg-3 col-md-3">
 	        <div class="widget-item">
 	          <h4 class="text-white">For Talent </h4>
-	          <a href="">Terms &amp; Conditions</a>
-	          <a href="">Privacy Policy </a>
+	          <a href="{{route('terms-conditions')}}">Terms &amp; Conditions</a>
+	          <a href="{{route('privacy-policy')}}">Privacy Policy </a>
 	          <a href="">How It Works</a>
-	          <a href="">Contact Us</a>
+	          <a href="{{route('contact-us')}}">Contact Us</a>
 	        </div>
 	      </div>
 	      <div class="col-lg-3 col-md-3">
@@ -30,10 +30,10 @@
 	      <div class="col-lg-3 col-md-3">
 	        <div class="widget-item">
 	          <h4 class="text-white">Company</h4>
-	          <a href="">About Us</a>
+	          <a href="{{route('about-us')}}">About Us</a>
 	          <a href="">Leadership </a>
 	          <a href="">Press</a>
-	          <a href="">Contact Us</a>
+	          <a href="{{route('contact-us')}}">Contact Us</a>
 	        </div>
 	      </div>
 	    </div>
