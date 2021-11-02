@@ -14,7 +14,7 @@
             <div class="menu-inner">
               <ul class="mb-0">
                 <li><a href="{{route('home')}}">Home</a></li>
-                <li><a href="">How it Works</a></li>
+                <!-- <li><a href="">How it Works</a></li> -->
                 <li><a href="{{ route('job.index') }}">Browse Jobs</a></li>
                 <li><a href="{{ route('freelancers.index') }}">Browse Freelancers</a></li>
                 @if(Auth::user())
@@ -107,10 +107,10 @@
   <div class="canvs-menu">
     <ul class="d-flex flex-column mb-0">
       <li>
-        <a href="">Post A Job</a>
+        <a href="{{ route('freelancers.index') }}">Browse Freelancers</a>
       </li>
       <li>
-        <a href="">How it Works</a>
+        <a href="{{ route('about-us') }}">About Us</a>
       </li>
       @if(Auth::user() != '')
       <li>
