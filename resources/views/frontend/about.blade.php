@@ -5,6 +5,23 @@
 <script src="{{asset('assets/js/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
 @endsection
 @section('content')
+<!--Inner Home Banner Start-->
+<div class="wt-haslayout wt-innerbannerholder">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+        <div class="wt-innerbannercontent">
+        <div class="wt-title"><h2>About Us</h2></div>
+        <ol class="wt-breadcrumb">
+          <li><a href="{{route('home')}}">Home</a></li>
+          <li class="wt-active">About Us</li>
+        </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Inner Home End-->
 <!--Main Start-->
 <main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
   <div class="wt-haslayout wt-main-section">
