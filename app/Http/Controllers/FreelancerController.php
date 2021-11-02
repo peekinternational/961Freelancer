@@ -187,4 +187,52 @@ class FreelancerController extends Controller
       }
       
     }
+
+    // Filter Freelancers
+    public function getFreelancers(Request $request){
+      // dd($request->all());
+      $hourly_rate = $request->input('hourly_rate');
+      $tagline = $request->input('tagline');
+      $clear = $request->input('clear');
+      // dd($tagline);
+      
+      if($tagline != ''){
+        if($tagline == 'all'){
+          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+        }else{
+          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('tagline','like','%'.$tagline.'%')->paginate(10);  
+        }
+      }
+      // else{
+      //   $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+      // }
+      if($hourly_rate != ''){
+        if($hourly_rate == 9){
+          $min_rate = 0;
+          $max_rate = 9;
+        }elseif ($hourly_rate == 91) {
+          $min_rate = 91;
+          $max_rate = 500;
+        }else{
+          $hour_price = explode('-',$hourly_rate);
+          $min_rate = $hour_price[0];
+          $max_rate = $hour_price[1];
+        }
+
+        // dd($max_rate);
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->whereBetween('hourly_rate',[(int)$min_rate,(int)$max_rate])->paginate(10);  
+        
+      }
+        
+      if($clear){
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+      }
+
+      
+      
+      
+      return View::make('frontend.ajax.get-freelancers')->with([
+          'freelancers' => $freelancers
+      ]);
+    }
 }

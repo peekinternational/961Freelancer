@@ -74,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
   Route::get('completed-jobs',[JobsController::class, 'completedJobs'])->name('job.completed-jobs');
   Route::get('cancelled-jobs',[JobsController::class, 'cancelledJobs'])->name('job.cancelled-jobs');
   Route::get('ongoing-jobs',[JobsController::class, 'onGoingJobs'])->name('job.ongoing-jobs');
+  // Filter and Sorting
+  Route::get('sort-jobs',[JobsController::class, 'getJobs']);
   
   
   Route::get('ongoing-job/{id}',[JobsController::class, 'onGoingJobsDetail'])->name('job.ongoing-job');
@@ -115,7 +117,7 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('freelancers',FreelancerController::class);
 Route::get('freelancer/{username}',[FreelancerController::class, 'show'])->name('freelancers.show');
 
-
+Route::get('get-freelancers', [FreelancerController::class, 'getFreelancers']);
 
 
 

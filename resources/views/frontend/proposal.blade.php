@@ -362,9 +362,9 @@
 													@if($proposal->status == 5)
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Completed</a>
 													@endif
-													@if($proposal->job->job_status == 4)
+													<!-- @if($proposal->job->job_status == 4)
 													<a href="javascript:void(0);" class="wt-btn rounded-pill">Job Close</a>
-													@endif
+													@endif -->
 												</div>												
 												<div class="wt-hireduserstatus">
 													<h5>&#36;{{$proposal->budget}}</h5>

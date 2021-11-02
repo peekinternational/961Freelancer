@@ -43,34 +43,12 @@
 										</fieldset> -->
 										<fieldset>
 											<div class="wt-checkboxholder wt-verticalscrollbar">
-												<span class="wt-checkbox">
-													<input id="wordpress" type="checkbox" name="description" value="company" checked>
-													<label for="wordpress"> WordPress</label>
+												@foreach($categories as $category)
+												<span class="wt-radio">
+													<input id="wordpress{{$category->id}}" type="radio" name="jobCategory" value="{{$category->category_name}}" onchange="category(this)">
+													<label for="wordpress{{$category->id}}"> {{$category->category_name}}</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="graphic" type="checkbox" name="description" value="company">
-													<label for="graphic"> Graphic Design</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="website" type="checkbox" name="description" value="company">
-													<label for="website"> Website Design</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="article" type="checkbox" name="description" value="company">
-													<label for="article"> Article Writing</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="software" type="checkbox" name="description" value="company">
-													<label for="software"> Software Architecture</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="wordpress1" type="checkbox" name="description" value="company">
-													<label for="wordpress1"> WordPress</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="graphic1" type="checkbox" name="description" value="company">
-													<label for="graphic1"> Graphic Design</label>
-												</span>
+												@endforeach
 											</div>
 										</fieldset>
 									</form>
@@ -85,11 +63,11 @@
 										<fieldset>
 											<div class="wt-checkboxholder">
 												<span class="wt-radio">
-													<input id="project" type="radio" name="description" value="company" checked>
+													<input id="project" type="radio" name="job_type" value="all_type" checked>
 													<label for="project"> Any Project Type</label>
 												</span>
 												<span class="wt-radio">
-													<input id="hourly" type="radio" name="description" value="company">
+													<input id="hourly" type="radio" name="job_type" value="hourly">
 													<label for="hourly"> Hourly Based Project</label>
 												</span>
 												<div id="wt-productrangeslider" class="wt-productrangeslider wt-themerangeslider"></div>
@@ -97,7 +75,7 @@
 													<input type="text" id="wt-consultationfeeamount" readonly>
 												</div>
 												<span class="wt-radio">
-													<input id="fixed" type="radio" name="description" value="company">
+													<input id="fixed" type="radio" name="job_type" value="fixed">
 													<label for="fixed"> Fixed Price Project</label>
 												</span>
 											</div>
@@ -119,72 +97,41 @@
 										</fieldset> -->
 										<fieldset>
 											<div class="wt-checkboxholder wt-verticalscrollbar">
-												<span class="wt-checkbox">
-													<input id="wt-description" type="checkbox" name="description" value="company" checked>
-													<label for="wt-description"> <img src="{{asset('assets/images/flag/img-01.png')}}" alt="img description"> Australia</label>
+												@foreach($countries as $country)
+												<span class="wt-radio">
+													<input id="wt-description{{$country->id}}" type="radio" name="job_location" value="{{$country->name}}">
+													<label for="wt-description{{$country->id}}">  {{$country->name}}</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="us" type="checkbox" name="description" value="company">
+												@endforeach
+												<!-- <span class="wt-radio">
+													<input id="us" type="radio" name="job_location" value="company">
 													<label for="us"> <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="canada" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="canada" type="radio" name="job_location" value="company">
 													<label for="canada"> <img src="{{asset('assets/images/flag/img-03.png')}}" alt="img description"> Canada</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="england" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="england" type="radio" name="job_location" value="company">
 													<label for="england"> <img src="{{asset('assets/images/flag/img-04.png')}}" alt="img description"> England</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="emirates" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="emirates" type="radio" name="job_location" value="company">
 													<label for="emirates"> <img src="{{asset('assets/images/flag/img-05.png')}}" alt="img description"> United Emirates</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="wt-description1" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="wt-description1" type="radio" name="job_location" value="company">
 													<label for="wt-description1"> <img src="{{asset('assets/images/flag/img-01.png')}}" alt="img description"> Australia</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="us1" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="us1" type="radio" name="job_location" value="company">
 													<label for="us1"> <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</label>
-												</span>
+												</span> -->
 											</div>
 										</fieldset>
 									</form>
 								</div>
 							</div>
-							<!-- <div class="wt-widget wt-effectiveholder">
-								<div class="wt-widgettitle">
-									<h2>Skills Required</h2>
-								</div>
-								<div class="wt-widgetcontent">
-									<form class="wt-formtheme wt-formsearch">
-										<fieldset>
-											<div class="wt-checkboxholder">
-												<span class="wt-checkbox">
-													<input id="proindependent" type="checkbox" name="description" value="company" checked>
-													<label for="proindependent">Pro Independent Freelancers</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="proagency" type="checkbox" name="description" value="company">
-													<label for="proagency"> Pro Agency Freelancers</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="independent" type="checkbox" name="description" value="company">
-													<label for="independent"> Independent Freelancers</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="agency" type="checkbox" name="description" value="company">
-													<label for="agency">Agency Freelancers</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="rising" type="checkbox" name="description" value="company">
-													<label for="rising"> New Rising Talent</label>
-												</span>
-											</div>
-										</fieldset>
-									</form>
-								</div>
-							</div> -->
 							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Project Length</h2>
@@ -193,24 +140,24 @@
 									<form class="wt-formtheme wt-formsearch">
 										<fieldset>
 											<div class="wt-checkboxholder">
-												<span class="wt-checkbox">
-													<input id="anyproject" type="checkbox" name="anyproject" value="project" checked>
+												<span class="wt-radio">
+													<input id="anyproject" type="radio" name="job_duration" value="project" checked>
 													<label for="anyproject">Any Project Length</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="01month" type="checkbox" name="01month" value="month">
+												<span class="wt-radio">
+													<input id="01month" type="radio" name="job_duration" value="Less than 1 month">
 													<label for="01month"> Less Than 01 Month</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="3months" type="checkbox" name="3months" value="months">
+												<span class="wt-radio">
+													<input id="3months" type="radio" name="job_duration" value="1 to 3 months">
 													<label for="3months"> 01 to 03 Months</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="6months" type="checkbox" name="months" value="months">
+												<span class="wt-radio">
+													<input id="6months" type="radio" name="job_duration" value="3 to 6 months">
 													<label for="6months"> 03 to 06 Months</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="moremonths" type="checkbox" name="months" value="months">
+												<span class="wt-radio">
+													<input id="moremonths" type="radio" name="job_duration" value="More than 6 months">
 													<label for="moremonths"> More Than 06 Months</label>
 												</span>
 											</div>
@@ -218,52 +165,11 @@
 									</form>
 								</div>
 							</div>
-							<!-- <div class="wt-widget wt-effectiveholder">
-								<div class="wt-widgettitle">
-									<h2>Languages</h2>
-								</div>
-								<div class="wt-widgetcontent">
-									<form class="wt-formtheme wt-formsearch">
-										<fieldset>
-											<div class="wt-checkboxholder wt-verticalscrollbar">
-												<span class="wt-checkbox">
-													<input id="chinese" type="checkbox" name="description" value="company" checked>
-													<label for="chinese">Chinese</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="spanish" type="checkbox" name="description" value="company">
-													<label for="spanish">Spanish</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="english" type="checkbox" name="description" value="company">
-													<label for="english">English</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="arabic" type="checkbox" name="description" value="company">
-													<label for="arabic">Arabic</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="russian" type="checkbox" name="description" value="company">
-													<label for="russian">Russian</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="chinese1" type="checkbox" name="description" value="company">
-													<label for="chinese1">Chinese</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="spanish1" type="checkbox" name="description" value="company">
-													<label for="spanish1">Spanish</label>
-												</span>
-											</div>
-										</fieldset>
-									</form>
-								</div>
-							</div> -->
 							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgetcontent">
 									<div class="wt-applyfilters">
-										<span>Click “Apply Filter” to apply latest<br> changes made by you.</span>
-										<a href="javascript:void(0);" class="wt-btn">Apply Filters</a>
+										<span>Click Clear Filter” to clear latest<br> changes made by you.</span>
+										<a href="javascript:void(0);" id="clearFilter" class="wt-btn">Clear Filters</a>
 									</div>
 								</div>
 							</div>
@@ -273,7 +179,7 @@
 						
 						<div class="notify-box d-flex justify-content-between align-items-center">
 							<div class="switch-container">
-								<span>01 - 48 of 57143 results for <em>"PHP Developer"</em></span>
+								<span>{{count($jobs)}} jobs result <em></em></span>
 							</div>
 
 							<div class="sort-by align-items-center">
@@ -284,12 +190,6 @@
 									</button> -->
 									<div class="dropdown-menu open" role="combobox" style="max-height: 216px; overflow: hidden; min-height: 121px;">
 										<ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 196px; overflow-y: auto; min-height: 101px;">
-											<li data-original-index="0">
-												<a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-													<span class="text">Relevance</span>
-													<span class="glyphicon glyphicon-ok check-mark"></span>
-												</a>
-											</li>
 											<li data-original-index="1">
 												<a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
 													<span class="text">Newest</span>
@@ -310,16 +210,15 @@
 											</li>
 										</ul>
 									</div>
-									<select class="selectpicker hide-tick" tabindex="-98">
-										<option>Relevance</option>
-										<option>Newest</option>
-										<option>Oldest</option>
-										<option>Random</option>
+									<select class="selectpicker hide-tick" id="sortBy" tabindex="-98">
+										<option value="newest">Newest</option>
+										<option value="oldest">Oldest</option>
+										<option value="random">Random</option>
 									</select>
 								</div>
 							</div>
 						</div>
-						<div class="listings-container mt-5">
+						<div class="listings-container mt-5" id="listings-container">
 							
 							@foreach($jobs as $job)
 							<!-- Job Listing -->
@@ -419,5 +318,115 @@
     	}
    	})
 	}
+
+
+	$('#sortBy').on('change', function(e){
+      e.preventDefault();
+      // alert( this.value );
+      var sort_by = this.value;
+      // console.log(sort_by);
+      // console.log(sort_by);
+      if (sort_by != undefined || sort_by !='') {
+          $.ajax({
+            url: "{{url('sort-jobs')}}",
+            type: 'get',
+            data: {sort_by:sort_by},
+            cache : false,
+            success:function(data){
+              // console.log(data);
+              $("#listings-container").html(data);
+            }
+          });
+      }
+
+    })
+	function category(event){
+		if($(event).is(":checked")){
+		
+			var category = event.value;
+		}
+		
+		if (category != undefined || category !='') {
+        $.ajax({
+          url: "{{url('sort-jobs')}}",
+          type: 'get',
+          data: {category:category},
+          cache : false,
+          success:function(data){
+            // console.log(data);
+            $("#listings-container").html(data);
+          }
+        });
+    }
+	}
+
+	$('input[name="job_type"]').on('change', function(e){
+		e.preventDefault();
+		
+		var job_type = this.value;
+		$.ajax({
+		  url: "{{url('sort-jobs')}}",
+		  type: 'get',
+		  data: {job_type:job_type},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#listings-container").html(data);
+		  }
+		});
+
+	})
+
+	$('input[name="job_duration"]').on('change', function(e){
+	e.preventDefault();
+		if($(this).is(":checked")){
+			var duration = this.value;
+		}
+		if (duration != undefined || duration !='') {
+        $.ajax({
+          url: "{{url('sort-jobs')}}",
+          type: 'get',
+          data: {duration:duration},
+          cache : false,
+          success:function(data){
+            // console.log(data);
+            $("#listings-container").html(data);
+          }
+        });
+    }
+	})
+
+	$('input[name="job_location"]').on('change', function(e){
+		e.preventDefault();
+		
+		var job_location = this.value;
+		$.ajax({
+		  url: "{{url('sort-jobs')}}",
+		  type: 'get',
+		  data: {job_location:job_location},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#listings-container").html(data);
+		  }
+		});
+
+	})
+
+	$('#clearFilter').on('click', function(e){
+		e.preventDefault();
+		var clear = 'all';
+		$.ajax({
+		  url: "{{url('sort-jobs')}}",
+		  type: 'get',
+		  data: {clear:clear},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#listings-container").html(data);
+		  }
+		});
+
+	})
 </script>
 @endsection

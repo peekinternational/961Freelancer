@@ -28,9 +28,12 @@ class JobsController extends Controller
     public function index()
     {
       $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
-      
+      $categories = Category::get();
+      $countries = Countries::get();
       return View::make('frontend.job-listings')->with([
-        'jobs' => $jobs
+        'jobs' => $jobs,
+        'categories' => $categories,
+        'countries' => $countries
       ]);
     }
 
@@ -249,6 +252,63 @@ class JobsController extends Controller
         'ongoingJob' => $jobData,
         'rating_count' => $rating_count,
         'rating_avg' => $rating_avg
+      ]);
+    }
+
+    // Filters and Sorting
+    public function getJobs(Request $request){
+      // dd($request->all());
+      $sort_by = $request->input('sort_by');
+      $category = $request->input('category');
+      $job_type = $request->input('job_type');
+      $min = $request->input('minPrice');
+      $max = $request->input('maxPrice');
+      $duration = $request->input('duration');
+      $job_location = $request->input('job_location');
+      $clear = $request->input('clear');
+      // dd($duration);
+      if($sort_by == 'oldest'){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'ASC')->paginate(10);
+      }
+      if($sort_by == 'newest'){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
+      }
+
+      if($category != ''){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_cat','like','%'.$category.'%')->orderBy('created_at', 'DESC')->paginate(10);
+      }
+      
+
+      if($job_type == 'hourly'){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_type',$job_type)->orderBy('created_at', 'DESC')->paginate(10);
+      }
+      if ($job_type == 'fixed') {
+        $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_type',$job_type)->orderBy('created_at', 'DESC')->paginate(10);
+      }
+      
+      
+      if($min != null && $max !=null){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_type','hourly')->where('hourly_min_price',$min)->whereBetween('hourly_max_price',[(int)$min,(int)$max])->orderBy('created_at', 'DESC')->paginate(10);
+      }
+
+      if($duration != '' && $duration != null){
+        if ($duration == 'project') {
+          $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
+        }else{
+          $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_duration','like','%'.$duration.'%')->orderBy('created_at', 'DESC')->paginate(10);
+        }
+      }
+      
+      if($job_location != ''){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_location','like','%'.$job_location.'%')->orderBy('created_at', 'DESC')->paginate(10);
+      }
+      
+      if($clear){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
+      }
+
+      return View::make('frontend.ajax.job-sorting')->with([
+        'jobs' => $jobs
       ]);
     }
 }

@@ -77,6 +77,19 @@ function ageRangeslider(){
 		values: [ 10, 110 ],
 		slide: function( event, ui ) {
 			jQuery( "#wt-consultationfeeamount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+			
+			var minPrice = ui.values[ 0 ];
+			var maxPrice = ui.values[ 1 ];
+			$.ajax({
+			  url: "/sort-jobs",
+			  type: 'get',
+			  data: {minPrice:minPrice, maxPrice:maxPrice},
+			  cache : false,
+			  success:function(data){
+			    // console.log(data);
+			    $("#listings-container").html(data);
+			  }
+			});
 		}
 	});
 	jQuery( "#wt-consultationfeeamount" ).val( "$" + jQuery("#wt-productrangeslider").slider( "values", 0 ) + " - $" + jQuery("#wt-productrangeslider").slider( "values", 1 ));

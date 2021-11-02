@@ -19,7 +19,7 @@
 		</div>
 	</div>
 </div>
-<div class="wt-categoriesslider-holder wt-haslayout">
+<!-- <div class="wt-categoriesslider-holder wt-haslayout">
 	<div class="wt-title">
 		<h2>Browse Top Job Categories:</h2>
 	</div>
@@ -67,7 +67,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--Inner Home End-->
 <!--Main Start-->
 <main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
@@ -97,33 +97,41 @@
 										</fieldset> -->
 										<fieldset>
 											<div class="wt-checkboxholder wt-verticalscrollbar">
-												<span class="wt-checkbox">
-													<input id="wordpress" type="checkbox" name="description" value="company" checked>
-													<label for="wordpress"> WordPress</label>
+												<span class="wt-radio">
+													<input id="all" type="radio" name="user_tagline" value="all" checked>
+													<label for="all"> All</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="graphic" type="checkbox" name="description" value="company">
-													<label for="graphic"> Graphic Design</label>
+												<span class="wt-radio">
+													<input id="wordpress" type="radio" name="user_tagline" value="WordPress Developer">
+													<label for="wordpress"> WordPress Developer</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="website" type="checkbox" name="description" value="company">
-													<label for="website"> Website Design</label>
+												<span class="wt-radio">
+													<input id="graphic" type="radio" name="user_tagline" value="Graphic Designer">
+													<label for="graphic"> Graphic Designer</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="article" type="checkbox" name="description" value="company">
-													<label for="article"> Article Writing</label>
+												<span class="wt-radio">
+													<input id="website" type="radio" name="user_tagline" value="Web Developer">
+													<label for="website"> Web Developer</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="software" type="checkbox" name="description" value="company">
-													<label for="software"> Software Architecture</label>
+												<span class="wt-radio">
+													<input id="article" type="radio" name="user_tagline" value="Content Writer">
+													<label for="article"> Content Writer</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="wordpress1" type="checkbox" name="description" value="company">
-													<label for="wordpress1"> WordPress</label>
+												<span class="wt-radio">
+													<input id="software" type="radio" name="user_tagline" value="Full Stack Developer">
+													<label for="software"> Full Stack Developer</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="graphic1" type="checkbox" name="description" value="company">
-													<label for="graphic1"> Graphic Design</label>
+												<span class="wt-radio">
+													<input id="wordpress1" type="radio" name="user_tagline" value="Frontend Developer">
+													<label for="wordpress1"> Frontend Developer</label>
+												</span>
+												<span class="wt-radio">
+													<input id="php" type="radio" name="user_tagline" value="Php Developer">
+													<label for="php"> Php Developer</label>
+												</span>
+												<span class="wt-radio">
+													<input id="laravel" type="radio" name="user_tagline" value="Laravel Developer">
+													<label for="laravel"> Laravel Developer</label>
 												</span>
 											</div>
 										</fieldset>
@@ -179,33 +187,25 @@
 									<form class="wt-formtheme wt-formsearch">
 										<fieldset>
 											<div class="wt-checkboxholder wt-verticalscrollbar">
-												<span class="wt-checkbox">
-													<input id="rate1" type="checkbox" name="description" value="company" checked>
+												<span class="wt-radio">
+													<input id="rate1" type="radio" name="hourly_rate" value="9">
 													<label for="rate1">$10 and below</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="rate2" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="rate2" type="radio" name="hourly_rate" value="10-30">
 													<label for="rate2"> $10 - $30</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="rate3" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="rate3" type="radio" name="hourly_rate" value="30-60">
 													<label for="rate3"> $30 - $60</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="rate4" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="rate4" type="radio" name="hourly_rate" value="60-90">
 													<label for="rate4"> $60 - $90</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="rate5" type="checkbox" name="description" value="company">
+												<span class="wt-radio">
+													<input id="rate5" type="radio" name="hourly_rate" value="91">
 													<label for="rate5"> $90 &amp;above</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="rate2v" type="checkbox" name="description" value="company">
-													<label for="rate2v">$10 and below</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="rate3v" type="checkbox" name="description" value="company">
-													<label for="rate3v"> $10 - $30</label>
 												</span>
 											</div>
 										</fieldset>
@@ -262,15 +262,15 @@
 							<div class="wt-widget wt-applyfilters-holder">
 								<div class="wt-widgetcontent">
 									<div class="wt-applyfilters">
-										<span>Click “Apply Filter” to apply latest<br> changes made by you.</span>
-										<a href="javascript:void(0);" class="wt-btn">Apply Filters</a>
+										<span>Click Clear Filter” to clear latest<br> changes made by you.</span>
+										<a href="javascript:void(0);" id="clearFilter" class="wt-btn">Clear Filters</a>
 									</div>
 								</div>
 							</div>
 						</aside>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
-						<div class="wt-userlistingholder wt-userlisting wt-haslayout">
+						<div class="wt-userlistingholder wt-userlisting wt-haslayout" id="freelancers-list">
 							<!-- <div class="wt-userlistingtitle">
 								<span>01 - 48 of 57143 results for <em>"Logo Design"</em></span>
 							</div> -->
@@ -397,5 +397,61 @@
     	}
    	})
 	}
+
+	$('input[name="hourly_rate"]').on('change', function(e){
+		e.preventDefault();
+		if($(this).is(":checked")){
+			var hourly_rate = this.value;
+		}
+		// alert()
+		if (hourly_rate != undefined || hourly_rate !='') {
+			$.ajax({
+			  url: "{{url('get-freelancers')}}",
+			  type: 'get',
+			  data: {hourly_rate:hourly_rate},
+			  cache : false,
+			  success:function(data){
+			    // console.log(data);
+			    $("#freelancers-list").html(data);
+			  }
+			});
+		}	
+	})
+
+	$('input[name="user_tagline"]').on('change', function(e){
+		e.preventDefault();
+		if($(this).is(":checked")){
+			var tagline = this.value;
+		}
+		// alert(tagline);
+		if (tagline != undefined || tagline !='') {
+			$.ajax({
+			  url: "{{url('get-freelancers')}}",
+			  type: 'get',
+			  data: {tagline:tagline},
+			  cache : false,
+			  success:function(data){
+			    // console.log(data);
+			    $("#freelancers-list").html(data);
+			  }
+			});
+		}	
+	})
+
+	$('#clearFilter').on('click', function(e){
+		e.preventDefault();
+		var clear = 'all';
+		$.ajax({
+		  url: "{{url('get-freelancers')}}",
+		  type: 'get',
+		  data: {clear:clear},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#freelancers-list").html(data);
+		  }
+		});
+
+	})
 </script>
 @endsection
