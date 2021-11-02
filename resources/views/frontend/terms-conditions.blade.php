@@ -19,7 +19,6 @@
 		</div>
 	</div>
 </div>
-
 <!--Inner Home End-->
 <!--Main Start-->
 <main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">

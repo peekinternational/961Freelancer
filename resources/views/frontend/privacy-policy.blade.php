@@ -19,55 +19,6 @@
 		</div>
 	</div>
 </div>
-<!-- <div class="wt-categoriesslider-holder wt-haslayout">
-	<div class="wt-title">
-		<h2>Browse Top Job Categories:</h2>
-	</div>
-	<div id="wt-categoriesslider" class="wt-categoriesslider owl-carousel">
-		<div class="wt-categoryslidercontent item">
-			<figure><img src="{{asset('assets/images/categories/slider/img-01.png')}}" alt="image description"></figure>
-			<div class="wt-cattitle">
-				<h3><a href="javascrip:void(0);">Graphic &amp; Design</a></h3>
-				<span>Items: 523,112</span>
-			</div>
-		</div>
-		<div class="wt-categoryslidercontent item">
-			<figure><img src="{{asset('assets/images/categories/slider/img-02.png')}}" alt="image description"></figure>
-			<div class="wt-cattitle">
-				<h3><a href="javascrip:void(0);">Digital Marketing</a></h3>
-				<span>Items: 523,112</span>
-			</div>
-		</div>
-		<div class="wt-categoryslidercontent item">
-			<figure><img src="{{asset('assets/images/categories/slider/img-03.png')}}" alt="image description"></figure>
-			<div class="wt-cattitle">
-				<h3><a href="javascrip:void(0);">Writing &amp; Translation</a></h3>
-				<span>Items: 325,442</span>
-			</div>
-		</div>
-		<div class="wt-categoryslidercontent item">
-			<figure><img src="{{asset('assets/images/categories/slider/img-04.png')}}" alt="image description"></figure>
-			<div class="wt-cattitle">
-				<h3><a href="javascrip:void(0);">Video &amp; Animation</a></h3>
-				<span>Items: 421,305</span>
-			</div>
-		</div>
-		<div class="wt-categoryslidercontent item">
-			<figure><img src="{{asset('assets/images/categories/slider/img-05.png')}}" alt="image description"></figure>
-			<div class="wt-cattitle">
-				<h3><a href="javascrip:void(0);">Music &amp; Audio</a></h3>
-				<span>Items: 421,305</span>
-			</div>
-		</div>
-		<div class="wt-categoryslidercontent item">
-			<figure><img src="{{asset('assets/images/categories/slider/img-01.png')}}" alt="image description"></figure>
-			<div class="wt-cattitle">
-				<h3><a href="javascrip:void(0);">Programing &amp; Tech</a></h3>
-				<span>Items: 421,305</span>
-			</div>
-		</div>
-	</div>
-</div> -->
 <!--Inner Home End-->
 <!--Main Start-->
 <main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
