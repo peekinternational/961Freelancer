@@ -288,6 +288,9 @@ class JobsController extends Controller
       if ($job_type == 'fixed') {
         $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_type',$job_type)->orderBy('created_at', 'DESC')->paginate(10);
       }
+      if($job_type == 'all_type'){
+        $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
+      }
       
       
       if($min != null && $max !=null){
