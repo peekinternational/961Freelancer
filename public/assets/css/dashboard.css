@@ -2783,16 +2783,16 @@ a.wt-back:hover{color: #55acee;}
 	width: 40px;
 	height: 40px;
 	display: none;
-	color: #2d3e50;
-	font-size: 18px;
-	content: '\e876';
+	color: #fff;
+	font-size: 15px;
+	content: '\f0c9';
 	line-height: 40px;
 	text-align: center;
 	position: relative;
-	font-family: 'Linearicons-Free';
+	font-family: 'Font Awesome 5 Pro';
 }
 .wt-openmenu .wt-btnmenutoggle:before{
 	left: 0;
-	content: '\e875';
+	content: '\f0c9';
 }
 .wt-infouploading .wt-labelgroup > span{display: none !important;}
