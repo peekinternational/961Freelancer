@@ -147,14 +147,14 @@ class RegisterController extends Controller
         
         $toemail =  $new_user->email;
         // dd($toemail);
-        // Mail::send('mail.user-registration-email',['user' =>$new_user],
-        // function ($message) use ($toemail)
-        // {
+        Mail::send('mail.user-registration-email',['user' =>$new_user],
+        function ($message) use ($toemail)
+        {
 
-        //   $message->subject('961Freelancer - Account Created');
-        //   $message->from('support@961freelancer.com', '961Freelancer');
-        //   $message->to($toemail);
-        // });
+          $message->subject('961Freelancer - Account Created');
+          $message->from('support@961freelancer.com', '961Freelancer');
+          $message->to($toemail);
+        });
 
 
         $request->session()->flash('registerSuccess',"Account created. Please check your email.");
