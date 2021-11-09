@@ -26,6 +26,12 @@
             </div>
           </div>
           <div class="form-group row mb-4">
+            <label for="projectname" class="col-form-label col-lg-2">Category Slug</label>
+            <div class="col-lg-10">
+              <input id="categoryname" name="slug" value="{{$getSingleData->slug}}" type="text" class="form-control" placeholder="Enter Category Slug...">
+            </div>
+          </div>
+          <div class="form-group row mb-4">
             <label for="projectdesc" class="col-form-label col-lg-2">Category Description</label>
             <div class="col-lg-10">
               <textarea class="form-control" name="cat_desc" id="cat_desc" rows="3" placeholder="Enter Category Description...">{{$getSingleData->cat_desc}}</textarea>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Hash;
 use Session;
 use Mail;
 use Redirect;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CategoriesController extends Controller
 {
@@ -49,11 +51,11 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-       $category = new Category;
-       $category->category_name = $request->input('category_name');
-       
-       $cat_icon = $request->file('cat_icon');
-       if($cat_icon != ''){
+      $category = new Category;
+      $category->category_name = $request->input('category_name');
+      $category->slug = Str::slug($request->category_name, '-');
+      $cat_icon = $request->file('cat_icon');
+      if($cat_icon != ''){
          $filename= $cat_icon->getClientOriginalName();
          $imagename= 'cat-'.rand(000000,999999).'.'.$cat_icon->getClientOriginalExtension();
          $extension= $cat_icon->getClientOriginalExtension();
@@ -61,7 +63,7 @@ class CategoriesController extends Controller
          $destinationpath= public_path('assets/images/categories/');
          $cat_icon->move($destinationpath, $imagename);
          $category->cat_icon = $imagename;
-       }
+      }
 
        $category->cat_desc = $request->input('cat_desc');
 
@@ -108,6 +110,7 @@ class CategoriesController extends Controller
     {
       $findData = Category::find($id);
       $findData->category_name = $request->input('category_name');
+      $category->slug = $request->input('slug');
       $cat_icon = $request->file('cat_icon');
       if($cat_icon != ''){
         $filename= $cat_icon->getClientOriginalName();
@@ -146,4 +149,5 @@ class CategoriesController extends Controller
 
       }
     }
+
 }

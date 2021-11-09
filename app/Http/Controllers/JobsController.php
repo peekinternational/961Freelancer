@@ -18,6 +18,7 @@ use Session;
 use Mail;
 use Redirect;
 
+
 class JobsController extends Controller
 {
     /**
@@ -186,6 +187,20 @@ class JobsController extends Controller
       }
     }
 
+    // Jobs By category
+    public function categoryJobs(Request $request,$slug){
+      
+      $category = Category::where('slug',$slug)->first();
+      // dd($category);
+      $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_cat',$category->category_name)->orderBy('created_at', 'DESC')->paginate(10);
+      $categories = Category::get();
+      $countries = Countries::get();
+      return View::make('frontend.job-listings')->with([
+        'jobs' => $jobs,
+        'categories' => $categories,
+        'countries' => $countries
+      ]);
+    }
     // Manage Jobs
 
     public function manageJobs(Request $request){

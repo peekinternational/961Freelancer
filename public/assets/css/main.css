@@ -1602,7 +1602,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	margin-left:-32px;
 	position: absolute;
 }
-.wt-categorycontent:hover figure{top: -80px;}
+.wt-categorycontent:hover figure{top: 10px;}
 .wt-cattitle{
 	left: 0;
 	top: 160px;
@@ -1611,7 +1611,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	padding: 0 20px;
 	position: absolute;
 }
-.wt-categorycontent:hover .wt-cattitle{top:21%;}
+.wt-categorycontent:hover .wt-cattitle{top:34%;}
 .wt-cattitle h3{
 	margin: 0;
 	font-size: 18px;
@@ -1638,11 +1638,11 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-categorycontent:hover .wt-categoryslidup{
 	opacity: 1;
 	bottom: 0;
-	bottom: 22%;
+	bottom: 10%;
 	visibility: visible;
 }
 .wt-categoryslidup p{
-	font-size: 14px;
+	font-size: 13px;
 	margin: 0 0 28px;
 	line-height: 24px;
 }

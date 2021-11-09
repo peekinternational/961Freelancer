@@ -81,8 +81,7 @@ Route::middleware(['auth'])->group(function () {
   Route::get('completed-jobs',[JobsController::class, 'completedJobs'])->name('job.completed-jobs');
   Route::get('cancelled-jobs',[JobsController::class, 'cancelledJobs'])->name('job.cancelled-jobs');
   Route::get('ongoing-jobs',[JobsController::class, 'onGoingJobs'])->name('job.ongoing-jobs');
-  // Filter and Sorting
-  Route::get('sort-jobs',[JobsController::class, 'getJobs']);
+  
   
   
   Route::get('ongoing-job/{id}',[JobsController::class, 'onGoingJobsDetail'])->name('job.ongoing-job');
@@ -116,6 +115,10 @@ Route::middleware(['auth'])->group(function () {
   Route::post('transaction-agree',[PaymentController::class,'agreeTransaction']);
   Route::get('transaction-link/{id}',[PaymentController::class,'linkTransaction']);
 
+  Route::post('deliver-order',[PaymentController::class,'shipProduct']);
+  
+  Route::post('receive-order',[PaymentController::class,'receiveProduct']);
+
   Route::get('rating/{job_id}',[RatingController::class,'show']);
   Route::post('add-rating',[RatingController::class,'store'])->name('add-rating');
 
@@ -126,7 +129,9 @@ Route::get('freelancer/{username}',[FreelancerController::class, 'show'])->name(
 
 Route::get('get-freelancers', [FreelancerController::class, 'getFreelancers']);
 
-
+Route::get('jobs/{category}',[JobsController::class, 'categoryJobs'])->name('job.category');
+// Filter and Sorting
+Route::get('sort-jobs',[JobsController::class, 'getJobs']);
 
 
 Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){

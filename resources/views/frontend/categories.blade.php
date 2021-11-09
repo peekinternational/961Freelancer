@@ -38,11 +38,11 @@
           <div class="wt-categorycontent">
             <figure><img src="{{asset('assets/images/categories/'.$category->cat_icon)}}" alt="image description"></figure>
             <div class="wt-cattitle">
-              <h3><a href="javascrip:void(0);">{{$category->category_name}}</a></h3>
+              <h3><a href="{{url('jobs/'.$category->slug)}}">{{$category->category_name}}</a></h3>
             </div>
             <div class="wt-categoryslidup">
-              <p>{{ \Illuminate\Support\Str::limit($category->cat_desc, $limit = 80, $end = '...') }}</p>
-              <a href="javascript:void(0);">Explore <i class="fas fa-arrow-right"></i></a>
+              <p class="mt-2 mb-1"><a href="{{url('jobs/'.$category->slug)}}" class="text-reset text-decoration-none">{{ \Illuminate\Support\Str::limit($category->cat_desc, $limit = 80, $end = '...') }}</a></p>
+              <a href="{{url('jobs/'.$category->slug)}}">Explore <i class="fas fa-arrow-right"></i></a>
             </div>
           </div>
         </div>

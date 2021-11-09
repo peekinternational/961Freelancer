@@ -64,7 +64,7 @@
 											<th>Amount</th>
 											<th>Escrow Fee</th>
 											<th>Status</th>
-											<!-- <th>Action</th> -->
+											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -76,13 +76,13 @@
 											<td>${{$transc->amount}}</td>
 											<td>${{$transc->escrow_fee}}</td>
 											<td>{{$transc->payment_status}}</td>
-											<!-- <td>
+											<td>
 												<div class="wt-actionbt">
 													<a onclick="agree({{$transc->transcation_id}})" class="wt-addinfo wt-skillsaddinfo bg-transparent text-success">Agree</a>
-													<a href="{{url('transaction-link/'.$transc->transcation_id)}}" class="wt-addinfo wt-skillsaddinfo bg-transparent text-success">Link</a>
+													<a href="javascript:void(0)" onclick="receive({{$transc->transcation_id}})" class="wt-addinfo wt-skillsaddinfo bg-transparent text-success">Receive</a>
 													<a href="javascript:void(0);" class="wt-deleteinfo bg-transparent">Print</a>
 												</div>
-											</td> -->
+											</td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -178,6 +178,56 @@
 	function agree(id){
 		$.ajax({
 	    url: "{{url('transaction-agree')}}",
+	    type: 'POST',
+	    data: {"trans_id": id},
+
+	    success: (response)=>{
+	        if (response.status == 'true') {
+	        	console.log(data);
+	            $.notify(response.message , 'success'  );
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/transactions/";
+	            
+	            
+	        }else{
+	            $.notify(response.message , 'error');
+
+	        }
+	    },
+	    error: (errorResponse)=>{
+	        $.notify( errorResponse, 'error'  );
+
+
+	    }
+		})
+	}
+	function deliver(id){
+		$.ajax({
+	    url: "{{url('deliver-order')}}",
+	    type: 'POST',
+	    data: {"trans_id": id},
+
+	    success: (response)=>{
+	        if (response.status == 'true') {
+	        	console.log(data);
+	            $.notify(response.message , 'success'  );
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/transactions/";
+	            
+	            
+	        }else{
+	            $.notify(response.message , 'error');
+
+	        }
+	    },
+	    error: (errorResponse)=>{
+	        $.notify( errorResponse, 'error'  );
+
+
+	    }
+		})
+	}
+	function receive(id){
+		$.ajax({
+	    url: "{{url('receive-order')}}",
 	    type: 'POST',
 	    data: {"trans_id": id},
 

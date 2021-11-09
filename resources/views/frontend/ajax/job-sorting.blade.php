@@ -19,6 +19,7 @@
 		</div>
 
 		<!-- Bookmark -->
+		@if(Auth::user())
 		@if($job->saveJobs != '')
 			@foreach($job->saveJobs as $save)
 				@if($save->user_id == Auth::user()->id && $save->status == 1)
@@ -31,6 +32,7 @@
 		@endif
 		@if($job->saveJobs == '')
 			<span class="bookmark-icon" onclick="saveJob({{$job->id}})"></span>
+		@endif
 		@endif
 	</div>
 

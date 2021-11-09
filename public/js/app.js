@@ -3336,7 +3336,7 @@ var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('ht
       this.singlefriend = friends;
       this.$socket.emit('peekUpdateCallStatus', {
         userId: this.userdata.id,
-        userName: this.userdata.first_name,
+        userFirstName: this.userdata.first_name,
         friendId: this.friendId,
         friendName: this.friendName,
         userImage: this.userdata.profile_image,
@@ -3346,7 +3346,7 @@ var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('ht
         job_id: this.projectId,
         project_name: this.singlefriend.project_info.job_title
       });
-      window.open('/messages#/o2ocall?userName=' + this.userdata.first_name + '&friendName=' + this.friendName + '&userId=' + this.userdata.id + '&friendId=' + this.friendId + '&receiveUser=no&callStatus=' + statuscall + '&projectId=' + this.singlefriend.job_id + '&projectName=' + this.singlefriend.project_info.job_title, '_blank');
+      window.open('/messages#/o2ocall?userName=' + this.userdata.username + '&friendName=' + this.userName + '&userId=' + this.userdata.id + '&friendId=' + this.friendId + '&receiveUser=no&callStatus=' + statuscall + '&projectId=' + this.singlefriend.job_id + '&projectName=' + this.singlefriend.project_info.job_title, '_blank');
     },
     o2oreceiveCall: function o2oreceiveCall() {
       this.isO2Ocall = false;
@@ -3373,7 +3373,7 @@ var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('ht
       // this.oncallFriend = post;
 
       this.callDisable = true;
-      window.open('/messages#/o2ocall?userName=' + this.callData.userName + '&friendName=' + this.callData.friendName + '&userId=' + this.callData.friendId + '&friendId=' + this.callData.userId + '&receiveUser=yes&callId=' + this.callData.callId + '&callStatus=' + this.callData.statuscall + '&projectId=' + projectIds + '&projectName=' + this.callData.project_name, '_blank'); // this.$router.push('/o2oCall?userName='+this.callData.userName+'&friendName='+this.callData.friendName+'&userId='+this.callData.friendId+'&friendId='+this.callData.userId+'&receiveUser=yes&callId='+this.callData.callId);
+      window.open('/messages#/o2ocall?userName=' + this.callData.userFirstName + '&friendName=' + this.callData.friendName + '&userId=' + this.callData.friendId + '&friendId=' + this.callData.userId + '&receiveUser=yes&callId=' + this.callData.callId + '&callStatus=' + this.callData.statuscall + '&projectId=' + projectIds + '&projectName=' + this.callData.project_name, '_blank'); // this.$router.push('/o2oCall?userName='+this.callData.userName+'&friendName='+this.callData.friendName+'&userId='+this.callData.friendId+'&friendId='+this.callData.userId+'&receiveUser=yes&callId='+this.callData.callId);
     },
     //o2o-stop
     o2ostopKCall: function o2ostopKCall(status) {
@@ -3604,7 +3604,7 @@ var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('ht
         noSSL: false,
         userInfo: {
           email: this.userdata.email,
-          displayName: this.userdata.frist_name
+          displayName: this.userdata.first_name
         },
         configOverwrite: {
           enableNoisyMicDetection: false,
@@ -71930,7 +71930,7 @@ var render = function() {
     [
       _c("vue-jitsi-meet", {
         ref: "jitsiRef",
-        attrs: { domain: "stun.ringy.jp", options: _vm.jitsiOptions }
+        attrs: { domain: "meet.jit.si", options: _vm.jitsiOptions }
       })
     ],
     1

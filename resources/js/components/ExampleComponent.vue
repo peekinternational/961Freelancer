@@ -1217,7 +1217,7 @@ export default {
 
       this.$socket.emit('peekUpdateCallStatus', {
         userId: this.userdata.id,
-        userName: this.userdata.first_name,
+        userFirstName: this.userdata.first_name,
         friendId: this.friendId,
         friendName: this.friendName,
         userImage: this.userdata.profile_image,
@@ -1228,7 +1228,7 @@ export default {
         project_name: this.singlefriend.project_info.job_title 
     
       });
-      window.open('/messages#/o2ocall?userName='+this.userdata.first_name+'&friendName='+this.friendName+'&userId='+this.userdata.id+'&friendId='+this.friendId+'&receiveUser=no&callStatus='+statuscall+'&projectId='+this.singlefriend.job_id+'&projectName='+this.singlefriend.project_info.job_title, '_blank');
+      window.open('/messages#/o2ocall?userName='+this.userdata.username+'&friendName='+this.userName+'&userId='+this.userdata.id+'&friendId='+this.friendId+'&receiveUser=no&callStatus='+statuscall+'&projectId='+this.singlefriend.job_id+'&projectName='+this.singlefriend.project_info.job_title, '_blank');
 
 
     }, 
@@ -1259,7 +1259,7 @@ export default {
       // this.oncallFriend = post;
        
       this.callDisable=true;
-      window.open('/messages#/o2ocall?userName='+this.callData.userName+'&friendName='+this.callData.friendName+'&userId='+this.callData.friendId+'&friendId='+this.callData.userId+'&receiveUser=yes&callId='+this.callData.callId+'&callStatus='+this.callData.statuscall+'&projectId='+projectIds+'&projectName='+this.callData.project_name,'_blank');
+      window.open('/messages#/o2ocall?userName='+this.callData.userFirstName+'&friendName='+this.callData.friendName+'&userId='+this.callData.friendId+'&friendId='+this.callData.userId+'&receiveUser=yes&callId='+this.callData.callId+'&callStatus='+this.callData.statuscall+'&projectId='+projectIds+'&projectName='+this.callData.project_name,'_blank');
        
 
       // this.$router.push('/o2oCall?userName='+this.callData.userName+'&friendName='+this.callData.friendName+'&userId='+this.callData.friendId+'&friendId='+this.callData.userId+'&receiveUser=yes&callId='+this.callData.callId);

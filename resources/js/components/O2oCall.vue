@@ -2,7 +2,7 @@
 	<div style="height:calc(100vh - 120px);">
   <vue-jitsi-meet
     ref="jitsiRef"
-    domain="stun.ringy.jp"
+    domain="meet.jit.si"
     :options="jitsiOptions"
   ></vue-jitsi-meet>
   </div>
@@ -110,7 +110,7 @@ export default {
               noSSL: false,
               userInfo: {
                 email: this.userdata.email,
-                displayName: this.userdata.frist_name,
+                displayName: this.userdata.first_name,
               },
               configOverwrite: {
                 enableNoisyMicDetection: false,
