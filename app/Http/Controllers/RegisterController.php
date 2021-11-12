@@ -127,16 +127,22 @@ class RegisterController extends Controller
         $user = new User;
         $user->username = $request->input('username');
         $user->email = $request->input('email');
-        $full_number = str_replace('+','',$request->input('full'));
-        $country_code = str_replace($request->input('mobile_number'),'',$full_number);
-        $mobile_number = $request->input('mobile_number');
-        $country = Countries::where('phonecode',$country_code)->orwhere('phonecode','+'.$country_code)->first()->name;
+        // $full_number = str_replace('+','',$request->input('full'));
+        // $country_code = str_replace($request->input('mobile_number'),'',$full_number);
+        // $mobile_number = $request->input('mobile_number');
+        // $country = Countries::where('phonecode',$country_code)->orwhere('phonecode','+'.$country_code)->first()->name;
+        // $country_code = str_replace($request->input('phone_code'),'',$full_number);
+        $country = $request->input('country');
+        $mobile_number = $request->input('phone_code').$request->input('mobile_number');
+        // $country = Countries::where('phonecode',$country_code)->orwhere('phonecode','+'.$country_code)->first()->name;
+        // dd($mobile_number);
         // dd($request->all(),$full_number,$country_code,$country);
-        $user->mobile_number = $request->input('mobile_number');
+        $user->mobile_number = $mobile_number;
         $user->country = $country;
         $user->remember_token = $request->input('_token');
         $user->password = Hash::make(trim($request->input('password')));
         $user->user_status = 'online';
+        $user->verification = 0;
         $user->account_type = $request->input('account_type');
         // $slug = $this->createSlug($request->input('username'));
         // $user->slug = $slug;
@@ -151,17 +157,29 @@ class RegisterController extends Controller
         function ($message) use ($toemail)
         {
 
-          $message->subject('961Freelancer - Account Created');
+          $message->subject('961Freelancer - Verify Account');
           $message->from('support@961freelancer.com', '961Freelancer');
           $message->to($toemail);
         });
 
 
-        $request->session()->flash('registerSuccess',"Account created. Please check your email.");
+        return redirect()->back()->with('registerSuccess',"Account created. Please check your email.");
 
-        return redirect('login');
+        // return redirect('login');
       }
-      return view('frontend.signup');
+      $countries = Countries::get();
+      return view('frontend.signup',compact('countries'));
+    }
+
+    ///////////////////// Account Verify //////////////////////////////
+    public function VerifyAccount(Request $request, $username, $token)
+    {
+      $user = User::where('username',$username)->where('remember_token',$token)->first();
+      // dd($user);
+      $user->verification = 1;
+      $user->save();
+      $request->session()->flash('verify_success',"Account verified.");
+      return redirect('login');
     }
     // Login Function
     public function checkLogin(Request $request){

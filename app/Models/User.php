@@ -32,7 +32,7 @@ class User extends Authenticatable
         'city',
         'tagline',
         'description',
-        'birth_date',
+        'age',
         'gender',
         'address',
         'account_type',
@@ -40,6 +40,7 @@ class User extends Authenticatable
         'skills_id',
         'facebook_id',
         'google_id',
+        'verification'
     ];
 
     public function userInfo(){

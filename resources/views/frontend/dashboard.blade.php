@@ -2,11 +2,51 @@
 @section('dashboardstyle')
 <link rel="stylesheet" media="screen" href="{{ asset('assets/css/dashboard.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('assets/css/dbresponsive.css') }}">
+<link rel="stylesheet" media="screen" href="{{ asset('assets/css/croppie.css') }}">
 <script src="{{asset('assets/js/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
 <style>
 	.home-header{
 		z-index: 29;
 		background: #fff;
+	}
+	textarea:invalid {
+	  border: 1px solid red;
+	}
+	textarea:invalid:focus {
+	  border: 1px solid red;
+	}
+	textarea:valid:focus {
+	  border: 1px solid green;
+	}
+	.dragBox {
+	  width: 100%;
+	  height: 56px;
+	  margin: 0 auto;
+	  position: relative;
+	  text-align: center;
+	  font-weight: bold;
+	  line-height: 57px;
+	  color: #999;
+	  /*border: 2px dashed #ccc;*/
+	  display: inline-block;
+	  transition: transform 0.3s;
+	}
+	.dragBox input[type="file"] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+	.draging {
+	  transform: scale(1.1);
+	}
+	#preview {
+	  text-align: center;
+	}
+	#preview img {
+	  max-width: 100%
 	}
 </style>
 @endsection
@@ -36,11 +76,11 @@
 									    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Personal Details &amp; Skills</a>
 									  </li>
 									  <li class="nav-item" role="presentation">
-									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Experience &amp; Education</a>
+									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Employement &amp; Education</a>
 									  </li>
 									  @if(Auth::user()->account_type != 'Client')
 									  <li class="nav-item" role="presentation">
-									    <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Projects &amp; Certifications</a>
+									    <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Portfolio &amp; Certifications</a>
 									  </li>
 									  @endif
 									</ul>
@@ -56,34 +96,69 @@
 								  			@csrf
 								  			<fieldset>
 								  				<div class="form-group form-group-half">
+								  					<label class="form-label">Username</label>
 								  					<input type="text" name="username" class="form-control" placeholder="User Name" value="{{Auth::user()->username}}" readonly>
 								  				</div>
 								  				<div class="form-group form-group-half">
+								  					<label class="form-label">Email</label>
 								  					<input type="email" name="email" class="form-control" placeholder="Email" value="{{Auth::user()->email}}" readonly>
 								  				</div>
 								  				<div class="form-group form-group-half">
+								  					<label class="form-label">Gender</label>
 								  					<span class="wt-select">
 								  						<select name="gender">
 								  							<option value="">Select Gender</option>
 								  							<option value="Male" @if(Auth::user()->gender == 'Male') selected @endif>Male</option>
 								  							<option value="Female" @if(Auth::user()->gender == 'Female') selected @endif>Female</option>
+								  							<option value="Other" @if(Auth::user()->gender == 'Other') selected @endif>Other</option>
 								  						</select>
 								  					</span>
 								  				</div>
 								  				<div class="form-group form-group-half">
+								  					<label class="form-label">First Name</label>
 								  					<input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{Auth::user()->first_name}}">
 								  				</div>
 								  				<div class="form-group form-group-half">
+								  					<label class="form-label">Last Name</label>
 								  					<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{Auth::user()->last_name}}">
 								  				</div>
+								  				
+								  				@if(Auth::user()->account_type == 'Freelancer')
 								  				<div class="form-group form-group-half">
+								  					<label class="form-label">Hourly Rate</label>
 								  					<input type="number" name="hourly_rate" class="form-control" placeholder="Your Service Hourly Rate ($)" value="{{Auth::user()->hourly_rate}}">
 								  				</div>
 								  				<div class="form-group">
-								  					<input type="text" name="tagline" class="form-control" placeholder="Add Your Tagline Here" value="{{Auth::user()->tagline}}">
+								  					<label class="form-label">Age</label>
+								  					<input type="number" name="age" class="form-control" placeholder="Add Age" value="{{Auth::user()->age}}">
 								  				</div>
 								  				<div class="form-group">
-								  					<textarea name="description" class="form-control" placeholder="Description">{{Auth::user()->description}}</textarea>
+								  					<label class="form-label">Mobile Number</label>
+								  					<input type="text" name="mobile_number" class="form-control" placeholder="Add Mobile Number" value="{{Auth::user()->mobile_number}}">
+								  				</div>
+								  				<div class="form-group">
+								  					<label class="form-label">Designation</label>
+								  					<input type="text" name="tagline" class="form-control" placeholder="Add Designation" value="{{Auth::user()->tagline}}">
+								  				</div>
+								  				@endif
+								  				
+								  				@if(Auth::user()->account_type == 'Client')
+								  				<div class="form-group form-group-half">
+								  					<label class="form-label">Mobile Number</label>
+								  					<input type="text" name="mobile_number" class="form-control" placeholder="Add Mobile Number" value="{{Auth::user()->mobile_number}}">
+								  				</div>
+								  				<div class="form-group">
+								  					<label class="form-label">Age</label>
+								  					<input type="number" name="age" class="form-control" placeholder="Add Age" value="{{Auth::user()->age}}">
+								  				</div>
+								  				<div class="form-group">
+								  					<label class="form-label">Company/Organization Name</label>
+								  					<input type="text" name="tagline" class="form-control" placeholder="Add Your Comapny, Organization Name" value="{{Auth::user()->tagline}}">
+								  				</div>
+								  				@endif
+								  				<div class="form-group">
+								  					<label class="form-label d-flex justify-content-between">Tell About Yourself/Your Company <span>(Minimum 50 Character)</span></label>
+								  					<textarea name="description" class="form-control" placeholder="Description" minlength="50">{{Auth::user()->description}}</textarea>
 								  				</div>
 								  			</fieldset>
 								  		</form>
@@ -100,11 +175,11 @@
 								  				<fieldset>
 								  					<div class="form-group form-group-label">
 								  						<div class="wt-labelgroup">
-								  							<label for="filep">
-								  								<span class="wt-btn">Select Files</span>
-								  								<input type="file" name="profile_image" id="filep" form="edit-profile-form" onchange="profileImage(this);">
+								  							<label for="uploadFile"  class="dragBox w-100">
+								  								<input type="file" name="profile_image" id="uploadFile" form="edit-profile-form" onChange="dragNdrop(event)" ondragover="drag()" ondrop="drop()" id="uploadFile" class="d-block">
+								  								Drag or upload profile image
 								  							</label>
-								  							<span>File upload</span>
+								  							<!-- <span>File upload</span> -->
 								  							<em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
 								  						</div>
 								  					</div>
@@ -114,9 +189,13 @@
 								  								<div class="wt-uploadingbox">
 								  									<div class="wt-designimg">
 								  										<input id="demoz" type="radio" name="employees" value="company" checked="">
-								  										<label for="demoz">
+								  										<label for="demoz"  id="preview">
 								  											@if(Auth::user()->profile_image)
-								  											<img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" alt="img description" id="profile">
+									  											@if(!empty(Auth::user()->facebook_id) || !empty(Auth::user()->google_id))
+											                    <img src="{{Auth::user()->profile_image}}" alt="">
+											                    @else
+											                    <img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" alt="">
+											                    @endif
 								  											@else
 								  											<img src="{{asset('assets/images/user/userlisting/img-07.jpg')}}" alt="img description" id="profile">
 								  											@endif
@@ -124,7 +203,7 @@
 								  									</div>
 								  									<div class="wt-uploadingbar">
 								  										<!-- <span class="uploadprogressbar"></span> -->
-								  										<span id="img_name">{{Auth::user()->profile_image}}</span>
+								  										<span id="img_name" class="text-break text-wrap">{{Auth::user()->profile_image}}</span>
 								  										<!-- <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em> -->
 								  									</div>
 								  								</div>
@@ -147,11 +226,12 @@
 								  				<fieldset>
 								  					<div class="form-group form-group-label">
 								  						<div class="wt-labelgroup">
-								  							<label for="filew">
-								  								<span class="wt-btn">Select Files</span>
-								  								<input type="file" name="cover_image" id="filew" onchange="coverImage(this);" form="edit-profile-form">
+								  							<label for="fileCover" class="dragBox">
+								  								<!-- <span class="wt-btn">Select Files</span> -->
+								  								<input type="file" name="cover_image" id="fileCover"  onChange="dragNdropCover(event)" ondragover="dragCover()" ondrop="dropCover()" class="d-block" form="edit-profile-form">
+								  								Drag or upload cover image
 								  							</label>
-								  							<span>file upload</span>
+								  							<!-- <span>file upload</span> -->
 								  							<em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
 								  						</div>
 								  					</div>
@@ -161,7 +241,7 @@
 								  								<div class="wt-uploadingbox">
 								  									<div class="wt-designimg">
 								  										<input id="demoq" type="radio" name="employees" value="company" checked="">
-								  										<label for="demoq">
+								  										<label for="demoq" id="coverPreview">
 								  											@if(Auth::user()->cover_image)
 								  											<img src="{{asset('assets/images/user/cover/'.Auth::user()->cover_image)}}" id="cover" alt="img description">
 								  											@else
@@ -172,7 +252,7 @@
 								  									</div>
 								  									<div class="wt-uploadingbar">
 								  										<span class="uploadprogressbar"></span>
-								  										<span id="covrimg_name">Banner Photo.jpg</span>
+								  										<span id="covrimg_name" class="text-break text-wrap">Banner Photo.jpg</span>
 								  										<!-- <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em> -->
 								  									</div>
 								  								</div>
@@ -215,34 +295,34 @@
 								  				<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 								  				<fieldset>
 								  					<div class="form-group">
-								  						<div class="form-group-holder">
-								  							<span class="wt-select">
-								  								<select name="skill_id">
+								  						<div class="form-group-holder border-0">
+								  							<span class="wt-select w-100 border-top-0">
+								  								<select name="skill_id" class="w-100 border rounded">
 								  									<option value="">Select Your Skill</option>
 								  									@foreach($skills as $skill)
 								  									<option value="{{$skill->id}}">{{$skill->skill_name}}</option>
 								  									@endforeach
 								  								</select>
 								  							</span>
-								  							<input type="number" name="skill_rate" class="form-control" placeholder="Rate Your Skill (0% to 100%)">
 								  						</div>
 								  					</div>
 								  					<div class="form-group wt-btnarea">
-								  						<button type="submit" class="wt-btn">Add Skills</button>
+								  						<button type="submit" id="addSkills" class="wt-btn" {{count($user_skills) == 12 ? 'disabled' : ''}}>Add Skills</button>
 								  					</div>
 								  				</fieldset>
 								  			</form>
 								  			<div class="wt-myskills">
+								  				@if(count($user_skills) == 12)
+								  					<p class="count_skill">You cannot add more than 12 skills.</p>
+								  				@endif
+								  				<p id="skill_length" class="d-none">You cannot add more than 12 skills.</p>
 								  				<ul class="sortable list" id="userskilss">
 								  					@foreach($user_skills as $key => $user_skill)
 								  					<li id="userSkill{{$user_skill->id}}">
 								  						<!-- <div class="wt-dragdroptool">
 								  							<a href="javascript:void(0)" class="fal fa-bars"></a>
 								  						</div> -->
-								  						<span class="skill-dynamic-html">{{$user_skill->skillData->skill_name}} (<em class="skill-val">{{$user_skill->skill_rate}}</em>%)</span>
-								  						<span class="skill-dynamic-field">
-								  							<input type="text" name="skills[1][percentage]" value="{{$user_skill->skill_rate}}">
-								  						</span>
+								  						<span class="skill-dynamic-html">{{$user_skill->skillData->skill_name}}</span>
 								  						<div class="wt-rightarea">
 								  							<!-- <a href="javascript:void(0);" class="wt-addinfo" onclick="updateSkill({{$user_skill->id}})"><i class="fal fa-pencil"></i></a> -->
 								  							<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill({{$user_skill->id}})"><i class="fal fa-trash-alt"></i></a>
@@ -261,7 +341,7 @@
 								  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 								  	<div class="wt-userexperience wt-tabsinfo">
 								  		<div class="wt-tabscontenttitle wt-addnew">
-								  			<h2>Add Your Experience</h2>
+								  			<h2>Add Your Employmeny History</h2>
 								  			<a href="javascript:void(0);" id="addExperience" data-bs-toggle="collapse" data-bs-target="#addexperience" aria-expanded="true">Add New</a>
 								  		</div>
 								  		<div class="wt-collapseexp collapse" id="addexperience" aria-labelledby="accordioninnertitle" data-parent="#accordion">
@@ -281,10 +361,11 @@
 									  					<input type="text" name="job_title" class="form-control" placeholder="Your Job Title">
 									  				</div>
 									  				<div class="form-group">
-									  					<textarea name="job_description" class="form-control" placeholder="Your Job Description"></textarea>
+									  					<textarea name="job_description" class="form-control" placeholder="Your Job Description" minlength="50"></textarea>
+									  					<span>(Minimum 50 Character)</span>
 									  				</div>
 									  				<div class="form-group">
-									  					<span>* Leave ending date empty if its your current job</span>
+									  					<span class="fs-6">* Leave ending date empty if its your current job</span>
 									  				</div>
 									  				<div class="form-group mt-3 text-end">
 									  					<button type="submit" class="wt-btn">Save</button>
@@ -320,13 +401,14 @@
 								  								<input type="text" id="job_title{{$exper->id}}" name="job_title" value="{{$exper->job_title}}" class="form-control" placeholder="Your Job Title">
 								  							</div>
 								  							<div class="form-group">
-								  								<textarea name="job_description" id="job_description{{$exper->id}}" class="form-control" placeholder="Your Job Description">{{$exper->job_description}}</textarea>
+								  								<textarea name="job_description" id="job_description{{$exper->id}}" class="form-control" placeholder="Your Job Description" minlength="50">{{$exper->job_description}}</textarea>
+								  								<span>(Minimum 50 Character)</span>
 								  							</div>
 								  							<div class="form-group">
 								  								<span>* Leave ending date empty if its your current job</span>
 								  							</div>
 								  							<div class="form-group mt-3 text-end">
-								  								<button onclick="editExperience({{$exper->id}})" class="wt-btn">Edit Experience</button>
+								  								<button onclick="editExperience({{$exper->id}})" class="wt-btn">Edit Employment History</button>
 								  							</div>
 								  						</fieldset>
 								  					</div>
@@ -359,26 +441,26 @@
 								  					<div class="form-group">
 								  						<input type="text" name="area_of_study" class="form-control" placeholder="Ex: Computer Science">
 								  					</div>
-								  					<div class="form-group">
+								  					<!-- <div class="form-group">
 								  						<textarea name="description" class="form-control" placeholder="Your Degree Description"></textarea>
-								  					</div>
+								  					</div> -->
 								  					<div class="form-group mt-3 text-end">
 								  						<button type="submit" id="add-education" class="wt-btn">Save Education</button>
 								  					</div>
 								  				</fieldset>
 								  			</form>
 								  		</div>
-								  		<ul class="wt-experienceaccordion accordion">
+								  		<ul class="wt-experienceaccordion accordion" id="education_list">
 								  			@foreach($education as $educ)
 								  			<li id="educatn{{$educ->id}}">
 								  				<div class="wt-accordioninnertitle">
-								  					<span id="accordioneducation{{$educ->id}}" data-toggle="collapse" data-target="#innertitleeduc{{$educ->id}}"><span id="degree{{$educ->id}}">{{$educ->degree}}</span> <span id="start_edu{{$educ->id}}"><em>({{$educ->start_date}}</em></span> - <span id="end_edu{{$educ->id}}"><em> {{$educ->end_date}})</em></span></span>
+								  					<span id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}"><span id="degree{{$educ->id}}">{{$educ->degree}}</span> <span id="start_edu{{$educ->id}}"><em>({{$educ->start_date}}</em></span> - <span id="end_edu{{$educ->id}}"><em> {{$educ->end_date}})</em></span></span>
 								  					<div class="wt-rightarea">
 								  						<a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}" aria-expanded="true"><i class="fal fa-pencil"></i></a>
 								  						<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteEducation({{$educ->id}})"><i class="fal fa-trash-alt"></i></a>
 								  					</div>
 								  				</div>
-								  				<div class="wt-collapseexp collapse" id="innertitleeduc{{$educ->id}}" aria-labelledby="accordioneducation{{$educ->id}}" data-parent="#accordion">
+								  				<div class="wt-collapseexp collapse" id="innertitleeduc{{$educ->id}}" aria-labelledby="accordioneducation{{$educ->id}}" data-bs-parent="#accordion">
 								  					<div class="wt-formtheme wt-userform">
 								  						<fieldset>
 								  							<input type="hidden" name="educaId" value="{{$educ->id}}">
@@ -397,9 +479,9 @@
 										  					<div class="form-group">
 										  						<input type="text" name="area_of_study" id="area_of_study{{$educ->id}}" class="form-control" placeholder="Ex: Computer Science" value="{{$educ->area_of_study}}">
 										  					</div>
-										  					<div class="form-group">
+										  					<!-- <div class="form-group">
 										  						<textarea name="description" id="degree_desc{{$educ->id}}" class="form-control" placeholder="Your Degree Description">{{$educ->description}}</textarea>
-										  					</div>
+										  					</div> -->
 										  					<div class="form-group mt-3 text-end">
 										  						<button onclick="editEducation({{$educ->id}})" class="wt-btn">Edit Education</button>
 										  					</div>
@@ -414,7 +496,7 @@
 								  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 								  	<div class="wt-addprojectsholder wt-tabsinfo">
 								  		<div class="wt-tabscontenttitle wt-addnew">
-								  			<h2>Add Your Projects</h2>
+								  			<h2>Add Your Portfolio</h2>
 								  			<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#addProject">Add New</a>
 								  		</div>
 								  		<div class="wt-collapseexp collapse" id="addProject" aria-labelledby="addProject" data-bs-parent="#accordion">
@@ -434,19 +516,20 @@
 								  								<input type="file" name="project_img" onchange="projectImage(this);" id="filen">
 								  							</label>
 								  							<span>Files Upload</span>
-								  							<em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+								  							<!-- <em class="wt-fileuploading">Uploading</em> -->
 								  						</div>
 								  					</div>
 								  					<div class="form-group">
 								  						<ul class="wt-attachfile">
-								  							<li class="wt-uploading">
+								  							<li class="wt-uploaded">
 								  								<span id="projectimg_name">Logo.jpg</span>
 								  								<em>File size: <span id="projectImg_size">300 kb</span></em>
 								  							</li>
 								  						</ul>
 								  					</div>
 								  					<div class="form-group">
-								  						<textarea name="project_desc" class="form-control" placeholder="Project Description"></textarea>
+								  						<textarea name="project_desc" class="form-control" placeholder="Project Description" minlength="50"></textarea>
+								  						<span>(Minimum 50 Character)</span>
 								  					</div>
 								  					<div class="form-group wt-btnarea text-end">
 								  						<button type="submit" class="wt-btn">Save</button>
@@ -496,7 +579,8 @@
 								  								</ul>
 								  							</div>
 								  							<div class="form-group">
-								  								<textarea name="project_desc" id="project_desc{{$project->id}}" class="form-control" placeholder="Project Description">{{$project->project_desc}}</textarea>
+								  								<textarea name="project_desc" id="project_desc{{$project->id}}" class="form-control" placeholder="Project Description" minlength="50">{{$project->project_desc}}</textarea>
+								  								<span>(Minimum 50 Character)</span>
 								  							</div>
 								  							<div class="form-group wt-btnarea text-end">
 								  								<button onclick="editProject({{$project->id}})" class="wt-btn">Edit Project</button>
@@ -527,7 +611,8 @@
 								  						<input type="date" name="expire_date" class="form-control" placeholder="Expire Date">
 								  					</div>
 								  					<div class="form-group">
-								  						<textarea name="certificate_desc" id="" class="form-control" placeholder="Certificate Description"></textarea>
+								  						<textarea name="certificate_desc" id="" class="form-control" placeholder="Certificate Description" minlength="50"></textarea>
+								  						<span>(Minimum 50 Character)</span>
 								  					</div>
 								  					<div class="form-group wt-btnarea text-end">
 								  						<button type="submit" class="wt-btn">Save</button>
@@ -561,7 +646,8 @@
 								  								<input type="date" id="expire_date{{$certificate->id}}" name="expire_date" class="form-control" value="{{$certificate->expire_date}}" placeholder="Expire Date">
 								  							</div>
 								  							<div class="form-group">
-								  								<textarea name="certificate_desc" id="certificate_desc{{$certificate->id}}" id="" class="form-control" placeholder="Certificate Description">{{$certificate->certificate_desc}}</textarea>
+								  								<textarea name="certificate_desc" id="certificate_desc{{$certificate->id}}" id="" class="form-control" placeholder="Certificate Description" minlength="50">{{$certificate->certificate_desc}}</textarea>
+								  								<span>(Minimum 50 Character)</span>
 								  							</div>
 								  							<div class="form-group wt-btnarea text-end">
 								  								<button onclick="editCertificate({{$certificate->id}})" class="wt-btn">Edit Certificate</button>
@@ -590,8 +676,44 @@
 		<!--Main End-->
 	</div>
 </div>
+<div id="insertimageModal" class="modal" role="dialog">
+  <div class="modal-dialog modal-md">
+  <div class="modal-content">
+    <div class="modal-header">
+     Crop & Insert Image <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="image_demo" style="width:100% !important;"></div>
+    </div>
+    <div class="modal-footer">
+      <input type="hidden" name="img_type" value="">
+      <button class="btn crop_image">Crop Image</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div id="insertCoverModal" class="modal" role="dialog">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+     Crop & Insert Cover <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="cover_demo" style="width:100% !important;"></div>
+    </div>
+    <div class="modal-footer">
+      <input type="hidden" name="img_type_cover" value="">
+      <button class="btn crop_image_cover">Crop Image</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('script')
+<script src="{{ URL::asset('assets/js/croppie.js') }}"></script>
 <script>
 	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
  $('#add_skill').on('submit', function(event){
@@ -608,7 +730,12 @@
 	    processData: false,
 	    success:function(data){
 	    	console.log(data);
-	    	$('#userskilss').append('<li id="userSkill'+data.id+'"><span class="skill-dynamic-html">'+data.skill_data.skill_name+' (<em class="skill-val">'+data.skill_rate+'</em>%)</span><span class="skill-dynamic-field"><input type="text" name="skills[1][percentage]" value="'+data.skill_rate+'"></span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill('+data.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
+	    	$('#userskilss').append('<li id="userSkill'+data.skill.id+'"><span class="skill-dynamic-html">'+data.skill.skill_data.skill_name+'</span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill('+data.skill.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
+	    	if(data.count == 12){
+	    		$('#addSkills').attr('disabled','true');
+	    		$('#skill_length').removeClass('d-none');
+	    		$('.count_skill').addClass('d-none');
+	    	}
 	     	// window.location.href = "{{url('manage-orders')}}"
 	     	// $('.added-questions').append(data);
 	     	// $('#requirements-form textarea').val('');
@@ -676,6 +803,7 @@
 	    success:function(data){
 	    	console.log(data);
 	    	$("#add-education-form")[0].reset();
+	    	$('#education_list').html(data);
 	    	// $('#pills-home-tab').removeClass('active');
 	    	// $('#pills-profile-tab').addClass('active');
 	    	// $('#pills-home').removeClass('show active');
@@ -731,11 +859,11 @@
 	});
 
  	function updateSkill(id){
- 		alert(id);
+ 		// alert(id);
  	}
 
  	function deleteSkill(id){
- 		alert(id);
+ 		// alert(id);
 	   	
  	   	$.ajax({
  		    url:"{{ url('delete-skill') }}/"+id,
@@ -744,8 +872,12 @@
  	      		"_token": CSRF_TOKEN,
  	          "id": id
  	      },
- 	      success: function (){
+ 	      success: function (data){
  	        $('#userSkill'+id).remove();
+ 	        if(data.count < 12){
+ 	        	$('#addSkills').removeAttr('disabled');
+ 	        	$('#skill_length').addClass('d-none');
+ 	        }
  	      }
  	   	})
  	}
@@ -761,7 +893,7 @@
 
         reader.readAsDataURL(input.files[0]);
     }
-    var filename = $('#filep').val().split('\\').pop();
+    var filename = $('#uploadFile').val().split('\\').pop();
     $('#img_name').html(filename);
    
 	}
@@ -879,8 +1011,7 @@
         "start_date": $('#start_date_edu'+id).val(),
         "end_date": $('#end_date_edu'+id).val(),
         "degree": $('#degree_edu'+id).val(),
-        "area_of_study": $('#area_of_study'+id).val(),
-        "description": $('#degree_desc'+id).val(),
+        "area_of_study": $('#area_of_study'+id).val()
       },
       success: function (){
         $('#degree'+id).html($('#degree_edu'+id).val());
@@ -991,5 +1122,109 @@
 		for (var selector in config) {
 			jQuery(selector).chosen(config[selector]);
 	}
+
+	function dragNdrop(event) {
+	    var fileName = URL.createObjectURL(event.target.files[0]);
+	    var preview = document.getElementById("preview");
+	    var previewImg = document.createElement("img");
+	    previewImg.setAttribute("src", fileName);
+	    preview.innerHTML = "";
+	    preview.appendChild(previewImg);
+
+	    var filename = $('#uploadFile').val().split('\\').pop();
+	    $('#img_name').html(filename);
+	}
+	function drag() {
+	    document.getElementById('uploadFile').parentNode.className = 'draging dragBox';
+	}
+	function drop() {
+	    document.getElementById('uploadFile').parentNode.className = 'dragBox';
+	}
+
+	// CoverImage
+	function dragNdropCover(event) {
+	    var fileName = URL.createObjectURL(event.target.files[0]);
+	    var preview = document.getElementById("coverPreview");
+	    var previewImg = document.createElement("img");
+	    previewImg.setAttribute("src", fileName);
+	    preview.innerHTML = "";
+	    preview.appendChild(previewImg);
+
+	    var filename = $('#fileCover').val().split('\\').pop();
+	    $('#covrimg_name').html(filename);
+	}
+	function dragCover() {
+	    document.getElementById('fileCover').parentNode.className = 'draging dragBox';
+	}
+	function dropCover() {
+	    document.getElementById('fileCover').parentNode.className = 'dragBox';
+	}
+
+	$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	$image_crop = $('#image_demo').croppie({
+	    enableExif: true,
+	    viewport: {
+	      width:200,
+	      height:200,
+	      type:'circle' //circle
+	    },
+	    boundary:{
+	      width:100,
+	      height:250
+	    }    
+	    });
+	  function crop(data){
+	    var reader = new FileReader();
+	    reader.onload = function (event) {
+	      $image_crop.croppie('bind',{
+	      url: event.target.result
+	      }).then(function(){
+	      console.log('jQuery bind complete');
+	      });
+	    }
+	    reader.readAsDataURL(data.files[0]);
+	    $('#insertimageModal').modal('show');
+	    $('input[type=hidden][name=img_type]').val($(data).attr('name'));
+	  }
+	  $(document).on('change','input[type=file]:not(#fileCover)', function(){
+	  	var size = $(this)[0].files[0].size; 
+	  	var ext = $(this).val().split('.').pop().toLowerCase();
+	  	if($.inArray(ext,['jpeg','jpg','gif','png']) == -1){
+	  		alert('Your File Extension Is Not Allowed.');
+	  		$(this).val('');
+	  	}else{
+	  		crop(this);
+	  	}
+	  });
+	  $('.crop_image').click(function(event){
+	  
+	  // $('#wait').addClass("loader");
+	  var name = $('input[type=hidden][name=img_type]').val();
+	    $image_crop.croppie('result', {
+	      type: 'canvas',
+	      size: 'viewport'
+	    }).then(function(response){
+	      $.ajax({
+	        url:"{{url('crop_upload')}}",
+	        type: "POST",
+	        data:{image: response, fileProfile: $('input[type=file][name='+ name +']').val().replace(/C:\\fakepath\\/i, '') },
+	        success:function(data){
+	          // $('#wait').removeClass("loader");
+	          $('#insertimageModal').modal('hide');
+	          $('input[type=hidden][name='+ name +']').val(data);
+	          main = $('input[type=hidden][name='+ name +']').parent();
+	          // main.prepend("<img src='user_images/"+data+"' class='img-fluid'>");
+	          // $('.img-circle').hide();
+	          $('.wt-userimg img').attr("src", "assets/images/user/profile/"+data.name+"");
+	          $('.mCS_img_loaded').attr("src", "assets/images/user/profile/"+data.name+"");
+	        }
+	      });
+	    });
+	    });
 </script>
 @endsection

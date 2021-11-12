@@ -18,7 +18,11 @@
 						<div class="wt-companysinfo">
 							<figure>
 							@if(Auth::user()->profile_image != '')
-								<img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" alt="img description">
+								@if(!empty(Auth::user()->facebook_id) || !empty(Auth::user()->google_id))
+								<img src="{{Auth::user()->profile_image}}" width="" height="" class="img-fluid rounded-circle mb-3" alt="">
+								@else
+								<img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" width="100px" height="100px" class="img-fluid rounded-circle mb-3" alt="">
+								@endif
 							@else
 								<img src="{{asset('assets/images/user-login.png')}}" alt="img description">
 							@endif

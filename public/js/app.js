@@ -2742,7 +2742,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Vue.use((vue_emoji_picker__WEBPACK_IMPORTED_MODULE_2___default()));
-var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://peekvideochat.com:22000/');
+var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://961freelancer.com:22000/');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["userdata"],
   name: "App",
@@ -3512,7 +3512,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://peekvideochat.com:22000/');
+var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://961freelancer.com:22000/');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     VueJitsiMeet: _mycure_vue_jitsi_meet__WEBPACK_IMPORTED_MODULE_2__.JitsiMeet
@@ -3770,10 +3770,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-window.Vue.prototype.$socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://peekvideochat.com:22000');
+window.Vue.prototype.$socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://961freelancer.com:22000');
 Vue.use(new (vue_socket_io__WEBPACK_IMPORTED_MODULE_0___default())({
   debug: true,
-  connection: 'https://peekvideochat.com:22000'
+  connection: 'https://961freelancer.com:22000'
 })); // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 

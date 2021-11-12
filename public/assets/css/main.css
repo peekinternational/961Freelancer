@@ -154,7 +154,7 @@ input:focus,
 label {
 	color: #666;
 	display: block;
-	font-weight: 400;
+	font-weight: 500;
 	margin-bottom: 10px;
 }
 form p {
@@ -1133,6 +1133,7 @@ li.wt-rss a { background:#ff6600; }
 	width: 100%;
 	display: block;
 	border-radius: 50px;
+	height: 36px;
 }
 .wt-loginarea .wt-loginbtn{color:#00adf2;margin-right:20px; }
 .wt-loginarea > .wt-btn{
@@ -1244,6 +1245,11 @@ body.wt-login .wt-userlogedin{display: block;}
 	font-weight:400;
 	margin: 0 0 5px;
 	line-height:16px;
+	width: 50px;
+    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+    display: inline-block;
 }
 .wt-username span{
 	display:block;
@@ -3764,6 +3770,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-companysinfo figure img{
 	width: 100%;
 	display: block;
+	height: 100%;
 }
 .wt-companysinfo .wt-title a {
 	display: block;
@@ -4228,7 +4235,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	border: 3px solid #fff;
 }
 .wt-away{background: #FFC30D;}
-.wt-offline{background: #fcfcfc;}
+.wt-offline{background: #ed1c24;}
 .wt-online{background: #57E50C;}
 .wt-busy{background: #E50C0F;}
 .wt-away{background: #FFC30D;}
@@ -4356,6 +4363,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	font-size: 14px;
 	margin: 0 0 7px;
 	line-height: 16px;
+	font-weight: 500;
 }
 .wt-skillbarholder{
 	float: left;

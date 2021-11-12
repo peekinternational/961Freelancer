@@ -28,11 +28,11 @@
 										@else
 										<img src="{{asset('assets/images/user-login.png')}}" alt="img description">
 										@endif
-										<div class="wt-userdropdown wt-online">
+										<div class="wt-userdropdown {{$freelancer->user_status == 'online' ? 'wt-online' : 'wt-offline'}}">
 										</div>
 									</figure>
 									<div class="wt-title">
-										<h3><i class="fa fa-check-circle"></i> {{$freelancer->first_name}} {{$freelancer->last_name}}</h3>
+										<!-- <h3><i class="fa fa-check-circle"></i> {{$freelancer->first_name}} {{$freelancer->last_name}}</h3> -->
 										<span>{{$rating_avg}}/5 <a class="javascript:void(0);">({{$freelancer->freelancer_rating_count}} Feedback)</a> <br>Member since {{$freelancer->created_at->format('F j, Y')}}<br><a href="javascript:void(0);">@ {{$freelancer->username}}</a> </span>
 									</div>
 								</div>
@@ -41,7 +41,8 @@
 						<div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
 							<div class="row">
 								<div class="wt-proposalhead wt-userdetails">
-									<h2>{{$freelancer->tagline}}</h2>
+									<h2 class="mb-1">{{$freelancer->first_name}} {{$freelancer->last_name}}</h2>
+									<h5>{{$freelancer->tagline}}</h5>
 									<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
 										<li><span><i class="far fa-money-bill-alt"></i> ${{$freelancer->hourly_rate}}.00 / hr</span></li>
 										<li><span><i class="fal fa-map-marker-alt"></i> {{$freelancer->country}}</span></li>
@@ -231,13 +232,13 @@
 										<h3>{{$education->degree}}</h3>
 									</div>
 									<div class="wt-experiencecontent">
-										<ul class="wt-userlisting-breadcrumb">
+										<ul class="wt-userlisting-breadcrumb mb-0">
 											<li><span><i class="far fa-building"></i> {{$education->institute}}</span></li>
 											<li><span><i class="far fa-calendar"></i> {{\Carbon\Carbon::parse($education->start_date)->format('F Y')}} - {{\Carbon\Carbon::parse($education->end_date)->format('F Y')}}</span></li>
 										</ul>
-										<div class="wt-description">
+										<!-- <div class="wt-description">
 											<p>“ {{$education->description}} ”</p>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								@endforeach
@@ -257,8 +258,8 @@
 							<div class="wt-widgetcontent wt-skillscontent">
 								@foreach($freelancer->userSkills as $key=>$skill)
 								<div class="wt-skillholder" data-percent="{{$skill->skill_rate}}%">
-									<span>{{ App\Models\User::skillTitle($skill->skill_id)->skill_name }} <em>{{$skill->skill_rate}}%</em></span>
-									<div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
+									<span>{{ App\Models\User::skillTitle($skill->skill_id)->skill_name }} </span>
+									<!-- <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div> -->
 								</div>
 								@endforeach
 								<!-- <div class="wt-btnarea">

@@ -35,7 +35,11 @@
             <div class="wt-userlogedin d-none {{ Auth::user()->account_type === "Freelancer" ? "d-sm-block" : "d-sm-flex align-items-center" }}">
               <figure class="wt-userimg">
                 @if(Auth::user()->profile_image != '')
-                  <img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" alt="img description">
+                  @if(!empty(Auth::user()->facebook_id) || !empty(Auth::user()->google_id))
+                    <img src="{{Auth::user()->profile_image}}" width="" height="" class="img-fluid rounded-circle mb-3" alt="">
+                    @else
+                    <img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" width="100px" height="100px" class="img-fluid rounded-circle mb-3" alt="">
+                    @endif
                 @else
                   <img src="{{asset('assets/images/user-login.png')}}" alt="img description">
                 @endif
@@ -96,8 +100,13 @@
   </div>
   @if(Auth::user() != '')
   <div class="profile-inner text-center">
+
     @if(!empty(Auth::user()->profile_image))
-    <img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" width="100px" height="100px" class="img-fluid rounded-circle mb-3" alt="">
+      @if(!empty(Auth::user()->facebook_id) || !empty(Auth::user()->google_id))
+      <img src="{{Auth::user()->profile_image}}" width="100px" height="100px" class="img-fluid rounded-circle mb-3" alt="">
+      @else
+      <img src="{{asset('assets/images/user/profile/'.Auth::user()->profile_image)}}" width="100px" height="100px" class="img-fluid rounded-circle mb-3" alt="">
+      @endif
     @else
     <img src="{{asset('assets/images/user-login.png')}}"  class="img-fluid rounded-circle mb-3" width="100px" height="100px">
     @endif

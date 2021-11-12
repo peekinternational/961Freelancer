@@ -134,12 +134,14 @@ class ProfileController extends Controller
 
       $user_skill->user_id = $request->input('user_id');
       $user_skill->skill_id = $request->input('skill_id');
-      $user_skill->skill_rate = $request->input('skill_rate');
+      $user_skill->skill_rate = '0';
 
       $user_skill->save();
 
       $current_skill = UserSkill::with('skillData')->whereid($user_skill->id)->first();
-      return $current_skill;
+      $showCounts = UserSkill::where('user_id',$request->input('user_id'))->count();
+      // return $current_skill;
+      return response()->json(['status'=>'true' , 'skill' => $current_skill, 'count' => $showCounts ]);
 
     }
     // Edit Profile
@@ -154,6 +156,8 @@ class ProfileController extends Controller
       $user->address = $request->input('address');
       $user->country = $request->input('country');
       $user->hourly_rate = $request->input('hourly_rate');
+      $user->mobile_number = $request->input('mobile_number');
+      $user->age = $request->input('age');
       $user->tagline = $request->input('tagline');
       $user->description = $request->input('description');
       $profile_image = $request->file('profile_image');
@@ -222,9 +226,13 @@ class ProfileController extends Controller
       $education->end_date = $request->input('end_date');
       $education->degree = $request->input('degree');
       $education->area_of_study = $request->input('area_of_study');
-      $education->description = $request->input('description');
+      // $education->description = $request->input('description');
       $education->save();
-      return 1;
+      $educ = UserEducation::where('id',$education->id)->first();
+      return View::make('frontend.ajax.education')->with([
+        'educ' => $educ
+      ]);
+      
     }
 
     public function editEducation(Request $request){
@@ -235,7 +243,7 @@ class ProfileController extends Controller
       $education->end_date = $request->input('end_date');
       $education->degree = $request->input('degree');
       $education->area_of_study = $request->input('area_of_study');
-      $education->description = $request->input('description');
+      // $education->description = $request->input('description');
       $education->save();
       return 1;
     }
@@ -335,9 +343,42 @@ class ProfileController extends Controller
 
     public function deleteSkill($id){
       UserSkill::find($id)->delete($id);
-        
+      $showCounts = UserSkill::where('user_id',auth()->user()->id)->count(); 
       return response()->json([
-          'success' => 'Record deleted successfully!'
+          'success' => 'Record deleted successfully!',
+          'count' => $showCounts
       ]);
+    }
+
+
+    public function storeImage(Request $request)
+    {
+      // dd($request->all());
+        $user_id = auth()->user()->id;
+        // dd($request->all());
+        $user = User::find($user_id);
+
+
+        $data = $request->input("image");
+        $name = $request->input("fileProfile");
+
+        $image_array_1 = explode(";", $data);
+        $image_array_2 = explode(",", $image_array_1[1]);
+
+        $data = base64_decode($image_array_2[1]);
+
+        $imageName = pathinfo($name, PATHINFO_FILENAME) . "_" . time() . '.png';
+        $allowed = array('jpeg','jpg','gif','tiff','png','webp');
+        $file_extension = pathinfo($name, PATHINFO_EXTENSION);
+
+        $path = public_path() . "/assets/images/user/profile/" . $imageName;
+        file_put_contents($path, $data);
+
+        $user->profile_image = $imageName;
+        $user->save();
+
+        
+        return response()->json(['name' => $imageName, 'message' => "Image uploaded successfully"]);
+
     }
 }

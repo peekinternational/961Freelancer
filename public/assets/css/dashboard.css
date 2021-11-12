@@ -209,6 +209,11 @@ body{background:#f2f3fa;}
 	margin: 0;
 	font-size: 18px;
 	line-height: inherit;
+	width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
 }
 .wt-usersidebar .wt-companysinfo figure{
 	max-width: 112px;

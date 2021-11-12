@@ -12,7 +12,7 @@ import VueSocketio from "vue-socket.io";
 import socketio from "socket.io-client";
 import { JitsiMeet } from '@mycure/vue-jitsi-meet';
 import moment from "moment";
-var socket = socketio.connect('https://peekvideochat.com:22000/');
+var socket = socketio.connect('https://961freelancer.com:22000/');
 export default {
    components: {
     VueJitsiMeet: JitsiMeet

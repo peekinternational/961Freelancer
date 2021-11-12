@@ -56,7 +56,7 @@
 					</div>
 					
 					<div class="login-by-social d-flex flex-column align-items-center justify-content-center">
-						<a class="social-button facebook d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location='https://www.facebook.com/v2.10/dialog/oauth?client_id=2583252321940651&amp;state=46c82a7ef8d2b02ea5cdc1eca1db5f90&amp;response_type=code&amp;sdk=php-sdk-5.7.0&amp;redirect_uri=https%3A%2F%2Fwww.emongez.com%2Ffb-callback&amp;scope=email';">
+						<a class="social-button facebook d-flex flex-row align-items-center" href="{{url('login/facebook')}}">
 							<span>
 								<i class="fab fa-facebook-f"></i>
 							</span>
@@ -68,7 +68,7 @@
 							</span>
 							<span>Login with Linkedin</span>
 						</a> -->
-						<a class="social-button google d-flex flex-row align-items-center" href="javascript:void(0);" onclick="window.location = 'https://accounts.google.com/o/oauth2/auth?response_type=code&amp;access_type=online&amp;client_id=38973601958-d3ujd0ivcm8b5ihkhrspdi37024cmjm1.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fwww.emongez.com%2Fg-callback&amp;state&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.login%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;approval_prompt=auto';">
+						<a class="social-button google d-flex flex-row align-items-center" href="{{url('login/google')}}">
 							<span>
 								<i class="fab fa-google"></i>
 							</span>

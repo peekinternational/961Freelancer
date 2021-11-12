@@ -73,7 +73,7 @@
   <div class='container'>
     <div class='box'>
       <center>
-        <img src='https://localhost:8000/images/logo.png' width='30% ' style="padding: 26px;" >
+        <img src='https://localhost:8000/assets/images/logo.png' width='30% ' style="padding: 26px;" >
         <!-- <h2> New Agreement Available. </h2> -->
       </center>
       <hr>
@@ -81,8 +81,8 @@
       <p class="bg-gray">Thank you for Registration.</p>
       <br>
       <center>
-        <a style="background-color: #ed1c24; border-radius: 35px;" href="{{url('/login')}}" class='btn pt-2'>
-          Click To Login
+        <a style="background-color: #ed1c24; border-radius: 35px;" href="{{url('/verify-account/'.$user->username.'/'.$user->remember_token)}}" class='btn pt-2'>
+          Click To Verify Account
         </a>
       </center>
       <br>

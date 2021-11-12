@@ -20,10 +20,10 @@ import VueRouter from 'vue-router'
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-window.Vue.prototype.$socket = socketio.connect('https://peekvideochat.com:22000');
+window.Vue.prototype.$socket = socketio.connect('https://961freelancer.com:22000');
 Vue.use(new VueSocketio({
     debug: true,
-    connection: 'https://peekvideochat.com:22000',
+    connection: 'https://961freelancer.com:22000',
 }))
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))

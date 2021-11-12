@@ -59,11 +59,21 @@
 		@if (Session::has('error'))
 		    $.notify("{{ session('error') }}" , 'error'  );
 		@endif
+		var config = {
+			'.chosen-select'           : {},
+			'.chosen-select-deselect'  : {allow_single_deselect:true},
+			'.chosen-select-no-single' : {disable_search_threshold:10},
+			'.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+			'.chosen-select-width'     : {width:"95%"}
+			}
+			for (var selector in config) {
+				jQuery(selector).chosen(config[selector]);
+		}
 	</script>
-	<script src="https://peekvideochat.com:22000/socket.io/socket.io.js"></script>
+	<script src="https://961freelancer.com:22000/socket.io/socket.io.js"></script>
 	@if(auth()->user())
 	<script type="text/javascript">
-	    const socket = io.connect('https://peekvideochat.com:22000');
+	    const socket = io.connect('https://961freelancer.com:22000');
 	    var user_id = "{{auth()->user()->id}}";
 	    // alert(user_id);
 	    socket.on('birdsreceivemsg', function(data) {

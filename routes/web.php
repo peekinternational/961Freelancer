@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\FreelancerController;
@@ -44,6 +45,16 @@ Route::get('/terms-conditions', function () {
 Route::match(['get','post'],'/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/login', [RegisterController::class, 'accountLogin'])->name('login');
 Route::post('/login', [RegisterController::class, 'checkLogin']);
+Route::get('/verify-account/{username}/{token}', [RegisterController::class, 'VerifyAccount'])->name('verify');
+// Socail Login
+Route::get('login/facebook', [SocialAuthController::class, 'redirectToFacebookProvider']);
+Route::get('facebook/callback', [SocialAuthController::class, 'FacebookProviderCallback']);
+Route::post('facebook/register', [SocialAuthController::class, 'facebookRegister']);
+Route::get('login/google', [SocialAuthController::class, 'redirectToGoogle']);
+Route::get('google/callback', [SocialAuthController::class, 'GoogleProviderCallback']);
+Route::post('google/register', [SocialAuthController::class, 'googleRegister']);
+
+
 Route::get('/logout', [RegisterController::class, 'logout'])->name('logout');
 // Forgot Password routes
 Route::get('/forgot-password', [RegisterController::class, 'forgotPasswordRoute'])->name('forgot-password');
@@ -69,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/add-certificate',[ProfileController::class,'addCertificate']);
 	Route::delete('/delete-certificate/{id}', [ProfileController::class, 'deleteCertificate']);
 	Route::post('/edit-certificate', [ProfileController::class, 'editCertificate']);
+
+  Route::post('/crop_upload', [ProfileController::class, 'storeImage']);
+
 
   Route::get('/account-setting', function () {
     return view('frontend.account-setting');

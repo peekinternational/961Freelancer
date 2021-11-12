@@ -73,7 +73,7 @@
   <div class='container'>
     <div class='box'>
       <center>
-        <img src='https://localhost:8000/images/logo.png' width='30% ' style="padding: 26px;" >
+        <img src='https://localhost:8000/assets/images/logo.png' width='30% ' style="padding: 26px;" >
         <!-- <h2> New Agreement Available. </h2> -->
       </center>
       <hr>

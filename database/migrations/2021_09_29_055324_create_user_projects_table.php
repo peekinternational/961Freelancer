@@ -17,7 +17,7 @@ class CreateUserProjectsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('project_title');
-            $table->string('project_url');
+            $table->string('project_url')->nullable();
             $table->string('project_img');
             $table->longText('project_desc');
             $table->timestamps();
