@@ -29,7 +29,11 @@
 								@if (App\Models\Proposal::isBidAvailable(auth()->id(), $job->job_id))
 								<div class="wt-btnarea"><a href="javascript:void(0)" class="wt-btn rounded-pill">Already applied</a></div>
 								@else
-								<div class="wt-btnarea"><a href="{{url('job-proposal/'.$job->job_id)}}" class="wt-btn rounded-pill">Send Proposal</a></div>
+									@if(Auth::user()->verification == 2)
+										<div class="wt-btnarea"><a href="{{url('job-proposal/'.$job->job_id)}}" class="wt-btn rounded-pill">Send Proposal</a></div>
+									@else
+										<div class="wt-btnarea"><a href="{{url('account-setting')}}" class="wt-btn rounded-pill" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your account to send proposal">Verify Account</a></div>
+									@endif
 								@endif
 							@endif
 						@elseif($job->job_status == 2)
@@ -128,7 +132,7 @@
 											</a>
 										</li>
 										<li>
-											<a href="javascript:void(0);">
+											<a href="{{url('client/'.$job->clientInfo->username)}}">
 												<span>Full Profile</span>
 											</a>
 										</li>

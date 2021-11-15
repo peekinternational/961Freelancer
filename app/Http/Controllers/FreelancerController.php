@@ -228,11 +228,25 @@ class FreelancerController extends Controller
         $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
       }
 
-      
-      
-      
       return View::make('frontend.ajax.get-freelancers')->with([
           'freelancers' => $freelancers
+      ]);
+    }
+
+    // Client Single Page
+    public function client(Request $request,$username){
+      $client = User::with('userInfo','certificates','freelancerRating')->withCount('freelancerRating')->whereusername($username)->first();
+      // dd($freelancer);
+      $rating_avg = 0.0;
+      $total = 0;
+      foreach($client->freelancerRating as $rating){
+        $total = $total + $rating->general_rating;
+        $rating_avg = $total/$client->freelancer_rating_count;
+      }
+      
+      return View::make('frontend.client')->with([
+          'client' => $client,
+          'rating_avg' => $rating_avg
       ]);
     }
 }

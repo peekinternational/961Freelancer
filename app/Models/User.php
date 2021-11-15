@@ -40,7 +40,8 @@ class User extends Authenticatable
         'skills_id',
         'facebook_id',
         'google_id',
-        'verification'
+        'verification',
+        'verification_image',
     ];
 
     public function userInfo(){

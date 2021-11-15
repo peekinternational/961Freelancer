@@ -186,6 +186,35 @@ class AdminController extends Controller
       }
     }
 
+    // Verification List
+    public function verificationList(Request $request){
+      $users = User::where('verification_image', '!=', '')->where('verification',1)->get();
+      return \View::make('admin.verification-request')->with([
+        'users' => $users
+      ]);
+    }
+    public function verify(Request $request,$id){
+      $user = User::find($id);
+      $user->verification = 2;
+
+      if($user->save()){
+        return response()->json(['status'=>'true' , 'message' => 'User Verified successfully'] , 200);
+      }else{
+        return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
+    }
+    public function rejectVerify(Request $request,$id){
+      $user = User::find($id);
+      $user->verification = 1;
+
+      if($user->save()){
+        return response()->json(['status'=>'true' , 'message' => 'User Verified successfully'] , 200);
+      }else{
+        return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
+    }
     public function live()
     {
         return "";

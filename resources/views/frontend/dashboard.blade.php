@@ -76,7 +76,7 @@
 									    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Personal Details &amp; Skills</a>
 									  </li>
 									  <li class="nav-item" role="presentation">
-									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Employement &amp; Education</a>
+									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Employment &amp; Education</a>
 									  </li>
 									  @if(Auth::user()->account_type != 'Client')
 									  <li class="nav-item" role="presentation">
@@ -341,7 +341,7 @@
 								  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 								  	<div class="wt-userexperience wt-tabsinfo">
 								  		<div class="wt-tabscontenttitle wt-addnew">
-								  			<h2>Add Your Employmeny History</h2>
+								  			<h2>Add Your Employment History</h2>
 								  			<a href="javascript:void(0);" id="addExperience" data-bs-toggle="collapse" data-bs-target="#addexperience" aria-expanded="true">Add New</a>
 								  		</div>
 								  		<div class="wt-collapseexp collapse" id="addexperience" aria-labelledby="accordioninnertitle" data-parent="#accordion">
@@ -352,13 +352,18 @@
 									  					<input type="text" name="company_title" class="form-control" placeholder="Company Title">
 									  				</div>
 									  				<div class="form-group form-group-half">
+									  					<input type="text" name="job_title" class="form-control" placeholder="Your Job Title">
+									  				</div>
+									  				<div class="form-group form-group-half">
 									  					<input type="date" name="start_date" class="form-control" placeholder="Starting Date">
 									  				</div>
 									  				<div class="form-group form-group-half">
 									  					<input type="date" name="end_date" class="form-control" placeholder="Ending Date">
 									  				</div>
-									  				<div class="form-group form-group-half">
-									  					<input type="text" name="job_title" class="form-control" placeholder="Your Job Title">
+									  				
+									  				<div class="form-group">
+									  					<input type="checkbox" name="present_job">
+									  					Present Job
 									  				</div>
 									  				<div class="form-group">
 									  					<textarea name="job_description" class="form-control" placeholder="Your Job Description" minlength="50"></textarea>
@@ -377,13 +382,21 @@
 								  			@foreach($experience as $exper)
 								  			<li id="expernc{{$exper->id}}">
 								  				<div class="wt-accordioninnertitle">
-								  					<span id="accordioninner{{$exper->id}}" data-bs-toggle="collapse" data-bs-target="#inner{{$exper->id}}"><span id="title{{$exper->id}}">{{$exper->job_title}}</span><span class="text-muted" id="start{{$exper->id}}"><em> ({{$exper->start_date}}</em></span> - <span class="text-muted" id="end{{$exper->id}}"><em>{{$exper->end_date}})</em></span></span>
+								  					<span id="accordioninner{{$exper->id}}" data-bs-toggle="collapse" data-bs-target="#inner{{$exper->id}}"><span id="title{{$exper->id}}">{{$exper->job_title}}</span><span class="text-muted" id="start{{$exper->id}}"><em> ({{date('d-m-Y', strtotime($exper->start_date))}}</em></span> - <span class="text-muted" id="end{{$exper->id}}">
+								  						<em>
+								  							@if($exper->present_job == 'on')
+								  							Present
+								  							@else
+								  							{{date('d-m-Y', strtotime($exper->end_date))}}
+								  							@endif
+								  						)</em>
+								  						</span></span>
 								  					<div class="wt-rightarea">
 								  						<a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninner{{$exper->id}}" data-bs-toggle="collapse" data-bs-target="#inner{{$exper->id}}" aria-expanded="true"><i class="fal fa-pencil"></i></a>
 								  						<a href="javascript:void(0);" onclick="deleteExperience({{$exper->id}})" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a>
 								  					</div>
 								  				</div>
-								  				<div class="wt-collapseexp collapse" id="inner{{$exper->id}}" aria-labelledby="accordioninnertitle" data-parent="#accordion">
+								  				<div class="wt-collapseexp collapse" id="inner{{$exper->id}}" aria-labelledby="accordioninnertitle" data-bs-parent="#accordion">
 								  					<div class="wt-formtheme wt-userform">
 								  						<input type="hidden" name="id" id="experienceId{{$exper->id}}" value="{{$exper->id}}">
 								  						<input type="hidden" name="_token" id="experienceId{{$exper->id}}" value="{{$exper->id}}">
@@ -392,13 +405,17 @@
 								  								<input type="text" id="company_title{{$exper->id}}" name="company_title" class="form-control" placeholder="Company Title" value="{{$exper->company_title}}">
 								  							</div>
 								  							<div class="form-group form-group-half">
+								  								<input type="text" id="job_title{{$exper->id}}" name="job_title" value="{{$exper->job_title}}" class="form-control" placeholder="Your Job Title">
+								  							</div>
+								  							<div class="form-group form-group-half">
 								  								<input type="date" id="start_date{{$exper->id}}" name="start_date" value="{{$exper->start_date}}" class="form-control" placeholder="Starting Date">
 								  							</div>
 								  							<div class="form-group form-group-half">
 								  								<input type="date" id="end_date{{$exper->id}}" name="end_date" value="{{$exper->end_date}}" class="form-control" placeholder="Ending Date ">
 								  							</div>
-								  							<div class="form-group form-group-half">
-								  								<input type="text" id="job_title{{$exper->id}}" name="job_title" value="{{$exper->job_title}}" class="form-control" placeholder="Your Job Title">
+								  							<div class="form-group">
+								  								<input type="checkbox" name="present_job" {{ $exper->present_job === "on" ? "checked" : "" }}>
+								  								Present Job
 								  							</div>
 								  							<div class="form-group">
 								  								<textarea name="job_description" id="job_description{{$exper->id}}" class="form-control" placeholder="Your Job Description" minlength="50">{{$exper->job_description}}</textarea>
@@ -454,7 +471,7 @@
 								  			@foreach($education as $educ)
 								  			<li id="educatn{{$educ->id}}">
 								  				<div class="wt-accordioninnertitle">
-								  					<span id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}"><span id="degree{{$educ->id}}">{{$educ->degree}}</span> <span id="start_edu{{$educ->id}}"><em>({{$educ->start_date}}</em></span> - <span id="end_edu{{$educ->id}}"><em> {{$educ->end_date}})</em></span></span>
+								  					<span id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}"><span id="degree{{$educ->id}}">{{$educ->degree}}</span> <span id="start_edu{{$educ->id}}"><em>({{date('d-m-Y', strtotime($educ->start_date))}}</em></span> - <span id="end_edu{{$educ->id}}"><em> {{date('d-m-Y', strtotime($educ->end_date))}})</em></span></span>
 								  					<div class="wt-rightarea">
 								  						<a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}" aria-expanded="true"><i class="fal fa-pencil"></i></a>
 								  						<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteEducation({{$educ->id}})"><i class="fal fa-trash-alt"></i></a>
@@ -626,7 +643,7 @@
 								  				<div class="wt-accordioninnertitle">
 								  					<div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innertitlecwcertificate{{$certificate->id}}">
 								  						
-								  						<h3><font id="certificateName{{$certificate->id}}">{{$certificate->certificate_title}}</font><samp id="certificateDate{{$certificate->id}}">{{$certificate->issue_date}}</samp></h3>
+								  						<h3><font id="certificateName{{$certificate->id}}">{{$certificate->certificate_title}}</font><samp id="certificateDate{{$certificate->id}}">{{date('d-m-Y', strtotime($certificate->issue_date))}}</samp></h3>
 								  					</div>
 								  					<div class="wt-rightarea">
 								  						<a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innertitlecwcertificate{{$certificate->id}}"><i class="fal fa-pencil"></i></a>

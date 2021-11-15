@@ -1245,7 +1245,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	font-weight:400;
 	margin: 0 0 5px;
 	line-height:16px;
-	width: 50px;
+	width: 75px;
     overflow: hidden;
     /*text-overflow: ellipsis;*/
     /*white-space: nowrap;*/
@@ -4228,8 +4228,8 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-userdropdown{
 	top: -6px;
 	right:-6px;
-	width: 18px;
-	height: 18px;
+	width: 22px;
+	height: 22px;
 	position: absolute;
 	border-radius: 50%;
 	border: 3px solid #fff;

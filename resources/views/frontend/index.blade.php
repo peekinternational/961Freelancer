@@ -23,13 +23,13 @@
               <p>Consectetur adipisicing elit sed dotem eiusmod tempor incuntes ut labore etdolore maigna aliqua enim.</p>
             </div>
           </div>
-          <form class="wt-formtheme wt-formbanner">
+          <form class="wt-formtheme wt-formbanner" method="get" action="{{url('search')}}">
             <fieldset>
               <div class="form-group">
-                <input type="text" name="fullname" class="form-control" placeholder="I’m looking for">
+                <input type="text" name="keyword" class="form-control" placeholder="I’m looking for">
                 <div class="wt-formoptions">
                   <div class="wt-dropdown">
-                    <span>In: <em class="selected-search-type">Freelancers </em><i class="lnr lnr-chevron-down"></i></span>
+                    <span>In: <em class="selected-search-type">Freelancers </em><i class="fal fa-chevron-down"></i></span>
                   </div>
                   <div class="wt-radioholder">
                     <span class="wt-radio">
@@ -37,15 +37,11 @@
                       <label for="wt-freelancers">Freelancers</label>
                     </span>
                     <span class="wt-radio">
-                      <input id="wt-jobs"  data-title="Jobs" type="radio" name="searchtype" value="job">
+                      <input id="wt-jobs" data-title="Jobs" type="radio" name="searchtype" value="job">
                       <label for="wt-jobs">Jobs</label>
                     </span>
-                    <span class="wt-radio">
-                      <input id="wt-company"  data-title="Companies" type="radio" name="searchtype" value="job">
-                      <label for="wt-company">Companies</label>
-                    </span>
                   </div>
-                  <a href="userlisting.html" class="wt-searchbtn"><i class="fas fa-search"></i></a>
+                  <button class="wt-searchbtn"><i class="fas fa-search"></i></button>
                 </div>
               </div>
             </fieldset>
@@ -317,4 +313,18 @@
   <!--Counter End-->
 </main>
 <!--Main End-->
+@endsection
+@section('script')
+<script>
+  jQuery('.wt-dropdown').on('click', function(event){
+    event.preventDefault();
+    jQuery('.wt-radioholder').slideToggle();
+  });
+  jQuery('input:radio[name="searchtype"]').on('change',
+      function(){
+          var _type = jQuery(this).data('title');
+          jQuery('.selected-search-type').html(_type);
+      }
+    );
+</script>
 @endsection

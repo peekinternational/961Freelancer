@@ -35,6 +35,8 @@ Route::get('/contact-us',[HomeController::class, 'contactUs'])->name('contact-us
 Route::post('/contactStore',[HomeController::class, 'store'])->name('contact.store');
 Route::get('/about-us',[HomeController::class, 'aboutUs'])->name('about-us');
 
+Route::get('/search',[HomeController::class, 'search'])->name('search');
+
 Route::get('/privacy-policy', function () {
   return view('frontend.privacy-policy');
 })->name('privacy-policy');
@@ -82,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/edit-certificate', [ProfileController::class, 'editCertificate']);
 
   Route::post('/crop_upload', [ProfileController::class, 'storeImage']);
+  Route::post('/verification-request', [ProfileController::class, 'verification'])->name('verification-request');
 
 
   Route::get('/account-setting', function () {
@@ -140,6 +143,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('freelancers',FreelancerController::class);
 Route::get('freelancer/{username}',[FreelancerController::class, 'show'])->name('freelancers.show');
+Route::get('client/{username}',[FreelancerController::class, 'client'])->name('user.client');
 
 Route::get('get-freelancers', [FreelancerController::class, 'getFreelancers']);
 
@@ -163,6 +167,9 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
       Route::resource('users','\App\Http\Controllers\Admin\AdminController');
       Route::get('/freelancers-list', [AdminController::class, 'index'])->name('freelancers-list');
       Route::get('/clients-list', [AdminController::class, 'clientsList'])->name('clients-list');
+      Route::get('/verification-list', [AdminController::class, 'verificationList'])->name('verification-list');
+      Route::post('/verify/{id}', [AdminController::class, 'verify']);
+      Route::post('/reject-verify/{id}', [AdminController::class, 'rejectVerify']);
       Route::resource('projects','\App\Http\Controllers\Admin\ProjectController');
       Route::resource('categories','\App\Http\Controllers\Admin\CategoriesController');
       Route::resource('skills','\App\Http\Controllers\Admin\SkillController');

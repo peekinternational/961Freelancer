@@ -186,12 +186,18 @@ class ProfileController extends Controller
 
     // Experience
     public function addExperience(Request $request){
+      // dd($request->all());
       $user_id = auth()->user()->id;
       $experience = new UserExperience;
       $experience->user_id = $user_id;
       $experience->company_title = $request->input('company_title');
       $experience->start_date = $request->input('start_date');
       $experience->end_date = $request->input('end_date');
+      if($request->input('present_job') != ''){
+        $experience->present_job = $request->input('present_job');
+      }else{
+        $experience->present_job = 'off';
+      }
       $experience->job_title = $request->input('job_title');
       $experience->job_description = $request->input('job_description');
       $experience->save();
@@ -348,6 +354,30 @@ class ProfileController extends Controller
           'success' => 'Record deleted successfully!',
           'count' => $showCounts
       ]);
+    }
+
+    // Verificatiion Request
+    public function verification(Request $request){
+      
+      $user_id = auth()->user()->id;
+      $user = User::find($user_id);
+      $verify_image = $request->file('verification_image');
+      if($verify_image != ''){
+        $filename= $verify_image->getClientOriginalName();
+        $imagename= 'verification-'.rand(000000,999999).'.'.$verify_image->getClientOriginalExtension();
+        $extension= $verify_image->getClientOriginalExtension();
+        // $imagename= $filename;
+        $destinationpath= public_path('assets/images/user/verification/');
+        $verify_image->move($destinationpath, $imagename);
+        $user->verification_image = $imagename;
+      }else{
+        $user->verification_image = $user->verification_image;
+      }
+      if ($user->save()) {
+          return response()->json(['status'=>'true' , 'message' => 'Verification request submitted'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
 

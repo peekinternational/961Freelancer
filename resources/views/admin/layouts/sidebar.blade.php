@@ -56,7 +56,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('admin.freelancers-list')}}">Freelancers</a></li>
                         <li><a href="{{route('admin.clients-list')}}">Clients</a></li>
-                        <!-- <li><a href="contacts-profile">Profile</a></li> -->
+                        <li><a href="{{route('admin.verification-list')}}">Verification Requests</a></li>
                         <li><a href="{{route('admin.users.create')}}">Add User</a></li>
                     </ul>
                 </li>

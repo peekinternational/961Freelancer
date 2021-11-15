@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\User;
+use App\Models\Job;
+use App\Models\Countries;
 use Hash;
 use Session;
 use Mail;
@@ -134,5 +137,34 @@ class HomeController extends Controller
     // About Us
     public function aboutUs(Request $request){
         return View::make('frontend.about');
+    }
+
+    // Main Search
+    public function search(Request $request){
+      if($request->searchtype == 'freelancer'){
+        if($request->keyword != ''){
+          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('tagline','like','%'.$request->keyword.'%')->paginate(10);
+        }else{
+          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+        }
+        
+        return View::make('frontend.freelancers')->with([
+            'freelancers' => $freelancers
+        ]);
+      }else{  
+        if($request->keyword != ''){
+          $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_title','like','%'.$request->keyword.'%')->orderBy('created_at', 'DESC')->paginate(10);
+        }else{
+          $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
+        }
+        
+        $categories = Category::get();
+        $countries = Countries::get();
+        return View::make('frontend.job-listings')->with([
+          'jobs' => $jobs,
+          'categories' => $categories,
+          'countries' => $countries
+        ]);
+      }
     }
 }

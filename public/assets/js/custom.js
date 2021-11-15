@@ -197,7 +197,7 @@ if(jQuery('.wt-horizontalthemescrollbar').length > 0){
 			1760:{items:6,}
 		}
 	});
-
+	
 	/* SHORT DESCRIPTION */
 	// var _readmore = jQuery('.wt-userdetails .wt-description');
 	// _readmore.readmore({

@@ -8,6 +8,36 @@
 		z-index: 29;
 		background: #fff;
 	}
+	.dragBox {
+	  width: 100%;
+	  height: 56px;
+	  margin: 0 auto;
+	  position: relative;
+	  text-align: center;
+	  font-weight: bold;
+	  line-height: 57px;
+	  color: #999;
+	  /*border: 2px dashed #ccc;*/
+	  display: inline-block;
+	  transition: transform 0.3s;
+	}
+	.dragBox input[type="file"] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+	.draging {
+	  transform: scale(1.1);
+	}
+	#preview {
+	  text-align: center;
+	}
+	#preview img {
+	  max-width: 100%
+	}
 </style>
 @endsection
 @section('content')
@@ -32,6 +62,9 @@
 										</li>
 										<li class="nav-item">
 											<a class="" id="wt-emailnoti-tab" data-bs-toggle="pill" data-bs-target="#wt-emailnoti" type="button" role="tab" aria-controls="wt-emailnoti" aria-selected="true">Email Notifications</a>
+										</li>
+										<li class="nav-item">
+											<a class="" id="wt-verify-tab" data-bs-toggle="pill" data-bs-target="#wt-verify" type="button" role="tab" aria-controls="wt-verify" aria-selected="true">Account Verification</a>
 										</li>
 										<li class="nav-item">
 											<a class="" id="wt-deleteaccount-tab" data-bs-toggle="pill" data-bs-target="#wt-deleteaccount" type="button" role="tab" aria-controls="wt-deleteaccount" aria-selected="true">Delete Account</a>
@@ -140,6 +173,54 @@
 											</div>
 										</div>
 									</div>
+									<!-- Account Verification -->
+									<div class="wt-verifyholder tab-pane fade" id="wt-verify" role="tabpanel" aria-labelledby="wt-verify-tab">
+										<div class="wt-verify">
+											<div class="wt-tabscontenttitle">
+												<h2>Verify Your Account</h2>
+											</div>
+											<div class="wt-settingscontent">
+												<div class="alert alert-success d-none" id="verification_message">Your verification request submitted. Admin will review your request within 24 hours.</div>
+												<form class="wt-formtheme wt-userform" id="verificationForm" enctype="multipart/form-data">
+													@csrf
+													<fieldset>
+														<div class="form-group form-group-label">
+															<label class="pb-2">Upload ID/Passport:</label>
+															<div class="wt-labelgroup">
+																<label for="uploadFile"  class="dragBox w-100">
+																	<input type="file" name="verification_image" id="uploadFile"onChange="dragNdrop(event)" ondragover="drag()" ondrop="drop()" id="uploadFile" class="d-block">
+																	Drag or upload your ID/Passport 
+																</label>
+															</div>
+														</div>
+								  					<div class="form-group mb-3">
+								  						<ul class="wt-attachfile wt-attachfilevtwo">
+								  							<li class="wt-uploadingholder w-100">
+								  								<div class="wt-uploadingbox">
+								  									<div class="wt-designimg">
+								  										<label for="demoz"  id="preview">
+								  											@if(Auth::user()->verification_image)
+											                    <img src="{{asset('assets/images/user/verification/'.Auth::user()->verification_image)}}" alt="">
+								  											@else
+								  											<img src="{{asset('assets/images/user/verification/id_sample.jpg')}}" alt="img description" id="profile">
+								  											@endif
+								  										</label>
+								  									</div>
+								  									<div class="wt-uploadingbar">
+								  										<span id="img_name" class="text-break text-wrap">{{Auth::user()->verification_image}}</span>
+								  									</div>
+								  								</div>
+								  							</li>
+								  						</ul>
+								  					</div>
+													</fieldset>
+													<div class="form-group mb-3 text-end">
+														<button class="wt-btn" type="submit">Submit Request</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
 									<div class="wt-accountholder tab-pane fade" id="wt-deleteaccount" role="tabpanel" aria-labelledby="wt-deleteaccount-tab">
 										<div class="wt-accountdel">
 											<div class="wt-tabscontenttitle">
@@ -203,5 +284,65 @@
     } else 
       $('#match').html('Password Not Matching').css('color', 'red');
   });
+
+  function dragNdrop(event) {
+      var fileName = URL.createObjectURL(event.target.files[0]);
+      var preview = document.getElementById("preview");
+      var previewImg = document.createElement("img");
+      previewImg.setAttribute("src", fileName);
+      preview.innerHTML = "";
+      preview.appendChild(previewImg);
+
+      var filename = $('#uploadFile').val().split('\\').pop();
+      $('#img_name').html(filename);
+  }
+  function drag() {
+      document.getElementById('uploadFile').parentNode.className = 'draging dragBox';
+  }
+  function drop() {
+      document.getElementById('uploadFile').parentNode.className = 'dragBox';
+  }
+
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+
+  $('#verificationForm').submit(function(event){
+		event.preventDefault();
+  	$.ajax({
+      url: "{{url('verification-request')}}",
+      type: 'POST',
+      data: new FormData(this),
+      dataType:'JSON',
+      contentType: false,
+      cache: false,
+      processData: false,
+
+      success: (response)=>{
+          if (response.status == 'true') {
+              $.notify(response.message , 'success'  );
+                // window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/account-setting/";
+              $('#wt-password-tab').removeClass('active');
+              $('#wt-password').removeClass('active show');
+              $('#wt-verify-tab').addClass('active');
+              $('#wt-verify').addClass('active show');
+              $('#verification_message').removeClass('d-none');
+              
+              
+          }else{
+              $.notify(response.message , 'error');
+
+          }
+      },
+      error: (errorResponse)=>{
+          $.notify( errorResponse, 'error'  );
+
+
+      }
+  	})
+  })
 </script>
 @endsection

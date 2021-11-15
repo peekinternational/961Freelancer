@@ -1,3 +1,8 @@
+@if(Auth::user() != '')
+  @if(Auth::user()->verification == 1)
+  <div class="alert alert-warning text-black text-center py-1 mb-0" role="alert">Please upload your ID/Passport image to fully verify your account. click here to verify <a href="{{route('account-setting')}}">Account Setting</a></div>
+  @endif
+@endif
 <header>
   <div class="home-header">
     <div class="container">
@@ -55,6 +60,13 @@
                   @if(Auth::user()->account_type == 'Freelancer')
                   <li>
                     <a href="{{url('freelancer/'.Auth::user()->username)}}">
+                      <span>View Profile</span>
+                    </a>
+                  </li>
+                  @endif
+                  @if(Auth::user()->account_type == 'Client')
+                  <li>
+                    <a href="{{url('client/'.Auth::user()->username)}}">
                       <span>View Profile</span>
                     </a>
                   </li>

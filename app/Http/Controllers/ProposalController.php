@@ -13,6 +13,7 @@ use App\Models\Countries;
 use App\Models\Proposal;
 use App\Models\Milestone;
 use App\Models\Rating;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -78,7 +79,10 @@ class ProposalController extends Controller
       }
       $proposal->attachments = implode(",",$images);
       
-      
+      $freelancer = User::where('id',auth()->user()->id)->first();
+      $jobUser = Job::where('job_id',$request->input('job_id'))->first();
+      $client = User::where('id',$jobUser->user_id)->first();
+      $toemail = $client->email;
       if ($proposal->save()) {
         if($request->proposal_type == 'by_milestone'){
           if ($request->milestone_detail && $request->milestone_due_date && $request->milestone_amount) {
@@ -95,6 +99,13 @@ class ProposalController extends Controller
               }
           }
         }
+        Mail::send('mail.propsalsubmit-email',['user' =>$freelancer,'job' => $jobUser, 'client'=>$client],
+        function ($message) use ($toemail)
+        {
+          $message->subject('961Freelancer - Proposal Submit');
+          $message->from('support@961freelancer.com', '961Freelancer');
+          $message->to($toemail);
+        });
         return redirect()->route('job.show', $request->job_id)->with('message', 'Bid Placed Successfully!');
       } else {
         return redirect()->route('job.show', $request->job_id)->with('error', 'Something wrong please check details again');
@@ -178,10 +189,20 @@ class ProposalController extends Controller
       $id = $request->proposal_id;
       $job_id = $request->job_id;
       $findData = Proposal::find($id);
+      $job = Job::where('job_id',$job_id)->first();
       $findData->status = 2;
+      $freelancer = User::where('id',$findData->id)->first();
+      $toemail =  $freelancer->email;
       Job::where('job_id',$job_id)->update(['job_status'=>2]);
       if ($findData->save()) {
-          return response()->json(['status'=>'true' , 'message' => 'Freelancer Hired'] , 200);
+        Mail::send('mail.hired-email',['user' =>$freelancer,'job' => $job],
+        function ($message) use ($toemail)
+        {
+          $message->subject('961Freelancer - Hired By Client');
+          $message->from('support@961freelancer.com', '961Freelancer');
+          $message->to($toemail);
+        });
+        return response()->json(['status'=>'true' , 'message' => 'Freelancer Hired'] , 200);
       }else{
            return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
       }
@@ -191,9 +212,19 @@ class ProposalController extends Controller
       $id = $request->proposal_id;
       $job_id = $request->job_id;
       $findData = Proposal::find($id);
+      $job = Job::where('job_id',$job_id)->first();
       $findData->status = 3;
+      $freelancer = User::where('id',$findData->id)->first();
+      $toemail =  $freelancer->email;
       Job::where('job_id',$job_id)->update(['job_status'=>1]);
       if ($findData->save()) {
+        Mail::send('mail.rejectProposal-email',['user' =>$freelancer,'job' => $job],
+        function ($message) use ($toemail)
+        {
+          $message->subject('961Freelancer - Rejected By Client');
+          $message->from('support@961freelancer.com', '961Freelancer');
+          $message->to($toemail);
+        });
           return response()->json(['status'=>'true' , 'message' => 'Freelancer proposal rejected'] , 200);
       }else{
            return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);

@@ -13,6 +13,7 @@ class UserExperience extends Model
       'company_title',
       'start_date',
       'end_date',
+      'present_job',
       'job_title',
       'job_description',
     ];
