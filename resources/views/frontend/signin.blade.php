@@ -25,10 +25,15 @@
 							    </ul>
 							 </div>
 							@endif
+							@if(session()->has('loginAlert'))
+                  <div class="alert alert-danger">
+                      {{ session()->get('loginAlert') }}
+                  </div>
+              @endif
 							@csrf
 							<div class="mb-3">
 								<label class="control-label">Username</label>
-								<input class="form-control" type="text" placeholder="Enter Username" name="username" value="">
+								<input class="form-control" type="text" placeholder="Enter Username or Email" name="username" value="">
 								<!--  -->
 								<span class="text-danger">{{ $errors->first('username') }}</span>
 							</div>

@@ -28,6 +28,40 @@
                     <span class="badge badge-danger messageCount badge-notification position-absolute top-0 translate-middle p-1 bg-danger border border-light rounded-circle">{{ App\Models\ChatMessages::getUnseenMsg() }}</span>
                   </a> 
                 </li>
+                <li class="dropdown notification">
+                  <a href="javascript:void(0);" class="position-relative" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fal fa-bell"></i>
+                    <span class="badge badge-danger notiCount badge-notification position-absolute top-0 translate-middle p-1 bg-danger border border-light rounded-circle">{{ App\Models\Notification::getUnseenNoti() }}</span>
+                  </a> 
+                  <ul class="dropdown-menu notification-dropdown py-0">
+                    <li class="head text-white w-100">
+                      <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                          <span>Notifications</span>
+                          <!-- <a href="" class="float-right text-light">Mark all as read</a> -->
+                        </div>
+                      </li>
+                      @foreach(App\Models\Notification::getAllNoti() as $key => $notif)
+                      <li class="notification-box bg-light {{$key == 0 ? 'first-notification-box': ''}}" onclick="readNoti({{$notif->id}})">
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12 col-12">
+                            <div class="noti-msg">
+                              @if($notif->noti_type == 'proposal')
+                              <a href="{{url('proposals')}}" class="pe-0">{{$notif->message}}</a>
+                              @endif
+                              @if($notif->noti_type == 'hire')
+                              <a href="{{url('ongoing-jobs')}}" class="pe-0">{{$notif->message}}</a>
+                              @endif
+                              @if($notif->noti_type == 'reject')
+                              <a href="{{url('proposals')}}" class="pe-0">{{$notif->message}}</a>
+                              @endif
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      @endforeach
+                    </ul>
+                </li>
                 @endif
               </ul>
             </div>
@@ -37,6 +71,7 @@
               <a href="{{ route('register') }}">Join Now</a>
             </div>
             @else
+
             <div class="wt-userlogedin d-none {{ Auth::user()->account_type === "Freelancer" ? "d-sm-block" : "d-sm-flex align-items-center" }}">
               <figure class="wt-userimg">
                 @if(Auth::user()->profile_image != '')

@@ -87,7 +87,7 @@
               @csrf
               <div class="mb-3 has-error">
                 <label class="control-label">Username</label>
-                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" value="">
+                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" value="" required="">
                  <div class="invalid-feedback">
                    Please enter Username.
                 </div>
@@ -98,14 +98,14 @@
               </div>
               <div class="mb-3">
               	<label class="control-label">YOUR EMAIL ADDRESS</label>
-              	<input class="form-control" type="email" name="email" placeholder="Enter Email" value="" id="email">
+              	<input class="form-control" type="email" name="email" placeholder="Enter Email" value="" id="email" required="">
               	<div class="invalid-feedback">
                     Please enter email.
                 </div>
               </div>
               <div class="mb-3">
                 <label class="control-label">Country</label>
-                <select class="form-control chosen-select" name="country" id="country">
+                <select class="form-control chosen-select" name="country" id="country" required="">
                   @foreach($countries as $country)
                   <option value="{{$country->name}}" data-code="{{$country->phonecode}}">{{$country->name}}</option>
                   @endforeach
@@ -119,7 +119,7 @@
               	<label class="control-label">Phone No.</label>
                 <div class="input-group">
                   <input type="text" class="ps-0 pe-0 text-center bg-light fw-bold" name="phone_code" value="93" style="width: 80px;height: 60px;" readonly="" id="phoneCode">
-                  <input type="number" class="form-control" name="mobile_number" placeholder="Enter Phone No.">
+                  <input type="number" class="form-control" name="mobile_number" placeholder="Enter Phone No." required>
                 </div>
                 
               	<!-- <input class="form-control" type="text" name="mobile_number" id="phone" placeholder="Enter Phone No."> -->
@@ -146,7 +146,7 @@
               </div>
               <div class="mb-3">
               	<label class="control-label"> Confirm Password: </label>
-              	<input type="password" class="form-control" id="confirm_pass" name="con_pass" placeholder="Confirm Password">
+              	<input type="password" class="form-control" id="confirm_pass" name="con_pass" placeholder="Confirm Password" required="">
               	<span class="form-text text-danger"></span>
               	<span id="match" class="pl-3"></span>
               </div>

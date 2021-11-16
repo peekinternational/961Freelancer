@@ -14,6 +14,7 @@ use App\Models\Proposal;
 use App\Models\Milestone;
 use App\Models\Rating;
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -99,6 +100,13 @@ class ProposalController extends Controller
               }
           }
         }
+        Notification::create([
+          'from' => auth()->id(),
+          'to' => $client->id,
+          'message' => $freelancer->username .' sent proposal on your project "'. $jobUser->job_title .'"',
+          'noti_type' => 'proposal',
+          'status' => 'unread',
+        ]);
         Mail::send('mail.propsalsubmit-email',['user' =>$freelancer,'job' => $jobUser, 'client'=>$client],
         function ($message) use ($toemail)
         {
@@ -191,10 +199,17 @@ class ProposalController extends Controller
       $findData = Proposal::find($id);
       $job = Job::where('job_id',$job_id)->first();
       $findData->status = 2;
-      $freelancer = User::where('id',$findData->id)->first();
+      $freelancer = User::where('id',$findData->user_id)->first();
       $toemail =  $freelancer->email;
       Job::where('job_id',$job_id)->update(['job_status'=>2]);
       if ($findData->save()) {
+        Notification::create([
+          'from' => auth()->id(),
+          'to' => $findData->user_id,
+          'message' => 'You have been hired for the project "'. $job->job_title .'"',
+          'noti_type' => 'hire',
+          'status' => 'unread',
+        ]);
         Mail::send('mail.hired-email',['user' =>$freelancer,'job' => $job],
         function ($message) use ($toemail)
         {
@@ -218,6 +233,13 @@ class ProposalController extends Controller
       $toemail =  $freelancer->email;
       Job::where('job_id',$job_id)->update(['job_status'=>1]);
       if ($findData->save()) {
+        Notification::create([
+          'from' => auth()->id(),
+          'to' => $findData->user_id,
+          'message' => 'You proposal has been rejected for this "'. $job->job_title.'" project.',
+          'noti_type' => 'reject',
+          'status' => 'unread',
+        ]);
         Mail::send('mail.rejectProposal-email',['user' =>$freelancer,'job' => $job],
         function ($message) use ($toemail)
         {

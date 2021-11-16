@@ -86,7 +86,7 @@
 											<div class="wt-rightarea">
 												<div class="wt-btnarea">
 													@if($proposal->status == 1 && $job->job_status == 1)
-													<a href="javascript:void(0);" onclick="hireNow('{{$proposal->id}}' ,'{{$proposal->job_id}}')" class="wt-btn rounded-pill">Hire Now</a>
+													<a href="javascript:void(0);" onclick="hireNow('{{$proposal->id}}' ,'{{$proposal->job_id}}','{{$proposal->user_id}}')" class="wt-btn rounded-pill">Hire Now</a>
 													<a href="javascript:void(0);" onclick="rejectNow('{{$proposal->id}}' ,'{{$proposal->job_id}}')" class="wt-btn rounded-pill">Reject</a>
 													@endif
 													@if($proposal->status == 2)
@@ -541,16 +541,24 @@
 	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	    }
 	});
-	function hireNow(id,job_id){
+	function hireNow(id,job_id,proposal_user){
+		var obj = {
+			from: "{{auth()->user()->id}}",
+			to : proposal_user,
+			message : "You have been hired for the project",
+			noti_type : 'hire',
+			status : 'unread'
+		}
 		$.ajax({
 	    url: "{{route('hire-freelancer')}}",
 	    type: 'POST',
 	    data: {"proposal_id": id,"job_id": job_id},
-
+	    
 	    success: (response)=>{
 	        if (response.status == 'true') {
-	            $.notify(response.message , 'success'  );
-	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
+	        	socket.emit("sendNotification", obj);
+	            // $.notify(response.message , 'success'  );
+	            //   window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
 	            
 	            
 	        }else{

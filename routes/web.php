@@ -11,6 +11,7 @@ use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -85,7 +86,9 @@ Route::middleware(['auth'])->group(function () {
 
   Route::post('/crop_upload', [ProfileController::class, 'storeImage']);
   Route::post('/verification-request', [ProfileController::class, 'verification'])->name('verification-request');
-
+  // Read Notification
+  Route::post('/readNotification/{id}', [NotificationController::class, 'readNotification']);
+  Route::get('/notificationCount/{id}', [NotificationController::class, 'notificationCount']);
 
   Route::get('/account-setting', function () {
     return view('frontend.account-setting');

@@ -379,7 +379,7 @@ class ProfileController extends Controller
            return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
       }
     }
-
+    
 
     public function storeImage(Request $request)
     {

@@ -92,10 +92,41 @@
 	      }
 
 	    });
+	    socket.on('receiveNotification', function(data){
+	    	console.log(data);
+	    	if(user_id == data.to){
+	    		var messagetone = document.getElementById("messagetone");
+	    		messagetone.play();
+	    		messagetone.muted = false;
+	    		$('.notiCount').html(1);
+	    		$.ajax({
+    		    url: "{{url('/notificationCount')}}/"+user_id,
+    		    type: "GET"
+    		  }).then(function(res) {
+    		    $('.notiCount').html(res);
+    		  })
+	    	}
+	    });
 	    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 	    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 	      return new bootstrap.Tooltip(tooltipTriggerEl)
 	    })
+	    $('.notification').click(function(){
+	    	$('.notification-dropdown').toggle();
+	    });
+	    function readNoti(id){
+	    	$.ajax({
+	    	    url: "{{url('/readNotification')}}/"+id,
+	    	    type: "POST",
+
+	    	    success: (response)=>{
+	    	        console.log(response);
+	    	    },
+	    	    error: (errorResponse)=>{
+	    	        $.notify( errorResponse, 'error'  );
+	    	    }
+	    	})
+	    }
 	</script>
 	@endif
 </body>
