@@ -229,7 +229,7 @@ class ProposalController extends Controller
       $findData = Proposal::find($id);
       $job = Job::where('job_id',$job_id)->first();
       $findData->status = 3;
-      $freelancer = User::where('id',$findData->id)->first();
+      $freelancer = User::where('id',$findData->user_id)->first();
       $toemail =  $freelancer->email;
       Job::where('job_id',$job_id)->update(['job_status'=>1]);
       if ($findData->save()) {

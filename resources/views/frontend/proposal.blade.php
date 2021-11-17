@@ -87,7 +87,7 @@
 												<div class="wt-btnarea">
 													@if($proposal->status == 1 && $job->job_status == 1)
 													<a href="javascript:void(0);" onclick="hireNow('{{$proposal->id}}' ,'{{$proposal->job_id}}','{{$proposal->user_id}}')" class="wt-btn rounded-pill">Hire Now</a>
-													<a href="javascript:void(0);" onclick="rejectNow('{{$proposal->id}}' ,'{{$proposal->job_id}}')" class="wt-btn rounded-pill">Reject</a>
+													<a href="javascript:void(0);" onclick="rejectNow('{{$proposal->id}}' ,'{{$proposal->job_id}}','{{$proposal->user_id}}')" class="wt-btn rounded-pill">Reject</a>
 													@endif
 													@if($proposal->status == 2)
 													<a href="{{url('ongoing-job/'.$proposal->job->job_id)}}">View Job</a>
@@ -557,8 +557,8 @@
 	    success: (response)=>{
 	        if (response.status == 'true') {
 	        	socket.emit("sendNotification", obj);
-	            // $.notify(response.message , 'success'  );
-	            //   window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
+	            $.notify(response.message , 'success'  );
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
 	            
 	            
 	        }else{
@@ -573,7 +573,14 @@
 	    }
 		})
 	}
-	function rejectNow(id,job_id){
+	function rejectNow(id,job_id,proposal_user){
+		var obj = {
+			from: "{{auth()->user()->id}}",
+			to : proposal_user,
+			message : "You proposal have been rejected by the client",
+			noti_type : 'reject',
+			status : 'unread'
+		}
 		$.ajax({
 	    url: "{{route('reject-freelancer')}}",
 	    type: 'POST',
@@ -581,6 +588,7 @@
 
 	    success: (response)=>{
 	        if (response.status == 'true') {
+	        	socket.emit("sendNotification", obj);
 	            $.notify(response.message , 'success'  );
 	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
 	            

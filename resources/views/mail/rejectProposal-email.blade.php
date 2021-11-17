@@ -73,12 +73,12 @@
   <div class='container'>
     <div class='box'>
       <center>
-        <img src='https://localhost:8000/assets/images/logo.png' width='30% ' style="padding: 26px;" >
+        <img src="{{asset('assets/images/logo.png')}}" width='30% ' style="padding: 26px;" >
         <!-- <h2> New Agreement Available. </h2> -->
       </center>
       <hr>
       <p class='bg-gray'> Dear {{$user->username}} , </p>
-      <p class="bg-gray">Client has rejected your proposal on <a href="https://localhost:8000/job-detail/.{{$job->job_id}}">{{$job->job_title}}</a>. Please click <a href="https://localhost:8000/job">here</a> to send proposal and other jobs.</p>
+      <p class="bg-gray">Client has rejected your proposal on <a href="{{url('job-detail/'.$job->job_id)}}">{{$job->job_title}}</a>. Please click <a href="{{url('job')}}">here</a> to send proposal and other jobs.</p>
       <br>
       <!-- <center>
         <a style="background-color: #ed1c24; border-radius: 35px;" href="{{ url('/reset-password/'.$user->email.'/'.$user->remember_token) }}" class='btn pt-2'>

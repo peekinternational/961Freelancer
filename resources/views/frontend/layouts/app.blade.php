@@ -9,6 +9,10 @@
 	<meta name="keywords" content="">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>961 Freelancer</title>
+	<!-- ==============Favicon ================ -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicon/apple-touch-icon.png')}}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/favicon/favicon-32x32.png')}}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon/favicon-16x16.png')}}">
 	<!-- ==============Google Fonts============= -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" media="screen" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -104,6 +108,7 @@
     		    type: "GET"
     		  }).then(function(res) {
     		    $('.notiCount').html(res);
+    		    $('.notification-list').append('<li class="notification-box bg-light"><div class="row"><div class="col-lg-12 col-sm-12 col-12"><div class="noti-msg"><a href="/proposals" class="pe-0">'+data.message+'</a></div></div></div></li>'); 
     		  })
 	    	}
 	    });

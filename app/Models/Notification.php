@@ -22,6 +22,6 @@ class Notification extends Model
 
     public static function getAllNoti()
     {
-      return Notification::where('to', auth()->id())->where('status', 'unread')->get();
+      return Notification::where('to', auth()->id())->orderBy('created_at', 'DESC')->get();
     }
 }

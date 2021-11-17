@@ -33,7 +33,7 @@
                     <i class="fal fa-bell"></i>
                     <span class="badge badge-danger notiCount badge-notification position-absolute top-0 translate-middle p-1 bg-danger border border-light rounded-circle">{{ App\Models\Notification::getUnseenNoti() }}</span>
                   </a> 
-                  <ul class="dropdown-menu notification-dropdown py-0">
+                  <ul class="dropdown-menu notification-dropdown py-0 notification-list">
                     <li class="head text-white w-100">
                       <div class="row">
                         <div class="col-lg-12 col-sm-12 col-12">
@@ -41,8 +41,9 @@
                           <!-- <a href="" class="float-right text-light">Mark all as read</a> -->
                         </div>
                       </li>
+
                       @foreach(App\Models\Notification::getAllNoti() as $key => $notif)
-                      <li class="notification-box bg-light {{$key == 0 ? 'first-notification-box': ''}}" onclick="readNoti({{$notif->id}})">
+                      <li class="notification-box {{$key == 0 ? 'first-notification-box': ''}} {{$notif->status == 'unread' ? 'bg-light': ''}}" onclick="readNoti({{$notif->id}})">
                         <div class="row">
                           <div class="col-lg-12 col-sm-12 col-12">
                             <div class="noti-msg">
