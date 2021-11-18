@@ -1142,3 +1142,24 @@ span.bookmark-icon {
   color: #212529 !important;
   font-weight: 400 !important;
 }
+.crop_image,.crop_image_cover{
+  background-color: #00a651;
+  color: #fff;
+}
+#insertimageModal .btn-default,#insertCoverModal .btn-default{
+  background-color: #ed1c24;
+  color: #fff;
+}
+#insertimageModal .modal-header,#insertCoverModal .modal-header{
+  color: #00a651;
+  font-size: 16px;
+}
+#insertimageModal .modal-header .close,#insertCoverModal .modal-header .close{
+  background-color: transparent;
+  color: #ed1c24;
+  font-size: 30px;
+}
+#pswrd-show{
+  right: 14px;
+  top: 23px; 
+}

@@ -130,14 +130,14 @@
 								  				</div>
 								  				<div class="form-group">
 								  					<label class="form-label">Age</label>
-								  					<input type="number" name="age" class="form-control" placeholder="Add Age" value="{{Auth::user()->age}}">
+								  					<input type="date" name="age" class="form-control" placeholder="Add Age" value="{{Auth::user()->age}}">
 								  				</div>
 								  				<div class="form-group">
 								  					<label class="form-label">Mobile Number</label>
 								  					<input type="text" name="mobile_number" class="form-control" placeholder="Add Mobile Number" value="{{Auth::user()->mobile_number}}">
 								  				</div>
 								  				<div class="form-group">
-								  					<label class="form-label">Designation</label>
+								  					<label class="form-label">Tagline</label>
 								  					<input type="text" name="tagline" class="form-control" placeholder="Add Designation" value="{{Auth::user()->tagline}}">
 								  				</div>
 								  				@endif
@@ -336,6 +336,7 @@
 								  	@endif
 								  	<div class="wt-updatall shadow-none mt-5">
 								  		<button type="submit" id="update_profile" form="edit-profile-form" class="wt-btn">Save &amp; Update</button>
+								  		<button type="button" class="wt-btn me-3 d-none" id="continue_education">Continue</button>
 								  	</div>
 								  </div>
 								  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -378,7 +379,7 @@
 									  			</fieldset>
 									  		</form>
 									  	</div>
-								  		<ul class="wt-experienceaccordion accordion">
+								  		<ul class="wt-experienceaccordion accordion" id="experience-list">
 								  			@foreach($experience as $exper)
 								  			<li id="expernc{{$exper->id}}">
 								  				<div class="wt-accordioninnertitle">
@@ -447,13 +448,17 @@
 								  						<input type="text" name="institute" class="form-control" placeholder="School/College/University">
 								  					</div>
 								  					<div class="form-group form-group-half">
+								  						<input type="text" name="degree" class="form-control" placeholder="Your Degree Title">
+								  					</div>
+								  					<div class="form-group form-group-half">
 								  						<input type="date" name="start_date" class="form-control" placeholder="From Date">
 								  					</div>
 								  					<div class="form-group form-group-half">
-								  						<input type="date" name="end_date" class="form-control" placeholder="To Date ">
+								  						<input type="date" name="end_date" id="edu_end_date" class="form-control" placeholder="To Date ">
 								  					</div>
-								  					<div class="form-group form-group-half">
-								  						<input type="text" name="degree" class="form-control" placeholder="Your Degree Title">
+								  					<div class="form-group">
+								  						<input type="checkbox" name="continue_study">
+								  						Continue Study
 								  					</div>
 								  					<div class="form-group">
 								  						<input type="text" name="area_of_study" class="form-control" placeholder="Ex: Computer Science">
@@ -471,7 +476,13 @@
 								  			@foreach($education as $educ)
 								  			<li id="educatn{{$educ->id}}">
 								  				<div class="wt-accordioninnertitle">
-								  					<span id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}"><span id="degree{{$educ->id}}">{{$educ->degree}}</span> <span id="start_edu{{$educ->id}}"><em>({{date('d-m-Y', strtotime($educ->start_date))}}</em></span> - <span id="end_edu{{$educ->id}}"><em> {{date('d-m-Y', strtotime($educ->end_date))}})</em></span></span>
+								  					<span id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}"><span id="degree{{$educ->id}}">{{$educ->degree}}</span> <span id="start_edu{{$educ->id}}"><em>({{date('d-m-Y', strtotime($educ->start_date))}}</em></span> - <span id="end_edu{{$educ->id}}"><em> 
+								  						@if($educ->continue_study == 'on')
+								  						Continue
+								  						@else
+								  						{{date('d-m-Y', strtotime($educ->end_date))}}
+								  						@endif
+								  					)</em></span></span>
 								  					<div class="wt-rightarea">
 								  						<a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioneducation{{$educ->id}}" data-bs-toggle="collapse" data-bs-target="#innertitleeduc{{$educ->id}}" aria-expanded="true"><i class="fal fa-pencil"></i></a>
 								  						<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteEducation({{$educ->id}})"><i class="fal fa-trash-alt"></i></a>
@@ -485,14 +496,19 @@
 										  						<input type="text" name="institute" id="institute{{$educ->id}}" class="form-control" placeholder="School/College/University" value="{{$educ->institute}}">
 										  					</div>
 										  					<div class="form-group form-group-half">
+										  						<input type="text" name="degree" id="degree_edu{{$educ->id}}" class="form-control" placeholder="Your Degree Title" value="{{$educ->degree}}">
+										  					</div>
+										  					<div class="form-group form-group-half">
 										  						<input type="date" name="start_date" id="start_date_edu{{$educ->id}}" class="form-control" placeholder="From Date" value="{{$educ->start_date}}">
 										  					</div>
 										  					<div class="form-group form-group-half">
-										  						<input type="date" name="end_date" id="end_date_edu{{$educ->id}}" class="form-control" placeholder="To Date " value="{{$educ->end_date}}">
+										  						<input type="date" name="end_date" id="end_date_edu{{$educ->id}}" id="edit_end_date" class="form-control" placeholder="To Date " value="{{$educ->end_date}}" {{ $educ->continue_study === "on" ? "readonly" : "" }}>
 										  					</div>
-										  					<div class="form-group form-group-half">
-										  						<input type="text" name="degree" id="degree_edu{{$educ->id}}" class="form-control" placeholder="Your Degree Title" value="{{$educ->degree}}">
+										  					<div class="form-group">
+										  						<input type="checkbox" name="continue_study" {{ $educ->continue_study === "on" ? "checked" : "" }}>
+										  						Continue Study
 										  					</div>
+										  					
 										  					<div class="form-group">
 										  						<input type="text" name="area_of_study" id="area_of_study{{$educ->id}}" class="form-control" placeholder="Ex: Computer Science" value="{{$educ->area_of_study}}">
 										  					</div>
@@ -508,6 +524,9 @@
 								  			</li>
 								  			@endforeach
 								  		</ul>
+								  	</div>
+								  	<div class="form-group mt-5 px-4 text-end">
+								  		<button type="button" id="continue_portfolio" class="wt-btn">Continue</button>
 								  	</div>
 								  </div>
 								  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
@@ -554,7 +573,7 @@
 								  				</fieldset>
 								  			</form>
 								  		</div>
-								  		<ul class="wt-experienceaccordion accordion">
+								  		<ul class="wt-experienceaccordion accordion" id="projects-list">
 								  			@foreach($projects as $project)
 								  			<li id="projecList{{$project->id}}">
 								  				<div class="wt-accordioninnertitle">
@@ -584,12 +603,12 @@
 								  										<input type="file" name="project_img" onchange="projectImageEdit(this,{{$project->id}});" id="filen{{$project->id}}">
 								  									</label>
 								  									<span>Drop files here to upload</span>
-								  									<em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+								  									<!-- <em class="wt-fileupload">Uploading<i class="fa fa-spinner fa-spin"></i></em> -->
 								  								</div>
 								  							</div>
 								  							<div class="form-group">
 								  								<ul class="wt-attachfile">
-								  									<li class="wt-uploading">
+								  									<li class="wt-uploaded">
 								  										<span id="projectimg_name{{$project->id}}">{{$project->project_img}}</span>
 								  								<em>File size: <span id="projectImg_size{{$project->id}}">300 kb</span></em>
 								  									</li>
@@ -637,7 +656,7 @@
 								  				</fieldset>
 								  			</form>
 								  		</div>
-								  		<ul class="wt-experienceaccordion accordion">
+								  		<ul class="wt-experienceaccordion accordion" id="certificates-list">
 								  			@foreach($certifications as $certificate)
 								  			<li id="certifcateList{{$certificate->id}}">
 								  				<div class="wt-accordioninnertitle">
@@ -697,7 +716,7 @@
   <div class="modal-dialog modal-md">
   <div class="modal-content">
     <div class="modal-header">
-     Crop & Insert Image <button type="button" class="close" data-dismiss="modal">&times;</button>
+     Crop & Insert Image <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
       <div id="image_demo" style="width:100% !important;"></div>
@@ -705,7 +724,7 @@
     <div class="modal-footer">
       <input type="hidden" name="img_type" value="">
       <button class="btn crop_image">Crop Image</button>
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
     </div>
     </div>
   </div>
@@ -715,7 +734,7 @@
   <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header">
-     Crop & Insert Cover <button type="button" class="close" data-dismiss="modal">&times;</button>
+     Crop & Insert Cover <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
       <div id="cover_demo" style="width:100% !important;"></div>
@@ -723,7 +742,7 @@
     <div class="modal-footer">
       <input type="hidden" name="img_type_cover" value="">
       <button class="btn crop_image_cover">Crop Image</button>
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
     </div>
     </div>
   </div>
@@ -774,13 +793,17 @@
 	    processData: false,
 	    success:function(data){
 	    	console.log(data);
-	    	$('#pills-home-tab').removeClass('active');
-	    	$('#pills-profile-tab').addClass('active');
-	    	$('#pills-home').removeClass('show active');
-	    	$('#pills-profile').addClass('show active');
+	    	$('#continue_education').removeClass('d-none');
     	}
    	})
 	});
+ 	
+ 	$('#continue_education').click(function(){
+ 		$('#pills-home-tab').removeClass('active');
+ 		$('#pills-profile-tab').addClass('active');
+ 		$('#pills-home').removeClass('show active');
+ 		$('#pills-profile').addClass('show active');
+ 	});
 
  $('#add-experience-form').on('submit', function(event){
    	event.preventDefault();
@@ -794,13 +817,24 @@
 	    contentType: false,
 	    cache: false,
 	    processData: false,
-	    success:function(data){
-	    	console.log(data);
+	    success:function(response){
+	    	console.log(response);
 	    	$("#add-experience-form")[0].reset();
-	    	// $('#pills-home-tab').removeClass('active');
-	    	// $('#pills-profile-tab').addClass('active');
-	    	// $('#pills-home').removeClass('show active');
-	    	// $('#pills-profile').addClass('show active');
+	    	
+	    	if (response.status == 'true') {
+	    		 	
+	    		 $.notify(response.message , 'success'  );
+	    	      $('#experience-list').append('<li id="expernc'+response.data.id+'"><div class="wt-accordioninnertitle"><span id="accordioninner'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#inner'+response.data.id+'"><span id="title'+response.data.id+'">'+response.data.job_title+'</span><span class="text-muted" id="startresponse.data.id"><em> ('+response.data.start_date+'</em></span> - <span class="text-muted" id="end'+response.data.id+'"><em>'+response.data.end_date+')</em></span></span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninner'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#inner'+response.data.id+'" aria-expanded="true"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteExperience('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div></li>');
+	    		 	 // 	$('#pills-home-tab').removeClass('active');
+	    		 		// $('#pills-profile-tab').addClass('active');
+	    		 		// $('#pills-home').removeClass('show active');
+	    		 		// $('#pills-profile').addClass('show active');   
+	    	    
+	    	}else{
+	    	    $.notify(response.message , 'error');
+
+	    	}
+	    	
     	}
    	})
 	});
@@ -817,17 +851,30 @@
 	    contentType: false,
 	    cache: false,
 	    processData: false,
-	    success:function(data){
-	    	console.log(data);
+	    success:function(response){
+	    	console.log(response);
 	    	$("#add-education-form")[0].reset();
-	    	$('#education_list').html(data);
-	    	// $('#pills-home-tab').removeClass('active');
-	    	// $('#pills-profile-tab').addClass('active');
-	    	// $('#pills-home').removeClass('show active');
-	    	// $('#pills-profile').addClass('show active');
+	    	if (response.status == 'true') {
+	    		 	
+	    		 $.notify(response.message , 'success'  );
+	    	      $('#education_list').append('<li id="educatn'+response.data.id+'"><div class="wt-accordioninnertitle"><span id="accordioneducation'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#innertitleeduc'+response.data.id+'"><span id="degree'+response.data.id+'">'+response.data.degree+'</span> <span id="start_edu'+response.data.id+'"><em>('+response.data.start_date+'</em></span> - <span id="end_edu'+response.data.id+'"><em> '+response.data.end_date+')</em></span></span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioneducation'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#innertitleeduc'+response.data.id+'" aria-expanded="true"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteEducation('+response.data.id+')"><i class="fal fa-trash-alt"></i></a></div></div></li>');
+	    		 	   
+	    	    
+	    	}else{
+	    	    $.notify(response.message , 'error');
+
+	    	}
+
     	}
    	})
 	});
+
+ 	$('#continue_portfolio').click(function(){
+ 		$('#pills-contact-tab').addClass('active');
+ 		$('#pills-profile-tab').removeClass('active');
+ 		$('#pills-contact').addClass('show active');
+ 		$('#pills-profile').removeClass('show active');
+ 	});
 
  $('#add-project-form').on('submit', function(event){
    	event.preventDefault();
@@ -841,13 +888,20 @@
 	    contentType: false,
 	    cache: false,
 	    processData: false,
-	    success:function(data){
-	    	console.log(data);
+	    success:function(response){
+	    	console.log(response);
 	    	$("#add-project-form")[0].reset();
-	    	// $('#pills-home-tab').removeClass('active');
-	    	// $('#pills-profile-tab').addClass('active');
-	    	// $('#pills-home').removeClass('show active');
-	    	// $('#pills-profile').addClass('show active');
+	    	if (response.status == 'true') {
+	    		 	
+	    		 $.notify(response.message , 'success'  );
+	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+response.data.project_img+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+response.data.project_url+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div></li>');
+	    		 	   
+	    	    
+	    	}else{
+	    	    $.notify(response.message , 'error');
+
+	    	}
+
     	}
    	})
 	});
@@ -864,13 +918,18 @@
 	    contentType: false,
 	    cache: false,
 	    processData: false,
-	    success:function(data){
-	    	console.log(data);
+	    success:function(response){
+	    	console.log(response);
 	    	$("#add-certificate-form")[0].reset();
-	    	// $('#pills-home-tab').removeClass('active');
-	    	// $('#pills-profile-tab').addClass('active');
-	    	// $('#pills-home').removeClass('show active');
-	    	// $('#pills-profile').addClass('show active');
+	    	if (response.status == 'true') {
+	    		 	
+	    		$.notify(response.message , 'success'  );
+  	      $('#certificates-list').append('<li id="certifcateList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innertitlecwcertificate'+response.data.id+'"><h3><font id="certificateName'+response.data.id+'">'+response.data.certificate_title+'</font><samp id="certificateDate'+response.data.id+'">'+response.data.issue_date+'</samp></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innertitlecwcertificate'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteCertificate('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div></li>');
+	    		 	      
+	    	}else{
+	    	  $.notify(response.message , 'error');
+
+	    	}
     	}
    	})
 	});
@@ -1208,7 +1267,7 @@
 	    $('#insertimageModal').modal('show');
 	    $('input[type=hidden][name=img_type]').val($(data).attr('name'));
 	  }
-	  $(document).on('change','input[type=file]:not(#fileCover)', function(){
+	  $(document).on('change','#uploadFile', function(){
 	  	var size = $(this)[0].files[0].size; 
 	  	var ext = $(this).val().split('.').pop().toLowerCase();
 	  	if($.inArray(ext,['jpeg','jpg','gif','png']) == -1){
@@ -1242,6 +1301,96 @@
 	        }
 	      });
 	    });
+	  });
+	  // Cover Inage
+	$image_crop_cover = $('#cover_demo').croppie({
+	    enableExif: true,
+	    viewport: {
+	      width:300,
+	      height:150,
+	      type:'square' //circle
+	    },
+	    boundary:{
+	      width:100,
+	      height:250
+	    }    
 	    });
+	  function crop_cover(data){
+	    var reader = new FileReader();
+	    reader.onload = function (event) {
+	      $image_crop_cover.croppie('bind',{
+	      url: event.target.result
+	      }).then(function(){
+	      console.log('jQuery bind complete');
+	      });
+	    }
+	    reader.readAsDataURL(data.files[0]);
+	    $('#insertCoverModal').modal('show');
+	    $('input[type=hidden][name=img_type]').val($(data).attr('name'));
+	  }
+	  $(document).on('change','#fileCover', function(){
+	  	var size = $(this)[0].files[0].size; 
+	  	var ext = $(this).val().split('.').pop().toLowerCase();
+	  	if($.inArray(ext,['jpeg','jpg','gif','png']) == -1){
+	  		alert('Your File Extension Is Not Allowed.');
+	  		$(this).val('');
+	  	}else{
+	  		crop_cover(this);
+	  	}
+	  });
+	  $('.crop_image_cover').click(function(event){
+	  
+	  // $('#wait').addClass("loader");
+	  var name = $('input[type=hidden][name=img_type]').val();
+	    $image_crop_cover.croppie('result', {
+	      type: 'canvas',
+	      size: 'viewport'
+	    }).then(function(response){
+	      $.ajax({
+	        url:"{{url('crop_upload_cover')}}",
+	        type: "POST",
+	        data:{image: response, fileCover: $('input[type=file][name='+ name +']').val().replace(/C:\\fakepath\\/i, '') },
+	        success:function(data){
+	          // $('#wait').removeClass("loader");
+	          $('#insertCoverModal').modal('hide');
+	          $('input[type=hidden][name='+ name +']').val(data);
+	          main = $('input[type=hidden][name='+ name +']').parent();
+	          // main.prepend("<img src='user_images/"+data+"' class='img-fluid'>");
+	          // $('.img-circle').hide();
+	          $('.wt-companysimg img').attr("src", "assets/images/user/cover/"+data.name+"");
+	        }
+	      });
+	    });
+	  });
+	  $('input[name="present_job"]').change(function(){
+		  if ($(this).is(":checked")) {
+		  	$('input[name="end_date"]').attr('readonly', 'true');
+		  	$('input[name="end_date"]').addClass('bg-light');
+	    }else{
+	    	$('input[name="end_date"]').removeAttr('readonly');
+	    	$('input[name="end_date"]').removeClass('bg-light');
+	    }	
+	  })
+
+	  $('input[name="continue_study"]').change(function(){
+		  if ($(this).is(":checked")) {
+		  	$('#edu_end_date').attr('readonly', 'true');
+		  	$('#edu_end_date').addClass('bg-light');
+		  	$('#edit_end_date').attr('readonly', 'true');
+		  	$('#edit_end_date').addClass('bg-light');
+	    }else{
+	    	$('#edu_end_date').removeAttr('readonly');
+	    	$('#edu_end_date').removeClass('bg-light');
+	    	$('#edit_end_date').removeAttr('readonly');
+	    	$('#edit_end_date').removeClass('bg-light');
+	    }	
+	  })
+	  
+	  // var url = window.location.href;
+	  // var activeTab = url.substring(url.indexOf("#") + 1);
+	  // alert(activeTab);
+	  // $(".tab-pane").removeClass("active in");
+	  // $("#" + activeTab).addClass("active in");
+	  // $('a[href="#'+ activeTab +'"]').tab('show')
 </script>
 @endsection

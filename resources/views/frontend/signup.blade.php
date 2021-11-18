@@ -87,20 +87,28 @@
               @csrf
               <div class="mb-3 has-error">
                 <label class="control-label">Username</label>
-                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" value="" required="">
+                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" value="" onkeyup="ValidateUsername()" required="">
                  <div class="invalid-feedback">
                    Please enter Username.
                 </div>
-                <span class="form-text text-danger" id="space_error"></span><br>
-                <small class="form-text text-muted">Note: You will not be able to change username once your account has been created.</small>
+                <span id="lblError" style="color: red"></span>
+                <!-- <span class="form-text text-danger" id="space_error"></span><br> -->
+                <!-- <small class="form-text text-muted">Note: You will not be able to change username once your account has been created.</small>
                 <span class="form-text text-danger" id="space_error"></span>
-                <small class="help-block" data-bv-validator="regexp" data-bv-for="u_name" data-bv-result="INVALID" style="">Spaces or dots are not allowed in username.</small>
+                <small class="help-block" data-bv-validator="regexp" data-bv-for="u_name" data-bv-result="INVALID" style="">Spaces or dots are not allowed in username.</small> -->
               </div>
               <div class="mb-3">
               	<label class="control-label">YOUR EMAIL ADDRESS</label>
               	<input class="form-control" type="email" name="email" placeholder="Enter Email" value="" id="email" required="">
               	<div class="invalid-feedback">
                     Please enter email.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="control-label">Date of Birth</label>
+                <input class="form-control" type="date" name="age" placeholder="Enter Date of birth" value="" id="age" required="">
+                <div class="invalid-feedback">
+                    Please enter date of birth.
                 </div>
               </div>
               <div class="mb-3">
@@ -130,7 +138,12 @@
                  
               <div class="mb-3 has-error">
               	<label class="control-label">Password</label>
-              	<input class="form-control" type="password" name="password" id="password" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*_=+-]).{8,}" title="Must contain at least one number and one uppercase and one special charater and lowercase letter, and at least 8 or more characters">
+                <div class="position-relative" id="show_hide_password">
+              	  <input class="form-control" type="password" name="password" id="password" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*_=+-]).{8,}" title="Must contain at least one number and one uppercase and one special charater and lowercase letter, and at least 8 or more characters">
+                  <span class="position-absolute bg-transparent" id="pswrd-show">
+                    <a href="javascript:void(0)"><i class="fa fa-eye-slash text-muted" aria-hidden="true"></i></a>
+                  </span>
+                </div>
               	<div class="invalid-feedback">
                   Please enter password.
                 </div>
@@ -386,6 +399,28 @@
   $('#country').change(function(){
     // alert($(this).find(':selected').data('code'));
     $('#phoneCode').val($(this).find(':selected').data('code'));
+  });
+
+  function ValidateUsername() {
+      var username = document.getElementById("username").value;
+      var lblError = document.getElementById("lblError");
+      lblError.innerHTML = "";
+      var expr = /^(?!.*__.*)[a-zA-Z_]*$/;
+      if (!expr.test(username)) {
+          lblError.innerHTML = "Only Alphabets, one Underscore allowed in Username.";
+      }
+  }
+  $("#show_hide_password a").on('click', function(event) {
+    event.preventDefault();
+    if($('#show_hide_password input').attr("type") == "text"){
+        $('#show_hide_password input').attr('type', 'password');
+        $('#show_hide_password i').addClass( "fa-eye-slash" );
+        $('#show_hide_password i').removeClass( "fa-eye" );
+    }else if($('#show_hide_password input').attr("type") == "password"){
+        $('#show_hide_password input').attr('type', 'text');
+        $('#show_hide_password i').removeClass( "fa-eye-slash" );
+        $('#show_hide_password i').addClass( "fa-eye" );
+    }
   });
 </script>
 @endsection

@@ -1245,7 +1245,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	font-weight:400;
 	margin: 0 0 5px;
 	line-height:16px;
-	width: 75px;
+	width: 100px;
     overflow: hidden;
     /*text-overflow: ellipsis;*/
     /*white-space: nowrap;*/
@@ -2511,9 +2511,9 @@ body.wt-login .wt-userlogedin{display: block;}
     margin: 0 0 26px;
 }
 .wt-statistics{
-	width:100%;
+	/*width:100%;
 	float:left;
-	margin: 12px 0 0;
+	margin: 12px 0 0;*/
 }
 .wt-statisticcontent{
 	float: left;
@@ -3538,9 +3538,9 @@ body.wt-login .wt-userlogedin{display: block;}
 	margin-bottom:30px; 
 }
 .wt-proposalhead{
-	float: left;
-	width: auto;
-	max-width: 900px;
+	/*float: left;*/
+	/*width: auto;*/
+	/*max-width: 900px;*/
 }
 .wt-proposalhead h2{
 	font-size: 28px;
@@ -4240,7 +4240,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-busy{background: #E50C0F;}
 .wt-away{background: #FFC30D;}
 .wt-userdetails{
-	max-width: 540px;
+	/*max-width: 540px;*/
 	padding: 0 30px 0 15px;
 }
 .wt-userdetails .wt-userlisting-breadcrumb{margin-bottom:30px; }
@@ -4303,10 +4303,10 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-userdetails.wt-displaynone{display: block;}
 .wt-userdetails.wt-displaynone .wt-description:after{display: none;}
 .wt-profilecounter{
-	width: auto;
+	/*width: auto;
 	float: right;
 	max-width: 327px;
-	margin: -30px 0 -55px;
+	margin: -30px 0 -55px;*/
 	text-align: center;
 	border-left: 1px solid #f2f2f2;
 }

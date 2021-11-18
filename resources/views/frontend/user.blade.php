@@ -40,7 +40,7 @@
 						</div>
 						<div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
 							<div class="row">
-								<div class="wt-proposalhead wt-userdetails">
+								<div class="wt-proposalhead wt-userdetails col-md-7">
 									<h2 class="mb-1">{{$freelancer->first_name}} {{$freelancer->last_name}}</h2>
 									<h5>{{$freelancer->tagline}}</h5>
 									<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
@@ -52,7 +52,7 @@
 										<p>{{$freelancer->description}}</p>
 									</div>
 								</div>
-								<div id="wt-statistics" class="wt-statistics wt-profilecounter">
+								<div id="wt-statistics" class="wt-statistics wt-profilecounter col-md-5">
 									<div class="wt-statisticcontent wt-countercolor1">
 										<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">{{App\Models\Proposal::freelancerOngoingCount(Auth::user()->id)}}</h3>
 										<h4>Ongoing <br>Projects</h4>
@@ -167,7 +167,7 @@
 						@if($freelancer->userProjects != '')
 						<div class="wt-craftedprojects">
 							<div class="wt-usertitle">
-								<h2>Projects</h2>
+								<h2>Portfolio</h2>
 							</div>
 							<div class="wt-projects">
 								@foreach($freelancer->userProjects as $project)
@@ -191,7 +191,7 @@
 						@if($freelancer->userInfo != '')
 						<div class="wt-experience">
 							<div class="wt-usertitle">
-								<h2>Experience</h2>
+								<h2>Employment History</h2>
 							</div>
 							<div class="wt-experiencelisting-hold">
 								@foreach($freelancer->userInfo as $key=>$experience)

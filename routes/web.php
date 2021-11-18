@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/edit-certificate', [ProfileController::class, 'editCertificate']);
 
   Route::post('/crop_upload', [ProfileController::class, 'storeImage']);
+  Route::post('/crop_upload_cover', [ProfileController::class, 'storeCoverImage']);
   Route::post('/verification-request', [ProfileController::class, 'verification'])->name('verification-request');
   // Read Notification
   Route::post('/readNotification/{id}', [NotificationController::class, 'readNotification']);

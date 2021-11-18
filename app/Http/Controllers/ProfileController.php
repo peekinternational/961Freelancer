@@ -18,6 +18,7 @@ use Hash;
 use Session;
 use Mail;
 use Redirect;
+use FaceDetection;
 
 class ProfileController extends Controller
 {
@@ -200,8 +201,14 @@ class ProfileController extends Controller
       }
       $experience->job_title = $request->input('job_title');
       $experience->job_description = $request->input('job_description');
-      $experience->save();
-      return 1;
+   
+      if ($experience->save()) {
+        $data = UserExperience::find($experience->id);
+        // dd($data);
+          return response()->json(['status'=>'true' , 'message' => 'Employment History added successfully','data' => $data] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
     public function editExperience(Request $request){
@@ -230,14 +237,22 @@ class ProfileController extends Controller
       $education->institute = $request->input('institute');
       $education->start_date = $request->input('start_date');
       $education->end_date = $request->input('end_date');
+      if($request->input('continue_study') != ''){
+        $education->continue_study = $request->input('continue_study');
+      }else{
+        $education->continue_study = 'off';
+      }
       $education->degree = $request->input('degree');
       $education->area_of_study = $request->input('area_of_study');
       // $education->description = $request->input('description');
-      $education->save();
-      $educ = UserEducation::where('id',$education->id)->first();
-      return View::make('frontend.ajax.education')->with([
-        'educ' => $educ
-      ]);
+      
+      if ($education->save()) {
+        $educ = UserEducation::where('id',$education->id)->first();
+        // dd($data);
+        return response()->json(['status'=>'true' , 'message' => 'Education added successfully','data' => $educ] , 200);
+      }else{
+       return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
       
     }
 
@@ -279,8 +294,14 @@ class ProfileController extends Controller
         $project->project_img = $imagename;
       }
       $project->project_desc = $request->input('project_desc');
-      $project->save();
-      return 1;
+      
+      if ($project->save()) {
+        $project = UserProject::where('id',$project->id)->first();
+        // dd($data);
+        return response()->json(['status'=>'true' , 'message' => 'Project added successfully','data' => $project] , 200);
+      }else{
+       return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
     public function editProject(Request $request){
@@ -321,8 +342,14 @@ class ProfileController extends Controller
       $certificate->issue_date = $request->input('issue_date');
       $certificate->expire_date = $request->input('expire_date');
       $certificate->certificate_desc = $request->input('certificate_desc');
-      $certificate->save();
-      return 1;
+      
+      if ($certificate->save()) {
+        $certificate = UserCertification::where('id',$certificate->id)->first();
+        // dd($data);
+        return response()->json(['status'=>'true' , 'message' => 'Certification added successfully','data' => $certificate] , 200);
+      }else{
+       return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
     public function editCertificate(Request $request){
@@ -397,14 +424,46 @@ class ProfileController extends Controller
 
         $data = base64_decode($image_array_2[1]);
 
-        $imageName = pathinfo($name, PATHINFO_FILENAME) . "_" . time() . '.png';
+        $imageName = "profile-" . time() . '.png';
         $allowed = array('jpeg','jpg','gif','tiff','png','webp');
         $file_extension = pathinfo($name, PATHINFO_EXTENSION);
 
         $path = public_path() . "/assets/images/user/profile/" . $imageName;
+        
         file_put_contents($path, $data);
 
         $user->profile_image = $imageName;
+        $user->save();
+
+        
+        return response()->json(['name' => $imageName, 'message' => "Image uploaded successfully"]);
+
+    }
+
+    public function storeCoverImage(Request $request)
+    {
+      // dd($request->all());
+        $user_id = auth()->user()->id;
+        // dd($request->all());
+        $user = User::find($user_id);
+
+
+        $data = $request->input("image");
+        $name = $request->input("fileCover");
+
+        $image_array_1 = explode(";", $data);
+        $image_array_2 = explode(",", $image_array_1[1]);
+
+        $data = base64_decode($image_array_2[1]);
+
+        $imageName = "cover-" . time() . '.png';
+        $allowed = array('jpeg','jpg','gif','tiff','png','webp');
+        $file_extension = pathinfo($name, PATHINFO_EXTENSION);
+
+        $path = public_path() . "/assets/images/user/cover/" . $imageName;
+        file_put_contents($path, $data);
+
+        $user->cover_image = $imageName;
         $user->save();
 
         

@@ -13,6 +13,7 @@ class UserEducation extends Model
       'institute',
       'start_date',
       'end_date',
+      'continue_study',
       'degree',
       'area_of_study',
       'description',

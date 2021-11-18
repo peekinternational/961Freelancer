@@ -111,7 +111,8 @@ class RegisterController extends Controller
           'email' => 'required|email|unique:users,email',
           'username' => 'required|unique:users,username',
           'password' => 'required|min:5|max:50',
-          'account_type' => 'required'
+          'account_type' => 'required',
+          'age' => 'required'
 
         ],[
 
@@ -120,13 +121,15 @@ class RegisterController extends Controller
           'mobile_number.required' => 'Enter Mobile Number',
           'address.required' => 'Enter Address',
           'password.required' => 'Enter password',
-          'account_type.required' => 'Select you account type'
+          'account_type.required' => 'Select you account type',
+          'age.required' => 'Please enter your date of birth'
         ]);
 
         // save User
         $user = new User;
         $user->username = $request->input('username');
         $user->email = $request->input('email');
+        $user->age = $request->input('age');
         // $full_number = str_replace('+','',$request->input('full'));
         // $country_code = str_replace($request->input('mobile_number'),'',$full_number);
         // $mobile_number = $request->input('mobile_number');
