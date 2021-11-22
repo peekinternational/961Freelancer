@@ -217,6 +217,11 @@ class ProfileController extends Controller
       $experience->company_title = $request->input('company_title');
       $experience->start_date = $request->input('start_date');
       $experience->end_date = $request->input('end_date');
+      if($request->input('present_job') != ''){
+        $experience->present_job = $request->input('present_job');
+      }else{
+        $experience->present_job = 'off';
+      }
       $experience->job_title = $request->input('job_title');
       $experience->job_description = $request->input('job_description');
       $experience->save();
@@ -262,6 +267,11 @@ class ProfileController extends Controller
       $education->institute = $request->input('institute');
       $education->start_date = $request->input('start_date');
       $education->end_date = $request->input('end_date');
+      if($request->input('continue_study') != ''){
+        $education->continue_study = $request->input('continue_study');
+      }else{
+        $education->continue_study = 'off';
+      }
       $education->degree = $request->input('degree');
       $education->area_of_study = $request->input('area_of_study');
       // $education->description = $request->input('description');
