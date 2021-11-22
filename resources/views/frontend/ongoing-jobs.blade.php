@@ -125,7 +125,7 @@
 							<div class="wt-dashboardboxcontent wt-jobdetailsholder">
 								<div class="wt-completejobholder">
 									<div class="wt-tabscontenttitle">
-										<h2>Completed Jobs</h2>
+										<h2>Ongoing Jobs</h2>
 									</div>
 									<div class="wt-managejobcontent">
 										@if(count($freelancerOngoingJobs) > 0)

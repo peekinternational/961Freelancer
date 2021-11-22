@@ -123,7 +123,7 @@
 }
 @media (max-width:1080px){
 	.wt-updatall .wt-btn{
-		float: left;
+		float: none;
 		clear: both;
 	}
 	.wt-chatbox .wt-messages{height: 300px;}
@@ -283,10 +283,10 @@
 	}
 }
 @media (max-width:568px){
-	.wt-accordioninnertitle span{display: block;}
+	/*.wt-accordioninnertitle span{display: block;}*/
 	.wt-accordioninnertitle .wt-rightarea{
-		float: left;
-		width: 100%;
+		/*float: left;*/
+		/*width: 100%;*/
 		margin-top:10px;
 		padding:0 !important; 
 	}
@@ -320,7 +320,7 @@
 	.wt-offerermessage{padding: 0 0 0 40px}
 	.wt-memessage{padding: 0 40px 0 0;}
 	.wt-offersmessages ul li:nth-child(2){padding: 20px;}
-	.wt-formprojectinfo .wt-attachfile em{width: 100%;}
+	/*.wt-formprojectinfo .wt-attachfile em{width: 100%;}*/
 	.wt-offerermessage .wt-description p, .wt-memessage .wt-description p{
 		width: 100%;
 		max-width: none;
@@ -330,7 +330,7 @@
 		/*float: left;*/
 		margin-top:0px; 
 	}
-	.wt-updatall{padding: 20px;}
+	.wt-updatall{padding: 20px;text-align: right;}
 	.wt-updatall span{padding-top:0; }
 	.wt-wrapper .wt-sidebarwrapper{margin-top:251px; }
 	.wt-yeartag .wt-tag{
@@ -408,7 +408,7 @@
 }
 @media (max-width:420px){
 	.wt-helpsupportcontent .wt-accordiondetails{padding: 30px 10px;}
-	.wt-attachfile li em{float: left;width: 100%;}
+	/*.wt-attachfile li em{float: left;width: 100%;}*/
 	.wt-historycontentcol .wt-historydescription{padding: 30px 10px;}
 	.wt-likeunlike span{display: block;margin-bottom:10px; }
 }

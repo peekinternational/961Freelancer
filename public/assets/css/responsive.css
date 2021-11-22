@@ -413,6 +413,9 @@
 	.wt-categorycontent:hover .wt-cattitle {top: 20%;}
 	.wt-categorycontent:hover .wt-categoryslidup{bottom: 20%;}
 	.wt-footercol {margin-top:20px; }
+	.footer-social a{
+		margin-right: 5px;
+	}
 }
 @media (max-width:568px){
 	.wt-formbannervtwo fieldset .form-group .form-control{border: 0;border-bottom: 1px solid #ddd;}

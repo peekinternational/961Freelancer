@@ -34,7 +34,7 @@
 										<h2>Hired Freelancer</h2>
 									</div>
 									<div class="wt-jobdetailscontent">
-										@if($ongoingJob > 0)
+										
 										<div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
 											<div class="wt-userlistingcontent">
 												<div class="wt-contenthead">
@@ -67,12 +67,10 @@
 												</div>
 											</div>	
 										</div>
-										@else
-
-										@endif
+										
 									</div>
 								</div>
-								@if($ongoingJob > 0)
+								
 								<div class="wt-rcvproposalholder wt-hiredfreelancer wt-tabsinfo">
 									<div class="wt-tabscontenttitle">
 										<h2>Hired Freelancer</h2>
@@ -200,7 +198,7 @@
 										</div>
 									</div>
 								</div>
-								@endif
+								
 								<!-- <div class="wt-projecthistory">
 									<div class="wt-tabscontenttitle">
 										<h2>Project History</h2>

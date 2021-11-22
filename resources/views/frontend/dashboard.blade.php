@@ -337,7 +337,7 @@
 								  	@endif
 								  	<div class="wt-updatall shadow-none mt-5">
 								  		<button type="submit" id="update_profile" form="edit-profile-form" class="wt-btn">Save &amp; Update</button>
-								  		<button type="button" class="wt-btn me-3 d-none" id="continue_education">Continue</button>
+								  		<button type="button" class="wt-btn me-md-3 d-none" id="continue_education">Continue</button>
 								  	</div>
 								  </div>
 								  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -526,7 +526,7 @@
 								  			@endforeach
 								  		</ul>
 								  	</div>
-								  	<div class="form-group mt-5 px-4 text-end">
+								  	<div class="form-group mt-5 px-1 px-md-4 text-end">
 								  		<button type="button" id="continue_portfolio" class="wt-btn">Continue</button>
 								  	</div>
 								  </div>
