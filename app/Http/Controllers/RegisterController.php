@@ -181,7 +181,7 @@ class RegisterController extends Controller
       // dd($user);
       $user->verification = 1;
       $user->save();
-      $request->session()->flash('verify_success',"Account verified.");
+      $request->session()->flash('verify_success',"Email verified.");
       return redirect('login');
     }
     // Login Function

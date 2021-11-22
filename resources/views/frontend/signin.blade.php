@@ -30,6 +30,11 @@
                       {{ session()->get('loginAlert') }}
                   </div>
               @endif
+              @if(session()->has('verify_success'))
+                  <div class="alert alert-success">
+                      {{ session()->get('verify_success') }}
+                  </div>
+              @endif
 							@csrf
 							<div class="mb-3">
 								<label class="control-label">Username</label>

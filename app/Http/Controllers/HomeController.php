@@ -143,7 +143,7 @@ class HomeController extends Controller
     public function search(Request $request){
       if($request->searchtype == 'freelancer'){
         if($request->keyword != ''){
-          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('tagline','like','%'.$request->keyword.'%')->paginate(10);
+          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('first_name','like','%'.$request->keyword.'%')->orWhere('last_name','like','%'.$request->keyword.'%')->orWhere('tagline','like','%'.$request->keyword.'%')->orWhere('username','like','%'.$request->keyword.'%')->paginate(10);
         }else{
           $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
         }

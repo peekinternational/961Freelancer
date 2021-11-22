@@ -246,7 +246,7 @@ address { font-style: italic; }
 	text-transform:uppercase;
 }
 .wt-select:after {
-	top: 0;
+	/*top: 0;
 	right: 15px;
 	z-index: 2;
 	color: #666;
@@ -256,15 +256,15 @@ address { font-style: italic; }
 	text-align: center;
 	font-size: inherit;
 	line-height: 50px;
-	font-family: 'Font Awesome 5 Pro';
+	font-family: 'Font Awesome 5 Pro';*/
 }
 .wt-select select {
 	z-index: 1;
 	width: 100%;
 	position: relative;
-	appearance: none;
+	appearance: auto;
 	-moz-appearance: none;
-	-webkit-appearance: none;
+	-webkit-appearance: auto;
 }
 .wt-select select option { color:#666; }
 .wt-displaynone{display: none;}
@@ -4264,7 +4264,7 @@ body.wt-login .wt-userlogedin{display: block;}
 }
 .wt-btntext{
 	float: left;
-	color: #55acee;
+	color: #00a651;
 	font-size: 14px;
 	margin-top:10px; 
 	text-align: right;
@@ -5032,9 +5032,22 @@ body.wt-login .wt-userlogedin{display: block;}
 	border-radius: 5px;
 	width: 100% !important;
 }
+/*.chosen-container::after{
+	top: 0;
+	right: 15px;
+	z-index: 1;
+	color: #666;
+	display: block;
+	content: '\f078';
+	position: absolute;
+	text-align: center;
+	font-size: inherit;
+	line-height: 50px;
+	font-family: 'Font Awesome 5 Pro';
+}*/
 .chosen-container-single .chosen-single{
 	margin: 0;
-	z-index: 2;
+	z-index: 1;
 	color: #999;
 	width: 100%;
 	height: 50px;

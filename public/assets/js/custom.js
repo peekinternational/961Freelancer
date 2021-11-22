@@ -111,6 +111,14 @@ if(jQuery('.wt-horizontalthemescrollbar').length > 0){
 		advanced:{autoExpandHorizontalScroll:true},
 	});
 }
+/* SHORT DESCRIPTION */
+var _readmore = jQuery('.wt-userdetails .wt-description');
+_readmore.readmore({
+	speed: 500,
+	collapsedHeight: 230,
+	moreLink: '<a class="wt-btntext" href="#">Read More</a>',
+	lessLink: '<a class="wt-btntext" href="#">Less</a>',
+});
 /* DASHBOARD MENU */
 	if(jQuery('#wt-btnmenutoggle').length > 0){
 		jQuery("#wt-btnmenutoggle").on('click', function(event) {

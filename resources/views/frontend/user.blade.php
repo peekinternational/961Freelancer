@@ -1,5 +1,15 @@
 @extends('frontend.layouts.app')
 @section('content')
+<style>
+	.wt-userdetails .wt-description[data-readmore] {
+	  transition: height 500ms;
+	  overflow: hidden;
+	}
+	.wt-userdetails .wt-description + [data-readmore-toggle], .wt-userdetails .wt-description[data-readmore] {
+	    display: block;
+	    width: 100%;
+	}
+</style>
 <!--Inner Home Banner Start-->
 <div class="wt-haslayout wt-innerbannerholder wt-innerbannerholdervtwo">
 	<div class="container">

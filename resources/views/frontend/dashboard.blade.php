@@ -48,6 +48,7 @@
 	#preview img {
 	  max-width: 100%
 	}
+	
 </style>
 @endsection
 @section('content')
@@ -129,8 +130,8 @@
 								  					<input type="number" name="hourly_rate" class="form-control" placeholder="Your Service Hourly Rate ($)" value="{{Auth::user()->hourly_rate}}">
 								  				</div>
 								  				<div class="form-group">
-								  					<label class="form-label">Age</label>
-								  					<input type="date" name="age" class="form-control" placeholder="Add Age" value="{{Auth::user()->age}}">
+								  					<label class="form-label">Date of Birth</label>
+								  					<input type="date" name="age" class="form-control" placeholder="Add Date of Birth" value="{{Auth::user()->age}}">
 								  				</div>
 								  				<div class="form-group">
 								  					<label class="form-label">Mobile Number</label>
@@ -148,8 +149,8 @@
 								  					<input type="text" name="mobile_number" class="form-control" placeholder="Add Mobile Number" value="{{Auth::user()->mobile_number}}">
 								  				</div>
 								  				<div class="form-group">
-								  					<label class="form-label">Age</label>
-								  					<input type="number" name="age" class="form-control" placeholder="Add Age" value="{{Auth::user()->age}}">
+								  					<label class="form-label">Date of Birth</label>
+								  					<input type="number" name="age" class="form-control" placeholder="Add Date of Birth" value="{{Auth::user()->age}}">
 								  				</div>
 								  				<div class="form-group">
 								  					<label class="form-label">Company/Organization Name</label>
