@@ -327,8 +327,8 @@
 	}
 	.wt-myskills li .wt-rightarea{
 		clear: both;
-		float: left;
-		margin-top:10px; 
+		/*float: left;*/
+		margin-top:0px; 
 	}
 	.wt-updatall{padding: 20px;}
 	.wt-updatall span{padding-top:0; }
