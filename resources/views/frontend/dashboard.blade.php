@@ -416,7 +416,7 @@
 								  								<input type="date" id="end_date{{$exper->id}}" name="end_date" value="{{$exper->end_date}}" class="form-control" placeholder="Ending Date ">
 								  							</div>
 								  							<div class="form-group">
-								  								<input type="checkbox" name="present_job" {{ $exper->present_job === "on" ? "checked" : "" }}>
+								  								<input type="checkbox" id="present_job{{$exper->id}}" name="present_job" {{ $exper->present_job === "on" ? "checked" : "" }}>
 								  								Present Job
 								  							</div>
 								  							<div class="form-group">
@@ -506,7 +506,7 @@
 										  						<input type="date" name="end_date" id="end_date_edu{{$educ->id}}" id="edit_end_date" class="form-control" placeholder="To Date " value="{{$educ->end_date}}" {{ $educ->continue_study === "on" ? "readonly" : "" }}>
 										  					</div>
 										  					<div class="form-group">
-										  						<input type="checkbox" name="continue_study" {{ $educ->continue_study === "on" ? "checked" : "" }}>
+										  						<input type="checkbox" id="continue_study{{$educ->id}}" name="continue_study" {{ $educ->continue_study === "on" ? "checked" : "" }}>
 										  						Continue Study
 										  					</div>
 										  					
@@ -1062,6 +1062,7 @@
         "company_title": $('#company_title'+id).val(),
         "start_date": $('#start_date'+id).val(),
         "end_date": $('#end_date'+id).val(),
+        "present_job": $('#present_job'+id).val(),
         "job_title": $('#job_title'+id).val(),
         "job_description": $('#job_description'+id).val(),
       },
@@ -1087,6 +1088,7 @@
         "institute": $('#institute'+id).val(),
         "start_date": $('#start_date_edu'+id).val(),
         "end_date": $('#end_date_edu'+id).val(),
+        "continue_study": $('#continue_study'+id).val(),
         "degree": $('#degree_edu'+id).val(),
         "area_of_study": $('#area_of_study'+id).val()
       },
