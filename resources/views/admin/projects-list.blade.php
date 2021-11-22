@@ -26,7 +26,13 @@
           <tbody>
             @foreach($projects as $project)
             <tr>
-              <td><img src="{{asset('assets/images/user/profile/'.$project->clientInfo->profile_image)}}" alt="" class="avatar-sm"></td>
+              <td>
+                @if($project->clientInfo->profile_image != '')
+                <img src="{{asset('assets/images/user/profile/'.$project->clientInfo->profile_image)}}" alt="" class="avatar-sm">
+                @else
+                <img src="{{asset('assets/images/user-login.png')}}" alt="" class="avatar-sm">
+                @endif
+              </td>
               <td>
                 <h5 class="text-truncate font-size-14"><a href="#" class="text-dark">{{$project->job_title}}</a></h5>
                 <p class="text-muted mb-0">It will be as simple as Occidental</p>
