@@ -64,7 +64,7 @@
 	.wt-teamfilter .wt-sectionhead{width: 50%;}
 	.wt-teamholder{width: 25%;}
 	.wt-fbtnarea{float: left;}
-	.wt-userprofileholder{padding: 30px;}
+	.wt-userprofileholder{padding: 30px;width: auto;}
 	.wt-profilecounter{
 		margin: 0;
 		border: 0;
@@ -388,6 +388,9 @@
 	}
 	.single-counter:nth-child(2) {
 	    border-bottom: 1px solid #e0e0e0;
+	}
+	.wt-haslayout {
+	    width: auto;
 	}
 }
 @media (max-width:720px){

@@ -28,7 +28,12 @@
 			<div class="container">
 				<div id="wt-twocolumns" class="row wt-twocolumns wt-haslayout">
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-						<aside id="wt-sidebar" class="wt-sidebar">
+						<div class="wt-usersidebaricon">
+							<span class="fa fa-cog wt-usersidebardown">
+								<i></i>
+							</span>
+						</div>
+						<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar">
 							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Categories</h2>
