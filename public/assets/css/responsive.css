@@ -92,8 +92,13 @@
 		vertical-align: middle;
 	}
 	.wt-userlisting .wt-userlistingimg{
+		max-height: 115px;
+	    max-width: 100px;
+	}
+	.wt-userlisting .wt-userlistingimg{
 		float: none;
 		margin: 0 auto 20px;
+		overflow: hidden;
 	}
 	.wt-proposalhead{max-width: none;}
 	.wt-proposalholder .wt-btnarea{

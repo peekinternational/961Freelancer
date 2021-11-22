@@ -119,6 +119,11 @@ _readmore.readmore({
 	moreLink: '<a class="wt-btntext" href="#">Read More</a>',
 	lessLink: '<a class="wt-btntext" href="#">Less</a>',
 });
+/* SIDEBAR DROPDOWN */
+jQuery('.wt-usersidebardown').on('click', function(event){
+	event.preventDefault();
+	jQuery('.wt-usersidebar').slideToggle();
+});
 /* DASHBOARD MENU */
 	if(jQuery('#wt-btnmenutoggle').length > 0){
 		jQuery("#wt-btnmenutoggle").on('click', function(event) {

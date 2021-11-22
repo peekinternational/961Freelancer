@@ -171,6 +171,9 @@
       </li>
       @if(Auth::user() != '')
       <li>
+        <a href="{{ route('job.index') }}">Browse Jobs</a>
+      </li>
+      <li>
         <a href="{{url('profile')}}">Profile</a>
       </li>
       <li>
