@@ -109,13 +109,13 @@
 										<li class="nav-item">
 											<a class="active" id="wt-password-tab" data-bs-toggle="pill" data-bs-target="#wt-password" type="button" role="tab" aria-controls="wt-password" aria-selected="true">Password</a>
 										</li>
-										<li class="nav-item">
+										<li class="nav-item d-none">
 											<a class="" id="wt-emailnoti-tab" data-bs-toggle="pill" data-bs-target="#wt-emailnoti" type="button" role="tab" aria-controls="wt-emailnoti" aria-selected="true">Email Notifications</a>
 										</li>
 										<li class="nav-item">
 											<a class="" id="wt-verify-tab" data-bs-toggle="pill" data-bs-target="#wt-verify" type="button" role="tab" aria-controls="wt-verify" aria-selected="true">Account Verification</a>
 										</li>
-										<li class="nav-item">
+										<li class="nav-item d-none">
 											<a class="" id="wt-deleteaccount-tab" data-bs-toggle="pill" data-bs-target="#wt-deleteaccount" type="button" role="tab" aria-controls="wt-deleteaccount" aria-selected="true">Delete Account</a>
 										</li>
 									</ul>
