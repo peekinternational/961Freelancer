@@ -32,7 +32,7 @@
 									@if(Auth::user()->verification == 2)
 										<div class="wt-btnarea"><a href="{{url('job-proposal/'.$job->job_id)}}" class="wt-btn rounded-pill">Send Proposal</a></div>
 									@else
-										<div class="wt-btnarea"><a href="{{url('account-setting')}}" class="wt-btn rounded-pill" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your account to send proposal">Verify Account</a></div>
+										<div class="wt-btnarea"><a href="{{url('account-setting#verify_account')}}" class="wt-btn rounded-pill" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify your account to send proposal">Verify Account</a></div>
 									@endif
 								@endif
 							@endif
@@ -96,6 +96,7 @@
 							</div>
 							<div class="wt-clicksavearea">
 								<span>Job ID: {{$job->job_id}}</span>
+								@if($job->user_id != Auth::user()->id)
 								<a href="javascrip:void(0);" onclick="saveJob({{$job->id}})" class="wt-clicksavebtn rounded-pill save{{$job->id}}" >
 								<!-- @if($job->saveJobs != '')
 									@foreach($job->saveJobs as $save)
@@ -112,6 +113,7 @@
 									<i class="far fa-heart"></i> Click to save
 
 								</a>
+								@endif
 							</div>
 						</div>
 						<div class="wt-widget wt-companysinfo-jobsingle">
@@ -125,7 +127,7 @@
 										<!-- <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a> -->
 										<h2>{{$job->clientInfo->first_name}} {{$job->clientInfo->last_name}}</h2>
 									</div>
-									<ul class="wt-postarticlemeta">
+									<ul class="wt-postarticlemeta d-none">
 										<li>
 											<a href="javascript:void(0);">
 												<span>Open Jobs</span>

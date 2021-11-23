@@ -188,7 +188,7 @@ class SocialAuthController extends Controller
           'password' => $request->password,
           'user_status' => 'online',
           'account_type' => $request->account_type,
-          'verification' = 1;
+          'verification' => 1,
       ]);
       Auth::login($newUser);
       return redirect('profile');

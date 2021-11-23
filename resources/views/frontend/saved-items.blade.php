@@ -87,7 +87,7 @@
 										</div>
 										<div class="wt-likedfreelancers wt-haslayout">
 											@foreach($saveFreelancers as $savefree)
-											<div class="wt-userlistinghold wt-featured">
+											<div class="wt-userlistinghold wt-featured saveuser{{$savefree->userData->id}}">
 												<!-- <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span> -->
 												<figure class="wt-userlistingimg">
 													<img src="{{asset('assets/images/user/profile/'.$savefree->userData->profile_image)}}" alt="image description">
@@ -102,7 +102,7 @@
 														<ul class="wt-userlisting-breadcrumb">
 															<li><span><i class="far fa-money-bill-alt"></i> ${{$savefree->userData->hourly_rate}}.00 / hr</span></li>
 															<li><span><!-- <img src="images/flag/img-02.png" alt="img description"> --> {{$savefree->userData->country}}</span></li>
-															<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Saved</a></li>
+															<li><a href="javascript:void(0);" class="wt-clicksave" onclick="saveUser({{$savefree->userData->id}});"><i class="fa fa-heart"></i> un saved</a></li>
 														</ul>
 													</div>
 													<div class="wt-rightarea">
@@ -173,4 +173,33 @@
 </div>
 @endsection
 @section('script')
+<script>
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+	function saveUser(id){
+   	$.ajax({
+	    url:"{{ url('save-freelancer') }}",
+	    method:"POST",
+	    data:{
+	    	"_token": CSRF_TOKEN,
+        "freelancer_id": id,
+        "save_type": 'Freelancer',
+      },
+	    success:function(data){
+	    	$('.saveuser'+id).addClass('d-none');
+	    	console.log(data);
+	    	if (data == 1) {
+	    		$('.save'+id).html('<i class="fa fa-heart"></i> Saved');
+	    	}
+	    	if(data == 2){
+	    		$('.save'+id).html('<i class="fal fa-heart"></i> Save');
+	    	}
+	    	// $("#add-project-form")[0].reset();
+	    	// $('#pills-home-tab').removeClass('active');
+	    	// $('#pills-profile-tab').addClass('active');
+	    	// $('#pills-home').removeClass('show active');
+	    	// $('#pills-profile').addClass('show active');
+    	}
+   	})
+	}
+</script>
 @endsection

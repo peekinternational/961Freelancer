@@ -1891,7 +1891,7 @@ jQuery(document).ready(function($){
   z-index: 1;
   font-family: Montserrat;
   border: 1px solid #ccc;
-  width: 14rem;
+  width: 16rem;
   height: 20rem;
   overflow-y: scroll;
   padding: 1rem;
@@ -1902,6 +1902,7 @@ jQuery(document).ready(function($){
   top: -296px !important;
   left: 16px !important;
   font-size: 14px;
+  overflow-x: hidden;
 }
 .emoji-picker__search {
   display: flex;

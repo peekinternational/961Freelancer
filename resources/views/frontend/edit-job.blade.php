@@ -52,14 +52,14 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 						<div class="wt-dashboardbox">
 							<div class="wt-dashboardboxtitle">
-								<h2>Post a Job</h2>
+								<h2>Edit a Job</h2>
 							</div>
 							<div class="wt-dashboardboxcontent">
 								<div class="wt-jobdescription wt-tabsinfo">
 									<div class="wt-tabscontenttitle">
 										<h2>Job Description</h2>
 									</div>
-									<form class="wt-formtheme wt-userform wt-userformvtwo" method="post" action="{{ route('job.store') }}" enctype="multipart/form-data" id="job-post-form">
+									<form class="wt-formtheme wt-userform wt-userformvtwo" method="post" action="{{ url('update-job') }}" enctype="multipart/form-data" id="job-post-form">
 										@if ($errors->any())
 			               <div class="alert alert-danger">
 			                  <ul>
@@ -70,18 +70,19 @@
 			               </div>
 			              @endif
 										@csrf
+										<input type="hidden" name="id" value="{{$getSingleData->id}}">
 										<fieldset>
 											<div class="form-group">
-												<input type="text" name="job_title" class="form-control" minlength="30" placeholder="Job Title" title="Job title should be minimum 30 charaters">
+												<input type="text" name="job_title" class="form-control" minlength="30" placeholder="Job Title" title="Job title should be minimum 30 charaters" value="{{$getSingleData->job_title}}">
 											</div>
 											
 											<div class="form-group form-group-half wt-formwithlabel">
 												<span class="wt-select">
 													<label for="selectoption">Service Level:</label>
 													<select name="service_level">
-														<option value="Expert">Expert</option>
-														<option value="Intermediate">Intermediate</option>
-														<option value="Beginner">Beginner</option>
+														<option value="Expert" {{$getSingleData->service_level == 'Expert' ? 'selected' : ''}}>Expert</option>
+														<option value="Intermediate" {{$getSingleData->service_level == 'Intermediate' ? 'selected' : ''}}>Intermediate</option>
+														<option value="Beginner" {{$getSingleData->service_level == 'Beginner' ? 'selected' : ''}}>Beginner</option>
 													</select>
 												</span>
 											</div>
@@ -89,34 +90,34 @@
 												<span class="wt-select">
 													<label for="selectoption">Job Type:</label>
 													<select name="job_type" onchange="jobType(this)">
-														<option value="fixed">Fixed</option>
-														<option value="hourly">Hourly</option>
+														<option value="fixed" {{$getSingleData->job_type == 'fixed' ? 'selected' : ''}}>Fixed</option>
+														<option value="hourly" {{$getSingleData->job_type == 'hourly' ? 'selected' : ''}}>Hourly</option>
 													</select>
 												</span>
 											</div>
 											<div id="hourly_price" class="d-none">
 												<div class="form-group  form-group-half">
 													<!-- <label for="selectoption">Hourly Price:</label> -->
-													<input type="text" name="hourly_min_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Min Price $10">
+													<input type="text" name="hourly_min_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Min Price $10" value="{{$getSingleData->hourly_min_price}}">
 												</div>
 												<div class="form-group  form-group-half">
 													<!-- <label for="selectoption">Hourly Price:</label> -->
-													<input type="text" name="hourly_max_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Max Price $40">
+													<input type="text" name="hourly_max_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Max Price $40" value="{{$getSingleData->hourly_max_price}}">
 												</div>
 											</div>
 											
 											<div class="form-group" id="fixed_price">
 												<!-- <label for="selectoption">Fixed Price:</label> -->
-												<input type="text" name="fixed_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Fixed Price $500">
+												<input type="text" name="fixed_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Fixed Price $500" value="{{$getSingleData->fixed_price}}">
 											</div>
 											<div class="form-group form-group-half wt-formwithlabel">
 												<span class="wt-select">
 													<label for="selectoption">Project Length:</label>
 													<select name="job_duration">
-														<option value="Less than 1 month">Less than 1 month</option>
-														<option value="1 to 3 months">1 to 3 months</option>
-														<option value="3 to 6 months">3 to 6 months</option>
-														<option value="More than 6 months">More than 6 months</option>
+														<option value="Less than 1 month" {{$getSingleData->job_duration == 'Less than 1 month' ? 'selected' : ''}}>Less than 1 month</option>
+														<option value="1 to 3 months" {{$getSingleData->job_duration == '1 to 3 months' ? 'selected' : ''}}>1 to 3 months</option>
+														<option value="3 to 6 months" {{$getSingleData->job_duration == '3 to 6 months' ? 'selected' : ''}}>3 to 6 months</option>
+														<option value="More than 6 months" {{$getSingleData->job_duration == 'More than 6 months' ? 'selected' : ''}}>More than 6 months</option>
 													</select>
 												</span>
 											</div>
@@ -143,7 +144,7 @@
 													<!-- <label for="selectoption">Job Category:</label> -->
 													<select name="job_cat" form="job-post-form" class="chosen-select Skills">
 														@foreach($categories as $category)
-														<option value="{{$category->category_name}}">{{$category->category_name}}</option>
+														<option value="{{$category->category_name}}" {{$getSingleData->job_cat == $category->category_name ? 'selected' : ''}}>{{$category->category_name}}</option>
 														@endforeach
 													</select>
 												</span>
@@ -162,7 +163,7 @@
 													<!-- <label for="selectoption">Job Category:</label> -->
 													<select name="job_location" form="job-post-form" class="select2 Skills">
 														@foreach($countries as $country)
-														<option value="{{$country->name}}">{{$country->name}}</option>
+														<option value="{{$country->name}}" {{$getSingleData->job_location == $country->name ? 'selected' : ''}}>{{$country->name}}</option>
 														@endforeach
 													</select>
 												</span>
@@ -177,7 +178,7 @@
 									<div class="wt-formtheme wt-userform wt-userformvtwo">
 										<fieldset>
 											<div class="form-group">
-												<textarea name="job_description" form="job-post-form" cols="10" rows="5" class="form-control" minlength="50" placeholder="Add Job Detail Here" title="Description should be minimum 50 charaters"></textarea>
+												<textarea name="job_description" form="job-post-form" cols="10" rows="5" class="form-control" minlength="50" placeholder="Add Job Detail Here" title="Description should be minimum 50 charaters">{{$getSingleData->job_description}}</textarea>
 											</div>
 										</fieldset>
 									</div>
@@ -191,7 +192,7 @@
 											<div class="form-group w-100">
 												<select class="chosen-select Skills" data-placeholder="Skills" name="job_skills[]" form="job-post-form" multiple>
 													@foreach($skills as $skill)
-													<option value="{{$skill->skill_name}}">{{$skill->skill_name}}</option>
+													<option value="{{$skill->skill_name}}" @foreach(explode(',',$getSingleData->job_skills) as $job_skl){{$job_skl == $skill->skill_name ? 'selected': ''}}   @endforeach>{{$skill->skill_name}}</option>
 													@endforeach
 												</select>
 											</div>

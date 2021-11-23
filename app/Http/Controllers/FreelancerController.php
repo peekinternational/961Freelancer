@@ -116,7 +116,7 @@ class FreelancerController extends Controller
     // Saved Items
     public function savedItems(Request $request){
       $user_id = auth()->user()->id;
-      $getSavedFreelancer = SaveItem::with('userData')->whereuser_id($user_id)->where('save_type','Freelancer')->get();
+      $getSavedFreelancer = SaveItem::with('userData')->whereuser_id($user_id)->where('save_type','Freelancer')->where('status',1)->get();
       $countFreelancer = $getSavedFreelancer->count();
 
       $getSavedjob = SaveItem::with('jobData')->whereuser_id($user_id)->where('save_type','Job')->get();

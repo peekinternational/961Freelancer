@@ -96,6 +96,8 @@ Route::middleware(['auth'])->group(function () {
   })->name('account-setting');
 	// Jobs
 	Route::resource('job',JobsController::class);
+  Route::post('update-job', [JobsController::class, 'updateJob'])->name('job.updateJob');
+
 	Route::get('job-detail/{id}',[JobsController::class, 'show'])->name('job.show');
 	Route::get('manage-jobs',[JobsController::class, 'manageJobs'])->name('job.manage-jobs');
 

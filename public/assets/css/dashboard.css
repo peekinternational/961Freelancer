@@ -710,7 +710,8 @@ body{background:#f2f3fa;}
 	display: block;
 	padding: 20px 30px;
 	position: relative;
-	font:400 16px/20px 'Poppins', Arial, Helvetica, sans-serif;;
+	font:400 16px/20px 'Poppins', Arial, Helvetica, sans-serif;
+	-webkit-appearance: none;
 }
 .wt-tabstitle li a.active{background: #fff;}
 .wt-tabscontent{

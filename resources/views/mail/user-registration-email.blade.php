@@ -78,8 +78,9 @@
       </center>
       <hr>
       <p class='bg-gray'> Dear {{$user->username}} , </p>
-      <p class="bg-gray">Thank you for Registration.</p>
+      <p class="bg-gray" style="text-align: center;">Verify your email address to complete registration.</p>
       <br>
+      <p>Thanks for your interest in joining 961Freelancer! To complete your registration, we need you to verify your email address.</p>
       <center>
         <a style="background-color: #ed1c24; border-radius: 35px;" href="{{url('/verify-account/'.$user->username.'/'.$user->remember_token)}}" class='btn pt-2'>
           Click To Verify Account

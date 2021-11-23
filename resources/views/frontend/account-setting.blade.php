@@ -506,5 +506,16 @@
              return 'Strong'  
          }  
     }
+    var url = window.location.href;
+    var activeTab = url.substring(url.indexOf("#") + 1);
+    if(activeTab == 'verify_account'){
+    // alert(activeTab);
+    	$('#wt-password-tab').removeClass('active');
+    	$('#wt-verify-tab').addClass('active');
+    	$('#wt-password').removeClass('show active');
+    	$('#wt-verify').addClass('show active');
+    }
+    
+    // wt-verify-tab
 </script>
 @endsection

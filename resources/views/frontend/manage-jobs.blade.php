@@ -31,7 +31,7 @@
 							<div class="wt-dashboardboxcontent wt-jobdetailsholder">
 								<div class="wt-freelancerholder">
 									<div class="wt-tabscontenttitle">
-										<h2>Posted Jobs</h2>
+										<h2>My Jobs</h2>
 									</div>
 									<div class="wt-managejobcontent wt-verticalscrollbar">
 										@foreach($myJobs as $job)
@@ -53,7 +53,9 @@
 												</div>
 												<div class="wt-rightarea">
 													<div class="wt-btnarea">
-														<a href="{{ route('job.show',$job->job_id)}}" class="wt-btn">VIEW DETAILS</a>
+														<a href="{{url('job/'.$job->id.'/edit')}}" class="wt-btn">Edit</a>
+														<a href="javascript:void(0);" class="wt-btn" onclick="deleteBatch({{$job->id}})">Delete</a>
+														<a href="{{ route('job.show',$job->job_id)}}" class="wt-btn">VIEW</a>
 													</div>
 													<div class="wt-hireduserstatus">
 														<h4>{{App\Models\Proposal::getProposalCount($job->job_id)}}</h4><span>Proposals</span>
@@ -118,6 +120,73 @@
 		<!--Main End-->
 	</div>
 </div>
+<div class="modal" id="deleteModel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-content-demo">
+      <div class="modal-header">
+        <h6 class="modal-title">Alert</h6><button aria-label="Close" class="close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <form id="deleteData" > 
+        @csrf
+         @method('DELETE')
+      <input type="hidden" name="projectId" id="projectId">
+      <div class="modal-body">
+        <h6></h6>
+        <p>Are you sure you want to delete this job ?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn ripple btn-danger" id="confirmDelete" type="submit"> Delete </button>
+        <button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
 @endsection
 @section('script')
+<script>
+	$.ajaxSetup({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+	
+	$('#deleteData').on('submit' , function(event){
+	  event.preventDefault();
+	  var data = $("#deleteData").serialize();
+	  $projectId = $("#projectId").val();
+	  console.log($projectId)
+
+	     $.ajax({
+	      url: "{{url('job')}}/"+$projectId,
+	      type: 'DELETE',
+	      data: data,
+	      processData: false,
+
+	      success: (response)=>{
+	          
+	          if (response.status == 'true') {
+
+	              $.notify(response.message , 'success'  );
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/manage-jobs";
+
+	          }else{
+	              $.notify(response.message , 'error');
+
+	          }
+	      },
+	      error: (errorResponse)=>{
+	          $.notify( errorResponse, 'error'  );
+
+
+	      }
+	  })
+
+	});
+
+	function deleteBatch(id) {
+	  $("#deleteModel").modal('show');
+	  $("#projectId").val(id);
+	}
+</script>
 @endsection

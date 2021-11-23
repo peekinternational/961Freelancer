@@ -76,10 +76,11 @@
 									  <li class="nav-item" role="presentation">
 									    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Personal Details &amp; Skills</a>
 									  </li>
+									  @if(Auth::user()->account_type != 'Client')
 									  <li class="nav-item" role="presentation">
 									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Employment &amp; Education</a>
 									  </li>
-									  @if(Auth::user()->account_type != 'Client')
+									  
 									  <li class="nav-item" role="presentation">
 									    <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Portfolio &amp; Certifications</a>
 									  </li>
@@ -150,7 +151,7 @@
 								  				</div>
 								  				<div class="form-group">
 								  					<label class="form-label">Date of Birth</label>
-								  					<input type="number" name="age" class="form-control" placeholder="Add Date of Birth" value="{{Auth::user()->age}}">
+								  					<input type="date" name="age" class="form-control" placeholder="Add Date of Birth" value="{{Auth::user()->age}}">
 								  				</div>
 								  				<div class="form-group">
 								  					<label class="form-label">Company/Organization Name</label>
@@ -184,6 +185,8 @@
 								  							<em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
 								  						</div>
 								  					</div>
+								  					<p class="mb-0">Note: Please upload only facial photos</p>
+								  					<p id="profile_img_size" class="d-none"><span class="text-danger">Please uplaod image less than 2MB.</span></p>
 								  					<div class="form-group">
 								  						<ul class="wt-attachfile wt-attachfilevtwo">
 								  							<li class="wt-uploadingholder">
@@ -236,6 +239,7 @@
 								  							<em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
 								  						</div>
 								  					</div>
+								  					<p id="cover_img_size" class="d-none"><span class="text-danger">Please uplaod image less than 4MB.</span></p>
 								  					<div class="form-group">
 								  						<ul class="wt-attachfile wt-attachfilevtwo">
 								  							<li class="wt-uploadingholder">
@@ -246,7 +250,7 @@
 								  											@if(Auth::user()->cover_image)
 								  											<img src="{{asset('assets/images/user/cover/'.Auth::user()->cover_image)}}" id="cover" alt="img description">
 								  											@else
-								  											<img id="cover" src="{{asset('assets/images/company/img-10.jpg')}}" alt="img description">
+								  											<img src="{{asset('assets/images/company/img-10.jpg')}}" alt="img description">
 								  											@endif
 								  											<i class="fa fa-check"></i>
 								  										</label>
@@ -336,8 +340,8 @@
 								  	</div>
 								  	@endif
 								  	<div class="wt-updatall shadow-none mt-5">
+								  		<button type="button" class="wt-btn ms-md-3 d-none" id="continue_education">Continue</button>
 								  		<button type="submit" id="update_profile" form="edit-profile-form" class="wt-btn">Save &amp; Update</button>
-								  		<button type="button" class="wt-btn me-md-3 d-none" id="continue_education">Continue</button>
 								  	</div>
 								  </div>
 								  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -963,15 +967,20 @@
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         console.log(reader);
-        reader.onload = function (e) {
-            $('#profile')
-                .attr('src', e.target.result);
-        };
+        if(input.files[0].size < 2000000){
+        	reader.onload = function (e) {
+        	    $('#profile')
+        	        .attr('src', e.target.result);
+        	};
+    			var filename = $('#uploadFile').val().split('\\').pop();
+  		    $('#img_name').html(filename);
+        	reader.readAsDataURL(input.files[0]);
+    		}
+        
 
-        reader.readAsDataURL(input.files[0]);
     }
-    var filename = $('#uploadFile').val().split('\\').pop();
-    $('#img_name').html(filename);
+    
+    
    
 	}
  	function coverImage(input) {
@@ -979,15 +988,20 @@
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         console.log(reader);
-        reader.onload = function (e) {
-            $('#cover')
-                .attr('src', e.target.result);
-        };
+        if(input.files[0].size > 4000000){
+        	reader.onload = function (e) {
+        	    $('#cover')
+        	        .attr('src', e.target.result);
+        	};
 
-        reader.readAsDataURL(input.files[0]);
+        	reader.readAsDataURL(input.files[0]);
+        	var filename = $('#filew').val().split('\\').pop();
+        	$('#covrimg_name').html(filename);
+        }
+        
+
     }
-    var filename = $('#filew').val().split('\\').pop();
-    $('#covrimg_name').html(filename);
+    
    
 	}
 
@@ -1206,12 +1220,16 @@
 	    var fileName = URL.createObjectURL(event.target.files[0]);
 	    var preview = document.getElementById("preview");
 	    var previewImg = document.createElement("img");
-	    previewImg.setAttribute("src", fileName);
-	    preview.innerHTML = "";
-	    preview.appendChild(previewImg);
+	    
 
-	    var filename = $('#uploadFile').val().split('\\').pop();
-	    $('#img_name').html(filename);
+	    if(event.target.files[0].size < 2000000){
+	    	preview.innerHTML = "";
+	    	preview.appendChild(previewImg);
+	    	previewImg.setAttribute("src", fileName);
+	    	var filename = $('#uploadFile').val().split('\\').pop();
+	    	$('#img_name').html(filename);
+	    }
+	    
 	}
 	function drag() {
 	    document.getElementById('uploadFile').parentNode.className = 'draging dragBox';
@@ -1225,12 +1243,15 @@
 	    var fileName = URL.createObjectURL(event.target.files[0]);
 	    var preview = document.getElementById("coverPreview");
 	    var previewImg = document.createElement("img");
-	    previewImg.setAttribute("src", fileName);
-	    preview.innerHTML = "";
-	    preview.appendChild(previewImg);
-
-	    var filename = $('#fileCover').val().split('\\').pop();
-	    $('#covrimg_name').html(filename);
+	    
+	    if(event.target.files[0].size < 4000000){
+	    	previewImg.setAttribute("src", fileName);
+	    	preview.innerHTML = "";
+	    	preview.appendChild(previewImg);
+	    	var filename = $('#fileCover').val().split('\\').pop();
+	    	$('#covrimg_name').html(filename);
+	    }
+	    
 	}
 	function dragCover() {
 	    document.getElementById('fileCover').parentNode.className = 'draging dragBox';
@@ -1272,12 +1293,19 @@
 	  }
 	  $(document).on('change','#uploadFile', function(){
 	  	var size = $(this)[0].files[0].size; 
+	  	// alert(size);
+
 	  	var ext = $(this).val().split('.').pop().toLowerCase();
 	  	if($.inArray(ext,['jpeg','jpg','gif','png']) == -1){
 	  		alert('Your File Extension Is Not Allowed.');
 	  		$(this).val('');
 	  	}else{
-	  		crop(this);
+	  		if(size > 2000000){
+	  			$('#profile_img_size').removeClass('d-none');
+	  			$(this).val('');
+	  		}else{
+	  			crop(this);
+	  		}
 	  	}
 	  });
 	  $('.crop_image').click(function(event){
@@ -1338,7 +1366,12 @@
 	  		alert('Your File Extension Is Not Allowed.');
 	  		$(this).val('');
 	  	}else{
-	  		crop_cover(this);
+	  		if(size > 4000000){
+	  			$('#cover_img_size').removeClass('d-none');
+	  			$(this).val('');
+	  		}else{
+	  			crop_cover(this);
+	  		}
 	  	}
 	  });
 	  $('.crop_image_cover').click(function(event){

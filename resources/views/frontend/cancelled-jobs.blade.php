@@ -248,7 +248,7 @@
 	    }
 	});
 	function repostJob(id){
-		alert(id);
+		// alert(id);
 	  $.ajax({
 	      url: "{{url('job')}}/"+id,
 	      type: 'PATCH',
