@@ -62,10 +62,10 @@
 			{{ View::make('frontend.includes.dashboard-sidebar') }}
 			<!--Sidebar Start-->
 			<!--Register Form Start-->
-			<section class="wt-haslayout">
+			<section class="wt-haslayout wt-dbsectionspace">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-						<div class="wt-haslayout wt-dbsectionspace">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-9">
+						<div class="wt-haslayout">
 							<div class="wt-dashboardbox wt-dashboardtabsholder">
 								<div class="wt-dashboardboxtitle">
 									<h2>My Profile</h2>
@@ -76,6 +76,11 @@
 									  <li class="nav-item" role="presentation">
 									    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Personal Details &amp; Skills</a>
 									  </li>
+									  @if(Auth::user()->account_type == 'Client')
+									  <li class="nav-item" role="presentation">
+									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Employment History</a>
+									  </li>
+									  @endif
 									  @if(Auth::user()->account_type != 'Client')
 									  <li class="nav-item" role="presentation">
 									    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Employment &amp; Education</a>
@@ -340,7 +345,7 @@
 								  	</div>
 								  	@endif
 								  	<div class="wt-updatall shadow-none mt-5">
-								  		<button type="button" class="wt-btn ms-md-3 d-none" id="continue_education">Continue</button>
+								  		<button type="button" class="wt-btn ms-md-3 d-none" id="continue_education" style="background: #00a651;">Continue</button>
 								  		<button type="submit" id="update_profile" form="edit-profile-form" class="wt-btn">Save &amp; Update</button>
 								  	</div>
 								  </div>
@@ -440,6 +445,7 @@
 								  			@endforeach
 								  		</ul>
 								  	</div>
+								  	@if(Auth::user()->account_type != 'Client')
 								  	<div class="wt-userexperience">
 								  		<div class="wt-tabscontenttitle wt-addnew">
 								  			<h2>Add Your Education</h2>
@@ -531,8 +537,9 @@
 								  		</ul>
 								  	</div>
 								  	<div class="form-group mt-5 px-1 px-md-4 text-end">
-								  		<button type="button" id="continue_portfolio" class="wt-btn">Continue</button>
+								  		<button type="button" id="continue_portfolio" class="wt-btn" style="background: #00a651;">Continue</button>
 								  	</div>
+								  	@endif
 								  </div>
 								  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 								  	<div class="wt-addprojectsholder wt-tabsinfo">
@@ -709,6 +716,43 @@
 							<span>Update all the latest changes made by you, by just clicking on “Save &amp; Continue” button.</span>
 							<a class="wt-btn" href="javascript:void(0);">Save &amp; Update</a>
 						</div> -->
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+						<aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave">
+							<div class="wt-proposalsr">
+								<div class="wt-proposalsrcontent">
+									<figure>
+										<img src="{{asset('assets/images/thumbnail/img-17.png')}}" alt="image">
+									</figure>
+									<div class="wt-title">
+										<h3>{{App\Models\Job::clientOngoingCount(Auth::user()->id)}}</h3>
+										<span>Total Ongoing Jobs</span>
+									</div>
+								</div> 
+							</div>
+							<div class="wt-proposalsr">
+								<div class="wt-proposalsrcontent wt-componyfolow">
+									<figure>
+										<img src="{{asset('assets/images/thumbnail/img-16.png')}}" alt="image">
+									</figure>
+									<div class="wt-title">
+										<h3>{{App\Models\Job::clientCompletedCount(Auth::user()->id)}}</h3>
+										<span>Total Completed Jobs</span>
+									</div>
+								</div> 
+							</div>								
+							<div class="wt-proposalsr">
+								<div class="wt-proposalsrcontent  wt-freelancelike">
+									<figure>
+										<img src="{{asset('assets/images/thumbnail/img-15.png')}}" alt="image">
+									</figure>
+									<div class="wt-title">
+										<h3>{{App\Models\Job::clientCancelledCount(Auth::user()->id)}}</h3>
+										<span>Total Cancelled Jobs</span>
+									</div>
+								</div> 
+							</div>								
+						</aside>
 					</div>
 				</div>
 			</section>

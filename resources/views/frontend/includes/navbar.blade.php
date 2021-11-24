@@ -3,6 +3,11 @@
   <div class="alert alert-warning text-black text-center py-1 mb-0" role="alert">Please upload your ID/Passport image to fully verify your account in <strong>24 hours</strong>. click here to verify <a href="{{url('account-setting#verify_account')}}">Account Setting</a></div>
   @endif
 @endif
+@if(Auth::user() != '' && Auth::user()->account_type == 'Client')
+  @if(Auth::user()->verification == 1)
+  <div class="alert alert-warning text-black text-center py-1 mb-0" role="alert">Please update your payments details to fully verify your account in <strong>24 hours</strong>. click here to verify <a href="{{url('account-setting#verify_account')}}">Account Setting</a></div>
+  @endif
+@endif
 <header>
   <div class="home-header">
     <div class="container">

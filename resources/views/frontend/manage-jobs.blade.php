@@ -8,6 +8,10 @@
 		z-index: 29;
 		background: #fff;
 	}
+	.wt-userlistingvtwo .wt-userlistingcontent .wt-rightarea .wt-btnarea {
+    padding: 32px 0;
+    width: auto;
+	}
 </style>
 @endsection
 @section('content')
@@ -23,7 +27,7 @@
 			<!--Register Form Start-->
 			<section class="wt-haslayout wt-dbsectionspace">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-9">
 						<div class="wt-dashboardbox">
 							<div class="wt-dashboardboxtitle">
 								<h2>Manage Jobs</h2>
@@ -59,12 +63,11 @@
 													</div>
 													<div class="wt-hireduserstatus">
 														<h4>{{App\Models\Proposal::getProposalCount($job->job_id)}}</h4><span>Proposals</span>
-														<ul class="wt-hireduserimgs">
+														<!-- <ul class="wt-hireduserimgs">
 															@foreach($job->proposal as $proposalUser)
 															<li><figure><img src="{{asset('assets/images/user/profile/'.App\Models\Proposal::freelancer($proposalUser->user_id)->profile_image)}}" alt="img description" class="mCS_img_loaded"></figure></li>
 															@endforeach
-															<!-- <li><figure><img src="{{asset('assets/images/user/userlisting/img-05.jpg')}}" alt="img description"></figure></li> -->
-														</ul>
+														</ul> -->
 													</div>
 												</div>
 											</div>	

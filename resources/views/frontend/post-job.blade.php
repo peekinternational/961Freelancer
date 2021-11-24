@@ -161,6 +161,7 @@
 												<span class="wt-select">
 													<!-- <label for="selectoption">Job Category:</label> -->
 													<select name="job_location" form="job-post-form" class="select2 Skills">
+														<option value="None">None</option>
 														@foreach($countries as $country)
 														<option value="{{$country->name}}">{{$country->name}}</option>
 														@endforeach

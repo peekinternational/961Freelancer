@@ -87,7 +87,7 @@
               @csrf
               <div class="mb-3 has-error">
                 <label class="control-label">Username</label>
-                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" pattern="\S(?!.*__.*)[a-zA-Z_.]*" value="" onkeyup="ValidateUsername()" required="">
+                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" pattern="\S(?!.*_.*_)[a-zA-Z_.]*" value="" onkeyup="ValidateUsername()" required="">
                  <div class="invalid-feedback">
                    Please enter Username.
                 </div>
@@ -405,7 +405,7 @@
       var username = document.getElementById("username").value;
       var lblError = document.getElementById("lblError");
       lblError.innerHTML = "";
-      var expr = /^\S(?!.*__.*)[a-zA-Z_.]*$/;
+      var expr = /^\S(?!.*_.*_)[a-zA-Z_.]*$/;
       if (!expr.test(username)) {
           lblError.innerHTML = "Only Alphabets, one Underscore allowed in Username.";
       }
