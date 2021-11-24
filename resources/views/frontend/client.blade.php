@@ -3,6 +3,10 @@
 <link rel="stylesheet" media="screen" href="{{ asset('assets/css/dbresponsive.css') }}">
 <script src="{{asset('assets/js/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
 <style>
+	.home-header{
+		z-index: 29;
+		background: #fff;
+	}
 	.mCSB_inside > .mCSB_container {
 	    margin: 0;
 	    margin-right: 0 !important;
