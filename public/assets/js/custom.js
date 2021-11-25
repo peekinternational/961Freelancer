@@ -4,7 +4,11 @@ $(".overlay-bg").on("click", function () {
 });
 
 
-
+/* PRELOADER*/
+jQuery(window).on('load', function() {
+	jQuery(".preloader-outer").delay(1000).fadeOut();
+	jQuery(".loader").delay(500).fadeOut("slow");
+});
 
 $(".menubar").on("click", function () {
     $(".all-content, .home-content, .header-top.sticky").addClass("active");

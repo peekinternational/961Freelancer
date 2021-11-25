@@ -75,7 +75,7 @@
 											<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
 												<!-- <li><span><i class="far fa-money-bill-alt"></i> ${{$client->hourly_rate}}.00 / hr</span></li> -->
 												<li><span><i class="fal fa-map-marker-alt"></i> {{$client->country}}</span></li>
-												<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
+												<!-- <li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li> -->
 											</ul>
 											<div class="wt-description">
 												<p>{{$client->description}}</p>
@@ -110,7 +110,7 @@
 				<!-- User Listing Start-->
 				<div class="container">
 					<div id="wt-twocolumns" class="row wt-twocolumns wt-haslayout justify-content-center">
-						<div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 col-xl-11 px-md-0 float-left">
+						<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 px-md-0 float-left">
 							<div class="wt-usersingle">
 								<div class="wt-clientfeedback">
 									<div class="wt-usertitle wt-titlewithselect">
@@ -212,7 +212,7 @@
 									</div>
 								</div>
 								@endif -->
-								<!-- @if($client->userInfo != '')
+								@if($client->userInfo != '')
 								<div class="wt-experience">
 									<div class="wt-usertitle">
 										<h2>Experience</h2>
@@ -243,8 +243,8 @@
 										<div class="divheight"></div>
 									</div>
 								</div>
-								@endif -->
-								@if($client->education != '')
+								@endif
+								<!-- @if($client->education != '')
 								<div class="wt-experience wt-education">
 									<div class="wt-usertitle">
 										<h2>Education</h2>
@@ -266,8 +266,45 @@
 										<div class="divheight"></div>
 									</div>
 								</div>
-								@endif
+								@endif -->
 							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 pe-md-0">
+							<aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave">
+								<div class="wt-proposalsr">
+									<div class="wt-proposalsrcontent">
+										<figure>
+											<img src="{{asset('assets/images/thumbnail/img-17.png')}}" alt="image">
+										</figure>
+										<div class="wt-title">
+											<h3>{{App\Models\Job::clientOngoingCount(Auth::user()->id)}}</h3>
+											<span>Total Ongoing Jobs</span>
+										</div>
+									</div> 
+								</div>
+								<div class="wt-proposalsr">
+									<div class="wt-proposalsrcontent wt-componyfolow">
+										<figure>
+											<img src="{{asset('assets/images/thumbnail/img-16.png')}}" alt="image">
+										</figure>
+										<div class="wt-title">
+											<h3>{{App\Models\Job::clientCompletedCount(Auth::user()->id)}}</h3>
+											<span>Total Completed Jobs</span>
+										</div>
+									</div> 
+								</div>								
+								<div class="wt-proposalsr">
+									<div class="wt-proposalsrcontent  wt-freelancelike">
+										<figure>
+											<img src="{{asset('assets/images/thumbnail/img-15.png')}}" alt="image">
+										</figure>
+										<div class="wt-title">
+											<h3>{{App\Models\Job::clientCancelledCount(Auth::user()->id)}}</h3>
+											<span>Total Cancelled Jobs</span>
+										</div>
+									</div> 
+								</div>								
+							</aside>
 						</div>
 						<!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left">
 							<aside id="wt-sidebar" class="wt-sidebar">

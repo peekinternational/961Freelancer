@@ -28,7 +28,7 @@
 
             <!-- App Search-->
 
-            <div class="dropdown dropdown-mega d-none d-lg-block ml-2">
+            <div class="dropdown dropdown-mega d-none d-lg-none ml-2">
                 <button type="button" class="btn header-item waves-effect" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                     Mega Menu
                     <i class="mdi mdi-chevron-down"></i> 

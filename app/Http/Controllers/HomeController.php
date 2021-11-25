@@ -143,7 +143,7 @@ class HomeController extends Controller
     public function search(Request $request){
       if($request->searchtype == 'freelancer'){
         if($request->keyword != ''){
-          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('first_name','like','%'.$request->keyword.'%')->orWhere('last_name','like','%'.$request->keyword.'%')->orWhere('tagline','like','%'.$request->keyword.'%')->orWhere('username','like','%'.$request->keyword.'%')->paginate(10);
+          $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('first_name','like','%'.$request->keyword.'%')->orWhere('last_name','like','%'.$request->keyword.'%')->orWhere('tagline','like','%'.$request->keyword.'%')->orWhere('username','like','%'.$request->keyword.'%')->orWhere('description','like','%'.$request->keyword.'%')->orWhere('country','like','%'.$request->keyword.'%')->paginate(10);
         }else{
           $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
         }
@@ -153,7 +153,7 @@ class HomeController extends Controller
         ]);
       }else{  
         if($request->keyword != ''){
-          $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_title','like','%'.$request->keyword.'%')->orderBy('created_at', 'DESC')->paginate(10);
+          $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_title','like','%'.$request->keyword.'%')->orWhere('job_description','like','%'.$request->keyword.'%')->orWhere('job_skills','like','%'.$request->keyword.'%')->orWhere('job_cat','like','%'.$request->keyword.'%')->orWhere('service_level','like','%'.$request->keyword.'%')->orWhere('job_location','like','%'.$request->keyword.'%')->orWhere('job_duration','like','%'.$request->keyword.'%')->orWhere('job_type','like','%'.$request->keyword.'%')->orderBy('created_at', 'DESC')->paginate(10);
         }else{
           $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
         }

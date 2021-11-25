@@ -1,4 +1,4 @@
-========== Left Sidebar Start ========== -->
+<!-- ========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
 
     <div data-simplebar class="h-100">
@@ -108,6 +108,9 @@
                         <li><a href="icons-dripicons">Dripicons</a></li>
                         <li><a href="icons-fontawesome">Font awesome</a></li>
                     </ul> -->
+                </li>
+                <li>
+                    <a class="waves-effect" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bx bx-power-off"></i> {{ __('Logout') }} </a>
                 </li>
 
 

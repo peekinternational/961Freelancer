@@ -365,21 +365,39 @@ class PaymentController extends Controller
     }
     public function shipProduct(Request $request){
       $transcation_id = $request->trans_id;
+      // $curl = curl_init();
+      // curl_setopt_array($curl, array(
+      //     CURLOPT_URL => 'https://api.escrow-sandbox.com/2017-09-01/transaction/'.$transcation_id,
+      //     CURLOPT_RETURNTRANSFER => 1,
+      //     CURLOPT_USERPWD => 'peek.zeeshan@gmail.com:2350_lLHmA7zo8YytSLb09eAES37Hh9XO40DZV4kBCH06KJSVDxc5XSffwbJweJSQo4YS',
+      //     CURLOPT_HTTPHEADER => array(
+      //         'Content-Type: application/json'
+      //     ),
+      //     CURLOPT_CUSTOMREQUEST => 'PATCH',
+      //     CURLOPT_POSTFIELDS => json_encode(
+      //         array(
+      //             'action' => 'ship',
+      //             'shipping_information' => array(
+      //               'authorization_type' => 'push',
+      //             )
+      //         )
+      //     )
+      // ));
+
+      // $output = curl_exec($curl);
+      // echo $output;
+      // curl_close($curl);
       $curl = curl_init();
       curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://api.escrow-sandbox.com/2017-09-01/transaction/'.$transcation_id,
+          CURLOPT_URL => 'https://api.escrow-sandbox.com/2017-09-01/transaction/'.$transcation_id.'/disbursement_methods',
           CURLOPT_RETURNTRANSFER => 1,
-          CURLOPT_USERPWD => 'peek.zeeshan@gmail.com:2350_lLHmA7zo8YytSLb09eAES37Hh9XO40DZV4kBCH06KJSVDxc5XSffwbJweJSQo4YS',
+          CURLOPT_USERPWD => 'zeeshanmasood93@yahoo.com:Satti0331',
           CURLOPT_HTTPHEADER => array(
               'Content-Type: application/json'
           ),
-          CURLOPT_CUSTOMREQUEST => 'PATCH',
           CURLOPT_POSTFIELDS => json_encode(
               array(
-                  'action' => 'ship',
-                  'shipping_information' => array(
-                    'authorization_type' => 'push',
-                  )
+                  'id' => '1391644',
               )
           )
       ));
