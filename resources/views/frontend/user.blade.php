@@ -65,15 +65,15 @@
 								</div>
 								<div id="wt-statistics" class="wt-statistics wt-profilecounter col-md-5">
 									<div class="wt-statisticcontent wt-countercolor1">
-										<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">{{App\Models\Proposal::freelancerOngoingCount(Auth::user()->id)}}</h3>
+										<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">{{App\Models\Proposal::freelancerOngoingCount($freelancer->id)}}</h3>
 										<h4>Ongoing <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor2">
-										<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">{{App\Models\Proposal::freelancerCompletedCount(Auth::user()->id)}}</h3>
+										<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">{{App\Models\Proposal::freelancerCompletedCount($freelancer->id)}}</h3>
 										<h4>Completed <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor4">
-										<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">{{App\Models\Proposal::freelancerCancelledCount(Auth::user()->id)}}</h3>
+										<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">{{App\Models\Proposal::freelancerCancelledCount($freelancer->id)}}</h3>
 										<h4>Cancelled <br>Projects</h4>
 									</div>
 									<div class="wt-statisticcontent wt-countercolor3">
