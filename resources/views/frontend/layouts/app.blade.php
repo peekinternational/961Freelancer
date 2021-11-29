@@ -41,7 +41,7 @@
   </audio>
 	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+	<!-- <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script> -->
 	<!-- <script src="{{ asset('assets/js/all.min.js') }}"></script> -->
 	<script src="{{ asset('assets/js/slick.js') }}"></script>
 	<script src="{{ asset('assets/js/scrollbar.min.js') }}"></script>

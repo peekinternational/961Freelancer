@@ -64,7 +64,7 @@
 			<!--Register Form Start-->
 			<section class="wt-haslayout wt-dbsectionspace">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-9">
+					<div class="col-xs-12 col-sm-12 {{Auth::user()->account_type == 'Client' ? 'col-md-8 col-lg-8 col-xl-9' : 'col-md-12 col-lg-12 col-xl-12'}} ">
 						<div class="wt-haslayout">
 							<div class="wt-dashboardbox wt-dashboardtabsholder">
 								<div class="wt-dashboardboxtitle">
@@ -353,9 +353,9 @@
 								  	<div class="wt-userexperience wt-tabsinfo">
 								  		<div class="wt-tabscontenttitle wt-addnew">
 								  			<h2>Add Your Employment History</h2>
-								  			<a href="javascript:void(0);" id="addExperience" data-bs-toggle="collapse" data-bs-target="#addexperience" aria-expanded="true">Add New</a>
+								  			<a href="javascript:void(0);" id="addExperience" data-bs-toggle="collapse" data-bs-target="#addexperience" aria-expanded="false">Add New</a>
 								  		</div>
-								  		<div class="wt-collapseexp collapse" id="addexperience" aria-labelledby="accordioninnertitle" data-parent="#accordion">
+								  		<div class="wt-collapseexp collapse" id="addexperience" aria-labelledby="accordioninnertitle" data-bs-parent="#accordion">
 									  		<form class="wt-formtheme wt-userform" id="add-experience-form">
 									  			@csrf
 									  			<fieldset>
@@ -403,11 +403,11 @@
 								  						)</em>
 								  						</span></span>
 								  					<div class="wt-rightarea">
-								  						<a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninner{{$exper->id}}" data-bs-toggle="collapse" data-bs-target="#inner{{$exper->id}}" aria-expanded="true"><i class="fal fa-pencil"></i></a>
+								  						<a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninner{{$exper->id}}" data-bs-toggle="collapse" data-bs-target="#inner{{$exper->id}}" aria-expanded="false"><i class="fal fa-pencil"></i></a>
 								  						<a href="javascript:void(0);" onclick="deleteExperience({{$exper->id}})" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a>
 								  					</div>
 								  				</div>
-								  				<div class="wt-collapseexp collapse" id="inner{{$exper->id}}" aria-labelledby="accordioninnertitle" data-bs-parent="#accordion">
+								  				<div class="wt-collapseexp collapse" id="inner{{$exper->id}}" aria-labelledby="accordioninner{{$exper->id}}" data-bs-parent="#accordion">
 								  					<div class="wt-formtheme wt-userform">
 								  						<input type="hidden" name="id" id="experienceId{{$exper->id}}" value="{{$exper->id}}">
 								  						<input type="hidden" name="_token" id="experienceId{{$exper->id}}" value="{{$exper->id}}">
@@ -645,6 +645,7 @@
 								  			<h2>Add Your Certification</h2>
 								  			<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#addCertificate">Add New</a>
 								  		</div>
+
 								  		<div class="wt-collapseexp collapse" id="addCertificate" aria-labelledby="accordioninnerCertificate" data-parent="#accordion">
 								  			<form class="wt-formtheme wt-userform wt-formprojectinfo" id="add-certificate-form">
 								  				@csrf
@@ -659,8 +660,8 @@
 								  						<input type="date" name="expire_date" class="form-control" placeholder="Expire Date">
 								  					</div>
 								  					<div class="form-group">
-								  						<textarea name="certificate_desc" id="" class="form-control" placeholder="Certificate Description" minlength="50"></textarea>
-								  						<span>(Minimum 50 Character)</span>
+								  						<textarea name="certificate_desc" id="" class="form-control" placeholder="Certificate Description" minlength="30"></textarea>
+								  						<span>(Minimum 30 Character)</span>
 								  					</div>
 								  					<div class="form-group wt-btnarea text-end">
 								  						<button type="submit" class="wt-btn">Save</button>
@@ -717,6 +718,7 @@
 							<a class="wt-btn" href="javascript:void(0);">Save &amp; Update</a>
 						</div> -->
 					</div>
+					@if(Auth::user()->account_type == 'Client')
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
 						<aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave">
 							<div class="wt-proposalsr">
@@ -754,6 +756,7 @@
 							</div>								
 						</aside>
 					</div>
+					@endif
 				</div>
 			</section>
 			<!--Register Form End-->

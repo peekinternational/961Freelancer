@@ -92,6 +92,7 @@
                    Please enter Username.
                 </div>
                 <span id="lblError" style="color: red"></span>
+                <span id="username_exist" style="color: red"></span>
                 <!-- <span class="form-text text-danger" id="space_error"></span><br> -->
                 <!-- <small class="form-text text-muted">Note: You will not be able to change username once your account has been created.</small>
                 <span class="form-text text-danger" id="space_error"></span>
@@ -219,8 +220,13 @@
 @section('script')
 <script src="{{asset('assets/js/intlTelInput.min.js')}}"></script>
 <script>
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
 
-     var myInput = document.getElementById("password");
+  var myInput = document.getElementById("password");
   var letter = document.getElementById("letter");
   var capital = document.getElementById("capital");
   var number = document.getElementById("number");
@@ -422,5 +428,27 @@
         $('#show_hide_password i').addClass( "fa-eye" );
     }
   });
+
+  $('#username').on('keyup', function(e){
+    e.preventDefault();
+    var username = this.value;
+    // alert(username);
+    $.ajax({
+      url: "{{url('username-check')}}",
+      type: 'post',
+      data: {username:username},
+      cache : false,
+      success:function(response){
+        if (response.status == 'true') {
+          $('#username_exist').removeClass('d-none');
+          $('#username_exist').html(response.message);
+        }else{
+          $('#username_exist').addClass('d-none');
+        }
+        // console.log(data);
+        // $("#listings-container").html(data);
+      }
+    });
+  })
 </script>
 @endsection

@@ -45,6 +45,7 @@ Route::get('/terms-conditions', function () {
   return view('frontend.terms-conditions');
 })->name('terms-conditions');
 
+Route::post('username-check',[RegisterController::class, 'usernameCheck']);
 Route::match(['get','post'],'/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/login', [RegisterController::class, 'accountLogin'])->name('login');
 Route::post('/login', [RegisterController::class, 'checkLogin']);

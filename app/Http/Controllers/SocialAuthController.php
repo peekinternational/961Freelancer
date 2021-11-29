@@ -135,7 +135,7 @@ class SocialAuthController extends Controller
       $newuser->user_status = 'online';
       $newuser->profile_image = $request->profile_image;
       $newuser->account_type = $request->account_type;
-      $newuser->password = $request->password;
+      $newuser->password = Hash::make(trim($request->password));
       $user->verification = 1;
       $newuser->save();
       Auth::login($newuser);
@@ -185,7 +185,7 @@ class SocialAuthController extends Controller
           'username' => $request->username,
           'profile_image' => $request->profile_image,
           'google_id'=> $request->google_id,
-          'password' => $request->password,
+          'password' => Hash::make(trim($request->password)),
           'user_status' => 'online',
           'account_type' => $request->account_type,
           'verification' => 1,

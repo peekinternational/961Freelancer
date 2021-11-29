@@ -98,6 +98,18 @@ class RegisterController extends Controller
         //
     }
 
+    // Check Username 
+    public function usernameCheck(Request $request){
+      $check = User::where('username',$request->username)->first();
+      // dd($check);
+      if($check){
+        return response()->json(['status'=>'true' , 'message' => 'username already exists, try another one'] , 200);
+      }else{
+        return response()->json(['status'=>'errorr' , 'message' => 'you can use this as your username'] , 200);
+      }
+    }
+
+
     public function register(Request $request){
 
       if($request->isMethod('post')){

@@ -69,7 +69,7 @@
 								</div>
 								<div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
 									<div class="row">
-										<div class="wt-proposalhead wt-userdetails">
+										<div class="wt-proposalhead wt-userdetails col-md-7">
 											<h2 class="mb-1">{{$client->first_name}} {{$client->last_name}}</h2>
 											<h5>{{$client->tagline}}</h5>
 											<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
@@ -81,17 +81,17 @@
 												<p>{{$client->description}}</p>
 											</div>
 										</div>
-										<!-- <div id="wt-statistics" class="wt-statistics wt-profilecounter">
+										<div id="wt-statistics" class="wt-statistics wt-profilecounter col-md-5">
 											<div class="wt-statisticcontent wt-countercolor1">
-												<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">{{App\Models\Proposal::freelancerOngoingCount(Auth::user()->id)}}</h3>
+												<h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">{{App\Models\Job::clientOngoingCount($client->id)}}</h3>
 												<h4>Ongoing <br>Projects</h4>
 											</div>
 											<div class="wt-statisticcontent wt-countercolor2">
-												<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">{{App\Models\Proposal::freelancerCompletedCount(Auth::user()->id)}}</h3>
+												<h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">{{App\Models\Job::clientCompletedCount($client->id)}}</h3>
 												<h4>Completed <br>Projects</h4>
 											</div>
 											<div class="wt-statisticcontent wt-countercolor4">
-												<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">{{App\Models\Proposal::freelancerCancelledCount(Auth::user()->id)}}</h3>
+												<h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">{{App\Models\Job::clientCancelledCount($client->id)}}</h3>
 												<h4>Cancelled <br>Projects</h4>
 											</div>
 											<div class="wt-statisticcontent wt-countercolor3">
@@ -99,7 +99,7 @@
 												<em>k</em>
 												<h4>Served <br>Hours</h4>
 											</div>
-										</div> -->
+										</div>
 									</div>
 								</div>
 							</div>
@@ -110,7 +110,7 @@
 				<!-- User Listing Start-->
 				<div class="container">
 					<div id="wt-twocolumns" class="row wt-twocolumns wt-haslayout justify-content-center">
-						<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 px-md-0 float-left">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-11 col-xl-11 px-md-0 float-left">
 							<div class="wt-usersingle">
 								<div class="wt-clientfeedback">
 									<div class="wt-usertitle wt-titlewithselect">
@@ -269,7 +269,7 @@
 								@endif -->
 							</div>
 						</div>
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 pe-md-0">
+						<!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 pe-md-0">
 							<aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave">
 								<div class="wt-proposalsr">
 									<div class="wt-proposalsrcontent">
@@ -305,7 +305,7 @@
 									</div> 
 								</div>								
 							</aside>
-						</div>
+						</div> -->
 						<!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left">
 							<aside id="wt-sidebar" class="wt-sidebar">
 								@if($client->userSkills != '')
