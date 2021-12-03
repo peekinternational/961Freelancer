@@ -84,30 +84,38 @@
 												</div>													
 											</div>
 											<div class="wt-rightarea">
+												@if($proposal->status == 1 && $job->job_status == 1)
+													@if (App\Models\User::walletAmt())
+	                        	@if(App\Models\User::walletAmt()->amt < $proposal->budget)
+	                        	<p class="mb-0 mt-2 text-danger">You should have minimum <strong>${{$proposal->budget}}</strong> in your wallet to hire this freelancer. <a href="{{route('payments.deposit')}}">Deposit amount</a></p>
+	                        	@endif
+	                        @endif
+	                      @endif
 												<div class="wt-btnarea">
+												
 													@if($proposal->status == 1 && $job->job_status == 1)
-													<a href="javascript:void(0);" onclick="hireNow('{{$proposal->id}}' ,'{{$proposal->job_id}}','{{$proposal->user_id}}')" class="wt-btn rounded-pill">Hire Now</a>
-													<a href="javascript:void(0);" onclick="rejectNow('{{$proposal->id}}' ,'{{$proposal->job_id}}','{{$proposal->user_id}}')" class="wt-btn rounded-pill">Reject</a>
+													<a href="javascript:void(0);" onclick="hireNow('{{$proposal->id}}' ,'{{$proposal->job_id}}','{{$proposal->user_id}}','{{$proposal->budget}}')" class="wt-btn rounded-pill text-capitalize">Hire Now</a>
+													<a href="javascript:void(0);" onclick="rejectNow('{{$proposal->id}}' ,'{{$proposal->job_id}}','{{$proposal->user_id}}')" class="wt-btn rounded-pill text-capitalize">Reject</a>
 													@endif
 													@if($proposal->status == 2)
 													<a href="{{url('ongoing-job/'.$proposal->job->job_id)}}">View Job</a>
-													<a href="javascript:void(0);" class="wt-btn rounded-pill">Hired</a>
+													<a href="javascript:void(0);" class="wt-btn rounded-pill text-capitalize">Hired</a>
 													@endif
 													@if($proposal->status == 3)
-													<a href="javascript:void(0);" class="wt-btn rounded-pill">Rejected</a>
+													<a href="javascript:void(0);" class="wt-btn rounded-pill text-capitalize">Rejected</a>
 													@endif
 													@if($proposal->status == 4)
-													<a href="javascript:void(0);" class="wt-btn rounded-pill">Expired</a>
+													<a href="javascript:void(0);" class="wt-btn rounded-pill text-capitalize">Expired</a>
 													@endif
 													@if($proposal->status == 5)
-													<a href="javascript:void(0);" class="wt-btn rounded-pill">Completed</a>
+													<a href="javascript:void(0);" class="wt-btn rounded-pill text-capitalize">Completed</a>
 													@endif
 													<form id="createChat{{$proposal->id}}" class="d-inline">
 														@csrf
 														<input type="hidden" id="jobId{{$proposal->id}}" name="job_id" value="{{$proposal->job_id}}">
 														<input type="hidden"id="proposalId{{$proposal->id}}" name="proposal_id" value="{{$proposal->id}}">
 														<input type="hidden"id="receiverId{{$proposal->id}}" name="receiver_id" value="{{$proposal->	user_id}}">
-														<button type="button" name="chat" onclick="createChat({{$proposal->id}})" class="wt-btn chat-btn rounded-pill">Chat</button>
+														<button type="button" name="chat" onclick="createChat({{$proposal->id}})" class="wt-btn chat-btn rounded-pill text-capitalize">Chat</button>
 													</form>
 												</div>												
 												<div class="wt-hireduserstatus">
@@ -196,17 +204,12 @@
 																<td>{{$milestone->detail}}</td>
 																<td>{{$milestone->milestone_amount}}</td>
 																<td>{{date('F d, Y', strtotime($milestone->due_date))}} </td>
-																<td>{{$milestone->status}}</td>
+																<td class="text-capitalize">{{$milestone->status}}</td>
 																<td>
 																	<div>
 																		@if($milestone->status == 'request')
-																		<form method="post" action="{{url('pay-now')}}">
+																		<form method="post" action="{{ route('milestone.depositOrReject', $milestone->id) }}">
 																			@csrf
-																			<input type="hidden" name="freelancer_firstname" value="{{App\Models\Proposal::freelancer($proposal->user_id)->first_name}}">
-																			<input type="hidden" name="freelancer_lastname" value="{{App\Models\Proposal::freelancer($proposal->user_id)->last_name}}">
-																			<input type="hidden" name="freelancer_email" value="{{App\Models\Proposal::freelancer($proposal->user_id)->email}}">
-																			<input type="hidden" name="freelancer_country" value="{{App\Models\Proposal::freelancer($proposal->user_id)->country}}">
-																			<input type="hidden" name="freelancer_phone" value="{{App\Models\Proposal::freelancer($proposal->user_id)->mobile_number}}">
 																			<input type="hidden" name="proposal_id" value="{{$proposal->id}}">
 																			<input type="hidden" name="milestone_id" value="{{$milestone->id}}">
 																			<input type="hidden" name="milestone_amount" value="{{$milestone->milestone_amount}}">
@@ -215,12 +218,23 @@
 																			<input type="hidden" name="milestone_detail" value="{{$milestone->detail}}">
 																			<input type="hidden" name="milestone_job_id" value="{{$milestone->job_id}}">
 																			<input type="hidden" name="freelancer_id" value="{{$milestone->user_id}}">
-																		<button type="submit" class="btn milestone-btn accept-btn rounded-pill">Accept</button>
+																		<input type="submit" class="btn milestone-btn accept-btn rounded-pill" name="deposit" value="Deposit">
+																		<input type="submit" name="reject" onclick=" return confirm('Are you sure you want to cancel this milestone?')" class="btn milestone-btn reject-btn rounded-pill" value="Reject">
 																		</form>
-																		<button class="btn milestone-btn reject-btn rounded-pill">Reject</button>
 																		@endif
 																		@if($milestone->status == 'accept')
-																		<button class="btn milestone-btn accept-btn rounded-pill">Deposit</button>
+																		<form action="{{ route('milestone.rrd', $milestone->id) }}" method="post">
+																			@csrf
+																			<input type="hidden" name="proposal_id" value="{{$proposal->id}}">
+																			<input type="hidden" name="milestone_job_id" value="{{$milestone->job_id}}">
+																			<input type="submit" class="btn milestone-btn accept-btn rounded-pill" name="amount_release" value="Release">
+																		</form>
+																		@endif
+																		@if($milestone->status == 'reject')
+																		<button class="btn milestone-btn reject-btn rounded-pill">Rejected</button>
+																		@endif
+																		@if($milestone->status == 'paid')
+																		<button class="btn milestone-btn accept-btn rounded-pill">Paid</button>
 																		@endif
 																	</div>
 																</td>
@@ -448,17 +462,20 @@
 																<td>{{$milestone->detail}}</td>
 																<td>{{$milestone->milestone_amount}}</td>
 																<td>{{date('F d, Y', strtotime($milestone->due_date))}} </td>
-																<td>{{$milestone->status}}</td>
+																<td class="text-capitalize">{{$milestone->status}}</td>
 																<td>
 																	<div>
 																		@if($milestone->status == 'request')
-																		<button class="btn milestone-btn accept-btn rounded-pill w-75">Requested</button>
+																		<button class="btn milestone-btn accept-btn rounded-pill" style="width: 100px;">Requested</button>
 																		@endif
 																		@if($milestone->status == 'accept')
-																		<button class="btn milestone-btn accept-btn rounded-pill w-75">Accepted</button>
+																		<button class="btn milestone-btn accept-btn rounded-pill" style="width: 100px;">Accepted</button>
 																		@endif
 																		@if($milestone->status == 'reject')
-																		<button class="btn milestone-btn reject-btn rounded-pill w-75">Rejected</button>
+																		<button class="btn milestone-btn reject-btn rounded-pill" style="width: 100px;">Rejected</button>
+																		@endif
+																		@if($milestone->status == 'paid')
+																		<button class="btn milestone-btn accept-btn rounded-pill" style="width: 100px;">Paid</button>
 																		@endif
 																	</div>
 																</td>
@@ -558,7 +575,7 @@
 	        if (response.status == 'true') {
 	        	socket.emit("sendNotification", obj);
 	            $.notify(response.message , 'success'  );
-	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/ongoing-jobs/";
 	            
 	            
 	        }else{

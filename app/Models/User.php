@@ -71,6 +71,10 @@ class User extends Authenticatable
     {
         return Skills::find($id);
     }
+    public static function walletAmt()
+    {
+        return Wallet::where('user_id', auth()->id())->first();
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

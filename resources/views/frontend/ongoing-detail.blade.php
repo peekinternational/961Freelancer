@@ -127,6 +127,7 @@
 														@endif
 													</fieldset>
 												</form>
+												
 												@if(Auth::user()->account_type == 'Client')
 												<div class="wt-hireduserstatus px-2" style="min-width: 95px;">
 													<form id="createChat{{$ongoingJob->id}}" class="d-inline">
@@ -138,8 +139,8 @@
 													</form>
 												</div>
 												@endif
-												<div class="wt-hireduserstatus">
-													<h5>&#36;{{$ongoingJob->budget}}</h5>
+												<div class="wt-hireduserstatus hhh">
+													<h5>&#36;{{$ongoingJob->budget}}@if($ongoingJob->job->job_type == 'hourly')<small class="text-lowercase">/hr</small> @endif</h5>
 													<span>In 0{{$ongoingJob->duration}} Months</span>
 												</div>
 												<div class="wt-hireduserstatus" data-bs-toggle="modal" data-bs-target="#coverModal{{$ongoingJob->id}}">
@@ -193,7 +194,84 @@
 												    </div>
 												  </div>
 												</div>
-												<!-- End Modal -->														
+												<!-- Show Hours List -->
+												<!-- End Modal -->	
+												@if($ongoingJob->job->job_type == 'hourly')
+												@if(Auth::user()->account_type == 'Freelancer')
+												<form class="g-3" id="storeWeeklyHours">
+													<div class="form-group">
+														<label>Enter Completed Hours</label>
+														<input type="hidden" name="hours_job_id" value="{{$ongoingJob->job->job_id}}">
+														<input type="hidden" name="hours_proposal_id" value="{{$ongoingJob->id}}">
+														<input type="hidden" name="hourly_amount" value="{{$ongoingJob->budget}}">
+														<input type="number" name="completed_hours" class="w-75" placeholder="Enter Your Weekly Completed Hours">
+														<input type="submit" value="Add" class="btn wt-btn">
+														<span>Note: please enter your correct weekly completed hours.</span>
+													</div>
+												</form>
+												@endif
+												<div class="table-responive">
+													<table class="table">
+														<thead>
+															<tr style="background-color: #e11a22;">
+																<th class="text-white">#</th>
+																<th class="text-white">Hourly Amount</th>
+																<th class="text-white">Weekly Completed Hours</th>
+																<th class="text-white">Weekly Payment</th>
+																<th class="text-white">Status</th>
+																@if(Auth::user()->account_type == 'Client')
+																<th class="text-white"></th>
+																@endif
+															</tr>
+														</thead>
+														<tbody>
+															@foreach($weeklyHours as $key=>$hours)
+															<tr>
+																<td>{{$key+1}}</td>
+																<td>${{$hours->hourly_amount}}</td>
+																<td>{{$hours->completed_hours}}/hr</td>
+																<td>${{$hours->weekly_payment}}</td>
+																<td>
+																	@if($hours->status == 1)
+																	added
+																	@elseif($hours->status == 2)
+																	Amount Deposit
+																	@elseif($hours->status == 3)
+																	Paid
+																	@else
+																	Reject
+																	@endif
+																</td>
+																@if(Auth::user()->account_type == 'Client')
+																<td>
+																	@if($hours->status == 1)
+																	<form method="post" action="{{ route('hourly.depositOrReject', $hours->id) }}">
+																			@csrf
+																		<input type="submit" class="btn milestone-btn accept-btn rounded-pill" name="deposit" value="Deposit">
+																	</form>
+																	@elseif($hours->status == 2)
+																	<form action="{{ route('hourly.rrd', $hours->id) }}" method="post">
+																			@csrf
+																			<input type="hidden" name="proposal_id" value="{{$hours->proposal_id}}">
+																			<input type="hidden" name="hours_job_id" value="{{$hours->job_id}}">
+																			<input type="submit" class="btn milestone-btn accept-btn rounded-pill" name="amount_release" value="Release">
+																		</form>
+																	@elseif($hours->status == 3)
+																		<a href="javascript:void(0);" class="btn milestone-btn accept-btn rounded-pill">Paid</a>
+																	@else
+																		<a href="javascript:void(0);" class="btn milestone-btn reject-btn rounded-pill">Rejected</a>
+																	@endif
+																	<!-- <a href="" class="btn milestone-btn accept-btn rounded-pill">Deposit</a> -->
+																	<!-- <input type="submit" name="reject" onclick=" return confirm('Are you sure you want to cancel these hours?')" class="btn milestone-btn reject-btn rounded-pill" value="Reject"> -->
+																</td>
+																@endif
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>
+
+												@endif													
 											</div>
 										</div>
 									</div>
@@ -333,30 +411,40 @@
 	});
 
 
-	function hireNow(id,job_id){
-		$.ajax({
-	    url: "{{route('hire-freelancer')}}",
-	    type: 'POST',
-	    data: {"proposal_id": id,"job_id": job_id},
 
-	    success: (response)=>{
-	        if (response.status == 'true') {
-	            $.notify(response.message , 'success'  );
-	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/proposals/";
-	            
-	            
-	        }else{
-	            $.notify(response.message , 'error');
+	$( '#storeWeeklyHours' ).on( 'submit', function(e) {
+    e.preventDefault();
 
-	        }
-	    },
-	    error: (errorResponse)=>{
-	        $.notify( errorResponse, 'error'  );
+    var job_id = $(this).find('input[name=hours_job_id]').val();
+    var proposal_id = $(this).find('input[name=hours_proposal_id]').val();
+    var hourly_amount = $(this).find('input[name=hourly_amount]').val();
+    var completed_hours = $(this).find('input[name=completed_hours]').val();
+    alert(job_id);
+    	$.ajax({
+        url: "{{route('weeklyhours.store')}}",
+        type: 'POST',
+        data: {"job_id": job_id,"proposal_id":proposal_id,"hourly_amount":hourly_amount,"completed_hours":completed_hours},
+        // contentType: false,
+        // processData: false,
+        success: (response)=>{
+            if (response.status == 'true') {
+                $.notify(response.message , 'success'  );
+                  window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/ongoing-job/"+response.job_id;
+                
+                
+            }else{
+                $.notify(response.message , 'error');
+
+            }
+        },
+        error: (errorResponse)=>{
+            $.notify( errorResponse, 'error'  );
 
 
-	    }
-		})
-	}
+        }
+    	})
+
+	});
 
 
 	function createChat(id){
@@ -396,7 +484,7 @@
 	        if (response.status == 'true') {
 	            $.notify(response.message , 'success'  );
 	            if(response.job_status == 3){
-	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/cancelled-job/";
+	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/cancelled-jobs/";
 	            }
 	            if(response.job_status == 5){
 	            	window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/completed-jobs/";

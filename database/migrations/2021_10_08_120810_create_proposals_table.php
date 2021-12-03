@@ -22,7 +22,8 @@ class CreateProposalsTable extends Migration
             $table->string('service_fee');
             $table->longText('cover_letter');
             $table->string('proposal_type');
-            $table->string('duration');
+            $table->string('duration')->nullable();
+            $table->integer('proposed_hours')->nullable();
             $table->longText('attachments');
             $table->string('status');
             $table->timestamps();

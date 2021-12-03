@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Countries;
 use App\Models\Proposal;
 use App\Models\Rating;
+use App\Models\CompletedHours;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -310,11 +311,26 @@ class JobsController extends Controller
         'freelancerOngoingJobs' => $freelancerJobs
       ]);
     }
-
+    // Store Weekly Hours Manually
+    public function storeWeeklyHours(Request $request){
+      
+      $hours = new CompletedHours;
+      $hours->job_id = $request->job_id;
+      $hours->proposal_id = $request->proposal_id;
+      $hours->hourly_amount = $request->hourly_amount;
+      $hours->completed_hours = $request->completed_hours;
+      $hours->weekly_payment = $request->completed_hours * $request->hourly_amount;
+      $hours->status = 1;
+      if($hours->save()){
+        return response()->json(['status'=>'true' , 'message' => 'Your weekly completed hours updated', 'job_id' =>$hours->job_id] , 200);
+      }else{
+        return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+      }
+    }
     // Ongoing Job Detail
     public function onGoingJobsDetail(Request $request,$id){
       $jobData = Proposal::with('job')->wherejob_id($id)->wherestatus(2)->first();
-
+      $weeklyHours = CompletedHours::where('proposal_id',$jobData->id)->get();
       $user_rating = Rating::where('rating_to',$jobData->user_id)->get();
       $rating_count = $user_rating->count();
       $rating_avg = 0.0;
@@ -326,7 +342,8 @@ class JobsController extends Controller
       return View::make('frontend.ongoing-detail')->with([
         'ongoingJob' => $jobData,
         'rating_count' => $rating_count,
-        'rating_avg' => $rating_avg
+        'rating_avg' => $rating_avg,
+        'weeklyHours' => $weeklyHours
       ]);
     }
 

@@ -187,12 +187,13 @@
 								<label class="fw-bold mb-0">Hourly Rate</label>
 							<div class="form-group">
 								<span>( <i class="fa fa-dollar-sign"></i> )</span>
-								<input type="number" onkeyup="getBudget(this)" form="propsalSubmit" class="form-control" name="budget" placeholder="Enter Your Proposal Amount">
+								<input type="number" onkeyup="getBudget(this)" form="propsalSubmit" class="form-control" id="hourly_price" name="budget" placeholder="Enter Your Proposal Amount" value="{{Auth::user()->hourly_rate}}">
 								<input type="hidden" name="budget_receive" form="propsalSubmit" value="">
 								<input type="hidden" name="service_fee" form="propsalSubmit" value="">
 								<a href="javascript:void(0);" class="collapsed" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fal fa-chevron-up"></i></a>
 								<em>Total amount the client will see on your proposal</em>
 							</div>
+
 							<ul class="wt-totalamount collapse show" id="collapseOne" aria-labelledby="headingOne">
 								<li>
 									<h3>( <i class="fa fa-dollar-sign"></i> ) <em  class="service_fee">- 00.00</em>/hr</h3>
@@ -223,6 +224,7 @@
 							@csrf
 							<input type="hidden" name="job_id" value="{{$jobData->job_id}}">
 							<fieldset>
+								@if($jobData->job_type != 'hourly')
 								<div class="form-group">
 									<span class="wt-select">
 										<select name="duration">
@@ -233,10 +235,17 @@
 										</select>
 									</span>
 								</div>
+								@endif
+								<!-- @if($jobData->job_type == 'hourly')
+								<div class="form-group">
+									<input type="number" name="proposed_hours" class="form-control" placeholder="Expected Hours" style="height: 50px;">
+								</div>
+								@endif -->
 								<div class="form-group">
 									<textarea class="form-control" name="cover_letter" placeholder="Add Description*"></textarea>
 								</div>
 							</fieldset>
+							
 							<fieldset>
 								<div class="wt-attachments wt-attachmentsvtwo">
 									<div class="wt-title">
@@ -317,7 +326,19 @@
 	          alert('Please select a file.') 
 	      }  
 		}
-
+	$( document ).ready(function() {
+		var rate = $('#hourly_price').val();
+		var multiply = 5 * rate;
+			var fee = multiply/100;
+			// alert(fee);
+			var budget = rate - fee;
+			// alert(budget);
+			$('.service_fee').html('- ' + fee);
+			$('.total_budget').html('- ' + budget);
+			$('input[name="budget_receive"]').val(budget);
+			$('input[name="service_fee"]').val(fee);
+		
+	});
 		function getBudget(input){
 			var multiply = 5 * input.value;
 			var fee = multiply/100;
@@ -329,8 +350,6 @@
 			$('input[name="budget_receive"]').val(budget);
 			$('input[name="service_fee"]').val(fee);
 		}
-
-		
 
 		// var total = 0;
 		// function milestoneAmount(e) {

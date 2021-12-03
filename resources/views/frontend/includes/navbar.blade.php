@@ -22,7 +22,7 @@
         <div class="col-6 col-md-9">
           <div class="header-right d-flex align-items-center justify-content-end">
             <div class="menu-inner">
-              <ul class="mb-0">
+              <ul class="mb-0 d-flex align-items-center">
                 <li><a href="{{route('home')}}">Home</a></li>
                 <!-- <li><a href="">How it Works</a></li> -->
                 <li><a href="{{ route('job.index') }}">Browse Jobs</a></li>
@@ -48,11 +48,11 @@
                       </li>
 
                       @foreach(App\Models\Notification::getAllNoti() as $key => $notif)
-                      <li class="notification-box {{$key == 0 ? 'first-notification-box': ''}} {{$notif->status == 'unread' ? 'bg-light': ''}}" onclick="readNoti({{$notif->id}})">
+                      <li class="notification-box {{$key == 0 ? 'first-notification-box': ''}} {{$notif->status == 'unread' ? 'bg-light': ''}} w-100" onclick="readNoti({{$notif->id}})">
                         <div class="row">
                           <div class="col-lg-12 col-sm-12 col-12">
                             <div class="noti-msg">
-                              @if($notif->noti_type == 'proposal')
+                              @if($notif->noti_type == 'proposal' || $notif->noti_type == 'milestone' || $notif->noti_type == 'project')
                               <a href="{{url('proposals')}}" class="pe-0">{{$notif->message}}</a>
                               @endif
                               @if($notif->noti_type == 'hire')
@@ -67,6 +67,30 @@
                       </li>
                       @endforeach
                     </ul>
+                </li>
+                <li>
+                  <div class="wt-userlogedin wallet d-none p-0 {{ Auth::user()->account_type === "Freelancer" ? "d-sm-block" : "d-sm-flex align-items-center" }}">
+                    
+                    <div class="wt-username">
+                      <span class="mb-0">
+                        <i class="far fa-dollar-sign mr-1" aria-hidden="true"></i>
+                        @if (App\Models\User::walletAmt())
+                        {{ App\Models\User::walletAmt()->amt }}
+                        @else
+                        0.0
+                        @endif
+                      </span>
+                    </div>
+                    <!-- <nav class="wt-usernav">
+                      <ul>
+                        <li>
+                          <a href="{{route('payments.deposit')}}">
+                            <span>Deposit in Wallet</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav> -->
+                  </div>
                 </li>
                 @endif
               </ul>
@@ -115,6 +139,16 @@
                   <li>
                     <a href="{{url('profile')}}">
                       <span>My Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{route('payments.deposit')}}">
+                      <span>Deposit in Wallet</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{route('withdraw')}}">
+                      <span>Withdraw</span>
                     </a>
                   </li>
                   <li>

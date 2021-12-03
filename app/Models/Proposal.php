@@ -17,6 +17,7 @@ class Proposal extends Model
       'cover_letter',
       'proposal_type',
       'duration',
+      'proposed_hours',
       'attachments',
       'status',
     ];

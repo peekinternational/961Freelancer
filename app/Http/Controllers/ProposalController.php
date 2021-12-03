@@ -15,6 +15,10 @@ use App\Models\Milestone;
 use App\Models\Rating;
 use App\Models\User;
 use App\Models\Notification;
+use App\Models\Wallet;
+use App\Models\Escrow;
+use App\Models\TransactionHistory;
+use App\Models\CompletedHours;
 use Illuminate\Support\Str;
 use Hash;
 use Session;
@@ -65,6 +69,7 @@ class ProposalController extends Controller
       $proposal->cover_letter = $request->input('cover_letter');
       $proposal->proposal_type = $request->input('proposal_type');
       $proposal->duration = $request->input('duration');
+      $proposal->proposed_hours = $request->input('proposed_hours');
       $proposal->status = 1;
       $images=array();
       if($files=$request->file('attachments')){
@@ -114,7 +119,7 @@ class ProposalController extends Controller
           $message->from('support@961freelancer.com', '961Freelancer');
           $message->to($toemail);
         });
-        return redirect()->route('job.show', $request->job_id)->with('message', 'Bid Placed Successfully!');
+        return redirect()->route('job.show', $request->job_id)->with('message', 'Proposal submitted Successfully!');
       } else {
         return redirect()->route('job.show', $request->job_id)->with('error', 'Something wrong please check details again');
       }
@@ -175,9 +180,9 @@ class ProposalController extends Controller
 
     public function allProposalClient(Request $request){
       $user_id = auth()->user()->id;
-      $job = Job::with('proposal','clientInfo')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
+      $job = Job::with('proposal','clientInfo')->whereuser_id($user_id)->wherejob_status(1)->orderBy('created_at','DESC')->paginate(5);
 
-      $proposals = Proposal::with('job','rating')->withCount('rating')->whereuser_id($user_id)->orderBy('created_at','DESC')->paginate(5);
+      $proposals = Proposal::with('job','rating')->withCount('rating')->whereuser_id($user_id)->where('status','!=',5)->orderBy('created_at','DESC')->paginate(5);
 
       $freelancerrating = Rating::where('rating_to',$user_id)->get();
       $rating_avg = 0.0;
@@ -194,22 +199,65 @@ class ProposalController extends Controller
     }
 
     public function hireFreelancer(Request $request){
+      $walletAmt = Wallet::where('user_id', auth()->user()->id)->first('amt');
+      // Check is Amount Exist or not
+      
+
       $id = $request->proposal_id;
       $job_id = $request->job_id;
       $findData = Proposal::find($id);
       $job = Job::where('job_id',$job_id)->first();
+      if($findData->proposal_type != 'hourly'){
+        if (!$walletAmt) {
+            return response()->json(['status'=>'error' , 'message' => 'Kindly verify your paypal account and deposit the amount first!'] , 200);
+        }
+        if ($walletAmt->amt < $findData->budget) {
+         // dd($findData->budget);
+         return response()->json(['status'=>'error' , 'message' => 'You have not enough amount in wallet kindly recharge your wallet!'] , 200);
+        }
+      }
+      // Check Wallet exsist or not!
+      
+      
       $findData->status = 2;
       $freelancer = User::where('id',$findData->user_id)->first();
       $toemail =  $freelancer->email;
       Job::where('job_id',$job_id)->update(['job_status'=>2]);
       if ($findData->save()) {
-        Notification::create([
-          'from' => auth()->id(),
-          'to' => $findData->user_id,
-          'message' => 'You have been hired for the project "'. $job->job_title .'"',
-          'noti_type' => 'hire',
-          'status' => 'unread',
-        ]);
+        if($findData->proposal_type != 'hourly'){
+          ProposalController::deductAmt($findData->budget);
+          // Create an escrow
+          $escrow = Escrow::create([
+              'from' => auth()->user()->id,
+              'to' => $findData->user_id,
+              'amt' => $findData->budget,
+              'source_id' => $request->proposal_id,
+              'type' => 2,
+          ]);
+          if($findData && $escrow){
+            Notification::create([
+              'from' => auth()->user()->id,
+              'to' => $findData->user_id,
+              'message' => 'You have been hired for the project "'. $job->job_title .'"',
+              'noti_type' => 'hire',
+              'status' => 'unread',
+            ]);
+            Notification::create([
+                'from' => auth()->user()->id,
+                'to' => $findData->user_id,
+                'message' => 'Project Amount is Deposited!',
+                'noti_type' => 'project',
+                'status' => 'unread'
+            ]);
+            TransactionHistory::create([
+                'user_id' => auth()->user()->id,
+                'transaction' => 'You Deposit the amount from your E-Wallet',
+                'amount' => $findData->budget,
+                'type' => 3,
+                'status' => 2,
+            ]);
+          }
+        }
         Mail::send('mail.hired-email',['user' =>$freelancer,'job' => $job],
         function ($message) use ($toemail)
         {
@@ -219,7 +267,7 @@ class ProposalController extends Controller
         });
         return response()->json(['status'=>'true' , 'message' => 'Freelancer Hired'] , 200);
       }else{
-           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+           return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
       }
     }
 
@@ -249,10 +297,11 @@ class ProposalController extends Controller
         });
           return response()->json(['status'=>'true' , 'message' => 'Freelancer proposal rejected'] , 200);
       }else{
-           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+           return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
       }
     }
 
+    
 
     public function projectStatus(Request $request){
 
@@ -269,11 +318,75 @@ class ProposalController extends Controller
       }
       $findData->status = $proposal_status;
       Job::where('job_id',$job_id)->update(['job_status'=>$request->project_status]);
+
       if ($findData->save()) {
+        if($request->project_status == 4){
+          $escrow = Escrow::where('source_id', $proposal_id)->where('type', 2)->first();
+          // Get Milestone
+          // $ms = Milestone::where('id', $id)->first();
+          // User (To) Wallet
+          $toUser = Wallet::where('user_id', $escrow->to)->first();
+          // User (From) Wallet
+          $fromUser = Wallet::where('user_id', $escrow->from)->first();
+
+          $bid = Proposal::where('id', $proposal_id)->first();
+          // $fee =  ($escrow->amt * 0.20) / (1 + 0.20);
+          // $net = $escrow->amt / (1 + 0.20);
+          if (!$toUser) {
+              Wallet::create([
+                  'user_id' => $escrow->to,
+                  'amt' => $escrow->amt,
+                  'currency_code' => 'USD',
+              ]);
+          } else {
+              $newWalletAmt = $toUser->amt + $escrow->amt;
+              $toUser->update([
+                  'amt' => $newWalletAmt
+              ]);
+          }
+          
+          // Escrow Status Update
+          $escrow->update([
+              'status' => 2
+          ]);
+          // Milestone Status Update (status -> Release Amount)
+          // $ms->update(['status' => 'paid']);
+          // Project Completion when Milestones are paid according to Project's Budget
+          $msAmt = Milestone::where('job_id', $request->milestone_job_id)->where('status', 4)->sum('milestone_amount');
+          
+          Notification::create([
+              'from' => auth()->id(),
+              'to' => $toUser->user_id,
+              'message' => 'The Milestone is Released!',
+              'noti_type' => 'milestone',
+              'status' => 'unread'
+          ]);
+          TransactionHistory::create([
+            'user_id' => $toUser->user_id,
+            'transaction' => 'You received the project amount in your E-Wallet',
+            'amount' => $escrow->amt,
+            'type' => 3,
+            'status' => 1,
+          ]);
+          if (!Rating::isExist(auth()->id(), $proposal_id, $request->milestone_job_id)) {
+              $bid->update(['status' => 5]);
+              Job::where('job_id', $request->milestone_job_id)->update(['status' => 3]);
+              return redirect()->route('job.feedback', ['job_id' => $request->milestone_job_id])->with('message', 'Project Amount Released, and project also completed now you can give feedback!');
+          }
+           
+        }else{
           return response()->json(['status'=>'true' , 'message' => 'Project Status updated', 'job_id' => $job_id, 'job_status' => $proposal_status] , 200);
+        }
       }else{
-           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+           return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
       }
+    }
+
+    public static function deductAmt($msAmt)
+    {
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+        $newAmt = $wallet->amt - $msAmt;
+        $wallet->update(['amt' => $newAmt]);
     }
     
 }

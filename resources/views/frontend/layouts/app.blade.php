@@ -62,6 +62,9 @@
 		@if (Session::has('success'))
 		   $.notify("{{ session('error') }}" , 'success'  );
 		@endif
+		@if (Session::has('message'))
+		    $.notify("{{ session('message') }}", 'success');
+		@endif
 
 		@if (Session::has('error'))
 		    $.notify("{{ session('error') }}" , 'error'  );

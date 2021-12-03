@@ -10,6 +10,10 @@ use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\PayoutController;
+use App\Http\Controllers\MilestoneController;
+use App\Http\Controllers\HourlyController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\AdminController;
@@ -109,6 +113,7 @@ Route::middleware(['auth'])->group(function () {
   
   
   Route::get('ongoing-job/{id}',[JobsController::class, 'onGoingJobsDetail'])->name('job.ongoing-job');
+  Route::post('/weeklyhours-store',[JobsController::class, 'storeWeeklyHours'])->name('weeklyhours.store');
 
 	Route::post('save-freelancer',[FreelancerController::class, 'saveFreelancer']);
 	Route::post('save-job',[FreelancerController::class, 'saveJob']);
@@ -124,6 +129,7 @@ Route::middleware(['auth'])->group(function () {
 
   Route::post('/update-project-status', [ProposalController::class, 'projectStatus'])->name('update-project-status');
   
+
   // Chat Controller
   Route::get('messages',[ChatController::class,'index'])->name('messages');
   Route::get('friendsList/{id}', [ChatController::class, 'friendsList']);
@@ -139,12 +145,48 @@ Route::middleware(['auth'])->group(function () {
   Route::post('transaction-agree',[PaymentController::class,'agreeTransaction']);
   Route::get('transaction-link/{id}',[PaymentController::class,'linkTransaction']);
 
-  Route::post('deliver-order',[PaymentController::class,'shipProduct']);
+  // Route::post('deliver-order',[PaymentController::class,'shipProduct']);
   
-  Route::post('receive-order',[PaymentController::class,'receiveProduct']);
+  // Route::post('receive-order',[PaymentController::class,'receiveProduct']);
 
-  Route::get('rating/{job_id}',[RatingController::class,'show']);
+  Route::get('rating/{job_id}',[RatingController::class,'show'])->name('job.feedback');
   Route::post('add-rating',[RatingController::class,'store'])->name('add-rating');
+
+  // Paypal
+  Route::get('/paypal-demo', function () {
+      return view('frontend.paypal-demo');
+  })->name('paypal-demo');
+  Route::get('/payment/deposit', function () {
+      return view('frontend.payments.deposit');
+  })->name('payments.deposit');
+
+  Route::get('payment', [PayPalController::class, 'payment'])->name('payment');
+  Route::get('cancel', [PayPalController::class, 'cancel'])->name('payment.cancel');
+  Route::get('payment/success', [PayPalController::class, 'success'])->name('payment.success');
+
+  Route::get('paymentFixed', [PayPalController::class, 'paymentFixed'])->name('paymentFixed');
+  Route::get('cancelFixed', [PayPalController::class, 'cancelFixed'])->name('payment.cancelFixed');
+  Route::get('payment/successFixed', [PayPalController::class, 'successFixed'])->name('payment.successFixed');
+
+  // Paypal Payouts 
+  Route::get('withdraw', function () {
+      return view('frontend.payout.index');
+  })->name('withdraw');
+  Route::get('payout', [PayoutController::class, 'payout'])->name('payout');
+
+  // Milestone deposit OR Reject
+  Route::post('/milestone/depositOrReject/{id}', [MilestoneController::class, 'depositOrReject'])->name('milestone.depositOrReject');
+  // Milestone Release OR Refund OR Dispute
+  Route::post('/milestone/rrd/{id}', [MilestoneController::class, 'ReleaseRefundDispute'])->name('milestone.rrd');
+  Route::post('/milestone/destory/{id}', [MilestoneController::class, 'destory'])->name('milestone.destory');
+  Route::post('/milestone/deposit', [MilestoneController::class, 'deposit'])->name('milestone.deposit');
+
+  // Hourly deposit OR Reject
+  Route::post('/hourly/depositOrReject/{id}', [HourlyController::class, 'depositOrReject'])->name('hourly.depositOrReject');
+  // Hourly Release OR Refund OR Dispute
+  Route::post('/hourly/rrd/{id}', [HourlyController::class, 'ReleaseRefundDispute'])->name('hourly.rrd');
+  Route::post('/hourly/destory/{id}', [HourlyController::class, 'destory'])->name('hourly.destory');
+  Route::post('/hourly/deposit', [HourlyController::class, 'deposit'])->name('hourly.deposit');
 
 });
 

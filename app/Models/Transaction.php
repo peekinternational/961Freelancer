@@ -9,17 +9,19 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
-      'transcation_id',
-      'reference',
-      'job_id',
-      'proposal_id',
-      'milestone_id',
-      'client_id',
-      'freelancer_id',
-      'amount',
-      'escrow_fee',
+      'trans_id',
+      'user_id',
+      'token',
+      'gross_amt',
+      'fee_amt',
+      'net_amt',
+      'payer_id',
+      'email',
+      'currency_code',
+      'country_code',
+      'status',
     ];
-    public function job(){
-      return $this->belongsTo(Job::class, 'job_id', 'job_id');
-    }
+    // public function job(){
+    //   return $this->belongsTo(Job::class, 'job_id', 'job_id');
+    // }
 }

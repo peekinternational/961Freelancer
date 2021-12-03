@@ -45,8 +45,6 @@
 			{{ View::make('frontend.includes.dashboard-sidebar') }}
 			<!--Sidebar Start-->
 			<!--Register Form Start-->
-			@if(Auth::user()->account_type == 'Client')
-			<!--Register Form Start-->
 			<section class="wt-haslayout wt-dbsectionspace">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-9 float-right">
@@ -59,35 +57,26 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Transaction ID</th>
-											<th>Job Title</th>
+											<!-- <th>Transaction ID</th> -->
+											<!-- <th>Job Title</th> -->
 											<th>Amount</th>
-											<th>Escrow Fee</th>
-											<th>Status</th>
-											<th>Action</th>
+											<th>Transaction</th>
+											<th>Date</th>
+											<!-- <th>Action</th> -->
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($client as $key=>$transc)
+										@foreach($transactions as $key=>$transc)
 										<tr>
 											<td>{{$key+1}}</td>
-											<td>{{$transc->transcation_id}}</td>
-											<td>{{$transc->job->job_title}}</td>
 											<td>${{$transc->amount}}</td>
-											<td>${{$transc->escrow_fee}}</td>
-											<td>{{$transc->payment_status}}</td>
-											<td>
-												<div class="wt-actionbt">
-													<a onclick="agree({{$transc->transcation_id}})" class="wt-addinfo wt-skillsaddinfo bg-transparent text-success">Agree</a>
-													<a href="javascript:void(0)" onclick="receive({{$transc->transcation_id}})" class="wt-addinfo wt-skillsaddinfo bg-transparent text-success">Receive</a>
-													<a href="javascript:void(0);" class="wt-deleteinfo bg-transparent">Print</a>
-												</div>
-											</td>
+											<td class="text-start">{{$transc->transaction}}</td>
+											<td>{{date('d F,Y',strtotime($transc->created_at))}}</td>
 										</tr>
 										@endforeach
 									</tbody>
 								</table>
-								{{ $client->links('frontend.pagination.manage-jobs') }}
+								{{ $transactions->links('frontend.pagination.manage-jobs') }}
 							</div>
 						</div>
 					</div>
@@ -96,64 +85,6 @@
 					</div>
 				</div>
 			</section>
-			<!--Register Form End-->
-			@endif
-			<!-- Freelancer -->
-			@if(Auth::user()->account_type == 'Freelancer')
-			<!--Register Form Start-->
-			<section class="wt-haslayout wt-dbsectionspace">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-9 float-right">
-						<div class="wt-dashboardbox wt-dashboardinvocies">
-							<div class="wt-dashboardboxtitle wt-titlewithsearch">
-								<h2>Transactions</h2>
-								
-							</div>
-							<div class="wt-dashboardboxcontent wt-categoriescontentholder wt-categoriesholder px-3 pt-4">
-								<table class="trans-table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Transaction ID</th>
-											<th>Job Title</th>
-											<th>Amount</th>
-											<th>Escrow Fee</th>
-											<th>Status</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach($freelancers as $key=>$transc)
-										<tr>
-											<td>{{$key+1}}</td>
-											<td>{{$transc->transcation_id}}</td>
-											<td>{{$transc->job->job_title}}</td>
-											<td>${{$transc->amount}}</td>
-											<td>${{$transc->escrow_fee}}</td>
-											<td>{{$transc->payment_status}}</td>
-
-											<td>
-												<div class="wt-actionbt">
-													<a onclick="deliver({{$transc->transcation_id}})" class="wt-addinfo wt-skillsaddinfo bg-transparent text-success">Deliver</a>
-													<!-- <a href="{{url('transactions/'.$transc->transcation_id)}}" class="wt-addinfo wt-skillsaddinfo bg-transparent text-success">View</a>
-													<a href="javascript:void(0);" class="wt-deleteinfo bg-transparent">Print</a> -->
-												</div>
-											</td>
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
-								{{ $freelancers->links('frontend.pagination.manage-jobs') }}
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-3 float-left">
-						
-					</div>
-				</div>
-			</section>
-			<!--Register Form End-->
-			@endif
 			<!--Register Form End-->
 		</main>
 		<!--Main End-->

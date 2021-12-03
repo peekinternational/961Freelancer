@@ -19,4 +19,8 @@ class Rating extends Model
       'communication_rating',
       'feedback',
     ];
+    public static function isExist($user_from,$proposal_id, $job_id)
+    {
+      return Rating::where('rating_by', $user_from)->where('proposal_id', $proposal_id)->where('job_id', $job_id)->count();
+    }
 }
