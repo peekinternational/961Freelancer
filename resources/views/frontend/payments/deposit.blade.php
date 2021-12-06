@@ -32,8 +32,7 @@
                         <div class="row mb-3">
                             <label for="amount" class="col-md-4">Amount of Payment:</label>
                             <div class="col-md-8">
-                                <input type="number" class="form-control" id="paypal_deposit_amt" name="paypal_deposit_amt"
-                                    placeholder="1000" onkeyup="PaypalFeeFun()">
+                                <input type="number" class="form-control" id="paypal_deposit_amt" name="paypal_deposit_amt" placeholder="1000" min="0" onkeyup="PaypalFeeFun()">
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mb-3">

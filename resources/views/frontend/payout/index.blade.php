@@ -27,7 +27,7 @@
                             <label for="amount" class="col-md-4">Withdrawal Amount:</label>
                             <div class="col-md-8">
                                 <input type="number" class="form-control" id="paypal_withdraw_amt"
-                                    name="paypal_withdraw_amt" placeholder="30">
+                                    name="paypal_withdraw_amt" min="0" placeholder="30">
                             </div>
                         </div>
                         <div class="row mb-3">
