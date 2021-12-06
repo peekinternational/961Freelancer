@@ -25,18 +25,20 @@
                   <th scope="col">Country</th>
                   <th scope="col">Account Type</th>
                   <th scope="col">Hourly Rate</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($freelancers as $freelancer)
+              @foreach($freelancers as $key => $freelancer)
               <tr>
                 <td>
-                    <div class="avatar-xs">
+                  {{$key+1}}
+                    <!-- <div class="avatar-xs">
                         <span class="avatar-title rounded-circle">
                             {{substr($freelancer->first_name, 0, 1)}}
                         </span>
-                    </div>
+                    </div> -->
                 </td>
                 <td>
                     <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">{{$freelancer->first_name}} {{$freelancer->last_name}}</a></h5>
@@ -47,6 +49,13 @@
                 <td>{{$freelancer->account_type}}</td>
                 <td>
                     ${{$freelancer->hourly_rate}}
+                </td>
+                <td>
+                  @if($freelancer->verification == 1 || $freelancer->verification == 0)
+                    Not Verified
+                  @else
+                    Verified
+                  @endif
                 </td>
                 <td>
                   <ul class="list-inline font-size-20 contact-links mb-0">

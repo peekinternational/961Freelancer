@@ -24,18 +24,20 @@
                   <th scope="col">Email</th>
                   <th scope="col">Country</th>
                   <th scope="col">Account Type</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($clients as $client)
+              @foreach($clients as $key => $client)
               <tr>
                 <td>
-                    <div class="avatar-xs">
+                  {{$key+1}}
+                    <!-- <div class="avatar-xs">
                         <span class="avatar-title rounded-circle">
                             {{substr($client->first_name, 0, 1)}}
                         </span>
-                    </div>
+                    </div> -->
                 </td>
                 <td>
                     <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">{{$client->first_name}} {{$client->last_name}}</a></h5>
@@ -44,6 +46,13 @@
                 <td>{{$client->email}}</td>
                 <td>{{$client->country}}</td>
                 <td>{{$client->account_type}}</td>
+                <td>
+                  @if($client->verification == 1 || $client->verification == 0)
+                    Not Verified
+                  @else
+                    Verified
+                  @endif
+                </td>
                 <td>
                   <ul class="list-inline font-size-20 contact-links mb-0">
                     <li class="list-inline-item px-2">

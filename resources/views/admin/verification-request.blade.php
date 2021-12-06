@@ -58,7 +58,7 @@
                           <button type="button" class="btn-close bg-transparent border-0" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
                         </div>
                         <div class="modal-body">
-                          <img class="modal-content" src="{{asset('assets/images/user/verification/'.$user->verification_image)}}"/>
+                          <img class="modal-content" src="{{asset('assets/images/user/verification/'.$user->verification_image)}}" style="width: 150px;" />
                         </div>
                       </div>
                     </div>
