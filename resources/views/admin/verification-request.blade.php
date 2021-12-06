@@ -47,7 +47,7 @@
                 <td>
                   <div>
                     <a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal">
-                      <img src="{{asset('assets/images/user/verification/'.$user->verification_image)}}" data-toggle="modal" data-target="#exampleModal">
+                      <img src="{{asset('assets/images/user/verification/'.$user->verification_image)}}" data-toggle="modal" data-target="#exampleModal" style="width: 150px;">
                     </a>
                   </div>
                   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -58,7 +58,7 @@
                           <button type="button" class="btn-close bg-transparent border-0" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
                         </div>
                         <div class="modal-body">
-                          <img class="modal-content" src="{{asset('assets/images/user/verification/'.$user->verification_image)}}" style="width: 150px;" />
+                          <img class="modal-content" src="{{asset('assets/images/user/verification/'.$user->verification_image)}}" />
                         </div>
                       </div>
                     </div>
