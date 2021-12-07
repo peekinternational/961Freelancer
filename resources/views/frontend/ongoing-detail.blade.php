@@ -487,7 +487,7 @@
 	              window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/cancelled-jobs/";
 	            }
 	            if(response.job_status == 5){
-	            	window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/completed-jobs/";
+	            	window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/rating/"+response.job_id;
 	            }
 	            
 	            

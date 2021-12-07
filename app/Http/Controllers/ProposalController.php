@@ -322,6 +322,7 @@ class ProposalController extends Controller
       if ($findData->save()) {
         if($request->project_status == 4){
           $escrow = Escrow::where('source_id', $proposal_id)->where('type', 2)->first();
+          // dd($escrow);
           // Get Milestone
           // $ms = Milestone::where('id', $id)->first();
           // User (To) Wallet
@@ -352,7 +353,7 @@ class ProposalController extends Controller
           // Milestone Status Update (status -> Release Amount)
           // $ms->update(['status' => 'paid']);
           // Project Completion when Milestones are paid according to Project's Budget
-          $msAmt = Milestone::where('job_id', $request->milestone_job_id)->where('status', 4)->sum('milestone_amount');
+          // $msAmt = Milestone::where('job_id', $request->milestone_job_id)->where('status', 4)->sum('milestone_amount');
           
           Notification::create([
               'from' => auth()->id(),
@@ -368,10 +369,11 @@ class ProposalController extends Controller
             'type' => 3,
             'status' => 1,
           ]);
-          if (!Rating::isExist(auth()->id(), $proposal_id, $request->milestone_job_id)) {
+          if (!Rating::isExist(auth()->id(), $proposal_id, $request->job_id)) {
               $bid->update(['status' => 5]);
-              Job::where('job_id', $request->milestone_job_id)->update(['status' => 3]);
-              return redirect()->route('job.feedback', ['job_id' => $request->milestone_job_id])->with('message', 'Project Amount Released, and project also completed now you can give feedback!');
+              // Job::where('job_id', $request->milestone_job_id)->update(['status' => 3]);
+              // return redirect()->route('job.feedback', ['job_id' => $request->job_id])->with('message', 'Project Amount Released, and project also completed now you can give feedback!');
+              return response()->json(['status'=>'true' , 'message' => 'Project Status updated', 'job_id' => $job_id, 'job_status' => $proposal_status, 'job_id' => $request->job_id] , 200);
           }
            
         }else{
