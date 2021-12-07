@@ -321,6 +321,7 @@ class ProposalController extends Controller
 
       if ($findData->save()) {
         if($request->project_status == 4){
+          $job_data = Job::where('job_id',$job_id)->first();
           $escrow = Escrow::where('source_id', $proposal_id)->where('type', 2)->first();
           // dd($escrow);
           // Get Milestone
@@ -354,12 +355,18 @@ class ProposalController extends Controller
           // $ms->update(['status' => 'paid']);
           // Project Completion when Milestones are paid according to Project's Budget
           // $msAmt = Milestone::where('job_id', $request->milestone_job_id)->where('status', 4)->sum('milestone_amount');
-          
           Notification::create([
               'from' => auth()->id(),
               'to' => $toUser->user_id,
-              'message' => 'The Milestone is Released!',
-              'noti_type' => 'milestone',
+              'message' => 'Your project "'. $job_data->job_title.'" is completed!',
+              'noti_type' => 'project',
+              'status' => 'unread'
+          ]);
+          Notification::create([
+              'from' => auth()->id(),
+              'to' => $toUser->user_id,
+              'message' => 'The project amount is Released!',
+              'noti_type' => 'project',
               'status' => 'unread'
           ]);
           TransactionHistory::create([

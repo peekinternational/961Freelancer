@@ -79,6 +79,7 @@
 			for (var selector in config) {
 				jQuery(selector).chosen(config[selector]);
 		}
+		
 	</script>
 	<script src="https://961freelancer.com:22000/socket.io/socket.io.js"></script>
 	@if(auth()->user())
@@ -138,6 +139,8 @@
 	    	    }
 	    	})
 	    }
+
+	    
 	</script>
 	@endif
 </body>

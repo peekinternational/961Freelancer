@@ -38,7 +38,7 @@ class Job extends Model
       return $this->hasMany(Proposal::class, 'job_id', 'job_id');
     }
     public function clientRating(){
-      return $this->belongsTo(Rating::class, 'user_id', 'rating_by');
+      return $this->belongsTo(Rating::class, 'job_id', 'job_id');
     }
     
     public static function client($user_id)
