@@ -138,6 +138,15 @@ class HomeController extends Controller
     public function aboutUs(Request $request){
         return View::make('frontend.about');
     }
+    // How it Works
+    public function howWorks(Request $request){
+        return View::make('frontend.how-it-works');
+    }
+
+    // How it Works
+    public function helpSupport(Request $request){
+        return View::make('frontend.help-support');
+    }
 
     // Main Search
     public function search(Request $request){

@@ -39,6 +39,8 @@ Route::get('/categories',[HomeController::class, 'allCategories'])->name('catego
 Route::get('/contact-us',[HomeController::class, 'contactUs'])->name('contact-us');
 Route::post('/contactStore',[HomeController::class, 'store'])->name('contact.store');
 Route::get('/about-us',[HomeController::class, 'aboutUs'])->name('about-us');
+Route::get('/how-it-works',[HomeController::class, 'howWorks'])->name('how-it-works');
+Route::get('/help-support',[HomeController::class, 'helpSupport'])->name('help-support');
 
 Route::get('/search',[HomeController::class, 'search'])->name('search');
 

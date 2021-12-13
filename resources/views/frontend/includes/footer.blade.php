@@ -14,7 +14,7 @@
 	          <h4 class="text-white">For Talent </h4>
 	          <a href="{{route('terms-conditions')}}">Terms &amp; Conditions</a>
 	          <a href="{{route('privacy-policy')}}">Privacy Policy </a>
-	          <a href="">How It Works</a>
+	          <a href="{{route('how-it-works')}}">How It Works</a>
 	          <a href="{{route('contact-us')}}">Contact Us</a>
 	        </div>
 	      </div>
