@@ -51,11 +51,11 @@
                         <div class="wt-description">
                           <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore eta dolore magnam aliqua. Ut enim ad minim veniam, quis nostrud <a href="javascript:void(0);">exercitation ullamco </a> laboris nisi ut aliquiprex ea commodo consequat eta dolore magna aliqua.</p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
@@ -71,11 +71,11 @@
                             Consectetur adipisicing elit sed aeiusmisuod tempor incididunt labore dolore ma alaeiqua enim ade minim veniam quis nostr xecitation ullamcoaris nisi ut aliquipa extaea coedmmmodo equate irure dolawor in reprehenderit.
                           </p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
@@ -91,18 +91,18 @@
                             Consectetur adipisicing elit sed aeiusmisuod tempor incididunt labore dolore ma alaeiqua enim ade minim veniam quis nostr xecitation ullamcoaris nisi ut aliquipa extaea coedmmmodo equate irure dolawor in reprehenderit.
                           </p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
 
 
 
                     <li>
-                      <div class="wt-accordiontitle collapsed" id="headingtwo3" data-toggle="collapse" data-target="#collapsetwo3">
+                      <div class="wt-accordiontitle collapsed" id="headingtwo3" data-bs-toggle="collapse" data-bs-target="#collapsetwo3">
                         <span>Ways to work online and earn money?</span>
                       </div>
                       <div class="wt-accordiondetails collapse" id="collapsetwo3" aria-labelledby="headingtwo3">
@@ -112,15 +112,15 @@
                         <div class="wt-description">
                           <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore eta dolore magnam aliqua. Ut enim ad minim veniam, quis nostrud <a href="javascript:void(0);">exercitation ullamco </a> laboris nisi ut aliquiprex ea commodo consequat eta dolore magna aliqua.</p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
-                      <div class="wt-accordiontitle collapsed" id="headingtwo6" data-toggle="collapse" data-target="#collapsetwo6">
+                      <div class="wt-accordiontitle collapsed" id="headingtwo6" data-bs-toggle="collapse" data-bs-target="#collapsetwo6">
                         <span>Dolore magna aliqua enim ad minim veniam?</span>
                       </div>
                       <div class="wt-accordiondetails collapse" id="collapsetwo6" aria-labelledby="headingtwo6">
@@ -132,15 +132,15 @@
                             Consectetur adipisicing elit sed aeiusmisuod tempor incididunt labore dolore ma alaeiqua enim ade minim veniam quis nostr xecitation ullamcoaris nisi ut aliquipa extaea coedmmmodo equate irure dolawor in reprehenderit.
                           </p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
-                      <div class="wt-accordiontitle collapsed" id="headingthree6" data-toggle="collapse" data-target="#collapsethree6">
+                      <div class="wt-accordiontitle collapsed" id="headingthree6" data-bs-toggle="collapse" data-bs-target="#collapsethree6">
                         <span>Eiusmod tempor incididunt ut labore et dolore magna aliqua?</span>
                       </div>
                       <div class="wt-accordiondetails collapse" id="collapsethree6" aria-labelledby="headingthree6">
@@ -152,15 +152,15 @@
                             Consectetur adipisicing elit sed aeiusmisuod tempor incididunt labore dolore ma alaeiqua enim ade minim veniam quis nostr xecitation ullamcoaris nisi ut aliquipa extaea coedmmmodo equate irure dolawor in reprehenderit.
                           </p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
-                      <div class="wt-accordiontitle collapsed" id="headingtwo7" data-toggle="collapse" data-target="#collapsetwo7">
+                      <div class="wt-accordiontitle collapsed" id="headingtwo7" data-bs-toggle="collapse" data-bs-target="#collapsetwo7">
                         <span>Ways to work online and earn money?</span>
                       </div>
                       <div class="wt-accordiondetails collapse" id="collapsetwo7" aria-labelledby="headingtwo7">
@@ -170,15 +170,15 @@
                         <div class="wt-description">
                           <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore eta dolore magnam aliqua. Ut enim ad minim veniam, quis nostrud <a href="javascript:void(0);">exercitation ullamco </a> laboris nisi ut aliquiprex ea commodo consequat eta dolore magna aliqua.</p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
-                      <div class="wt-accordiontitle collapsed" id="headingtwo8" data-toggle="collapse" data-target="#collapsetwo8">
+                      <div class="wt-accordiontitle collapsed" id="headingtwo8" data-bs-toggle="collapse" data-bs-target="#collapsetwo8">
                         <span>Dolore magna aliqua enim ad minim veniam?</span>
                       </div>
                       <div class="wt-accordiondetails collapse" id="collapsetwo8" aria-labelledby="headingtwo8">
@@ -190,15 +190,15 @@
                             Consectetur adipisicing elit sed aeiusmisuod tempor incididunt labore dolore ma alaeiqua enim ade minim veniam quis nostr xecitation ullamcoaris nisi ut aliquipa extaea coedmmmodo equate irure dolawor in reprehenderit.
                           </p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                     <li>
-                      <div class="wt-accordiontitle collapsed" id="headingthree8" data-toggle="collapse" data-target="#collapsethree8">
+                      <div class="wt-accordiontitle collapsed" id="headingthree8" data-bs-toggle="collapse" data-bs-target="#collapsethree8">
                         <span>Eiusmod tempor incididunt ut labore et dolore magna aliqua?</span>
                       </div>
                       <div class="wt-accordiondetails collapse" id="collapsethree8" aria-labelledby="headingthree8">
@@ -210,11 +210,11 @@
                             Consectetur adipisicing elit sed aeiusmisuod tempor incididunt labore dolore ma alaeiqua enim ade minim veniam quis nostr xecitation ullamcoaris nisi ut aliquipa extaea coedmmmodo equate irure dolawor in reprehenderit.
                           </p>
                         </div>
-                        <div class="wt-likeunlike">
+                        <!-- <div class="wt-likeunlike">
                           <span>Did you find this useful?</span>
                           <a href="javascript:void(0);" class="wt-like"><i class="fa fa-thumbs-up"></i></a>
                           <a href="javascript:void(0);" class="wt-unlike"><i class="fa fa-thumbs-down"></i></a>
-                        </div>
+                        </div> -->
                       </div>
                     </li>
                   </ul>

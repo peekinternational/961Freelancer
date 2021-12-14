@@ -21,7 +21,7 @@
 	      <div class="col-lg-3 col-md-3 col-6">
 	        <div class="widget-item">
 	          <h4 class="text-white">Resources</h4>
-	          <a href="">Help & Support</a>
+	          <a href="{{route('help-support')}}">Help & Support</a>
 	          <a href="">Success Stories </a>
 	          <a href="">Resources</a>
 	          <a href="">Blog</a>
