@@ -21,9 +21,15 @@
 	}
 </style>
 @section('content')
-
+<?php 
+	if($freelancer->cover_image != ''){
+		$background = 'background: url(/assets/images/user/cover/'.$freelancer->cover_image.') no-repeat center'.';'.'background-size: cover';
+	}else{
+		$background = 'background : #ed1c24';
+	}
+?>
 <!--Inner Home Banner Start-->
-<div class="wt-haslayout wt-innerbannerholder wt-innerbannerholdervtwo">
+<div class="wt-haslayout wt-innerbannerholder wt-innerbannerholdervtwo" style="{{$background}}">
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">

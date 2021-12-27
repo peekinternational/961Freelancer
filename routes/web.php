@@ -117,7 +117,8 @@ Route::middleware(['auth'])->group(function () {
   Route::get('ongoing-job/{id}',[JobsController::class, 'onGoingJobsDetail'])->name('job.ongoing-job');
   Route::post('/weeklyhours-store',[JobsController::class, 'storeWeeklyHours'])->name('weeklyhours.store');
 
-	Route::post('save-freelancer',[FreelancerController::class, 'saveFreelancer']);
+	Route::get('freelancer-dashboard',[FreelancerController::class, 'freelancerDashboard']);
+  Route::post('save-freelancer',[FreelancerController::class, 'saveFreelancer']);
 	Route::post('save-job',[FreelancerController::class, 'saveJob']);
 
   Route::get('saved-items',[FreelancerController::class, 'savedItems'])->name('freelancers.saved-items');

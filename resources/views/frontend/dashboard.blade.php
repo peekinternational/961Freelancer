@@ -64,7 +64,7 @@
 			<!--Register Form Start-->
 			<section class="wt-haslayout wt-dbsectionspace">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 {{Auth::user()->account_type == 'Client' ? 'col-md-8 col-lg-8 col-xl-9' : 'col-md-12 col-lg-12 col-xl-12'}} ">
+					<div class="col-xs-12 col-sm-12 {{Auth::user()->account_type == 'Client' ? 'col-md-8 col-lg-8 col-xl-9' : 'col-md-8 col-lg-8 col-xl-9'}} ">
 						<div class="wt-haslayout">
 							<div class="wt-dashboardbox wt-dashboardtabsholder">
 								<div class="wt-dashboardboxtitle">
@@ -720,8 +720,8 @@
 							<a class="wt-btn" href="javascript:void(0);">Save &amp; Update</a>
 						</div> -->
 					</div>
-					@if(Auth::user()->account_type == 'Client')
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+						@if(Auth::user()->account_type == 'Client')
 						<aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave">
 							<div class="wt-proposalsr">
 								<div class="wt-proposalsrcontent">
@@ -757,8 +757,13 @@
 								</div> 
 							</div>								
 						</aside>
+						@else
+						<div class="wt-companyad">
+							<figure class="wt-companyadimg"><img src="{{asset('assets/images/add-img.jpg')}}" alt="img description"></figure>
+							<span>Advertisement  255px X 255px</span>
+						</div>
+						@endif
 					</div>
-					@endif
 				</div>
 			</section>
 			<!--Register Form End-->

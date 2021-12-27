@@ -234,7 +234,7 @@ class RegisterController extends Controller
           session()->forget('previous_url');
           return redirect($url);
         } else {
-        return redirect('profile');
+        return redirect('freelancer-dashboard');
       }
     }
     }

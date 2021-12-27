@@ -233,6 +233,11 @@ class FreelancerController extends Controller
       ]);
     }
 
+    // Freelancer Dashboard
+    public function freelancerDashboard(Request $request){
+      return View::make('frontend.freelancer-dashboard');
+    }
+
     // Client Single Page
     public function client(Request $request,$username){
       $client = User::with('userInfo','certificates','freelancerRating')->withCount('freelancerRating')->whereusername($username)->first();

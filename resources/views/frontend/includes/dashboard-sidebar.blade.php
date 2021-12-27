@@ -39,6 +39,12 @@
 					<nav id="wt-navdashboard" class="wt-navdashboard">
 						<ul>
 							<li class="wt-active">
+								<a href="{{url('freelancer-dashboard')}}">
+									<i class="fal fa-tachometer-alt"></i>
+									<span>Dashboard</span>
+								</a>
+							</li>
+							<li>
 								<a href="{{url('profile')}}">
 									<i class="fal fa-briefcase"></i>
 									<span>My Profile</span>
