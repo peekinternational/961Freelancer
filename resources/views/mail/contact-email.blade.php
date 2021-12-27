@@ -80,8 +80,8 @@
       <p class='bg-gray'> Dear Admin , </p>
       <p class="bg-gray"><strong>{{$user->name}}</strong> sent you message through contact us please login as admin and send response to respective person.</p>
       <br>
-      <br>
-      <p class="regards">Regards,<br>961Freelancer</p>
+      <br><br>
+      <p class="regards" style="margin-top: 4rem;">Regards,<br>961Freelancer</p>
       <br>
       <hr>
 

@@ -310,7 +310,9 @@
 								  								<select name="skill_id" class="w-100 border rounded">
 								  									<option value="">Select Your Skill</option>
 								  									@foreach($skills as $skill)
-								  									<option value="{{$skill->id}}">{{$skill->skill_name}}</option>
+								  									@foreach($user_skills as $key => $user_skill)
+								  										<option value="{{$skill->id}}" {{$user_skill->id == $skill->id ? 'disabled' : ''}}>{{$skill->skill_name}}</option>
+								  									@endforeach	
 								  									@endforeach
 								  								</select>
 								  							</span>
@@ -555,7 +557,7 @@
 								  						<input type="text" name="project_title" class="form-control" placeholder="Project Title">
 								  					</div>
 								  					<div class="form-group form-group-half">
-								  						<input type="text" name="project_url" class="form-control" placeholder="Project URL">
+								  						<input type="text" name="project_url" pattern="(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}" title="please enter a valid url" class="form-control" placeholder="Please enter valid url or leave empty">
 								  					</div>
 								  					<div class="form-group form-group-label wt-infouploading">
 								  						<div class="wt-labelgroup">

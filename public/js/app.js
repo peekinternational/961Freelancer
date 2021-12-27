@@ -2742,7 +2742,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Vue.use((vue_emoji_picker__WEBPACK_IMPORTED_MODULE_2___default()));
-var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://961freelancer.com:22000/');
+var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default().connect('https://961freelancer.com');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["userdata"],
   name: "App",

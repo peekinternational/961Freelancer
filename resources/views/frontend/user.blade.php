@@ -92,7 +92,7 @@
 		<!-- User Listing Start-->
 		<div class="container">
 			<div id="wt-twocolumns" class="row wt-twocolumns wt-haslayout justify-content-center">
-				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 float-left">
+				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 float-left ps-md-0">
 					<div class="wt-usersingle">
 						<div class="wt-clientfeedback">
 							<div class="wt-usertitle wt-titlewithselect">
@@ -259,7 +259,7 @@
 						@endif
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left pe-md-0">
 					<aside id="wt-sidebar" class="wt-sidebar">
 						@if($freelancer->userSkills != '')
 						<div id="wt-ourskill" class="wt-widget">

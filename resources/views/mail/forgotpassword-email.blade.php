@@ -81,12 +81,12 @@
       <p class="bg-gray">Click the below link to change password.</p>
       <br>
       <center>
-        <a style="background-color: #ed1c24; border-radius: 35px;" href="{{ url('/reset-password/'.$user->email.'/'.$user->remember_token) }}" class='btn pt-2'>
+        <a style="background-color: #ed1c24; border-radius: 35px;margin-top: 4rem;" href="{{ url('/reset-password/'.$user->email.'/'.$user->remember_token) }}" class='btn pt-2'>
           Click To Reset Password
         </a>
       </center>
       <br>
-      <p class="regards">Regards,<br>961Freelancer</p>
+      <p class="regards" style="margin-top: 4rem;">Regards,<br>961Freelancer</p>
       <br>
       <hr>
       <p class="footer">© 2021 961Freelancer All rights reserved.</p>

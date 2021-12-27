@@ -81,13 +81,15 @@
       <p class="bg-gray" style="text-align: center;">Verify your email address to complete registration.</p>
       <br>
       <p>Thanks for your interest in joining 961Freelancer! To complete your registration, we need you to verify your email address.</p>
+      <br><br>
       <center>
-        <a style="background-color: #ed1c24; border-radius: 35px;" href="{{url('/verify-account/'.$user->username.'/'.$user->remember_token)}}" class='btn pt-2'>
+        <a style="background-color: #ed1c24; border-radius: 35px; margin-top: 4rem;" href="{{url('/verify-account/'.$user->username.'/'.$user->remember_token)}}" class='btn pt-2'>
           Click To Verify Account
         </a>
       </center>
       <br>
-      <p class="regards">Regards,<br>961Freelancer</p>
+      <br><br>
+      <p class="regards" style="margin-top: 4rem;">Regards,<br>961Freelancer</p>
       <br>
       <hr>
 

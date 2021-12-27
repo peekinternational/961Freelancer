@@ -1,11 +1,11 @@
 @if(Auth::user() != '' && Auth::user()->account_type != 'Client')
   @if(Auth::user()->verification == 1)
-  <div class="alert alert-warning text-black text-center py-1 mb-0" role="alert">Please upload your ID/Passport image to fully verify your account in <strong>24 hours</strong>. click here to verify <a href="{{url('account-setting#verify_account')}}">Account Setting</a></div>
+  <div class="alert alert-warning text-black text-center py-0 mb-0 position-absolute top-0 w-100" role="alert" style="z-index: 1020; font-size: 12px;">Please upload your ID/Passport image to fully verify your account in <strong>24 hours</strong>. click here to verify <a href="{{url('account-setting#verify_account')}}">Account Setting</a></div>
   @endif
 @endif
 @if(Auth::user() != '' && Auth::user()->account_type == 'Client')
   @if(Auth::user()->verification == 1)
-  <div class="alert alert-warning text-black text-center py-1 mb-0" role="alert">Please update your payments details to fully verify your account in <strong>24 hours</strong>. click here to verify <a href="{{url('account-setting#verify_account')}}">Account Setting</a></div>
+  <div class="alert alert-warning text-black text-center py-0 mb-0 position-absolute top-0 w-100" role="alert" style="z-index: 1020; font-size: 12px;">Please update your payments details to fully verify your account in <strong>24 hours</strong>. click here to verify <a href="{{url('account-setting#verify_account')}}">Account Setting</a></div>
   @endif
 @endif
 <header>

@@ -86,7 +86,7 @@
         </a>
       </center> -->
       <br>
-      <p class="regards">Regards,<br>961Freelancer</p>
+      <p class="regards" style="margin-top: 4rem;">Regards,<br>961Freelancer</p>
       <br>
       <hr>
       <p class="footer">© 2021 961Freelancer All rights reserved.</p>

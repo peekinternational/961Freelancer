@@ -579,7 +579,7 @@ import socketio from "socket.io-client";
 import EmojiPicker from 'vue-emoji-picker';
 import moment from "moment";
 Vue.use(EmojiPicker);
-var socket = socketio.connect('https://961freelancer.com:22000/');
+var socket = socketio.connect('https://961freelancer.com');
 export default {
   props: ["userdata"],
   name: "App",
