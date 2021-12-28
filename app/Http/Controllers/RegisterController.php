@@ -234,7 +234,11 @@ class RegisterController extends Controller
           session()->forget('previous_url');
           return redirect($url);
         } else {
-        return redirect('freelancer-dashboard');
+          if(auth()->user()->account_type == 'Freelancer'){
+            return redirect('dashboards');
+          }else{
+            return redirect('dashboard');
+          }
       }
     }
     }

@@ -75,6 +75,10 @@ class User extends Authenticatable
     {
         return Wallet::where('user_id', auth()->id())->first();
     }
+    // Checking Skills
+    public static function skillsCheck($id,$user_id){
+        return UserSkill::where('skill_id',$id)->where('user_id',$user_id)->count();
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

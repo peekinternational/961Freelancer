@@ -29,7 +29,7 @@ body {
 	color: #767676;
 	background: #fff;
 	overflow-x: hidden;
-	font:400 14px/23px 'Montserrat', sans-serif;
+	font:400 14px/23px 'Roboto', sans-serif;
 }
 body h1,
 body h2,
@@ -413,7 +413,7 @@ address { font-style: italic; }
 	display: inline-block;
 	vertical-align: middle;
 	text-transform: uppercase;
-	font:600 13px/50px 'Montserrat', sans-serif;
+	font:600 13px/50px 'Roboto', sans-serif;
 }
 .wt-btn:hover{
 		-webkit-box-shadow: 10px 10px 25px 0 rgba(0,0,0,0.25);
@@ -895,7 +895,7 @@ li.wt-rss a { background:#ff6600; }
 	display:inline-block;
 	vertical-align:middle;
 	text-transform: capitalize;
-	font:400 18px/18px 'Montserrat', sans-serif;
+	font:400 18px/18px 'Roboto', sans-serif;
 }
 .wt-breadcrumb li {
 	width: auto;
@@ -968,7 +968,7 @@ li.wt-rss a { background:#ff6600; }
 	width: 100%;
 	float: left;
 	text-transform: capitalize;
-	font:400 16px/16px 'Montserrat', sans-serif;
+	font:400 16px/16px 'Roboto', sans-serif;
 }
 .wt-navigation{
 	padding: 0;
@@ -1883,7 +1883,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	padding: 0 25px 15px;
 	position: relative;
 	line-height: inherit;
-	font-family:'Montserrat', sans-serif;
+	font-family:'Roboto', sans-serif;
 }
 .wt-navarticletabvtwo{line-height: 69px;}
 .wt-navarticletabvtwo li a{padding: 0 25px;}
@@ -2823,7 +2823,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	text-align: center;
 	border-radius: 50px;
 	border:2px solid #ddd;
-	font: 700 13px/38px 'Montserrat', sans-serif;
+	font: 700 13px/38px 'Roboto', sans-serif;
 }
 .wt-joinsteps li.wt-done-next a{
 	color: #fff;
@@ -3248,7 +3248,7 @@ body.wt-login .wt-userlogedin{display: block;}
 }
 .wt-userlistingtitle span{
 	display: block;
-	font:400 16px/18px 'Montserrat', sans-serif;
+	font:400 16px/18px 'Roboto', sans-serif;
 }
 .wt-userlistingtitle span em{color: #323232;font-style: normal;}
 .wt-filterholder{
@@ -3355,7 +3355,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	display: block;
 	color:#323232;
 	margin: 0 0 9px;
-	font:400 14px/16px 'Montserrat', sans-serif;
+	font:400 14px/16px 'Roboto', sans-serif;
 }
 .wt-contenthead .wt-title h2{
 	margin: 0;
@@ -3724,7 +3724,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .tg-qrcodefeat h3 span {
 	display: block;
 	font-weight: 700;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 .wt-clicksavearea{
 	float: left;
@@ -3746,7 +3746,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	border-radius: 4px;
 	display: inline-block;
 	vertical-align: middle;
-	font:700 13px/48px 'Montserrat', sans-serif;
+	font:700 13px/48px 'Roboto', sans-serif;
 }
 .wt-clicksavebtn i{margin-right: 7px;}
 .wt-companyinfo{
@@ -3776,7 +3776,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	display: block;
 	color: #323232;
 	margin: 0 0 9px;
-	font: 400 14px/16px 'Montserrat', sans-serif;
+	font: 400 14px/16px 'Roboto', sans-serif;
 }
 .wt-companysinfo .wt-title a i {color: #00cc8d;}
 .wt-companysinfo .wt-title h2 {
@@ -3983,7 +3983,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	line-height: inherit;
 	display: inline-block;
 	vertical-align: baseline;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 .wt-alertbtn{
 	color: #fff;
@@ -4258,7 +4258,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	content: '';
 	position: absolute;
 	background: url(../images/bg-img.png);
-	height: 99px;
+	height: 20px;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -4608,7 +4608,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	padding: 0 20px;
 	text-align: center;
 	border-radius: 0 4px 4px 0;
-	font:700 13px/50px 'Montserrat', sans-serif;
+	font:700 13px/50px 'Roboto', sans-serif;
 }
 .wt-btnsearch:hover,
 .wt-btnsearch:focus{color: #fff;}
@@ -4800,7 +4800,7 @@ body.wt-login .wt-userlogedin{display: block;}
 }
 .wt-companyinfo span a{
 	color: #55acee;
-	font:700 22px/22px 'Montserrat', Arial, Helvetica, sans-serif;
+	font:700 22px/22px 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-fbtnarea{float: right;}
 .wt-footerbottom{
@@ -5303,7 +5303,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	padding-left:27px; 
 	display: inline-block;
 	vertical-align: middle;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 .wt-paymentmethod li a span em{
 	display: block;

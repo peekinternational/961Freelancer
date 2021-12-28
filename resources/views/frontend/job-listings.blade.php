@@ -246,8 +246,14 @@
 									</div>
 
 									<!-- Bookmark -->
+
 									@if(Auth::user())
-										@if($job->saveJobs != '')
+										@if(App\Models\SaveItem::jobSaved(Auth::user()->id,$job->id) == 0)
+											<span class="bookmark-icon" onclick="saveJob({{$job->id}})"></span>
+											@else
+											<span class="bookmark-icon" style="color: red;" onclick="saveJob({{$job->id}})"></span>
+										@endif
+										<!-- @if($job->saveJobs != '')
 											@foreach($job->saveJobs as $save)
 												@if($save->user_id == Auth::user()->id && $save->status == 1)
 													<span class="bookmark-icon" style="color: red;" onclick="saveJob({{$job->id}})"></span>
@@ -259,7 +265,7 @@
 										@endif
 										@if($job->saveJobs == '')
 											<span class="bookmark-icon" onclick="saveJob({{$job->id}})"></span>
-										@endif
+										@endif -->
 									@endif
 								</div>
 

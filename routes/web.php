@@ -16,6 +16,8 @@ use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\HourlyController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ClientDashboardController;
+use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -117,7 +119,8 @@ Route::middleware(['auth'])->group(function () {
   Route::get('ongoing-job/{id}',[JobsController::class, 'onGoingJobsDetail'])->name('job.ongoing-job');
   Route::post('/weeklyhours-store',[JobsController::class, 'storeWeeklyHours'])->name('weeklyhours.store');
 
-	Route::get('freelancer-dashboard',[FreelancerController::class, 'freelancerDashboard']);
+	Route::get('dashboards',[FreelancerDashboardController::class, 'index'])->name('freelancer-dashboard');
+  Route::get('dashboard',[ClientDashboardController::class, 'index'])->name('client.dashboard');
   Route::post('save-freelancer',[FreelancerController::class, 'saveFreelancer']);
 	Route::post('save-job',[FreelancerController::class, 'saveJob']);
 

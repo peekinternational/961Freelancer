@@ -119,7 +119,7 @@ class FreelancerController extends Controller
       $getSavedFreelancer = SaveItem::with('userData')->whereuser_id($user_id)->where('save_type','Freelancer')->where('status',1)->get();
       $countFreelancer = $getSavedFreelancer->count();
 
-      $getSavedjob = SaveItem::with('jobData')->whereuser_id($user_id)->where('save_type','Job')->get();
+      $getSavedjob = SaveItem::with('jobData')->whereuser_id($user_id)->where('save_type','Job')->where('status',1)->get();
       $jobCount = $getSavedjob->count();
       return View::make('frontend.saved-items')->with([
         "saveFreelancers" => $getSavedFreelancer,
@@ -236,6 +236,10 @@ class FreelancerController extends Controller
     // Freelancer Dashboard
     public function freelancerDashboard(Request $request){
       return View::make('frontend.freelancer-dashboard');
+    }
+
+    public function clientDashboard(Request $request){
+      return View::make('frontend.client-dashboard');
     }
 
     // Client Single Page

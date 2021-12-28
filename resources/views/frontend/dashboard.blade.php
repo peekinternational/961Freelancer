@@ -48,7 +48,9 @@
 	#preview img {
 	  max-width: 100%
 	}
-	
+	select[name="skill_id"] option:disabled {
+	  color: #9a9a9a;
+	}
 </style>
 @endsection
 @section('content')
@@ -310,9 +312,11 @@
 								  								<select name="skill_id" class="w-100 border rounded">
 								  									<option value="">Select Your Skill</option>
 								  									@foreach($skills as $skill)
-								  									@foreach($user_skills as $key => $user_skill)
-								  										<option value="{{$skill->id}}" {{$user_skill->id == $skill->id ? 'disabled' : ''}}>{{$skill->skill_name}}</option>
-								  									@endforeach	
+									  									
+									  										
+									  									<option value="{{$skill->id}}" {{App\Models\User::skillsCheck($skill->id,Auth::user()->id) == 1 ? 'disabled' : ''}}>{{$skill->skill_name}} </option>
+									  										
+									  										
 								  									@endforeach
 								  								</select>
 								  							</span>

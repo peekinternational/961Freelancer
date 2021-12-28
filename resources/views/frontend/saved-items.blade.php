@@ -52,14 +52,14 @@
 														<div class="wt-title">
 															<!-- <a href="usersingle.html"><i class="fa fa-check-circle"></i> Choosen Design -->
 															</a>
-															<h2>{{$saveJob->jobData->job_title}}</h2>
+															<h2><a href="{{ route('job.show',$saveJob->jobData->job_id)}}" class="text-reset" style="font-size: 18px;">{{$saveJob->jobData->job_title}}</a></h2>
 														</div>
 														<ul class="wt-saveitem-breadcrumb wt-userlisting-breadcrumb">
 															<li><span class="wt-dashboraddoller"><i class="fa fa-dollar-sign"></i> {{$saveJob->jobData->service_level}}</span></li>
 															<!-- <li><span><img src="images/flag/img-04.png" alt="img description"> {{$saveJob->jobData->country}}</span></li> -->
 															<li><a href="javascript:void(0);" class="wt-clicksavefolder text-capitalize"><i class="far fa-folder"></i> Type: {{$saveJob->jobData->job_type}}</a></li>
 															<li><span class="wt-dashboradclock"><i class="far fa-clock"></i> Duration: {{$saveJob->jobData->job_duration}}</span></li>
-															<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Saved</a></li>															
+															<li><a href="javascript:void(0);" class="wt-clicksave" onclick="saveJob({{$saveJob->jobData->id}})"><i class="fa fa-heart"></i> Saved</a></li>															
 														</ul>
 													</div>
 												</div>	
@@ -95,7 +95,7 @@
 												<div class="wt-userlistingcontent">
 													<div class="wt-contenthead">
 														<div class="wt-title">
-															<a href="usersingle.html"><i class="fa fa-check-circle"></i> {{$savefree->userData->first_name}} {{$savefree->userData->last_name}}
+															<a href="{{ route('freelancers.show',$savefree->userData->username)}}"><i class="fa fa-check-circle"></i> {{$savefree->userData->first_name}} {{$savefree->userData->last_name}}
 															</a>
 															<h2>{{$savefree->userData->tagline}}</h2>
 														</div>
@@ -192,6 +192,31 @@
 	    	}
 	    	if(data == 2){
 	    		$('.save'+id).html('<i class="fal fa-heart"></i> Save');
+	    	}
+	    	// $("#add-project-form")[0].reset();
+	    	// $('#pills-home-tab').removeClass('active');
+	    	// $('#pills-profile-tab').addClass('active');
+	    	// $('#pills-home').removeClass('show active');
+	    	// $('#pills-profile').addClass('show active');
+    	}
+   	})
+	}
+	function saveJob(id){
+   	$.ajax({
+	    url:"{{ url('save-job') }}",
+	    method:"POST",
+	    data:{
+	    	"_token": CSRF_TOKEN,
+        "job_id": id,
+        "save_type": 'Job',
+      },
+	    success:function(data){
+	    	console.log(data);
+	    	if (data == 1) {
+	    		$('.save'+id).html('<i class="fa fa-heart"></i> Saved');
+	    	}
+	    	if(data == 2){
+	    		$('.save'+id).html('<i class="far fa-heart"></i> Click to save');
 	    	}
 	    	// $("#add-project-form")[0].reset();
 	    	// $('#pills-home-tab').removeClass('active');

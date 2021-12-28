@@ -81,4 +81,6 @@ class Job extends Model
     {
         return Job::where('user_id', $user_id)->where('job_status',2)->count();
     }
+
+    
 }

@@ -102,36 +102,13 @@
 										</tr>
 									</thead>
 									<tbody>
+										@foreach($completedJobs as $jobs)
 										<tr>
-											<td>I want some customization and installation on wordpress</td>
-											<td>February 3, 2019</td>
-											<td>$19.00</td>
+											<td>{{$jobs->job->job_title}}</td>
+											<td>{{$jobs->job->updated_at->format('F j, Y')}}</td>
+											<td>${{$jobs->budget_receive}}</td>
 										</tr>
-										<tr>
-											<td>Develop a transportation company website</td>
-											<td>January 12, 2019</td>
-											<td>$350.00</td>
-										</tr>
-										<tr>
-											<td>Change temp to Arabic and install on wordpress</td>
-											<td>December 16, 2018</td>
-											<td>$120.00</td>
-										</tr>
-										<tr>
-											<td>I want some customization and installation on wordpress</td>
-											<td>November 18, 2018</td>
-											<td>$60.00</td>
-										</tr>
-										<tr>
-											<td>Website changes in HTML &amp; PHP</td>
-											<td>October 24, 2018</td>
-											<td>$50.00</td>
-										</tr>
-										<tr>
-											<td>I want some customization and installation on wordpress</td>
-											<td>October 21, 2018</td>
-											<td>$240.00</td>
-										</tr>
+										@endforeach
 									</tbody>
 								</table>
 							</div>
@@ -148,7 +125,7 @@
 										<div class="wt-insightdetails">
 											<div class="wt-title">
 												<h3>New Messages</h3>
-												<a href="javascript:void(0)">Click To View</a>
+												<a href="{{ route('messages') }}">Click To View</a>
 											</div>	
 										</div>	
 									</div>																		
@@ -197,7 +174,7 @@
 										<div class="wt-insightdetails">
 											<div class="wt-title">
 												<h3>Latest Proposals</h3>
-												<a href="javascript:void(0)">Click To View</a>
+												<a href="{{route('proposals')}}">Click To View</a>
 											</div>
 										</div>	
 									</div>						
@@ -210,7 +187,7 @@
 										<div class="wt-insightdetails">
 											<div class="wt-title">
 												<h3>View Saved Items</h3>
-												<a href="javascript:void(0)">Click To View</a>
+												<a href="{{ route('freelancers.saved-items') }}">Click To View</a>
 											</div>													
 										</div>
 									</div>								
@@ -223,38 +200,19 @@
 											<h2>Ongoing Projects</h2>
 										</div>
 										<div class="wt-dashboardboxcontent wt-hiredfreelance">
+											@foreach($freelancerOngoingJobs as $ongoing)
 											<div class="wt-userlistinghold wt-featured">
 												<!-- <span class="wt-smallfeaturedtag"><img src="{{asset('assets/images/featured.png')}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span> -->
 												<div class="wt-proposaldetails">
 													<div class="wt-contenthead">
 														<div class="wt-title">
-															<h3>I want some customization &amp; installation on wordpress <span>Louanne Mattioli</span></h3>
-															<a href="javascript:void(0)" class="wt-hiredarrow"><i class="lnr lnr-chevron-right"></i></a>
+															<h3>{{$ongoing->job->job_title}} <span>{{App\Models\Job::client($ongoing->job->user_id)->first_name}} {{App\Models\Job::client($ongoing->job->user_id)->last_name}}</span></h3>
+															<a href="{{url('ongoing-job/'.$ongoing->job->job_id)}}" class="wt-hiredarrow"><i class="fal fa-chevron-right"></i></a>
 														</div>
 													</div>													
 												</div>	
 											</div>
-											<div class="wt-userlistinghold wt-featured">
-												<!-- <span class="wt-smallfeaturedtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span> -->
-												<div class="wt-proposaldetails">
-													<div class="wt-contenthead">
-														<div class="wt-title">
-															<h3>Develop a transportation company website <span>Louanne Mattioli</span></h3>
-															<a href="javascript:void(0)" class="wt-hiredarrow"><i class="lnr lnr-chevron-right"></i></a>
-														</div>
-													</div>													
-												</div>	
-											</div>											
-											<div class="wt-userlistinghold wt-featured">
-												<div class="wt-proposaldetails">
-													<div class="wt-contenthead">
-														<div class="wt-title">
-															<h3>Change temp to Arabic &amp; install on wordpress <span>Louanne Mattioli</span></h3>
-															<a href="javascript:void(0)" class="wt-hiredarrow"><i class="lnr lnr-chevron-right"></i></a>
-														</div>
-													</div>													
-												</div>	
-											</div>							
+											@endforeach							
 										</div>
 									</div>
 								</div>
@@ -267,7 +225,7 @@
 												<img src="{{asset('assets/images/thumbnail/img-17.png')}}" alt="image">
 											</figure>
 											<div class="wt-title">
-												<h3>150</h3>
+												<h3>{{App\Models\Proposal::freelancerOngoingCount(Auth::user()->id)}}</h3>
 												<span>Total Ongoing Jobs</span>
 											</div>
 										</div> 
@@ -280,7 +238,7 @@
 												<img src="{{asset('assets/images/thumbnail/img-15.png')}}" alt="image">
 											</figure>
 											<div class="wt-title">
-												<h3>2075</h3>
+												<h3>{{App\Models\Proposal::freelancerCancelledCount(Auth::user()->id)}}</h3>
 												<span>Total Cancelled Jobs</span>
 											</div>
 										</div> 

@@ -124,12 +124,22 @@
                 <ul>
                   @if(Auth::user()->account_type == 'Freelancer')
                   <li>
+                    <a href="{{route('freelancer-dashboard')}}">
+                      <span>Dashboard</span>
+                    </a>
+                  </li>
+                  <li>
                     <a href="{{url('freelancer/'.Auth::user()->username)}}">
                       <span>View Profile</span>
                     </a>
                   </li>
                   @endif
                   @if(Auth::user()->account_type == 'Client')
+                  <li>
+                    <a href="{{route('client.dashboard')}}">
+                      <span>Dashboard</span>
+                    </a>
+                  </li>
                   <li>
                     <a href="{{url('client/'.Auth::user()->username)}}">
                       <span>View Profile</span>

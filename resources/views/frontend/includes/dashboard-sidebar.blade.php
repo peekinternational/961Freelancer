@@ -38,12 +38,21 @@
 					</div>
 					<nav id="wt-navdashboard" class="wt-navdashboard">
 						<ul>
+							@if(Auth::user()->account_type == 'Freelancer')
 							<li class="wt-active">
-								<a href="{{url('freelancer-dashboard')}}">
+								<a href="{{route('freelancer-dashboard')}}">
 									<i class="fal fa-tachometer-alt"></i>
 									<span>Dashboard</span>
 								</a>
 							</li>
+							@else
+							<li class="wt-active">
+								<a href="{{route('client.dashboard')}}">
+									<i class="fal fa-tachometer-alt"></i>
+									<span>Dashboard</span>
+								</a>
+							</li>
+							@endif
 							<li>
 								<a href="{{url('profile')}}">
 									<i class="fal fa-briefcase"></i>

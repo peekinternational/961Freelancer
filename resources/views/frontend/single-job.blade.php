@@ -108,10 +108,13 @@
 										@endif
 									@endforeach
 									@else
-
+								
 								@endif -->
+								@if(App\Models\SaveItem::jobSaved(Auth::user()->id,$job->id) == 0)
 									<i class="far fa-heart"></i> Click to save
-
+								@else
+									<i class="fa fa-heart text-danger"></i> Saved
+								@endif
 								</a>
 								@endif
 							</div>

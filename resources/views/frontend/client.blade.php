@@ -20,10 +20,20 @@
 	  }
 	}
 </style>
+@if(Auth::user() != '' && Auth::user()->account_type == 'Client')
+<style>
+	@media(min-width: 768px){
+		.footer-social a {
+		    display: inline-grid !important;
+		    align-content: center;
+		}
+	}
+</style>
+@endif
 @section('content')
 <?php 
-	if($freelancer->cover_image != ''){
-		$background = 'background: url(/assets/images/user/cover/'.$freelancer->cover_image.') no-repeat center'.';'.'background-size: cover';
+	if($client->cover_image != ''){
+		$background = 'background: url(/assets/images/user/cover/'.$client->cover_image.') no-repeat center'.';'.'background-size: cover';
 	}else{
 		$background = 'background : #ed1c24';
 	}

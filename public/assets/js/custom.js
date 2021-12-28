@@ -214,7 +214,23 @@ jQuery('.wt-usersidebardown').on('click', function(event){
 			1760:{items:6,}
 		}
 	});
-	
+	/* Dashboard Slider */
+	var _wt_postedsilder = jQuery("#wt-postedsilder")
+	_wt_postedsilder.owlCarousel({
+		item: 6,
+		loop:true,
+		nav:true,
+		margin: 10,
+		autoplay:false,
+		responsiveClass:true,
+		navClass: ['wt-prev', 'wt-next'],
+		navContainerClass: 'wt-slidernav',
+		navText: ['<span class="fal fa-chevron-left"></span>', '<span class="fal fa-chevron-right"></span>'],
+		responsive:{
+			0:{items:1,},
+			720:{items:2,},
+		}
+	});
 	/* SHORT DESCRIPTION */
 	// var _readmore = jQuery('.wt-userdetails .wt-description');
 	// _readmore.readmore({

@@ -22,4 +22,8 @@ class SaveItem extends Model
     public function jobData(){
       return $this->belongsTo(Job::class, 'job_id','id');
     }
+    public static function jobSaved($user_id,$job_id)
+    {
+      return SaveItem::where('user_id',$user_id)->where('job_id',$job_id)->where('status',1)->count();
+    }
 }

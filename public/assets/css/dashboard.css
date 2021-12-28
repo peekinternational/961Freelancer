@@ -87,7 +87,7 @@ body{background:#f2f3fa;}
 .wt-navdashboard {
 	width: 270px;
 	float: left;;
-	font:400 13px/46px 'Poppins', Arial, Helvetica, sans-serif;
+	font:400 13px/46px 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-navdashboard ul{
 	width: 100%;
@@ -710,7 +710,7 @@ body{background:#f2f3fa;}
 	display: block;
 	padding: 20px 30px;
 	position: relative;
-	font:400 16px/20px 'Poppins', Arial, Helvetica, sans-serif;
+	font:400 16px/20px 'Roboto', Arial, Helvetica, sans-serif;
 	-webkit-appearance: none;
 }
 .wt-tabstitle li a.active{background: #fff;}
@@ -1037,7 +1037,7 @@ body{background:#f2f3fa;}
 	float:left;
 	color:#323232;
 	padding: 14px 0;
-	font:400 16px/22px 'Poppins', Arial, Helvetica, sans-serif;
+	font:400 16px/22px 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-updatall .wt-btnarea .wt-btn{float: left;}
 .wt-updatall .wt-btn{
@@ -1141,7 +1141,7 @@ body{background:#f2f3fa;}
     vertical-align: middle;
     text-transform: uppercase;
 	background: #00cc8d !important;
-    font: 700 13px/50px 'Poppins', Arial, Helvetica, sans-serif;
+    font: 700 13px/50px 'Roboto', Arial, Helvetica, sans-serif;
 }
 .form-group-label label input{display: none;}
 .wt-experienceaccordion .wt-collapseexp fieldset .form-group .wt-labelgroup span{
@@ -1218,7 +1218,7 @@ body{background:#f2f3fa;}
 	background: #fcfcfc;
 	vertical-align: middle;
 	border-top: 1px solid #eff2f5;
-	font-family: 'Poppins', Arial, Helvetica, sans-serif;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-tablecategories .wt-radio,
 .wt-tablecategories .wt-radio label,
@@ -1435,7 +1435,7 @@ table.wt-tablecategories tbody tr td figure img{
 	color: #767676;
 	font-style: normal;
 	font-size: 13px;
-	font-family: 'Poppins', Arial, Helvetica, sans-serif;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 /* Account Settings */
 .wt-securitysettings{
@@ -1584,7 +1584,7 @@ table.wt-tablecategories tbody tr td figure img{
 	padding: 10px 0;
 	display: inline-block;
 	vertical-align: middle;
-	font:400 13px/16px 'Poppins', Arial, Helvetica, sans-serif;
+	font:400 13px/16px 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-designtitle .wt-btn{
 	width: 100px;
@@ -1862,7 +1862,7 @@ table.wt-tablecategories tbody tr td figure img{
 	display: inline-block;
 	vertical-align: middle;
 	text-transform: uppercase;
-	font: 700 13px/36px 'Poppins', Arial, Helvetica, sans-serif;
+	font: 700 13px/36px 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-canceljobholder .wt-userlistinghold .wt-rightarea .wt-btnarea a + a{
 	margin-left: 25px;
@@ -2286,7 +2286,7 @@ li.collapsed .wt-msgbtns .wt-msgbtn i.lnr-chevron-up:before{content: "\e874";}
     line-height: inherit;
     display: inline-block;
     vertical-align: top;
-    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-jobalertsdashboard .wt-alertbtn{
 	top: 50%; 
@@ -2338,7 +2338,7 @@ li.collapsed .wt-msgbtns .wt-msgbtn i.lnr-chevron-up:before{content: "\e874";}
 .wt-posteditem span{
 	display: block;
 	margin-bottom:8px; 
-	font:400 14px/18px 'Poppins', Arial, Helvetica, sans-serif;
+	font:400 14px/18px 'Roboto', Arial, Helvetica, sans-serif;
 }
 .wt-posteditem span a{color: #323232;}
 .wt-posteditem span i{color: #00cc8d}
