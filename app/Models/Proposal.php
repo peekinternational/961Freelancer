@@ -62,4 +62,8 @@ class Proposal extends Model
     {
         return Proposal::where('user_id', $user_id)->where('status',2)->count();
     }
+
+    public static function selectedProposal($job_id){
+      return Proposal::where('job_id',$job_id)->where('status',2)->first();
+    }
 }
