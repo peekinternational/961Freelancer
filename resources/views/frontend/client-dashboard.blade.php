@@ -106,7 +106,7 @@
 											<div class="wt-userlistinghold wt-featured">
 												<!-- <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content"></span> -->
 												<figure class="wt-userlistingimg">
-													<img src="{{asset('assets/images/user/profile/'.App\Models\Proposal::freelancerApp\Models\Proposal::selectedProposal($freelancer->job_id)->user_id)->profile_image)}}" alt="image description" class="img description">
+													<img src="{{asset('assets/images/user/profile/'.App\Models\Proposal::freelancer(App\Models\Proposal::selectedProposal($freelancer->job_id)->user_id)->profile_image)}}" alt="image description" class="img description">
 												</figure>
 												<div class="wt-proposaldetails">
 													<div class="wt-contenthead">
