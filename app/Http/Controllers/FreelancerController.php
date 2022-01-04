@@ -13,6 +13,8 @@ use App\Models\UserEducation;
 use App\Models\UserExperience;
 use App\Models\UserProject;
 use App\Models\SaveItem;
+use App\Models\Category;
+use App\Models\Countries;
 use Hash;
 use Session;
 use Mail;
@@ -28,9 +30,12 @@ class FreelancerController extends Controller
     public function index()
     {
         $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
-        
+        $categories = Category::get();
+        $countries = Countries::get();
         return View::make('frontend.freelancers')->with([
-            'freelancers' => $freelancers
+            'freelancers' => $freelancers,
+            'categories' => $categories,
+            'countries' => $countries
         ]);
     }
 
@@ -193,6 +198,7 @@ class FreelancerController extends Controller
       // dd($request->all());
       $hourly_rate = $request->input('hourly_rate');
       $tagline = $request->input('tagline');
+      $location = $request->input('user_location');
       $clear = $request->input('clear');
       // dd($tagline);
       
@@ -202,6 +208,11 @@ class FreelancerController extends Controller
         }else{
           $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('tagline','like','%'.$tagline.'%')->paginate(10);  
         }
+      }
+      if($location != ''){
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('country','like','%'.$location.'%')->paginate(10); 
+      }else{
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
       }
       // else{
       //   $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);

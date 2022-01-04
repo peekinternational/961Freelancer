@@ -53,6 +53,11 @@
 </style>
 @endsection
 @section('content')
+<?php 
+	foreach ($jobCount as $key => $value) {
+		echo $value->month;
+	}
+?>
 <!--Main Start-->
 <!-- Wrapper Start -->
 <div id="wt-wrapper" class="wt-wrapper wt-haslayout">
@@ -70,11 +75,11 @@
 								<div class="wt-dashboardbox">
 									<div class="wt-dashboardboxtitle wt-yeartag">
 										<h2>Job Posted</h2>
-										<div class="wt-tag wt-widgettag">
+										<!-- <div class="wt-tag wt-widgettag">
 											<a href="javascript:void(0);">2019</a>
 											<a href="javascript:void(0);">2018</a>
 											<a href="javascript:void(0);">2017</a>
-										</div>
+										</div> -->
 									</div>
 									<div class="wt-dashboardboxcontent">
 										<div id="wt-postedsilder" class="wt-postedsilder owl-carousel">
@@ -184,7 +189,7 @@
 				<section class="wt-haslayout wt-dbsectionspace wt-padding-add-top wt-moredetailsholder">
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-							<div class="wt-insightsitem wt-dashboardbox wt-insightnoticon">
+							<div class="wt-insightsitem wt-dashboardbox {{ App\Models\ChatMessages::getUnseenMsg() > 0 ? 'wt-insightnoticon' : '' }}">
 								<figure class="wt-userlistingimg">
 									<img src="{{asset('assets/images/thumbnail/img-19.png')}}" alt="image description" class="mCS_img_loaded">
 								</figure>
@@ -275,10 +280,11 @@
 	var wt_jobchart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: ["January", "February", "March", "April"],
+	        labels: ["Jan", "Feb", "Mar", "Apr", "May", 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
 	        datasets: [{
-	            label: 'Total Earnings',
-	            data: [ 6, 8, 4, 7, 10],
+	            label: 'Total Jobs',
+	            
+	            data: [ 0,0, 0, 0, 0, 0,0, 0, 0, 0,0,0],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',

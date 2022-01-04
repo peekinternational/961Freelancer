@@ -12,6 +12,7 @@ use App\Models\Countries;
 use App\Models\Proposal;
 use App\Models\Rating;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Hash;
 use Session;
 use Mail;
@@ -31,10 +32,16 @@ class FreelancerDashboardController extends Controller
 
       $completedJobs = Proposal::with('job','freelancerRating')->whereuser_id($user_id)->wherestatus(5)->orderBy('created_at','DESC')->paginate(5);
 
-      // dd($proposals);
+      $monthlySale = Proposal::with('job','freelancerRating')->whereuser_id($user_id)->wherestatus(5)->get()
+                  ->groupBy(function($val) {
+                  return Carbon::parse($val->updated_at)->format('M');
+              });
+       
+      // dd(count($monthlySale['Dec']));
       return View::make('frontend.freelancer-dashboard')->with([
         'freelancerOngoingJobs' => $freelancerJobs,
-        'completedJobs' => $completedJobs
+        'completedJobs' => $completedJobs,
+        'monthlySale' => $monthlySale
       ]);
     }
 

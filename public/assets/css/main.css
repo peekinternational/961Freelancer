@@ -3452,7 +3452,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-viewjobholder ul{
 	float: left;
 	width: 100%;
-	padding: 30px;
+	padding: 30px 14px;
 	list-style:none;
 	line-height: 16px;
 }
@@ -4765,8 +4765,8 @@ body.wt-login .wt-userlogedin{display: block;}
 }
 .wt-footerlogohold .wt-logo{margin: 0; margin-bottom:20px; }
 .wt-footerlogohold > .wt-description > p{
-	color: #ccc;
-	font-size: 16px;
+	color: #fff;
+	font-size: 14px;
 	margin: 0 0 26px;
 	line-height: 26px;
 }
@@ -4781,7 +4781,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	border-left: 1px solid rgba(255, 255, 255, 0.20); 
 }
 .wt-footerholder .wt-fwidgettitle h3{color: #fff;}
-.wt-footerholder .wt-fwidgetcontent li a{color: #ccc;}
+.wt-footerholder .wt-fwidgetcontent li a{color: #fff;}
 .wt-footerholder .wt-fwidgetcontent li.wt-viewmore a{color: #55acee;}
 .wt-joininfo{
 	padding: 25px 0;
@@ -4795,7 +4795,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-companyinfo span{
 	color: #fff;
 	display: block;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 24px;
 }
 .wt-companyinfo span a{
@@ -4812,7 +4812,7 @@ body.wt-login .wt-userlogedin{display: block;}
 .wt-copyrights{
 	margin:0;
 	float:left;
-	color:#ccc;
+	color:#fff;
 	font-size:14px;
 	line-height:16px;
 }
@@ -4846,7 +4846,7 @@ body.wt-login .wt-userlogedin{display: block;}
 }
 .wt-addnav ul li:last-child{padding-right:0;}
 .wt-addnav ul li a{
-	color:#ccc;
+	color:#fff;
 	display:block;
 }
 .wt-addnav ul li:hover a{color:#55acee;}

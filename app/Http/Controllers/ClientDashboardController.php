@@ -12,6 +12,7 @@ use App\Models\Countries;
 use App\Models\Proposal;
 use App\Models\Rating;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Hash;
 use Session;
 use Mail;
@@ -31,9 +32,20 @@ class ClientDashboardController extends Controller
 
       $hiredFreelancers = Job::with('proposal','clientInfo')->whereuser_id($user_id)->wherejob_status(2)->orderBy('created_at','DESC')->paginate(5);
 
+      // $jobCount = Job::whereuser_id($user_id)->get()
+      //   ->groupBy(function($val) {
+      //   return Carbon::parse($val->created_at)->format('M');
+      // });
+
+      $jobCount = Job::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month')->whereuser_id($user_id)
+    ->groupBy('year', 'month')
+    ->get();
+
+      // dd($jobCount);
       return View::make('frontend.client-dashboard')->with([
         'jobs' => $myJobs,
-        'hiredFreelancers' => $hiredFreelancers
+        'hiredFreelancers' => $hiredFreelancers,
+        'jobCount' => $jobCount
       ]);
     }
 

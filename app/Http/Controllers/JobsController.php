@@ -347,6 +347,22 @@ class JobsController extends Controller
       ]);
     }
 
+    // Category Search
+    public function catSearch(Request $request){
+      $keyword = $request->cat_keyword;
+      $get_category = Category::where('category_name','like','%'.$keyword.'%')->get();
+      return View::make('frontend.ajax.cate-filter')->with([
+        'categories' => $get_category
+      ]);
+    }
+    // Location Search
+    public function locationSearch(Request $request){
+      $keyword = $request->loc_keyword;
+      $get_country = Countries::where('name','like','%'.$keyword.'%')->get();
+      return View::make('frontend.ajax.location-filter')->with([
+        'countries' => $get_country
+      ]);
+    }
     // Filters and Sorting
     public function getJobs(Request $request){
       // dd($request->all());
@@ -371,6 +387,8 @@ class JobsController extends Controller
 
       if($category != ''){
         $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_cat','like','%'.$category.'%')->orderBy('created_at', 'DESC')->paginate(10);
+      }else{
+        $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
       }
       
 

@@ -194,7 +194,7 @@
 										<img src="{{asset('assets/images/projects/'.$project->project_img)}}" alt="img description" style="height: 140px;">
 									</figure>
 									<div class="wt-projectcontent">
-										<h3><a href="{{$project->project_url == '' ? '' : $project->project_url}}" class="text-reset">{{$project->project_title}}</a></h3>
+										<h3><a href="{{$project->project_url == '' ? 'javascript:void(0)' : $project->project_url}}" class="text-reset">{{$project->project_title}}</a></h3>
 										<!-- <a href="{{$project->project_url}}">{{$project->project_url}}</a> -->
 									</div>
 								</div>

@@ -467,14 +467,26 @@ a{
 /********** Footer ***********/
 .footer-area {
   background: #007b3c;
-  padding: 60px 0;
+  /*padding: 60px 0;*/
 }
 .copyright-area {
   background: #007b3c;
   padding: 20px 0;
   border-top: 1px solid #fff;
 }
-.footer-area .widget-item h4 {
+.footer-info{
+  background: rgb(6 100 52);
+}
+.wt-footerbottom{
+  background: #007b3c;
+}
+.wt-copyrights span {
+    color: #ed1c24;
+}
+.wt-companyinfo span a {
+  color: #ed1c24;
+}
+/*.footer-area .widget-item h4 {
   color: #fff;
   font-size: 18px;
   font-weight: 600;
@@ -498,8 +510,8 @@ a{
   font-size: 17px;
   margin-right: 10px;
   border: 1px solid #fff;
-}
-.copyright-area .widget-link ul li {
+}*/
+/*.copyright-area .widget-link ul li {
     display: inline-block;
     margin-right: 5px;
 }
@@ -507,7 +519,7 @@ a{
     color: #9F9F9F;
     font-size: 14px;
     margin-bottom: 5px;
-}
+}*/
 .icon-box {
     text-align: center;
     margin-top: 45px;

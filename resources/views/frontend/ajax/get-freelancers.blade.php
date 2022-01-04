@@ -29,13 +29,6 @@
 			</ul>
 		</div>
 		<div class="wt-rightarea">
-			<span class="wt-starsvtwo">
-				<i class="fa fa-star fill"></i>
-				<i class="fa fa-star fill"></i>
-				<i class="fa fa-star fill"></i>
-				<i class="fa fa-star fill"></i>
-				<i class="fa fa-star fill"></i>
-			</span>
 			<?php 
 				$rating_avg = 0.0;
         $total = 0;
@@ -44,6 +37,46 @@
           $rating_avg = $total/$freelancer->freelancer_rating_count;
         }
 			?>
+			<span class="wt-starsvtwo">
+				@if($rating_avg == 0 || $rating_avg < 1)
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				@elseif($rating_avg == 1 || $rating_avg < 1.5)
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				@elseif($rating_avg == 1.5 || $rating_avg < 2.5)
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				@elseif($rating_avg == 2.5 || $rating_avg < 3.5)
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star "></i>
+				<i class="fa fa-star "></i>
+				@elseif($rating_avg == 3.5 || $rating_avg < 4.5)
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star "></i>
+				@elseif($rating_avg == 4.5 || $rating_avg < 5.5)
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				<i class="fa fa-star fill"></i>
+				@endif
+			</span>
+			
 			<span class="wt-starcontent">{{$rating_avg}}/<sub>5</sub> <em>({{$freelancer->freelancer_rating_count}} Feedback)</em></span>
 		</div>
 	</div>

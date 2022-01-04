@@ -68,11 +68,11 @@
 						<div class="wt-dashboardbox">
 							<div class="wt-dashboardboxtitle wt-yeartag">
 								<h2>Total Earnings</h2>
-								<div class="wt-tag wt-widgettag">
+								<!-- <div class="wt-tag wt-widgettag">
 									<a href="javascript:void(0);">2019</a>
 									<a href="javascript:void(0);">2018</a>
 									<a href="javascript:void(0);">2017</a>
-								</div>
+								</div> -->
 							</div>
 							<div class="wt-dashboardboxcontent">
 								<div class="wt-jobchartholder">
@@ -82,7 +82,7 @@
 						</div>
 						<div class="wt-dashboardbox wt-earningsholder">
 							<div class="wt-dashboardboxtitle wt-titlewithsearch">
-								<h2>Past Earnings</h2>
+								<h2>Past Earnings </h2>
 								<!-- <form class="wt-formtheme wt-formsearch">
 									<fieldset>
 										<div class="form-group">
@@ -118,7 +118,7 @@
 						<div class="row">
 							<div class="wt-insightsitemholder row">
 								<div class="col-12 col-sm-12 col-md-6 col-lg-6 float-left">
-									<div class="wt-insightsitem wt-dashboardbox wt-insightnoticon">
+									<div class="wt-insightsitem wt-dashboardbox {{ App\Models\ChatMessages::getUnseenMsg() > 0 ? 'wt-insightnoticon' : '' }} ">
 										<figure class="wt-userlistingimg">
 											<img src="{{asset('assets/images/thumbnail/img-19.png')}}" alt="image description" class="mCS_img_loaded">
 										</figure>
@@ -263,17 +263,23 @@
 	var wt_jobchart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: ["January", "February", "March", "April"],
+	        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
 	        datasets: [{
 	            label: 'Total Earnings',
-	            data: [ 6, 8, 4, 7, 10],
+	            data: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',
 	                'rgba(255, 206, 86, 0.2)',
 	                'rgba(75, 192, 192, 0.2)',
 	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
+	                'rgba(255, 159, 64, 0.2)',
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)',
 	            ],
 	            borderColor: [
 	                'rgba(255,99,132,1)',

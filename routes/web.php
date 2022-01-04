@@ -205,6 +205,8 @@ Route::get('get-freelancers', [FreelancerController::class, 'getFreelancers']);
 Route::get('jobs/{category}',[JobsController::class, 'categoryJobs'])->name('job.category');
 // Filter and Sorting
 Route::get('sort-jobs',[JobsController::class, 'getJobs']);
+Route::get('cat-search',[JobsController::class, 'catSearch']);
+Route::get('loc-search',[JobsController::class, 'locationSearch']);
 
 
 Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){

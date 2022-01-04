@@ -40,17 +40,17 @@
 								</div>
 								<div class="wt-widgetcontent">
 									<form class="wt-formtheme wt-formsearch">
-										<!-- <fieldset>
+										<fieldset>
 											<div class="form-group">
-												<input type="text" name="Search" class="form-control" placeholder="Search Category">
+												<input type="text" name="cat_keyword" class="form-control" placeholder="Search Category" id="categorySearch">
 												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
 											</div>
-										</fieldset> -->
+										</fieldset>
 										<fieldset>
-											<div class="wt-checkboxholder wt-verticalscrollbar">
+											<div class="wt-checkboxholder wt-verticalscrollbar" id="category-container">
 												@foreach($categories as $category)
-												<span class="wt-radio">
-													<input id="wordpress{{$category->id}}" type="radio" name="jobCategory" value="{{$category->category_name}}" onchange="category(this)">
+												<span class="wt-checkbox">
+													<input id="wordpress{{$category->id}}" type="checkbox" name="jobCategory" value="{{$category->category_name}}">
 													<label for="wordpress{{$category->id}}"> {{$category->category_name}}</label>
 												</span>
 												@endforeach
@@ -94,17 +94,17 @@
 								</div>
 								<div class="wt-widgetcontent">
 									<form class="wt-formtheme wt-formsearch">
-										<!-- <fieldset>
+										<fieldset>
 											<div class="form-group">
-												<input type="text" name="fullname" class="form-control" placeholder="Search Location">
+												<input type="text" name="location_keyword" class="form-control" placeholder="Search Location" id="locationSearch">
 												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
 											</div>
-										</fieldset> -->
+										</fieldset>
 										<fieldset>
-											<div class="wt-checkboxholder wt-verticalscrollbar">
+											<div class="wt-checkboxholder wt-verticalscrollbar" id="location-container">
 												@foreach($countries as $country)
-												<span class="wt-radio">
-													<input id="wt-description{{$country->id}}" type="radio" name="job_location" value="{{$country->name}}">
+												<span class="wt-checkbox">
+													<input id="wt-description{{$country->id}}" type="checkbox" name="job_location" value="{{$country->name}}">
 													<label for="wt-description{{$country->id}}">  {{$country->name}}</label>
 												</span>
 												@endforeach
@@ -226,26 +226,54 @@
 						<div class="listings-container mt-5" id="listings-container">
 							
 							@foreach($jobs as $job)
+							<div class="wt-userlistinghold wt-userlistingholdvtwo float-none">
+								<div class="wt-userlistingcontent">
+									<div class="wt-contenthead">
+										<div class="wt-title">
+											<a href="{{url('client/'.$job->clientInfo->username)}}"><i class="fa fa-check-circle"></i> {{$job->clientInfo->first_name}} {{$job->clientInfo->last_name}}
+											</a>
+											<h2>{{$job->job_title}}</h2>
+										</div>
+										<div class="wt-description">
+											<p>{{ \Illuminate\Support\Str::limit($job->job_description, 200, $end='...') }}</p>
+										</div>
+										<div class="wt-tag wt-widgettag">
+											@foreach(explode(',', $job->job_skills) as $skill)
+											<a href="javascript:void(0);">{{$skill}}</a>
+											@endforeach
+										</div>
+									</div>
+									<div class="wt-viewjobholder">
+										<ul>
+											<li><span><i class="fal fa-ribbon wt-viewjobdollar"></i>{{$job->service_level}}</span></li>
+											<li><span><em><i class="fal fa-map-marker-alt wt-viewjobclock"></i></em>{{$job->job_location}}</span></li>
+											<li><span class="text-capitalize"><i class="far fa-folder wt-viewjobfolder"></i>Type: {{$job->job_type}}</span></li>
+											<li><span><i class="far fa-clock wt-viewjobclock"></i>Duration: {{$job->job_duration}}</span></li>
+											<li><span><i class="fa fa-tag wt-viewjobtag"></i>Job ID: {{$job->job_id}}</span></li>
+											@if(Auth::user())
+												@if(App\Models\SaveItem::jobSaved(Auth::user()->id,$job->id) == 0)
+												<li><a href="javascript:void(0);" class="wt-clicklike wt-clicksave" onclick="saveJob({{$job->id}})"><i class="fal fa-heart"></i> Save</a></li>
+												@else
+												<li><a href="javascript:void(0);" class="wt-clicklike wt-clicksave" onclick="saveJob({{$job->id}})"><i class="fa fa-heart"></i> Saved</a></li>
+												@endif
+											@endif
+											<li class="wt-btnarea"><a href="{{ route('job.show',$job->job_id)}}" class="wt-btn">View Job</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
 							<!-- Job Listing -->
-							<a href="{{ route('job.show',$job->job_id)}}" class="job-listing">
+							<!-- <a href="{{ route('job.show',$job->job_id)}}" class="job-listing">
 
-								<!-- Job Listing Details -->
+								
 								<div class="job-listing-details">
-									<!-- Logo -->
-									<!-- <div class="job-listing-company-logo">
-										<img src="images/company-logo-01.png" alt="">
-									</div> -->
+									
 
-									<!-- Details -->
 									<div class="job-listing-description">
-										<!-- <h4 class="job-listing-company">Hexagon 
-											<span class="verified-badge" data-tippy-placement="top" data-tippy="" data-original-title="Verified Employer"></span>
-										</h4> -->
+										
 										<h3 class="job-listing-title">{{$job->job_title}}</h3>
 										<p class="job-listing-text">{{ \Illuminate\Support\Str::limit($job->job_description, 200, $end='...') }}</p>
 									</div>
-
-									<!-- Bookmark -->
 
 									@if(Auth::user())
 										@if(App\Models\SaveItem::jobSaved(Auth::user()->id,$job->id) == 0)
@@ -253,23 +281,9 @@
 											@else
 											<span class="bookmark-icon" style="color: red;" onclick="saveJob({{$job->id}})"></span>
 										@endif
-										<!-- @if($job->saveJobs != '')
-											@foreach($job->saveJobs as $save)
-												@if($save->user_id == Auth::user()->id && $save->status == 1)
-													<span class="bookmark-icon" style="color: red;" onclick="saveJob({{$job->id}})"></span>
-												@endif
-												@if($save->user_id == Auth::user()->id && $save->status == 0)
-													<span class="bookmark-icon" onclick="saveJob({{$job->id}})"></span>
-												@endif
-											@endforeach
-										@endif
-										@if($job->saveJobs == '')
-											<span class="bookmark-icon" onclick="saveJob({{$job->id}})"></span>
-										@endif -->
 									@endif
 								</div>
 
-								<!-- Job Listing Footer -->
 								<div class="job-listing-footer">
 									<ul>
 										<li><i class="fal fa-map-marker-alt"></i> {{$job->job_location}}</li>
@@ -284,7 +298,7 @@
 										<li><i class="fal fa-ribbon"></i> {{$job->job_cat}}</li>
 									</ul>
 								</div>
-							</a>		
+							</a> -->		
 							@endforeach
 							
 							<!-- Pagination -->
@@ -353,25 +367,60 @@
       }
 
     })
-	function category(event){
-		if($(event).is(":checked")){
+    $(document).on('change', 'input[name="jobCategory"]', function(e) {
+		e.preventDefault();
+		if($(this).is(":checked")){
 		
-			var category = event.value;
+			var category = this.value;
 		}
 		
 		if (category != undefined || category !='') {
-        $.ajax({
-          url: "{{url('sort-jobs')}}",
-          type: 'get',
-          data: {category:category},
-          cache : false,
-          success:function(data){
-            // console.log(data);
-            $("#listings-container").html(data);
-          }
-        });
-    }
-	}
+	        $.ajax({
+	          url: "{{url('sort-jobs')}}",
+	          type: 'get',
+	          data: {category:category},
+	          cache : false,
+	          success:function(data){
+	            // console.log(data);
+	            $("#listings-container").html(data);
+	          }
+	        });
+    	}
+	})
+
+	$('#categorySearch').on('keyup', function(e){
+		e.preventDefault();
+		
+		var cat_keyword = this.value;
+		$.ajax({
+		  url: "{{url('cat-search')}}",
+		  type: 'get',
+		  data: {cat_keyword:cat_keyword},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#category-container").html(data);
+		  }
+		});
+
+	})
+
+	$('#locationSearch').on('keyup', function(e){
+		e.preventDefault();
+		
+		var loc_keyword = this.value;
+		$.ajax({
+		  url: "{{url('loc-search')}}",
+		  type: 'get',
+		  data: {loc_keyword:loc_keyword},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#location-container").html(data);
+		  }
+		});
+
+	})
 
 	$('input[name="job_type"]').on('change', function(e){
 		e.preventDefault();
@@ -391,7 +440,7 @@
 	})
 
 	$('input[name="job_duration"]').on('change', function(e){
-	e.preventDefault();
+		e.preventDefault();
 		if($(this).is(":checked")){
 			var duration = this.value;
 		}
@@ -409,7 +458,8 @@
     }
 	})
 
-	$('input[name="job_location"]').on('change', function(e){
+	$(document).on('change', 'input[name="job_location"]', function(e) {
+	// $('input[name="job_location"]').on('change', function(e){
 		e.preventDefault();
 		
 		var job_location = this.value;

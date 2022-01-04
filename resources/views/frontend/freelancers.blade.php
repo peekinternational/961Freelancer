@@ -138,15 +138,27 @@
 									</form>
 								</div>
 							</div>
-							<!-- <div class="wt-widget wt-effectiveholder">
+							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Location</h2>
 								</div>
 								<div class="wt-widgetcontent">
 									<form class="wt-formtheme wt-formsearch">
 										<fieldset>
-											<div class="wt-checkboxholder wt-verticalscrollbar">
+											<div class="form-group">
+												<input type="text" name="location_keyword" class="form-control" placeholder="Search Location" id="locationSearch">
+												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+											</div>
+										</fieldset>
+										<fieldset>
+											<div class="wt-checkboxholder wt-verticalscrollbar" id="location-container">
+												@foreach($countries as $country)
 												<span class="wt-checkbox">
+													<input id="wt-description{{$country->id}}" type="checkbox" name="job_location" value="{{$country->name}}">
+													<label for="wt-description{{$country->id}}">  {{$country->name}}</label>
+												</span>
+												@endforeach
+												<!-- <span class="wt-checkbox">
 													<input id="wt-description" type="checkbox" name="description" value="company" checked>
 													<label for="wt-description"> <img src="{{asset('assets/images/flag/img-01.png')}}" alt="img description"> Australia</label>
 												</span>
@@ -173,12 +185,12 @@
 												<span class="wt-checkbox">
 													<input id="us1" type="checkbox" name="description" value="company">
 													<label for="us1"> <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</label>
-												</span>
+												</span> -->
 											</div>
 										</fieldset>
 									</form>
 								</div>
-							</div> -->
+							</div>
 							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Hourly Rate</h2>
@@ -327,13 +339,6 @@
 										</ul>
 									</div>
 									<div class="wt-rightarea">
-										<span class="wt-starsvtwo">
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-											<i class="fa fa-star fill"></i>
-										</span>
 										<?php 
 											$rating_avg = 0.0;
 							        $total = 0;
@@ -342,6 +347,46 @@
 						            $rating_avg = $total/$freelancer->freelancer_rating_count;
 						          }
 										?>
+										<span class="wt-starsvtwo">
+											@if($rating_avg == 0 || $rating_avg < 1)
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											@elseif($rating_avg == 1 || $rating_avg < 1.5)
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											@elseif($rating_avg == 1.5 || $rating_avg < 2.5)
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											@elseif($rating_avg == 2.5 || $rating_avg < 3.5)
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star "></i>
+											<i class="fa fa-star "></i>
+											@elseif($rating_avg == 3.5 || $rating_avg < 4.5)
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star "></i>
+											@elseif($rating_avg == 4.5 || $rating_avg < 5.5)
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											<i class="fa fa-star fill"></i>
+											@endif
+										</span>
+										
 										<span class="wt-starcontent">{{$rating_avg}}/<sub>5</sub> <em>({{$freelancer->freelancer_rating_count}} Feedback)</em></span>
 									</div>
 								</div>
@@ -398,6 +443,43 @@
    	})
 	}
 
+	$('#locationSearch').on('keyup', function(e){
+		e.preventDefault();
+		
+		var loc_keyword = this.value;
+		$.ajax({
+		  url: "{{url('loc-search')}}",
+		  type: 'get',
+		  data: {loc_keyword:loc_keyword},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#location-container").html(data);
+		  }
+		});
+
+	})
+
+	$(document).on('change', 'input[name="job_location"]', function(e) {
+	// $('input[name="job_location"]').on('change', function(e){
+		e.preventDefault();
+		alert('ghghgh');
+		if($(this).is(":checked")){
+			var user_location = this.value;
+		}
+		// alert()
+		$.ajax({
+		  url: "{{url('get-freelancers')}}",
+		  type: 'get',
+		  data: {user_location:user_location},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#freelancers-list").html(data);
+		  }
+		});
+	})
+	
 	$('input[name="hourly_rate"]').on('change', function(e){
 		e.preventDefault();
 		if($(this).is(":checked")){
