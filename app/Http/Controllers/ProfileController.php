@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\View;
 use App\Models\User;
 use App\Models\Countries;
 use App\Models\Skills;
+use App\Models\Language;
 use App\Models\UserSkill;
+use App\Models\UserLanguage;
 use App\Models\UserExperience;
 use App\Models\UserEducation;
 use App\Models\UserCertification;
@@ -32,7 +34,9 @@ class ProfileController extends Controller
       $user_id = auth()->user()->id;
 
       $get_skills = Skills::get();
+      $get_languages = Language::get();
       $user_skills = UserSkill::with('skillData')->whereuser_id($user_id)->get();
+      $user_languages = UserLanguage::with('languageData')->whereuser_id($user_id)->get();
       $countries = Countries::get();
       $experiences = UserExperience::whereuser_id($user_id)->get();
       $educations = UserEducation::whereuser_id($user_id)->get();
@@ -42,6 +46,8 @@ class ProfileController extends Controller
       return View::make('frontend.dashboard')->with([
         'skills' => $get_skills,
         'user_skills' => $user_skills,
+        'languages' => $get_languages,
+        'user_languages' => $user_languages,
         'countries' => $countries,
         'experience' => $experiences,
         'education' => $educations,
@@ -145,6 +151,28 @@ class ProfileController extends Controller
       return response()->json(['status'=>'true' , 'skill' => $current_skill, 'count' => $showCounts ]);
 
     }
+
+    // Languages
+    public function addLanguage(Request $request){
+      // dd($request->all());
+      $user_language = new UserLanguage;
+
+      $user_language->user_id = $request->input('user_id');
+      $user_language->language_id = $request->input('language_id');
+      $user_language->language_rate = $request->language_rate;
+
+      $user_language->save();
+
+      $current_language = UserLanguage::with('languageData')->whereid($user_language->id)->first();
+      $showCounts = UserLanguage::where('user_id',$request->input('user_id'))->count();
+      // return $current_skill;
+      return response()->json(['status'=>'true' , 'language' => $current_language, 'count' => $showCounts ]);
+
+    }
+
+
+
+
     // Edit Profile
     public function edit_profile(Request $request){
       // dd($request->all());
@@ -293,16 +321,33 @@ class ProfileController extends Controller
       $project->user_id = $user_id;
       $project->project_title = $request->input('project_title');
       $project->project_url = $request->input('project_url');
-      $project_image = $request->file('project_img');
-      if($project_image != ''){
-        $filename= $project_image->getClientOriginalName();
-        $imagename= 'project-'.rand(000000,999999).'.'.$project_image->getClientOriginalExtension();
-        $extension= $project_image->getClientOriginalExtension();
-        // $imagename= $filename;
-        $destinationpath= public_path('assets/images/projects/');
-        $project_image->move($destinationpath, $imagename);
-        $project->project_img = $imagename;
+
+      $images=array();
+      if($files=$request->file('project_img')){
+        foreach($files as $file){
+          
+          $imagename= 'project-'.rand(000000,999999).'.'.$file->getClientOriginalExtension();
+          $extension= $file->getClientOriginalExtension();
+          // $imagename= $filename;
+          $destinationpath= public_path('assets/images/projects/');
+          $file->move($destinationpath, $imagename);
+
+          $images[]=$imagename;
+        }
       }
+      $project->project_img = implode(",",$images);
+
+      
+      // $project_image = $request->file('project_img');
+      // if($project_image != ''){
+      //   $filename= $project_image->getClientOriginalName();
+      //   $imagename= 'project-'.rand(000000,999999).'.'.$project_image->getClientOriginalExtension();
+      //   $extension= $project_image->getClientOriginalExtension();
+      //   // $imagename= $filename;
+      //   $destinationpath= public_path('assets/images/projects/');
+      //   $project_image->move($destinationpath, $imagename);
+      //   $project->project_img = $imagename;
+      // }
       $project->project_desc = $request->input('project_desc');
       
       if ($project->save()) {
@@ -387,6 +432,16 @@ class ProfileController extends Controller
     public function deleteSkill($id){
       UserSkill::find($id)->delete($id);
       $showCounts = UserSkill::where('user_id',auth()->user()->id)->count(); 
+      return response()->json([
+          'success' => 'Record deleted successfully!',
+          'count' => $showCounts
+      ]);
+    }
+
+    // Delete Language
+    public function deleteLanguage($id){
+      UserLanguage::find($id)->delete($id);
+      $showCounts = UserLanguage::where('user_id',auth()->user()->id)->count(); 
       return response()->json([
           'success' => 'Record deleted successfully!',
           'count' => $showCounts

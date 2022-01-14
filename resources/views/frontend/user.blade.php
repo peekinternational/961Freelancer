@@ -9,6 +9,9 @@
 	    display: block;
 	    width: 100%;
 	}
+	.carousel-control-next-icon, .carousel-control-prev-icon{
+		background-color: #000;
+	}
 </style>
 <?php 
 	if($freelancer->cover_image != ''){
@@ -189,15 +192,122 @@
 							</div>
 							<div class="wt-projects">
 								@foreach($freelancer->userProjects as $project)
+								<?php 
+									$imgs = explode(",", $project->project_img);
+								?>
 								<div class="wt-project">
 									<figure>
-										<img src="{{asset('assets/images/projects/'.$project->project_img)}}" alt="img description" style="height: 140px;">
+										<img src="{{asset('assets/images/projects/'.$imgs[0])}}" alt="img description" style="height: 140px;" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$project->id}}">
 									</figure>
 									<div class="wt-projectcontent">
 										<h3><a href="{{$project->project_url == '' ? 'javascript:void(0)' : $project->project_url}}" class="text-reset">{{$project->project_title}}</a></h3>
 										<!-- <a href="{{$project->project_url}}">{{$project->project_url}}</a> -->
 									</div>
 								</div>
+								<!-- modal -->
+								  <div class="modal fade" id="exampleModal-{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+								    <div class="modal-dialog">
+								      <div class="modal-content">
+								        <div class="modal-body">
+								           <!-- carousel -->
+								          <div
+								               id='carouselExampleIndicators-{{$project->id}}'
+								               class='carousel slide'
+								               data-bs-ride='carousel'
+								               >
+								            <!-- <ol class='carousel-indicators'>
+								              <li
+								                  data-bs-target='#carouselExampleIndicators'
+								                  data-bs-slide-to='0'
+								                  class='active'
+								                  ></li>
+								              <li
+								                  data-bs-target='#carouselExampleIndicators'
+								                  data-bs-slide-to='1'
+								                  ></li>
+								              <li
+								                  data-bs-target='#carouselExampleIndicators'
+								                  data-bs-slide-to='2'
+								                  ></li>
+								            </ol> -->
+								            <div class='carousel-inner'>
+								            	@foreach(explode(',',$project->project_img) as $key => $attach)
+								              <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
+								                <img class='img-size' src="{{asset('assets/images/projects/'.$attach)}}" alt='First slide' />
+								              </div>
+								              @endforeach
+								            </div>
+								            <a
+								               class='carousel-control-prev'
+								               href='#carouselExampleIndicators-{{$project->id}}'
+								               role='button'
+								               data-bs-slide='prev'
+								               >
+								              <span class='carousel-control-prev-icon'
+								                    aria-hidden='true'
+								                    ></span>
+								              <span class='sr-only'>Previous</span>
+								            </a>
+								            <a
+								               class='carousel-control-next'
+								               href='#carouselExampleIndicators-{{$project->id}}'
+								               role='button'
+								               data-bs-slide='next'
+								               >
+								              <span
+								                    class='carousel-control-next-icon'
+								                    aria-hidden='true'
+								                    ></span>
+								              <span class='sr-only'>Next</span>
+								            </a>
+								          </div>
+								        </div>
+								        <div class="modal-footer">
+								          <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+								        </div>
+								      </div>
+								    </div>
+								  </div>
+								<!-- <div id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal" role="dialog">
+								  <div class="modal-dialog modal-md">
+								  <div class="modal-content">
+								    <div class="modal-header">
+								     Crop & Insert Cover <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+								    </div>
+								    <div class="modal-body">
+								      <div id="wt-categoriesslider" class="wt-categoriesslider owl-carousel">
+							      		<div class="wt-categoryslidercontent item">
+							      			<figure><img src="{{asset('assets/images/categories/slider/img-01.png')}}" alt="image description"></figure>
+							      			<div class="wt-cattitle">
+							      				<h3><a href="javascrip:void(0);">Graphic &amp; Design</a></h3>
+							      				<span>Items: 523,112</span>
+							      			</div>
+							      		</div>
+							      		<div class="wt-categoryslidercontent item">
+							      			<figure><img src="{{asset('assets/images/categories/slider/img-02.png')}}" alt="image description"></figure>
+							      			<div class="wt-cattitle">
+							      				<h3><a href="javascrip:void(0);">Digital Marketing</a></h3>
+							      				<span>Items: 523,112</span>
+							      			</div>
+							      		</div>
+							      		<div class="wt-categoryslidercontent item">
+							      			<figure><img src="{{asset('assets/images/categories/slider/img-03.png')}}" alt="image description"></figure>
+							      			<div class="wt-cattitle">
+							      				<h3><a href="javascrip:void(0);">Writing &amp; Translation</a></h3>
+							      				<span>Items: 325,442</span>
+							      			</div>
+							      		</div>
+							      	</div>
+
+								    </div>
+								    <div class="modal-footer">
+								      <input type="hidden" name="img_type_cover" value="">
+								      <button class="btn crop_image_cover">Crop Image</button>
+								      <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+								    </div>
+								    </div>
+								  </div>
+								</div> -->
 								@endforeach
 								
 								<!-- <div class="wt-btnarea">
@@ -345,4 +455,25 @@
 <!--Main End-->
 @endsection
 @section('script')
+<script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+<script>
+	var _wt_categoriesslider = jQuery("#wt-categoriesslider")
+	_wt_categoriesslider.owlCarousel({
+		item: 1,
+		loop:true,
+		nav:false,
+		margin: 0,
+		autoplay:false,
+		center: true,
+		responsiveClass:true,
+		responsive:{
+			0:{items:1,},
+			481:{items:1,},
+			768:{items:1,},
+			1440:{items:1,},
+			1760:{items:1,}
+		}
+	});
+	$('.carousel').carousel();
+</script>
 @endsection

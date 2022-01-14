@@ -15,6 +15,8 @@ use App\Models\UserProject;
 use App\Models\SaveItem;
 use App\Models\Category;
 use App\Models\Countries;
+use App\Models\Language;
+use App\Models\UserLanguage;
 use Hash;
 use Session;
 use Mail;
@@ -30,12 +32,14 @@ class FreelancerController extends Controller
     public function index()
     {
         $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
-        $categories = Category::get();
-        $countries = Countries::get();
+        $categories = Category::all();
+        $countries = Countries::all();
+        $languages = Language::all();
         return View::make('frontend.freelancers')->with([
             'freelancers' => $freelancers,
             'categories' => $categories,
-            'countries' => $countries
+            'countries' => $countries,
+            'languages' => $languages
         ]);
     }
 
@@ -242,6 +246,35 @@ class FreelancerController extends Controller
       return View::make('frontend.ajax.get-freelancers')->with([
           'freelancers' => $freelancers
       ]);
+    }
+
+
+    // Language Search
+    public function languageSearch(Request $request){
+      $keyword = $request->lang_keyword;
+      $get_languge = Language::where('language_name','like','%'.$keyword.'%')->get();
+      return View::make('frontend.ajax.language-filter')->with([
+        'languages' => $get_languge
+      ]);
+    }
+
+    // Filter Freelancer Using Language
+    public function getFreelancersLang(Request $request){
+      $language_id = $request->user_lang;
+      if($language_id != ''){
+        $freelancers = UserLanguage::with('freelancer','freelancerRating')->withCount('freelancerRating')->where('language_id',$language_id)->paginate(10);
+        return View::make('frontend.ajax.get-freelancers-language')->with([
+            'freelancers' => $freelancers
+        ]);
+      }else{
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+
+        return View::make('frontend.ajax.get-freelancers')->with([
+            'freelancers' => $freelancers
+        ]);
+      }
+      // dd($freelancers->freelancer);
+
     }
 
     // Freelancer Dashboard

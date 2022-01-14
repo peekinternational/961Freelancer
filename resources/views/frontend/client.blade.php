@@ -37,6 +37,7 @@
 	}else{
 		$background = 'background : #ed1c24';
 	}
+		
 ?>
 <!--Inner Home Banner Start-->
 <div class="wt-haslayout wt-innerbannerholder wt-innerbannerholdervtwo" style="{{$background}}">

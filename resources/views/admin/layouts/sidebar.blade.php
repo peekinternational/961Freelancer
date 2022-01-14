@@ -36,6 +36,16 @@
                         <li><a href="{{route('admin.skills.create')}}">Add Skills</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-layout"></i>
+                        <span>Languages</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('admin.languages.index')}}">Languages</a></li>
+                        <li><a href="{{route('admin.languages.create')}}">Add Languages</a></li>
+                    </ul>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

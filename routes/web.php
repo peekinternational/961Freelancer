@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\SupportController;
+use App\Http\Controllers\Admin\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,18 +79,26 @@ Route::post('/reset-password', [RegisterController::class, 'resetPassword']);
 Route::middleware(['auth'])->group(function () {
 	Route::resource('profile',ProfileController::class);
 	Route::match(['get','post'],'/edit-profile', [ProfileController::class, 'edit_profile']);
-	Route::post('/add_skill',[ProfileController::class,'add_skill']);
+	// Skills
+  Route::post('/add_skill',[ProfileController::class,'add_skill']);
 	Route::delete('/delete-skill/{id}',[ProfileController::class,'deleteSkill']);
-	Route::post('/add-experience',[ProfileController::class,'addExperience']);
+  // Langauge
+  Route::post('/add_language',[ProfileController::class,'addLanguage']);
+  Route::delete('/delete-language/{id}',[ProfileController::class,'deleteLanguage']);
+	// Experience
+  Route::post('/add-experience',[ProfileController::class,'addExperience']);
 	Route::delete('/delete-experience/{id}', [ProfileController::class, 'deleteExperience']);
 	Route::post('/edit-experience', [ProfileController::class, 'editExperience']);
-	Route::post('/add-education',[ProfileController::class,'addEducation']);
+	// Education
+  Route::post('/add-education',[ProfileController::class,'addEducation']);
 	Route::delete('/delete-education/{id}', [ProfileController::class, 'deleteEducation']);
 	Route::post('/edit-education', [ProfileController::class, 'editEducation']);
-	Route::post('/add-project',[ProfileController::class,'addProject']);
+	// Project / portfolio
+  Route::post('/add-project',[ProfileController::class,'addProject']);
 	Route::delete('/delete-project/{id}', [ProfileController::class, 'deleteProject']);
 	Route::post('/edit-project', [ProfileController::class, 'editProject']);
-	Route::post('/add-certificate',[ProfileController::class,'addCertificate']);
+	// Certifications
+  Route::post('/add-certificate',[ProfileController::class,'addCertificate']);
 	Route::delete('/delete-certificate/{id}', [ProfileController::class, 'deleteCertificate']);
 	Route::post('/edit-certificate', [ProfileController::class, 'editCertificate']);
 
@@ -201,12 +210,14 @@ Route::get('freelancer/{username}',[FreelancerController::class, 'show'])->name(
 Route::get('client/{username}',[FreelancerController::class, 'client'])->name('user.client');
 
 Route::get('get-freelancers', [FreelancerController::class, 'getFreelancers']);
+Route::get('get-freelancers-lang', [FreelancerController::class, 'getFreelancersLang']);
 
 Route::get('jobs/{category}',[JobsController::class, 'categoryJobs'])->name('job.category');
 // Filter and Sorting
 Route::get('sort-jobs',[JobsController::class, 'getJobs']);
 Route::get('cat-search',[JobsController::class, 'catSearch']);
 Route::get('loc-search',[JobsController::class, 'locationSearch']);
+Route::get('lang-search',[FreelancerController::class, 'languageSearch']);
 
 
 Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
@@ -231,6 +242,7 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
       Route::resource('categories','\App\Http\Controllers\Admin\CategoriesController');
       Route::resource('skills','\App\Http\Controllers\Admin\SkillController');
       Route::resource('supports','\App\Http\Controllers\Admin\SupportController');
+      Route::resource('languages','\App\Http\Controllers\Admin\LanguageController');
       
       Route::post('/logout',function(){
        Auth::guard('admin')->logout();

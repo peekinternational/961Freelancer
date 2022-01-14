@@ -48,8 +48,11 @@
 	#preview img {
 	  max-width: 100%
 	}
-	select[name="skill_id"] option:disabled {
+	select[name="skill_id"] option:disabled ,select[name="language_id"] option:disabled {
 	  color: #9a9a9a;
+	}
+	.wt-languagesform fieldset .form-group {
+	    padding-right: 125px;
 	}
 </style>
 @endsection
@@ -349,6 +352,59 @@
 								  			</div>
 								  		</div>
 								  	</div>
+								  	<div class="wt-skills">
+								  		<div class="wt-tabscontenttitle mt-5">
+								  			<h2>My Languages</h2>
+								  		</div>
+								  		<div class="wt-skillscontent-holder">
+								  			<form class="wt-formtheme wt-skillsform wt-languagesform" id="add_language">
+								  				@csrf
+								  				<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+								  				<fieldset>
+								  					<div class="form-group">
+								  						<div class="form-group-holder">
+								  							<span class="wt-select">
+								  								<select name="language_id" class="w-100">
+								  									<option value="">Select Your Language</option>
+								  									@foreach($languages as $language)
+									  									
+									  										
+									  									<option value="{{$language->id}}" {{App\Models\User::languageCheck($language->id,Auth::user()->id) == 1 ? 'disabled' : ''}}>{{$language->language_name}} </option>
+									  										
+									  										
+								  									@endforeach
+								  								</select>
+								  							</span>
+								  							<input type="number" name="language_rate" class="form-control" placeholder="Rate Your Language (0% to 100%)">
+								  						</div>
+								  					</div>
+								  					<div class="form-group wt-btnarea">
+								  						<button type="submit" id="addLanguage" class="wt-btn" {{count($user_languages) == 12 ? 'disabled' : ''}}>Add</button>
+								  					</div>
+								  				</fieldset>
+								  			</form>
+								  			<div class="wt-myskills">
+								  				<!-- @if(count($user_skills) == 12)
+								  					<p class="count_skill">You cannot add more than 12 skills.</p>
+								  				@endif -->
+								  				<!-- <p id="skill_length" class="d-none">You cannot add more than 12 skills.</p> -->
+								  				<ul class="sortable list" id="userlanguagess">
+								  					@foreach($user_languages as $key => $user_language)
+								  					<li id="userLanguage{{$user_language->id}}">
+								  						<!-- <div class="wt-dragdroptool">
+								  							<a href="javascript:void(0)" class="fal fa-bars"></a>
+								  						</div> -->
+								  						<span class="skill-dynamic-html">{{$user_language->languageData->language_name}} (<em class="skill-val">{{$user_language->language_rate}}</em>%)</span>
+								  						<div class="wt-rightarea">
+								  							<!-- <a href="javascript:void(0);" class="wt-addinfo" onclick="updateSkill({{$user_skill->id}})"><i class="fal fa-pencil"></i></a> -->
+								  							<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteLanguage({{$user_language->id}})"><i class="fal fa-trash-alt"></i></a>
+								  						</div>
+								  					</li>
+								  					@endforeach
+								  				</ul>
+								  			</div>
+								  		</div>
+								  	</div>
 								  	@endif
 								  	<div class="wt-updatall shadow-none mt-5">
 								  		<button type="button" class="wt-btn ms-md-3 d-none" id="continue_education" style="background: #00a651;">Continue</button>
@@ -567,18 +623,18 @@
 								  						<div class="wt-labelgroup">
 								  							<label for="filen">
 								  								<span class="wt-btn">Select Files</span>
-								  								<input type="file" name="project_img" onchange="projectImage(this);" id="filen">
+								  								<input type="file" name="project_img[]" onchange="projectImage(this);" id="filen" multiple="">
 								  							</label>
 								  							<span>Files Upload</span>
 								  							<!-- <em class="wt-fileuploading">Uploading</em> -->
 								  						</div>
 								  					</div>
 								  					<div class="form-group">
-								  						<ul class="wt-attachfile">
-								  							<li class="wt-uploaded">
+								  						<ul class="wt-attachfile portfolio-imgs">
+								  							<!-- <li class="wt-uploaded">
 								  								<span id="projectimg_name">Logo.jpg</span>
 								  								<em>File size: <span id="projectImg_size">300 kb</span></em>
-								  							</li>
+								  							</li> -->
 								  						</ul>
 								  					</div>
 								  					<div class="form-group">
@@ -593,10 +649,13 @@
 								  		</div>
 								  		<ul class="wt-experienceaccordion accordion" id="projects-list">
 								  			@foreach($projects as $project)
+								  			<?php 
+								  				$imgs = explode(",", $project->project_img);
+								  			?>
 								  			<li id="projecList{{$project->id}}">
 								  				<div class="wt-accordioninnertitle">
 								  					<div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject{{$project->id}}" aria-expanded="false" aria-controls="innerproject{{$project->id}}">
-								  						<figure><img src="{{asset('assets/images/projects/'.$project->project_img)}}" alt="img description"></figure>
+								  						<figure><img src="{{asset('assets/images/projects/'.$imgs[0])}}" alt="img description"></figure>
 								  						<h3>
 								  							<font id="projectName{{$project->id}}">{{$project->project_title}}</font><span id="projectUrl{{$project->id}}">{{$project->project_url}}</span></h3>
 								  					</div>
@@ -626,10 +685,12 @@
 								  							</div>
 								  							<div class="form-group">
 								  								<ul class="wt-attachfile">
+								  									@foreach(explode(',',$project->project_img) as $attach)
 								  									<li class="wt-uploaded">
-								  										<span id="projectimg_name{{$project->id}}">{{$project->project_img}}</span>
-								  								<em>File size: <span id="projectImg_size{{$project->id}}">300 kb</span></em>
+								  										<span id="projectimg_name{{$project->id}}">{{$attach}}</span>
+								  								<em>File size: <span id="projectImg_size{{$project->id}}"></span></em>
 								  									</li>
+								  									@endforeach
 								  								</ul>
 								  							</div>
 								  							<div class="form-group">
@@ -842,6 +903,35 @@
    	})
 	});
 
+ // Add Language
+
+ $('#add_language').on('submit', function(event){
+   	event.preventDefault();
+   	
+
+   	$.ajax({
+	    url:"{{ url('add_language') }}",
+	    method:"POST",
+	    data:new FormData(this),
+	    dataType:'JSON',
+	    contentType: false,
+	    cache: false,
+	    processData: false,
+	    success:function(data){
+	    	console.log(data);
+	    	$('#userlanguagess').append('<li id="userLanguage'+data.language.id+'"><span class="skill-dynamic-html">'+data.language.language_data.language_name+' (<em class="skill-val">'+data.language.language_rate+'</em>%)</span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill('+data.language.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
+	    	// if(data.count == 12){
+	    	// 	$('#addSkills').attr('disabled','true');
+	    	// 	$('#skill_length').removeClass('d-none');
+	    	// 	$('.count_skill').addClass('d-none');
+	    	// }
+	     	// window.location.href = "{{url('manage-orders')}}"
+	     	// $('.added-questions').append(data);
+	     	// $('#requirements-form textarea').val('');
+    	}
+   	})
+	});
+
  $('#edit-profile-form').on('submit', function(event){
    	event.preventDefault();
    	
@@ -967,7 +1057,7 @@
 	    	if (response.status == 'true') {
 	    		 	
 	    		 $.notify(response.message , 'success'  );
-	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+response.data.project_img+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+response.data.project_url+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
+	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+response.data.project_img[0]+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+response.data.project_url+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
 	    		 	   
 	    	    
 	    	}else{
@@ -1074,6 +1164,30 @@
 	}
 
  	function projectImage(input) {
+ 		var fi = input;
+ 		if (fi.files.length > 0) {
+
+ 		    // THE TOTAL FILE COUNT.
+ 		    // document.getElementById('fp').innerHTML =
+ 		        // 'Total Files: <b>' + fi.files.length + '</b></br >';
+
+ 		    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+ 		    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+ 		        var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+ 		        var _size = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+ 		        var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+ 		              		j=0;while(_size>900){_size/=1024;j++;}
+ 		                  var exactSize = (Math.round(_size*100)/100)+' '+fSExt[j];
+
+ 		        $('.portfolio-imgs').append('<li class="wt-uploaded"><span>'+fname+'</span><em>File size: '+exactSize+'</em></li>');
+ 		        // $('.fileSizea').html(fsize);
+ 		        // SHOW THE EXTRACTED DETAILS OF THE FILE.
+ 		    }
+ 		}
+ 		else { 
+ 		    alert('Please select a file.') 
+ 		}
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -1089,10 +1203,10 @@
           var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
       		i=0;while(_size>900){_size/=1024;i++;}
           var exactSize = (Math.round(_size*100)/100)+' '+fSExt[i];
-      	$('#projectImg_size').html(exactSize)
+      	// $('#projectImg_size').html(exactSize)
     }
-    var filename = $('#filen').val().split('\\').pop();
-    $('#projectimg_name').html(filename);
+    // var filename = $('#filen').val().split('\\').pop();
+    // $('#projectimg_name').html(filename);
     
 	}
  	function projectImageEdit(input,id) {

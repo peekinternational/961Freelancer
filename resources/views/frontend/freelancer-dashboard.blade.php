@@ -52,6 +52,9 @@
 </style>
 @endsection
 @section('content')
+<?php 
+	
+?>
 <!--Main Start-->
 <!-- Wrapper Start -->
 <div id="wt-wrapper" class="wt-wrapper wt-haslayout">

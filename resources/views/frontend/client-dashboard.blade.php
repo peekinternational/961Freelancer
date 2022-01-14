@@ -54,9 +54,7 @@
 @endsection
 @section('content')
 <?php 
-	foreach ($jobCount as $key => $value) {
-		echo $value->month;
-	}
+
 ?>
 <!--Main Start-->
 <!-- Wrapper Start -->
@@ -93,6 +91,7 @@
 											@endforeach
 										</div>
 										<div class="wt-jobchartholder">
+											
 											<canvas id="wt-jobchart" class="wt-jobchart"></canvas>
 										</div>
 									</div>

@@ -79,6 +79,10 @@ class User extends Authenticatable
     public static function skillsCheck($id,$user_id){
         return UserSkill::where('skill_id',$id)->where('user_id',$user_id)->count();
     }
+    // Checking Language
+    public static function languageCheck($id,$user_id){
+        return UserLanguage::where('language_id',$id)->where('user_id',$user_id)->count();
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

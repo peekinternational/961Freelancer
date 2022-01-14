@@ -224,7 +224,7 @@
 									</form>
 								</div>
 							</div>
-							<!-- <div class="wt-widget wt-effectiveholder">
+							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Languages</h2>
 								</div>
@@ -232,45 +232,23 @@
 									<form class="wt-formtheme wt-formsearch">
 										<fieldset>
 											<div class="form-group">
-												<input type="text" name="fullname" class="form-control" placeholder="Search Language">
+												<input type="text" name="language_keyword" class="form-control" placeholder="Search Language" id="languageSearch">
 												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
 											</div>
 										</fieldset>
 										<fieldset>
-											<div class="wt-checkboxholder wt-verticalscrollbar">
+											<div class="wt-checkboxholder wt-verticalscrollbar" id="language-container">
+												@foreach($languages as $language)
 												<span class="wt-checkbox">
-													<input id="chinese" type="checkbox" name="description" value="company" checked>
-													<label for="chinese">Chinese</label>
+													<input  id="language-{{$language->id}}" type="checkbox" name="lang_search" value="{{$language->id}}">
+													<label for="language-{{$language->id}}">{{$language->language_name}}</label>
 												</span>
-												<span class="wt-checkbox">
-													<input id="spanish" type="checkbox" name="description" value="company">
-													<label for="spanish">Spanish</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="english" type="checkbox" name="description" value="company">
-													<label for="english">English</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="arabic" type="checkbox" name="description" value="company">
-													<label for="arabic">Arabic</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="russian" type="checkbox" name="description" value="company">
-													<label for="russian">Russian</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="chinese1" type="checkbox" name="description" value="company">
-													<label for="chinese1">Chinese</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="spanish1" type="checkbox" name="description" value="company">
-													<label for="spanish1">Spanish</label>
-												</span>
+												@endforeach
 											</div>
 										</fieldset>
 									</form>
 								</div>
-							</div> -->
+							</div>
 							<div class="wt-widget wt-applyfilters-holder">
 								<div class="wt-widgetcontent">
 									<div class="wt-applyfilters">
@@ -459,11 +437,28 @@
 		});
 
 	})
+	// Language Search
+	$('#languageSearch').on('keyup', function(e){
+		e.preventDefault();
+		
+		var lang_keyword = this.value;
+		$.ajax({
+		  url: "{{url('lang-search')}}",
+		  type: 'get',
+		  data: {lang_keyword:lang_keyword},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#language-container").html(data);
+		  }
+		});
+
+	})
 
 	$(document).on('change', 'input[name="job_location"]', function(e) {
 	// $('input[name="job_location"]').on('change', function(e){
 		e.preventDefault();
-		alert('ghghgh');
+
 		if($(this).is(":checked")){
 			var user_location = this.value;
 		}
@@ -472,6 +467,27 @@
 		  url: "{{url('get-freelancers')}}",
 		  type: 'get',
 		  data: {user_location:user_location},
+		  cache : false,
+		  success:function(data){
+		    // console.log(data);
+		    $("#freelancers-list").html(data);
+		  }
+		});
+	})
+
+	// Language Search
+
+	$(document).on('change', 'input[name="lang_search"]', function(e) {
+	// $('input[name="job_location"]').on('change', function(e){
+		e.preventDefault();
+		
+		if($(this).is(":checked")){
+			var user_lang = this.value;
+		}
+		$.ajax({
+		  url: "{{url('get-freelancers-lang')}}",
+		  type: 'get',
+		  data: {user_lang:user_lang},
 		  cache : false,
 		  success:function(data){
 		    // console.log(data);
