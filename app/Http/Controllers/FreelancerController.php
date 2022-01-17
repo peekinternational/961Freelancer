@@ -32,7 +32,7 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        $freelancers = User::with('userSkills','saveInfo','freelancerRating','reportData')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
         $categories = Category::all();
         $countries = Countries::all();
         $languages = Language::all();
