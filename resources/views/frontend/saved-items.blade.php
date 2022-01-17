@@ -102,10 +102,10 @@
 														<ul class="wt-userlisting-breadcrumb">
 															<li><span><i class="far fa-money-bill-alt"></i> ${{$savefree->userData->hourly_rate}}.00 / hr</span></li>
 															<li><span><!-- <img src="images/flag/img-02.png" alt="img description"> --> {{$savefree->userData->country}}</span></li>
-															<li><a href="javascript:void(0);" class="wt-clicksave" onclick="saveUser({{$savefree->userData->id}});"><i class="fa fa-heart"></i> un saved</a></li>
+															<li><a href="javascript:void(0);" class="wt-clicksave" onclick="saveUser({{$savefree->userData->id}});"><i class="fa fa-heart"></i> Save</a></li>
 														</ul>
 													</div>
-													<div class="wt-rightarea">
+													<!-- <div class="wt-rightarea">
 														<span class="wt-starsvtwo">
 															<i class="fa fa-star fill"></i>
 															<i class="fa fa-star fill"></i>
@@ -114,7 +114,7 @@
 															<i class="fa fa-star fill"></i>
 														</span>
 														<span class="wt-starcontent">4.5/<sub>5</sub> <em>(860 Feedback)</em></span>
-													</div>
+													</div> -->
 												</div>	
 											</div>
 											@endforeach
