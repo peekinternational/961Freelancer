@@ -288,7 +288,6 @@ jQuery('.wt-usersidebardown').on('click', function(event){
 	// Report User AJAX
 	$('#reportForm').on('submit', function(event){
 	  event.preventDefault();
-	  alert('dsadsa');
    	$.ajax({
 	    url:"/report-user",
 	    method:"POST",
