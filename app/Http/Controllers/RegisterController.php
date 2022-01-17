@@ -159,6 +159,7 @@ class RegisterController extends Controller
         $user->user_status = 'online';
         $user->verification = 0;
         $user->account_type = $request->input('account_type');
+        $user->status = 'active';
         // $slug = $this->createSlug($request->input('username'));
         // $user->slug = $slug;
         $user->save();

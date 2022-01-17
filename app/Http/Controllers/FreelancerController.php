@@ -17,6 +17,7 @@ use App\Models\Category;
 use App\Models\Countries;
 use App\Models\Language;
 use App\Models\UserLanguage;
+use App\Models\ReportUser;
 use Hash;
 use Session;
 use Mail;
@@ -31,7 +32,7 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
+        $freelancers = User::with('userSkills','saveInfo','freelancerRating','reportData')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
         $categories = Category::all();
         $countries = Countries::all();
         $languages = Language::all();
@@ -301,5 +302,16 @@ class FreelancerController extends Controller
           'client' => $client,
           'rating_avg' => $rating_avg
       ]);
+    }
+
+    // Report User
+    public function reportUser(Request $request){
+      // dd($request->all());
+      $report = ReportUser::create($request->all());
+      if($report){
+        return response()->json(['status'=>'true' , 'message' => 'Freelancer reported successfully'] , 200); 
+      }else{
+        return response()->json(['status'=>'true' , 'message' => 'Freelancer reported successfully'] , 200);
+      }
     }
 }

@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\SupportController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -211,7 +212,8 @@ Route::get('client/{username}',[FreelancerController::class, 'client'])->name('u
 
 Route::get('get-freelancers', [FreelancerController::class, 'getFreelancers']);
 Route::get('get-freelancers-lang', [FreelancerController::class, 'getFreelancersLang']);
-
+// Report User
+Route::post('report-user', [FreelancerController::class, 'reportUser']);
 Route::get('jobs/{category}',[JobsController::class, 'categoryJobs'])->name('job.category');
 // Filter and Sorting
 Route::get('sort-jobs',[JobsController::class, 'getJobs']);
@@ -238,11 +240,15 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
       Route::get('/verification-list', [AdminController::class, 'verificationList'])->name('verification-list');
       Route::post('/verify/{id}', [AdminController::class, 'verify']);
       Route::post('/reject-verify/{id}', [AdminController::class, 'rejectVerify']);
+      Route::get('/blocked-users/', [AdminController::class, 'blockedUsers'])->name('blocked-users');
+      Route::post('/unblock-users/{id}', [AdminController::class, 'unblockUsers'])->name('unblock-users');
       Route::resource('projects','\App\Http\Controllers\Admin\ProjectController');
       Route::resource('categories','\App\Http\Controllers\Admin\CategoriesController');
       Route::resource('skills','\App\Http\Controllers\Admin\SkillController');
       Route::resource('supports','\App\Http\Controllers\Admin\SupportController');
       Route::resource('languages','\App\Http\Controllers\Admin\LanguageController');
+      Route::resource('reports','\App\Http\Controllers\Admin\ReportController');
+      Route::post('block-user/{id}',[ReportController::class,'blockUser']);
       
       Route::post('/logout',function(){
        Auth::guard('admin')->logout();

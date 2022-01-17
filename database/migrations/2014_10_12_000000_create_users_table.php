@@ -36,6 +36,7 @@ class CreateUsersTable extends Migration
             $table->integer('skills_id')->nullable();
             $table->string('facebook_id')->nullable();
             $table->string('google_id')->nullable();
+            $table->string('status')->default('active');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

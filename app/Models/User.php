@@ -42,8 +42,13 @@ class User extends Authenticatable
         'google_id',
         'verification',
         'verification_image',
+        'status',
     ];
 
+    public function getFullName()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
     public function userInfo(){
         return $this->hasMany(UserExperience::class, 'user_id');
     }

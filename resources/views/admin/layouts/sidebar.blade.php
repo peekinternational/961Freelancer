@@ -67,6 +67,7 @@
                         <li><a href="{{route('admin.freelancers-list')}}">Freelancers</a></li>
                         <li><a href="{{route('admin.clients-list')}}">Clients</a></li>
                         <li><a href="{{route('admin.verification-list')}}">Verification Requests</a></li>
+                        <li><a href="{{route('admin.blocked-users')}}">Blocked Users</a></li>
                         <li><a href="{{route('admin.users.create')}}">Add User</a></li>
                     </ul>
                 </li>
@@ -112,12 +113,12 @@
                         <i class="bx bx-aperture"></i>
                         <span>Supports</span>
                     </a>
-                    <!-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="icons-boxicons">Boxicons</a></li>
-                        <li><a href="icons-materialdesign">Material Design</a></li>
-                        <li><a href="icons-dripicons">Dripicons</a></li>
-                        <li><a href="icons-fontawesome">Font awesome</a></li>
-                    </ul> -->
+                </li>
+                <li>
+                    <a href="{{route('admin.reports.index')}}" class="waves-effect">
+                        <i class="bx bx-aperture"></i>
+                        <span>Freelancer Reports</span>
+                    </a>
                 </li>
                 <li>
                     <a class="waves-effect" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bx bx-power-off"></i> {{ __('Logout') }} </a>

@@ -24,14 +24,12 @@
                   <th scope="col">Email</th>
                   <th scope="col">Country</th>
                   <th scope="col">Account Type</th>
-                  <th scope="col">Hourly Rate</th>
-                  <th scope="col">Verification</th>
                   <th scope="col">Status</th>
                   <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($freelancers as $key => $freelancer)
+              @foreach($blockedusers as $key => $freelancer)
               <tr>
                 <td>
                   {{$key+1}}
@@ -49,24 +47,18 @@
                 <td>{{$freelancer->country}}</td>
                 <td>{{$freelancer->account_type}}</td>
                 <td>
-                    ${{$freelancer->hourly_rate}}
-                </td>
-                <td>
-                  @if($freelancer->verification == 1 || $freelancer->verification == 0)
-                    Not Verified
-                  @else
-                    Verified
+                  @if($freelancer->status == 'block')
+                    Block
                   @endif
                 </td>
-                <td>{{$freelancer->status}}</td>
                 <td>
                   <ul class="list-inline font-size-20 contact-links mb-0">
                     <li class="list-inline-item px-2">
-                      <a href="{{url('admin/users/'.$freelancer->id.'/edit')}}" class="btn btn-success text-white" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bx bx-edit"></i></a>
+                      <a href="javascript:void(0);" class="btn btn-success text-white" data-toggle="tooltip" data-placement="top" title="Unblock" onclick="unblockUser({{$freelancer->id}})"><i class="bx bx-edit"></i>Unblock</a>
                     </li>
-                    <li class="list-inline-item px-2">
-                      <a href="" class="btn btn-primary text-white rounded" data-toggle="modal" onclick="deleteFreelancer({{$freelancer->id}})" data-placement="top" title="Delete"><i class="bx bx-trash-alt"></i></a>
-                    </li>
+                    <!-- <li class="list-inline-item px-2">
+                      <a href="" class="btn btn-primary text-white rounded" data-toggle="modal" onclick="deleteFreelancer({{$freelancer->id}})" data-placement="top" title="Delete"><i class="bx bx-block"></i>Unblock</a>
+                    </li> -->
                   </ul>
                 </td>
               </tr>
@@ -108,16 +100,17 @@
     $(document).ready(function() {
         $('#user-lists').DataTable();
     } );
-      $('#deleteData').on('submit' , function(event){
-        event.preventDefault();
-        var data = $("#deleteData").serialize();
-        $projectId = $("#projectId").val();
-        console.log($projectId)
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+      function unblockUser(id){
+        // alert(id);
+       
            $.ajax({
-            url: '/admin/users/'+$projectId,
-            type: 'DELETE',
-            data: data,
+            url: '/admin/unblock-users/'+id,
+            type: 'POST',
             processData: false,
 
             success: (response)=>{
@@ -139,7 +132,7 @@
             }
         })
 
-      });
+      }
 
     function deleteFreelancer(id) {
       $("#deleteModel").modal('show');

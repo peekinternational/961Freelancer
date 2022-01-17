@@ -12,6 +12,14 @@
 	.carousel-control-next-icon, .carousel-control-prev-icon{
 		background-color: #000;
 	}
+	.img-size{
+	/* 	padding: 0;
+		margin: 0; */
+		height: 400px;
+		width: 700px;
+		background-size: cover;
+		overflow: hidden;
+	}
 </style>
 <?php 
 	if($freelancer->cover_image != ''){
@@ -62,7 +70,7 @@
 						<div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
 							<div class="row">
 								<div class="wt-proposalhead wt-userdetails col-md-7">
-									<h2 class="mb-1">{{$freelancer->first_name}} {{$freelancer->last_name}}</h2>
+									<h2 class="mb-1">{{$freelancer->first_name}} {{$freelancer->last_name}} </h2>
 									<h5>{{$freelancer->tagline}}</h5>
 									<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
 										<li><span><i class="far fa-money-bill-alt"></i> ${{$freelancer->hourly_rate}}.00 / hr</span></li>
@@ -208,7 +216,8 @@
 								  <div class="modal fade" id="exampleModal-{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 								    <div class="modal-dialog">
 								      <div class="modal-content">
-								        <div class="modal-body">
+								      	<button type="button" class="close position-absolute end-0 bg-transparent fs-5" data-bs-dismiss="modal" style="z-index: 1050;">&times;</button>
+								        <div class="modal-body p-0">
 								           <!-- carousel -->
 								          <div
 								               id='carouselExampleIndicators-{{$project->id}}'
@@ -262,9 +271,9 @@
 								            </a>
 								          </div>
 								        </div>
-								        <div class="modal-footer">
+								        <!-- <div class="modal-footer">
 								          <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-								        </div>
+								        </div> -->
 								      </div>
 								    </div>
 								  </div>
@@ -445,6 +454,37 @@
 								</ul>
 							</div>
 						</div> -->
+						<div class="wt-widget wt-reportjob">
+							<div class="wt-widgettitle">
+								<h2>Report This User</h2>
+							</div>
+							<div class="wt-widgetcontent">
+								<form class="wt-formtheme wt-formreport" id="reportForm">
+									@csrf
+									<fieldset>
+										<input type="hidden" name="user_id" value="{{$freelancer->id}}">
+										<input type="hidden" name="report_by" value="{{Auth::user()->id}}">
+										<div class="form-group">
+											<span class="wt-select">
+												<select name="reason">
+													<option disabled="" selected="">Select Reason</option>
+													<option value="Fake User">Fake User</option>
+													<option value="Fraud">Fraud</option>
+													<!-- <option value="reason3">Reason3</option> -->
+													<!-- <option value="reason4">Reason4</option> -->
+												</select>
+											</span>
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" name="description" placeholder="Description"></textarea>
+										</div>
+										<div class="form-group wt-btnarea">
+											<button type="submit" name="submit" id="reportSubmit" class="wt-btn">Submit</button>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</div>
 					</aside>
 				</div>
 			</div>
@@ -457,7 +497,9 @@
 @section('script')
 <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
 <script>
-	var _wt_categoriesslider = jQuery("#wt-categoriesslider")
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+	$('.carousel').carousel();
+	var _wt_categoriesslider = jQuery("#wt-categoriesslider");
 	_wt_categoriesslider.owlCarousel({
 		item: 1,
 		loop:true,
@@ -474,6 +516,12 @@
 			1760:{items:1,}
 		}
 	});
-	$('.carousel').carousel();
+
+	
+
+	// $('#reportSubmit').click(function(event){
+	// 	event.preventDefault();
+	// 	alert('dada');
+	// });
 </script>
 @endsection

@@ -59,6 +59,22 @@ class AdminController extends Controller
         ]);
     }
 
+    // Blocked Users List
+    public function blockedUsers(Request $request){
+      $blockedusers = User::with('userSkills','saveInfo')->whereaccount_type('Freelancer')->where('status','block')->get();
+      return View::make('admin.blocked-users-list')->with([
+          'blockedusers' => $blockedusers
+      ]);
+    }
+
+    public function unblockUsers(Request $request,$id){
+      $unblock = User::where('id',$id)->update(['status' => 'active']);
+      if($unblock){
+        return response()->json(['status'=>'true' , 'message' => 'User unblocked'] , 200);
+      }else{
+        return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+      }
+    }
     /**
      * Show the form for creating a new resource.
      *

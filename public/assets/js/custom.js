@@ -285,6 +285,33 @@ jQuery('.wt-usersidebardown').on('click', function(event){
 		}
 	} )();
 
+	// Report User AJAX
+	$('#reportForm').on('submit', function(event){
+	  event.preventDefault();
+	  alert('dsadsa');
+   	$.ajax({
+	    url:"/report-user",
+	    method:"POST",
+	    data:new FormData(this),
+	    dataType:'JSON',
+	    contentType: false,
+	    cache: false,
+	    processData: false,
+	    success:function(response){
+	    	console.log(response);
+	    	if (response.status == 'true') {
+    	    $.notify(response.message , 'success'  );
+    	      location.reload();
+	    	    
+	    	    
+	    	}else{
+	    	    $.notify(response.message , 'error');
+	    	    
+	    	}
+	    	
+    	}
+   	})
+	});
 	
 
 	
