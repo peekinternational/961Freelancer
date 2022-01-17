@@ -41,20 +41,19 @@ class ClientDashboardController extends Controller
     //   $jobCount = Job::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month')->whereuser_id($user_id)
     // ->groupBy('year', 'month')
     // ->get();
-      $graph = DB::table('jobs')
-      ->select(DB::raw('MONTH(created_at) as month'), 
-               DB::raw("YEAR(created_at) year"),    
-               DB::raw('ifnull(count(*),0) as totalbook'))
-      ->whereuser_id($user_id)
-      ->groupBy('year', 'month')
-      ->orderBy('created_at', 'asc')
-      ->get();
+      // $graph = DB::table('jobs')
+      // ->select(DB::raw('MONTH(created_at) as month'), 
+      //          DB::raw("YEAR(created_at) year"),    
+      //          DB::raw('ifnull(count(*),0) as totalbook'))
+      // ->whereuser_id($user_id)
+      // ->groupBy('year', 'month')
+      // ->orderBy('created_at', 'asc')
+      // ->get();
 
       // dd($graph);
       return View::make('frontend.client-dashboard')->with([
         'jobs' => $myJobs,
-        'hiredFreelancers' => $hiredFreelancers,
-        'jobCount' => $graph
+        'hiredFreelancers' => $hiredFreelancers
       ]);
     }
 
