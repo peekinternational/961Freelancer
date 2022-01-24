@@ -3337,11 +3337,14 @@ body.wt-login .wt-userlogedin{display: block;}
 	max-height: 100px;
 	max-width: 100px;
 	margin: 0 30px 30px 0;
+	overflow: hidden;
 }
 .wt-userlistingimg img{
-	width: 100%;
+	width: 100px;
 	display: block;
 	border-radius: 4px;
+	height: 100px;
+	object-fit: cover;
 }
 .wt-userlistingcontent{
 	overflow: hidden;

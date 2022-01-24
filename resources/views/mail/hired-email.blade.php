@@ -78,14 +78,14 @@
       </center>
       <hr>
       <p class='bg-gray'> Dear {{$user->username}} , </p>
-      <p class="bg-gray">Client has accepted your proposal on <a href="{{url('job-detail/'.$job->job_id)}}">{{$job->job_title}}</a>. Please click <a href="{{url('ongoing-jobs')}}">here</a> to view the status of the job.</p>
+      <p class="bg-gray">Client has accepted your proposal on "{{$job->job_title}}". Please click <a href="{{url('ongoing-jobs')}}">here</a> to view the status of the job.</p>
       <br>
       <!-- <center>
         <a style="background-color: #ed1c24; border-radius: 35px;" href="{{ url('/reset-password/'.$user->email.'/'.$user->remember_token) }}" class='btn pt-2'>
           Click To Reset Password
         </a>
       </center> -->
-      <br>
+      <br><br><br>
       <p class="regards" style="margin-top: 4rem;">Regards,<br>961Freelancer</p>
       <br>
       <hr>

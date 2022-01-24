@@ -78,14 +78,15 @@
       </center>
       <hr>
       <p class='bg-gray'> Dear {{$user->username}} , </p>
-      <p class="bg-gray">Client has rejected your proposal on <a href="{{url('job-detail/'.$job->job_id)}}">{{$job->job_title}}</a>. Please click <a href="{{url('job')}}">here</a> to send proposal and other jobs.</p>
-      <br>
-      <!-- <center>
-        <a style="background-color: #ed1c24; border-radius: 35px;" href="{{ url('/reset-password/'.$user->email.'/'.$user->remember_token) }}" class='btn pt-2'>
-          Click To Reset Password
+      <p class="bg-gray">Client has rejected your proposal on "{{$job->job_title}}". Please click below button to send proposal and other jobs.</p>
+      <br><br>
+      <center>
+        <a style="background-color: #ed1c24; border-radius: 35px; margin-top: 4rem;" href="{{url('job')}}" class='btn pt-2'>
+          Browse Jobs
         </a>
-      </center> -->
+      </center>
       <br>
+      <br><br>
       <p class="regards" style="margin-top: 4rem;">Regards,<br>961Freelancer</p>
       <br>
       <hr>

@@ -85,7 +85,7 @@
 						<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar">
 							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
-									<h2>Categories</h2>
+									<h2>Tags</h2>
 								</div>
 								<div class="wt-widgetcontent">
 									<form class="wt-formtheme wt-formsearch">
@@ -147,7 +147,7 @@
 										<fieldset>
 											<div class="form-group">
 												<input type="text" name="location_keyword" class="form-control" placeholder="Search Location" id="locationSearch">
-												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="fal fa-search"></i></a>
 											</div>
 										</fieldset>
 										<fieldset>
@@ -158,34 +158,6 @@
 													<label for="wt-description{{$country->id}}">  {{$country->name}}</label>
 												</span>
 												@endforeach
-												<!-- <span class="wt-checkbox">
-													<input id="wt-description" type="checkbox" name="description" value="company" checked>
-													<label for="wt-description"> <img src="{{asset('assets/images/flag/img-01.png')}}" alt="img description"> Australia</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="us" type="checkbox" name="description" value="company">
-													<label for="us"> <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="canada" type="checkbox" name="description" value="company">
-													<label for="canada"> <img src="{{asset('assets/images/flag/img-03.png')}}" alt="img description"> Canada</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="england" type="checkbox" name="description" value="company">
-													<label for="england"> <img src="{{asset('assets/images/flag/img-04.png')}}" alt="img description"> England</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="emirates" type="checkbox" name="description" value="company">
-													<label for="emirates"> <img src="{{asset('assets/images/flag/img-05.png')}}" alt="img description"> United Emirates</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="wt-description1" type="checkbox" name="description" value="company">
-													<label for="wt-description1"> <img src="{{asset('assets/images/flag/img-01.png')}}" alt="img description"> Australia</label>
-												</span>
-												<span class="wt-checkbox">
-													<input id="us1" type="checkbox" name="description" value="company">
-													<label for="us1"> <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</label>
-												</span> -->
 											</div>
 										</fieldset>
 									</form>
@@ -233,7 +205,7 @@
 										<fieldset>
 											<div class="form-group">
 												<input type="text" name="language_keyword" class="form-control" placeholder="Search Language" id="languageSearch">
-												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="fal fa-search"></i></a>
 											</div>
 										</fieldset>
 										<fieldset>
@@ -290,9 +262,14 @@
 							<div class="wt-userlistinghold">
 								<figure class="wt-userlistingimg">
 									@if($freelancer->profile_image != '')
-									<img src="{{asset('assets/images/user/profile/'.$freelancer->profile_image)}}" alt="image description">
+									@if(!empty($freelancer->facebook_id) || !empty($freelancer->google_id))
+									<img src="{{$freelancer->profile_image}}" width="" height="" class="img-fluid" alt="">
 									@else
-									<img src="{{asset('assets/images/user-login.png')}}" alt="image description">
+									<img src="{{asset('assets/images/user/profile/'.$freelancer->profile_image)}}" alt="image description">
+									@endif
+									
+									@else
+									<img src="{{asset('assets/images/user.jpg')}}" alt="image description">
 									@endif
 								</figure>
 								<div class="wt-userlistingcontent">
@@ -547,6 +524,10 @@
 		  success:function(data){
 		    // console.log(data);
 		    $("#freelancers-list").html(data);
+		    $('input[name="user_tagline"]').prop('checked', false);
+		    $('input[name="hourly_rate"]').prop('checked', false);
+		    $('input[name="lang_search"]').prop('checked', false);
+		    $('input[name="job_location"]').prop('checked', false);
 		  }
 		});
 

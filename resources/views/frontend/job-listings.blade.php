@@ -43,7 +43,7 @@
 										<fieldset>
 											<div class="form-group">
 												<input type="text" name="cat_keyword" class="form-control" placeholder="Search Category" id="categorySearch">
-												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="fal fa-search"></i></a>
 											</div>
 										</fieldset>
 										<fieldset>
@@ -97,7 +97,7 @@
 										<fieldset>
 											<div class="form-group">
 												<input type="text" name="location_keyword" class="form-control" placeholder="Search Location" id="locationSearch">
-												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="fal fa-search"></i></a>
 											</div>
 										</fieldset>
 										<fieldset>
@@ -108,30 +108,6 @@
 													<label for="wt-description{{$country->id}}">  {{$country->name}}</label>
 												</span>
 												@endforeach
-												<!-- <span class="wt-radio">
-													<input id="us" type="radio" name="job_location" value="company">
-													<label for="us"> <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</label>
-												</span>
-												<span class="wt-radio">
-													<input id="canada" type="radio" name="job_location" value="company">
-													<label for="canada"> <img src="{{asset('assets/images/flag/img-03.png')}}" alt="img description"> Canada</label>
-												</span>
-												<span class="wt-radio">
-													<input id="england" type="radio" name="job_location" value="company">
-													<label for="england"> <img src="{{asset('assets/images/flag/img-04.png')}}" alt="img description"> England</label>
-												</span>
-												<span class="wt-radio">
-													<input id="emirates" type="radio" name="job_location" value="company">
-													<label for="emirates"> <img src="{{asset('assets/images/flag/img-05.png')}}" alt="img description"> United Emirates</label>
-												</span>
-												<span class="wt-radio">
-													<input id="wt-description1" type="radio" name="job_location" value="company">
-													<label for="wt-description1"> <img src="{{asset('assets/images/flag/img-01.png')}}" alt="img description"> Australia</label>
-												</span>
-												<span class="wt-radio">
-													<input id="us1" type="radio" name="job_location" value="company">
-													<label for="us1"> <img src="{{asset('assets/images/flag/img-02.png')}}" alt="img description"> United States</label>
-												</span> -->
 											</div>
 										</fieldset>
 									</form>
@@ -487,6 +463,10 @@
 		  success:function(data){
 		    // console.log(data);
 		    $("#listings-container").html(data);
+		    $('input[name="job_location"]').prop('checked', false);
+		    $('input[name="job_duration"]').prop('checked', false);
+		    $('input[name="job_type"]').prop('checked', false);
+		    $('input[name="jobCategory"]').prop('checked', false);
 		  }
 		});
 

@@ -443,7 +443,7 @@ class ProfileController extends Controller
       UserLanguage::find($id)->delete($id);
       $showCounts = UserLanguage::where('user_id',auth()->user()->id)->count(); 
       return response()->json([
-          'success' => 'Record deleted successfully!',
+          'success' => 'Language deleted!',
           'count' => $showCounts
       ]);
     }

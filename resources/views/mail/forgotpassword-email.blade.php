@@ -79,13 +79,13 @@
       <hr>
       <p class='bg-gray'> Dear {{$user->username}} , </p>
       <p class="bg-gray">Click the below link to change password.</p>
-      <br>
+      <br><br>
       <center>
         <a style="background-color: #ed1c24; border-radius: 35px;margin-top: 4rem;" href="{{ url('/reset-password/'.$user->email.'/'.$user->remember_token) }}" class='btn pt-2'>
           Click To Reset Password
         </a>
       </center>
-      <br>
+      <br><br><br>
       <p class="regards" style="margin-top: 4rem;">Regards,<br>961Freelancer</p>
       <br>
       <hr>

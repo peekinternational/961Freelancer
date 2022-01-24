@@ -630,7 +630,7 @@
 								  						</div>
 								  					</div>
 								  					<div class="form-group">
-								  						<ul class="wt-attachfile portfolio-imgs">
+								  						<ul class="wt-attachfile portfolio-imgs" id="portfolio-imgs">
 								  							<!-- <li class="wt-uploaded">
 								  								<span id="projectimg_name">Logo.jpg</span>
 								  								<em>File size: <span id="projectImg_size">300 kb</span></em>
@@ -879,7 +879,7 @@
  $('#add_skill').on('submit', function(event){
    	event.preventDefault();
    	
-
+   	var skill_id = $('select[name="skill_id"]').val();
    	$.ajax({
 	    url:"{{ url('add_skill') }}",
 	    method:"POST",
@@ -896,6 +896,10 @@
 	    		$('#skill_length').removeClass('d-none');
 	    		$('.count_skill').addClass('d-none');
 	    	}
+	    	if(skill_id == data.skill.skill_id){
+	    		$('select[name="skill_id"] option[value="' + skill_id + '"]').prop('disabled', true);
+	    	}
+	    	$('select[name="skill_id"] option[value=""]').prop('selected', true);
 	     	// window.location.href = "{{url('manage-orders')}}"
 	     	// $('.added-questions').append(data);
 	     	// $('#requirements-form textarea').val('');
@@ -908,7 +912,7 @@
  $('#add_language').on('submit', function(event){
    	event.preventDefault();
    	
-
+   	var lang_id = $('select[name="language_id"]').val();
    	$.ajax({
 	    url:"{{ url('add_language') }}",
 	    method:"POST",
@@ -920,6 +924,11 @@
 	    success:function(data){
 	    	console.log(data);
 	    	$('#userlanguagess').append('<li id="userLanguage'+data.language.id+'"><span class="skill-dynamic-html">'+data.language.language_data.language_name+' (<em class="skill-val">'+data.language.language_rate+'</em>%)</span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill('+data.language.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
+	    	if(lang_id == data.language.language_data.id){
+	    		$('select[name="language_id"] option[value="' + lang_id + '"]').prop('disabled', true);
+	    	}
+	    	$('select[name="language_id"] option[value=""]').prop('selected', true);
+	    	$('input[name="language_rate"]').val('');
 	    	// if(data.count == 12){
 	    	// 	$('#addSkills').attr('disabled','true');
 	    	// 	$('#skill_length').removeClass('d-none');
@@ -981,13 +990,18 @@
 	    		  	var present_job_checked = 'checked';
 	    		  	var end_date_readonly = 'readonly';
 	    		  }
+	    		  if(response.data.end_date == null){
+	    		  	var job_end_date = 'Present';
+	    		  }else{
+	    		  	var job_end_date = response.data.end_date;
+	    		  }
 
-	    	      $('#experience-list').append('<li id="expernc'+response.data.id+'"><div class="wt-accordioninnertitle"><span id="accordioninner'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#inner'+response.data.id+'"><span id="title'+response.data.id+'">'+response.data.job_title+'</span><span class="text-muted" id="startresponse.data.id"><em> ('+response.data.start_date+'</em></span> - <span class="text-muted" id="end'+response.data.id+'"><em>'+response.data.end_date+')</em></span></span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninner'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#inner'+response.data.id+'" aria-expanded="true"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteExperience('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="inner'+response.data.id+'" aria-labelledby="accordioninnertitle" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform"><input type="hidden" name="id" id="experienceId'+response.data.id+'" value="'+response.data.id+'"><input type="hidden" name="_token" id="experienceId'+response.data.id+'" value="'+response.data.id+'"><fieldset><div class="form-group form-group-half"><input type="text" id="company_title'+response.data.id+'" name="company_title" class="form-control" placeholder="Company Title" value="'+response.data.company_title+'"></div><div class="form-group form-group-half"><input type="text" id="job_title'+response.data.id+'" name="job_title" value="'+response.data.job_title+'" class="form-control" placeholder="Your Job Title"></div><div class="form-group form-group-half"><input type="date" id="start_date'+response.data.id+'" name="start_date" value="'+response.data.start_date+'" class="form-control" placeholder="Starting Date"></div><div class="form-group form-group-half"><input type="date" id="end_date'+response.data.id+'" name="end_date" value="'+response.data.end_date+'" class="form-control" placeholder="Ending Date " '+end_date_readonly+'></div><div class="form-group"><input type="checkbox" id="present_job'+response.data.id+'" name="present_job" '+present_job_checked+'> Present Job </div><div class="form-group"><textarea name="job_description" id="job_description'+response.data.id+'" class="form-control" placeholder="Your Job Description" minlength="50">'+response.data.job_description+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group"><span>* Leave ending date empty if its your current job</span></div><div class="form-group mt-3 text-end"><button onclick="editExperience('+response.data.id+')" class="wt-btn">Edit Employment History</button></div></fieldset></div></div></li>');
+	    	      $('#experience-list').append('<li id="expernc'+response.data.id+'"><div class="wt-accordioninnertitle"><span id="accordioninner'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#inner'+response.data.id+'"><span id="title'+response.data.id+'">'+response.data.job_title+'</span><span class="text-muted" id="startresponse.data.id"><em> ('+response.data.start_date+'</em></span> - <span class="text-muted" id="end'+response.data.id+'"><em>'+job_end_date+')</em></span></span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninner'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#inner'+response.data.id+'" aria-expanded="true"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteExperience('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="inner'+response.data.id+'" aria-labelledby="accordioninnertitle" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform"><input type="hidden" name="id" id="experienceId'+response.data.id+'" value="'+response.data.id+'"><input type="hidden" name="_token" id="experienceId'+response.data.id+'" value="'+response.data.id+'"><fieldset><div class="form-group form-group-half"><input type="text" id="company_title'+response.data.id+'" name="company_title" class="form-control" placeholder="Company Title" value="'+response.data.company_title+'"></div><div class="form-group form-group-half"><input type="text" id="job_title'+response.data.id+'" name="job_title" value="'+response.data.job_title+'" class="form-control" placeholder="Your Job Title"></div><div class="form-group form-group-half"><input type="date" id="start_date'+response.data.id+'" name="start_date" value="'+response.data.start_date+'" class="form-control" placeholder="Starting Date"></div><div class="form-group form-group-half"><input type="date" id="end_date'+response.data.id+'" name="end_date" value="'+response.data.end_date+'" class="form-control" placeholder="Ending Date " '+end_date_readonly+'></div><div class="form-group"><input type="checkbox" id="present_job'+response.data.id+'" name="present_job" '+present_job_checked+'> Present Job </div><div class="form-group"><textarea name="job_description" id="job_description'+response.data.id+'" class="form-control" placeholder="Your Job Description" minlength="50">'+response.data.job_description+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group"><span>* Leave ending date empty if its your current job</span></div><div class="form-group mt-3 text-end"><button onclick="editExperience('+response.data.id+')" class="wt-btn">Edit Employment History</button></div></fieldset></div></div></li>');
 	    		 	 // 	$('#pills-home-tab').removeClass('active');
 	    		 		// $('#pills-profile-tab').addClass('active');
 	    		 		// $('#pills-home').removeClass('show active');
 	    		 		// $('#pills-profile').addClass('show active');   
-	    	    
+	    	    	this.reset();
 	    	}else{
 	    	    $.notify(response.message , 'error');
 
@@ -1019,10 +1033,15 @@
 	    		 		var continue_study_checked = 'checked';
 	    		 		var end_date_readonly = 'readonly';
 	    		 	}
+	    		 	if(response.data.end_date == null){
+	    		 		var educ_end_date = 'Continue';
+	    		 	}else{
+	    		 		var educ_end_date = response.data.end_date;
+	    		 	}
 
-	    	      $('#education_list').append('<li id="educatn'+response.data.id+'"><div class="wt-accordioninnertitle"><span id="accordioneducation'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#innertitleeduc'+response.data.id+'"><span id="degree'+response.data.id+'">'+response.data.degree+'</span> <span id="start_edu'+response.data.id+'"><em>('+response.data.start_date+'</em></span> - <span id="end_edu'+response.data.id+'"><em> '+response.data.end_date+')</em></span></span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioneducation'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#innertitleeduc'+response.data.id+'" aria-expanded="true"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteEducation('+response.data.id+')"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innertitleeduc'+response.data.id+'" aria-labelledby="accordioneducation'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform"><fieldset><input type="hidden" name="educaId" value="'+response.data.id+'"><div class="form-group form-group-half"><input type="text" name="institute" id="institute'+response.data.id+'" class="form-control" placeholder="School/College/University" value="'+response.data.institute+'"></div><div class="form-group form-group-half"><input type="text" name="degree" id="degree_edu'+response.data.id+'" class="form-control" placeholder="Your Degree Title" value="'+response.data.degree+'"></div><div class="form-group form-group-half"><input type="date" name="start_date" id="start_date_edu'+response.data.id+'" class="form-control" placeholder="From Date" value="'+response.data.start_date+'"></div><div class="form-group form-group-half"><input type="date" name="end_date" id="end_date_edu'+response.data.id+'" id="edit_end_date" class="form-control" placeholder="To Date " value="'+response.data.end_date+'" '+end_date_readonly+'></div><div class="form-group"><input type="checkbox" id="continue_study'+response.data.id+'" name="continue_study" '+continue_study_checked+'> Continue Study</div><div class="form-group"><input type="text" name="area_of_study" id="area_of_study'+response.data.id+'" class="form-control" placeholder="Ex: Computer Science" value="'+response.data.area_of_study+'"></div><div class="form-group mt-3 text-end"><button onclick="editEducation('+response.data.id+')" class="wt-btn">Edit Education</button></div></fieldset></div></div></li>');
+	    	      $('#education_list').append('<li id="educatn'+response.data.id+'"><div class="wt-accordioninnertitle"><span id="accordioneducation'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#innertitleeduc'+response.data.id+'"><span id="degree'+response.data.id+'">'+response.data.degree+'</span> <span id="start_edu'+response.data.id+'"><em>('+response.data.start_date+'</em></span> - <span id="end_edu'+response.data.id+'"><em> '+educ_end_date+')</em></span></span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioneducation'+response.data.id+'" data-bs-toggle="collapse" data-bs-target="#innertitleeduc'+response.data.id+'" aria-expanded="true"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteEducation('+response.data.id+')"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innertitleeduc'+response.data.id+'" aria-labelledby="accordioneducation'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform"><fieldset><input type="hidden" name="educaId" value="'+response.data.id+'"><div class="form-group form-group-half"><input type="text" name="institute" id="institute'+response.data.id+'" class="form-control" placeholder="School/College/University" value="'+response.data.institute+'"></div><div class="form-group form-group-half"><input type="text" name="degree" id="degree_edu'+response.data.id+'" class="form-control" placeholder="Your Degree Title" value="'+response.data.degree+'"></div><div class="form-group form-group-half"><input type="date" name="start_date" id="start_date_edu'+response.data.id+'" class="form-control" placeholder="From Date" value="'+response.data.start_date+'"></div><div class="form-group form-group-half"><input type="date" name="end_date" id="end_date_edu'+response.data.id+'" id="edit_end_date" class="form-control" placeholder="To Date " value="'+response.data.end_date+'" '+end_date_readonly+'></div><div class="form-group"><input type="checkbox" id="continue_study'+response.data.id+'" name="continue_study" '+continue_study_checked+'> Continue Study</div><div class="form-group"><input type="text" name="area_of_study" id="area_of_study'+response.data.id+'" class="form-control" placeholder="Ex: Computer Science" value="'+response.data.area_of_study+'"></div><div class="form-group mt-3 text-end"><button onclick="editEducation('+response.data.id+')" class="wt-btn">Edit Education</button></div></fieldset></div></div></li>');
 	    		 	   
-	    	    
+	    	    	this.reset();
 	    	}else{
 	    	    $.notify(response.message , 'error');
 
@@ -1056,10 +1075,20 @@
 	    	$("#add-project-form")[0].reset();
 	    	if (response.status == 'true') {
 	    		 	
+	    		 	if(response.data.project_url == null){
+	    		 		var project_link = '';
+	    		 	}else{
+	    		 		var project_link = response.data.project_url;
+	    		 	}
+	    		 	var imgss=response.data.project_img;
+						var single_img = imgss.split(',');
+						// alert(single_img[1]);
+
 	    		 $.notify(response.message , 'success'  );
-	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+response.data.project_img[0]+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+response.data.project_url+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
+	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+single_img[1]+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+project_link+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
 	    		 	   
-	    	    
+	    	    $('#portfolio-imgs').html('');
+	    	    $('#portfolio-imgs').remove();
 	    	}else{
 	    	    $.notify(response.message , 'error');
 
@@ -1088,7 +1117,9 @@
 	    		 	
 	    		$.notify(response.message , 'success'  );
   	      $('#certificates-list').append('<li id="certifcateList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innertitlecwcertificate'+response.data.id+'"><h3><font id="certificateName'+response.data.id+'">'+response.data.certificate_title+'</font><samp id="certificateDate'+response.data.id+'">'+response.data.issue_date+'</samp></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innertitlecwcertificate'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteCertificate('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innertitlecwcertificate'+response.data.id+'" aria-labelledby="accordioninnertitle1" data-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group"><input type="text" id="certificate_title'+response.data.id+'" name="certificate_title" class="form-control" value="'+response.data.certificate_title+'" placeholder="Certificate Title"></div><div class="form-group form-group-half"><input type="date" id="issue_date'+response.data.id+'" name="issue_date" value="'+response.data.issue_date+'" class="form-control" placeholder="Issue Date"></div><div class="form-group form-group-half"><input type="date" id="expire_date'+response.data.id+'" name="expire_date" class="form-control" value="'+response.data.expire_date+'" placeholder="Expire Date"></div><div class="form-group"><textarea name="certificate_desc" id="certificate_desc'+response.data.id+'" id="" class="form-control" placeholder="Certificate Description" minlength="50">'+response.data.certificate_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editCertificate('+response.data.id+')" class="wt-btn">Edit Certificate</button></div></fieldset></div></div></li>');
-	    		 	      
+	    		 	
+	    		 	this.reset();  
+	    		 	  
 	    	}else{
 	    	  $.notify(response.message , 'error');
 
@@ -1117,6 +1148,28 @@
  	        	$('#addSkills').removeAttr('disabled');
  	        	$('#skill_length').addClass('d-none');
  	        }
+ 	      }
+ 	   	})
+ 	}
+
+ 	// Delete Language
+
+ 	function deleteLanguage(id){
+ 		// alert(id);
+	   	
+ 	   	$.ajax({
+ 		    url:"{{ url('delete-language') }}/"+id,
+ 		    type: 'DELETE',
+ 	      data: {
+ 	      		"_token": CSRF_TOKEN,
+ 	          "id": id
+ 	      },
+ 	      success: function (data){
+ 	        $('#userLanguage'+id).remove();
+ 	        // if(data.count < 12){
+ 	        	// $('#addSkills').removeAttr('disabled');
+ 	        	// $('#skill_length').addClass('d-none');
+ 	        // }
  	      }
  	   	})
  	}
@@ -1170,20 +1223,24 @@
  		    // THE TOTAL FILE COUNT.
  		    // document.getElementById('fp').innerHTML =
  		        // 'Total Files: <b>' + fi.files.length + '</b></br >';
+ 		    if (fi.files.length > 3){
+        	alert("You are only allowed to upload a maximum of 3 files");
+       	}else{
+       		// RUN A LOOP TO CHECK EACH SELECTED FILE.
+       		for (var i = 0; i <= fi.files.length - 1; i++) {
 
- 		    // RUN A LOOP TO CHECK EACH SELECTED FILE.
- 		    for (var i = 0; i <= fi.files.length - 1; i++) {
+       		    var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+       		    var _size = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+       		    var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+       		          		j=0;while(_size>900){_size/=1024;j++;}
+       		              var exactSize = (Math.round(_size*100)/100)+' '+fSExt[j];
 
- 		        var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
- 		        var _size = fi.files.item(i).size;      // THE SIZE OF THE FILE.
- 		        var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
- 		              		j=0;while(_size>900){_size/=1024;j++;}
- 		                  var exactSize = (Math.round(_size*100)/100)+' '+fSExt[j];
-
- 		        $('.portfolio-imgs').append('<li class="wt-uploaded"><span>'+fname+'</span><em>File size: '+exactSize+'</em></li>');
- 		        // $('.fileSizea').html(fsize);
- 		        // SHOW THE EXTRACTED DETAILS OF THE FILE.
- 		    }
+       		    $('.portfolio-imgs').append('<li class="wt-uploaded portfolio-img-list"><span>'+fname+'</span><em>File size: '+exactSize+'</em></li>');
+       		    // $('.fileSizea').html(fsize);
+       		    // SHOW THE EXTRACTED DETAILS OF THE FILE.
+       		}
+       	}
+ 		    
  		}
  		else { 
  		    alert('Please select a file.') 

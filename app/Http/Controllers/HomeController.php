@@ -12,6 +12,7 @@ use App\Models\Contact;
 use App\Models\User;
 use App\Models\Job;
 use App\Models\Countries;
+use App\Models\Language;
 use Hash;
 use Session;
 use Mail;
@@ -151,14 +152,20 @@ class HomeController extends Controller
     // Main Search
     public function search(Request $request){
       if($request->searchtype == 'freelancer'){
+        
         if($request->keyword != ''){
           $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->where('first_name','like','%'.$request->keyword.'%')->orWhere('last_name','like','%'.$request->keyword.'%')->orWhere('tagline','like','%'.$request->keyword.'%')->orWhere('username','like','%'.$request->keyword.'%')->orWhere('description','like','%'.$request->keyword.'%')->orWhere('country','like','%'.$request->keyword.'%')->paginate(10);
         }else{
           $freelancers = User::with('userSkills','saveInfo','freelancerRating')->withCount('freelancerRating')->whereaccount_type('Freelancer')->paginate(10);
         }
-        
+        $categories = Category::all();
+        $countries = Countries::all();
+        $languages = Language::all();
         return View::make('frontend.freelancers')->with([
-            'freelancers' => $freelancers
+            'freelancers' => $freelancers,
+            'categories' => $categories,
+            'countries' => $countries,
+            'languages' => $languages
         ]);
       }else{  
         if($request->keyword != ''){
