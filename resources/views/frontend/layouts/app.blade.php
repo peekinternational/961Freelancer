@@ -30,9 +30,9 @@
 	@yield('dashboardstyle')
 </head>
 <body>
-	<div class="preloader-outer">
+	<!-- <div class="preloader-outer">
 		<div class="loader"></div>
-	</div>
+	</div> -->
 	{{ View::make('frontend.includes.navbar') }}
 	@yield('content')
 	{{ View::make('frontend.includes.footer') }}
