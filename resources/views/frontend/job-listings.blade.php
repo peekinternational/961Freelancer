@@ -303,7 +303,7 @@
 	    data:{
 	    	"_token": CSRF_TOKEN,
         "job_id": id,
-        "save_type": 'Freelancer',
+        "save_type": 'Job',
       },
 	    success:function(data){
 	    	console.log(data);
