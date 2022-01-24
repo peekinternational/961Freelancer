@@ -344,7 +344,7 @@
 								  						<span class="skill-dynamic-html">{{$user_skill->skillData->skill_name}}</span>
 								  						<div class="wt-rightarea">
 								  							<!-- <a href="javascript:void(0);" class="wt-addinfo" onclick="updateSkill({{$user_skill->id}})"><i class="fal fa-pencil"></i></a> -->
-								  							<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill({{$user_skill->id}})"><i class="fal fa-trash-alt"></i></a>
+								  							<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill({{$user_skill->id}},{{$user_skill->skillData->id}})"><i class="fal fa-trash-alt"></i></a>
 								  						</div>
 								  					</li>
 								  					@endforeach
@@ -397,7 +397,7 @@
 								  						<span class="skill-dynamic-html">{{$user_language->languageData->language_name}} (<em class="skill-val">{{$user_language->language_rate}}</em>%)</span>
 								  						<div class="wt-rightarea">
 								  							<!-- <a href="javascript:void(0);" class="wt-addinfo" onclick="updateSkill({{$user_skill->id}})"><i class="fal fa-pencil"></i></a> -->
-								  							<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteLanguage({{$user_language->id}})"><i class="fal fa-trash-alt"></i></a>
+								  							<a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteLanguage({{$user_language->id}},{{$user_language->languageData->id}})"><i class="fal fa-trash-alt"></i></a>
 								  						</div>
 								  					</li>
 								  					@endforeach
@@ -890,7 +890,7 @@
 	    processData: false,
 	    success:function(data){
 	    	console.log(data);
-	    	$('#userskilss').append('<li id="userSkill'+data.skill.id+'"><span class="skill-dynamic-html">'+data.skill.skill_data.skill_name+'</span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill('+data.skill.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
+	    	$('#userskilss').append('<li id="userSkill'+data.skill.id+'"><span class="skill-dynamic-html">'+data.skill.skill_data.skill_name+'</span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill('+data.skill.id+','+data.skill.skill_data.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
 	    	if(data.count == 12){
 	    		$('#addSkills').attr('disabled','true');
 	    		$('#skill_length').removeClass('d-none');
@@ -923,7 +923,7 @@
 	    processData: false,
 	    success:function(data){
 	    	console.log(data);
-	    	$('#userlanguagess').append('<li id="userLanguage'+data.language.id+'"><span class="skill-dynamic-html">'+data.language.language_data.language_name+' (<em class="skill-val">'+data.language.language_rate+'</em>%)</span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteSkill('+data.language.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
+	    	$('#userlanguagess').append('<li id="userLanguage'+data.language.id+'"><span class="skill-dynamic-html">'+data.language.language_data.language_name+' (<em class="skill-val">'+data.language.language_rate+'</em>%)</span><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-deleteinfo" onclick="deleteLanguage('+data.language.id+','+data.language.language_data.id+')"><i class="fal fa-trash-alt"></i></a></div></li>');
 	    	if(lang_id == data.language.language_data.id){
 	    		$('select[name="language_id"] option[value="' + lang_id + '"]').prop('disabled', true);
 	    	}
@@ -1132,7 +1132,7 @@
  		// alert(id);
  	}
 
- 	function deleteSkill(id){
+ 	function deleteSkill(id,skil_id){
  		// alert(id);
 	   	
  	   	$.ajax({
@@ -1144,6 +1144,7 @@
  	      },
  	      success: function (data){
  	        $('#userSkill'+id).remove();
+ 	        $('select[name="skill_id"] option[value="' + skil_id + '"]').prop('disabled', false);
  	        if(data.count < 12){
  	        	$('#addSkills').removeAttr('disabled');
  	        	$('#skill_length').addClass('d-none');
@@ -1154,7 +1155,7 @@
 
  	// Delete Language
 
- 	function deleteLanguage(id){
+ 	function deleteLanguage(id,lng_id){
  		// alert(id);
 	   	
  	   	$.ajax({
@@ -1166,6 +1167,7 @@
  	      },
  	      success: function (data){
  	        $('#userLanguage'+id).remove();
+ 	        $('select[name="language_id"] option[value="' + lng_id + '"]').prop('disabled', false);
  	        // if(data.count < 12){
  	        	// $('#addSkills').removeAttr('disabled');
  	        	// $('#skill_length').addClass('d-none');
