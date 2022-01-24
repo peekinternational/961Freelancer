@@ -228,7 +228,7 @@
 											<li><span><i class="fa fa-tag wt-viewjobtag"></i>Job ID: {{$job->job_id}}</span></li>
 											@if(Auth::user())
 												@if(App\Models\SaveItem::jobSaved(Auth::user()->id,$job->id) == 0)
-												<li><a href="javascript:void(0);" class="wt-clicklike wt-clicksave" onclick="saveJob({{$job->id}})"><i class="fal fa-heart"></i> Save</a></li>
+												<li><a href="javascript:void(0);" class="wt-clicklike wt-clicksave" onclick="saveJob({{$job->id}})"><span class="save{{$job->id}}"><i class="fal fa-heart"></i> Save</span></a></li>
 												@else
 												<li><a href="javascript:void(0);" class="wt-clicklike wt-clicksave" onclick="saveJob({{$job->id}})"><i class="fa fa-heart"></i> Saved</a></li>
 												@endif
@@ -309,6 +309,7 @@
 	    	console.log(data);
 	    	if (data == 1) {
 	    		$('.save'+id).html('<i class="fa fa-heart"></i> Saved');
+	    		$('.save'+id).css('color','red');
 	    	}
 	    	if(data == 2){
 	    		$('.save'+id).html('<i class="fal fa-heart"></i> Save');
