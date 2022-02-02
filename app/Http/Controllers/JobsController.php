@@ -81,7 +81,7 @@ class JobsController extends Controller
       ]);
       // dd($request->all());
       $job = new Job();
-      $job->job_id = time() . Str::random(9);
+      $job->job_id = time() . Str::random(6);
       $job->user_id = auth()->user()->id;
       $job->job_title = $request->input('job_title');
       $job->service_level = $request->input('service_level');
@@ -387,9 +387,10 @@ class JobsController extends Controller
 
       if($category != ''){
         $jobs = Job::with('saveJobs')->where('job_status',1)->where('job_cat','like','%'.$category.'%')->orderBy('created_at', 'DESC')->paginate(10);
-      }else{
-        $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
       }
+      // else{
+      //   $jobs = Job::with('saveJobs')->where('job_status',1)->orderBy('created_at', 'DESC')->paginate(10);
+      // }
       
 
       if($job_type == 'hourly'){

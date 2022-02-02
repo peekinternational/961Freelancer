@@ -87,7 +87,7 @@
               @csrf
               <div class="mb-3 has-error">
                 <label class="control-label">Username</label>
-                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" pattern="\S(?!.*_.*_)[a-zA-Z_.]*" value="" onkeyup="ValidateUsername()" required="">
+                <input class="form-control" type="text" id="username" name="username" placeholder="Enter Your Username" pattern="\S(?!.*_.*_)[a-zA-Z_.]*" value="{{old('username')}}" onkeyup="ValidateUsername()" required="">
                  <div class="invalid-feedback">
                    Please enter Username.
                 </div>
@@ -100,14 +100,14 @@
               </div>
               <div class="mb-3">
               	<label class="control-label">YOUR EMAIL ADDRESS</label>
-              	<input class="form-control" type="email" name="email" placeholder="Enter Email" value="" id="email" required="">
+              	<input class="form-control" type="email" name="email" placeholder="Enter Email" value="{{old('email')}}" id="email" required="">
               	<div class="invalid-feedback">
                     Please enter email.
                 </div>
               </div>
               <div class="mb-3">
                 <label class="control-label">Date of Birth</label>
-                <input class="form-control" type="date" name="age" placeholder="Enter Date of birth" value="" id="age" required="">
+                <input class="form-control" type="date" name="age" placeholder="Enter Date of birth" value="{{old('age')}}" id="age" required="">
                 <div class="invalid-feedback">
                     Please enter date of birth.
                 </div>
@@ -128,7 +128,7 @@
               	<label class="control-label">Phone No.</label>
                 <div class="input-group">
                   <input type="text" class="ps-0 pe-0 text-center bg-light fw-bold" name="phone_code" value="93" style="width: 80px;height: 60px;" readonly="" id="phoneCode">
-                  <input type="number" class="form-control" name="mobile_number" placeholder="Enter Phone No." required>
+                  <input type="number" class="form-control" name="mobile_number" placeholder="Enter Phone No." value="{{old('mobile_number')}}" required>
                 </div>
                 
               	<!-- <input class="form-control" type="text" name="mobile_number" id="phone" placeholder="Enter Phone No."> -->

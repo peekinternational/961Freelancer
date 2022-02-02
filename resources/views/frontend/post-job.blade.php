@@ -72,7 +72,7 @@
 										@csrf
 										<fieldset>
 											<div class="form-group">
-												<input type="text" name="job_title" class="form-control" minlength="30" placeholder="Job Title" title="Job title should be minimum 30 charaters">
+												<input type="text" name="job_title" class="form-control" minlength="30" placeholder="Job Title" value="{{old('job_title')}}" title="Job title should be minimum 30 charaters">
 											</div>
 											
 											<div class="form-group form-group-half wt-formwithlabel">
@@ -97,17 +97,17 @@
 											<div id="hourly_price" class="d-none">
 												<div class="form-group  form-group-half">
 													<!-- <label for="selectoption">Hourly Price:</label> -->
-													<input type="text" name="hourly_min_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Min Price $10">
+													<input type="text" name="hourly_min_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Min Price $10" value="{{old('hourly_min_price')}}">
 												</div>
 												<div class="form-group  form-group-half">
 													<!-- <label for="selectoption">Hourly Price:</label> -->
-													<input type="text" name="hourly_max_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Max Price $40">
+													<input type="text" name="hourly_max_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Hourly Max Price $40" value="{{old('hourly_max_price')}}">
 												</div>
 											</div>
 											
 											<div class="form-group" id="fixed_price">
 												<!-- <label for="selectoption">Fixed Price:</label> -->
-												<input type="text" name="fixed_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Fixed Price $500">
+												<input type="text" name="fixed_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Fixed Price $500" value="{{old('fixed_price')}}">
 											</div>
 											<div class="form-group form-group-half wt-formwithlabel">
 												<span class="wt-select">
@@ -178,7 +178,7 @@
 									<div class="wt-formtheme wt-userform wt-userformvtwo">
 										<fieldset>
 											<div class="form-group">
-												<textarea name="job_description" form="job-post-form" cols="10" rows="5" class="form-control" minlength="50" placeholder="Add Job Detail Here" title="Description should be minimum 50 charaters"></textarea>
+												<textarea name="job_description" form="job-post-form" cols="10" rows="5" class="form-control" minlength="50" placeholder="Add Job Detail Here" title="Description should be minimum 50 charaters">{{old('job_description')}}</textarea>
 											</div>
 										</fieldset>
 									</div>

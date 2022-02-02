@@ -665,26 +665,27 @@
 								  					</div>
 								  				</div>
 								  				<div class="wt-collapseexp collapse" id="innerproject{{$project->id}}" aria-labelledby="accordioninnerproject{{$project->id}}" data-bs-parent="#accordion">
-								  					<div class="wt-formtheme wt-userform wt-formprojectinfo">
+								  					<div class="wt-formtheme wt-userform wt-formprojectinfo" >
+								  						
 								  						<fieldset>
 								  							<div class="form-group form-group-half">
 								  								<input type="text" id="project_title{{$project->id}}" name="project_title" class="form-control" placeholder="Project Title" value="{{$project->project_title}}">
 								  							</div>
 								  							<div class="form-group form-group-half">
-								  								<input type="text" name="project_url" id="project_url{{$project->id}}" class="form-control" placeholder="Project URL" value="{{$project->project_url}}">
+								  								<input type="text" name="project_url" id="project_url{{$project->id}}" class="form-control" placeholder="Project URL" value="{{$project->project_url == '' ? '' : $project->project_url}}">
 								  							</div>
 								  							<div class="form-group form-group-label wt-infouploading">
 								  								<div class="wt-labelgroup">
 								  									<label for="filen{{$project->id}}">
 								  										<span class="wt-btn">Select Files</span>
-								  										<input type="file" name="project_img" onchange="projectImageEdit(this,{{$project->id}});" id="filen{{$project->id}}">
+								  										<input type="file" name="project_img[]" onchange="projectImageEdit(this,{{$project->id}});" id="filen{{$project->id}}" multiple="">
 								  									</label>
 								  									<span>Drop files here to upload</span>
 								  									<!-- <em class="wt-fileupload">Uploading<i class="fa fa-spinner fa-spin"></i></em> -->
 								  								</div>
 								  							</div>
 								  							<div class="form-group">
-								  								<ul class="wt-attachfile">
+								  								<ul class="wt-attachfile portfolio-edit-imgs">
 								  									@foreach(explode(',',$project->project_img) as $attach)
 								  									<li class="wt-uploaded">
 								  										<span id="projectimg_name{{$project->id}}">{{$attach}}</span>
@@ -1085,7 +1086,7 @@
 						// alert(single_img[1]);
 
 	    		 $.notify(response.message , 'success'  );
-	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+single_img[1]+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+project_link+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
+	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+single_img[0]+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+project_link+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
 	    		 	   
 	    	    $('#portfolio-imgs').html('');
 	    	    $('#portfolio-imgs').remove();
@@ -1269,25 +1270,55 @@
     
 	}
  	function projectImageEdit(input,id) {
+ 		alert(input);
+ 				var fi = input;
+ 				if (fi.files.length > 0) {
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        console.log(reader);
-        reader.onload = function (e) {
-            $('#projectImg'+id)
-                .attr('src', e.target.result);
-        };
+ 				    // THE TOTAL FILE COUNT.
+ 				    // document.getElementById('fp').innerHTML =
+ 				        // 'Total Files: <b>' + fi.files.length + '</b></br >';
+ 				    if (fi.files.length > 3){
+ 		       	alert("You are only allowed to upload a maximum of 3 files");
+ 		      	}else{
+ 		      		// RUN A LOOP TO CHECK EACH SELECTED FILE.
+ 		      		for (var i = 0; i <= fi.files.length - 1; i++) {
 
-        reader.readAsDataURL(input.files[0]);
+ 		      		    var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+ 		      		    var _size = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+ 		      		    var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+ 		      		          		j=0;while(_size>900){_size/=1024;j++;}
+ 		      		              var exactSize = (Math.round(_size*100)/100)+' '+fSExt[j];
 
-        var _size = input.files[0].size;
-          var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
-      		i=0;while(_size>900){_size/=1024;i++;}
-          var exactSize = (Math.round(_size*100)/100)+' '+fSExt[i];
-      	$('#projectImg_size'+id).html(exactSize)
-    }
-    var filename = $('#filen'+id).val().split('\\').pop();
-    $('#projectimg_name'+id).html(filename);
+ 		      		    $('.portfolio-edit-imgs').append('<li class="wt-uploaded portfolio-img-list"><span>'+fname+'</span><em>File size: '+exactSize+'</em></li>');
+ 		      		    // $('.fileSizea').html(fsize);
+ 		      		    // SHOW THE EXTRACTED DETAILS OF THE FILE.
+ 		      		}
+ 		      	}
+ 				    
+ 				}
+ 				else { 
+ 				    alert('Please select a file.') 
+ 				}
+
+
+    // if (input.files && input.files[0]) {
+    //     var reader = new FileReader();
+    //     console.log(reader);
+    //     reader.onload = function (e) {
+    //         $('#projectImg'+id)
+    //             .attr('src', e.target.result);
+    //     };
+
+    //     reader.readAsDataURL(input.files[0]);
+
+    //     var _size = input.files[0].size;
+    //       var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+    //   		i=0;while(_size>900){_size/=1024;i++;}
+    //       var exactSize = (Math.round(_size*100)/100)+' '+fSExt[i];
+    //   	$('#projectImg_size'+id).html(exactSize)
+    // }
+    // var filename = $('#filen'+id).val().split('\\').pop();
+    // $('#projectimg_name'+id).html(filename);
     
 	}
 
@@ -1370,15 +1401,41 @@
 
 	function editProject(id){
 		var project_url = $('#project_url'+id).val();
-		var img = $('#filen'+id)[0].files;
-	
+		// var img = $('#filen'+id)[0].files;
+		
+
+
+		// var fi = input;
+		// if (fi.files.length > 0) {
+		//     if (fi.files.length > 3){
+  //      	alert("You are only allowed to upload a maximum of 3 files");
+  //     	}else{
+  //     		for (var i = 0; i <= fi.files.length - 1; i++) {
+
+  //     		    var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+  //     		    var _size = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+  //     		    var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+  //     		    j=0;while(_size>900){_size/=1024;j++;}
+  //     		    var exactSize = (Math.round(_size*100)/100)+' '+fSExt[j];
+
+  //     		    $('.portfolio-edit-imgs').append('<li class="wt-uploaded portfolio-img-list"><span>'+fname+'</span><em>File size: '+exactSize+'</em></li>');
+  //     		}
+  //     	}
+		    
+		// }
+
+
 		var project_title = $('#project_title'+id).val();
 		var postData = new FormData();
 		postData.append('_token',CSRF_TOKEN);
 		postData.append('id',id);
 		postData.append('project_title',$('#project_title'+id).val());
 		postData.append('project_url',$('#project_url'+id).val());
-		postData.append('project_img',img);
+		var totalfiles = $('#filen'+id).get(0).files.length;
+		for (var index = 0; index < totalfiles; index++) {
+      postData.append("project_img[]", $('#filen'+id).get(0).files[index]);
+   	}
+		// postData.append('project_img',img);
 		postData.append('project_desc',$('#project_desc'+id).val());
    	$.ajax({
 	    url:"{{ url('edit-project') }}",

@@ -1,6 +1,11 @@
 @extends('frontend.layouts.app')
 @section('style')
 <link rel="stylesheet" media="screen" href="{{ asset('assets/css/owl.carousel.min.css') }}">
+<style>
+	.wt-userlistingimg img{
+		height: 100px;
+	}
+</style>
 @endsection
 @section('content')
 <!--Inner Home Banner Start-->

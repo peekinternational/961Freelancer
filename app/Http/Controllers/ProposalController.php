@@ -56,8 +56,7 @@ class ProposalController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-          'cover_letter' => 'required',
-          'duration' => 'required',
+          'cover_letter' => 'required'
       ]);
       // dd($request->all());
       $proposal = new Proposal;

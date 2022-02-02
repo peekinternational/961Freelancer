@@ -3343,7 +3343,7 @@ body.wt-login .wt-userlogedin{display: block;}
 	width: 100px;
 	display: block;
 	border-radius: 4px;
-	height: 100px;
+	/*height: 100px;*/
 	object-fit: cover;
 }
 .wt-userlistingcontent{

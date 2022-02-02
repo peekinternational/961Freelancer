@@ -360,21 +360,40 @@ class ProfileController extends Controller
     }
 
     public function editProject(Request $request){
+      // dd($request->all());
       $id = $request->input('id');
-
       $project = UserProject::find($id);
       $project->project_title = $request->input('project_title');
       $project->project_url = $request->input('project_url');
-      $project_image = $request->file('project_img');
-      if($project_image != ''){
-        $filename= $project_image->getClientOriginalName();
-        $imagename= 'project-'.rand(000000,999999).'.'.$project_image->getClientOriginalExtension();
-        $extension= $project_image->getClientOriginalExtension();
-        // $imagename= $filename;
-        $destinationpath= public_path('assets/images/projects/');
-        $project_image->move($destinationpath, $imagename);
-        $project->project_img = $imagename;
+      // $project_image = $request->file('project_img');
+      // if($project_image != ''){
+      //   $filename= $project_image->getClientOriginalName();
+      //   $imagename= 'project-'.rand(000000,999999).'.'.$project_image->getClientOriginalExtension();
+      //   $extension= $project_image->getClientOriginalExtension();
+      //   // $imagename= $filename;
+      //   $destinationpath= public_path('assets/images/projects/');
+      //   $project_image->move($destinationpath, $imagename);
+      //   $project->project_img = $imagename;
+      // }
+
+      $images=array();
+      $images[] = $project->project_img;
+      if($files=$request->file('project_img')){
+        foreach($files as $file){
+          
+          $imagename= 'project-'.rand(000000,999999).'.'.$file->getClientOriginalExtension();
+          $extension= $file->getClientOriginalExtension();
+          // $imagename= $filename;
+          $destinationpath= public_path('assets/images/projects/');
+          $file->move($destinationpath, $imagename);
+
+          $images[]=$imagename;
+        }
+      $project->project_img = implode(",",$images);
+      }else{
+        $project->project_img = implode(",",$images);
       }
+
       $project->project_desc = $request->input('project_desc');
 
       $project->save();

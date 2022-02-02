@@ -109,7 +109,7 @@
 							<div id="by_project">
 								<div class="form-group">
 									<span>( <i class="fa fa-dollar-sign"></i> )</span>
-									<input type="number" name="budget" onkeyup="getBudget(this)" form="propsalSubmit" class="form-control" placeholder="Enter Your Proposal Amount">
+									<input type="number" name="budget" onkeyup="getBudget(this)" form="propsalSubmit" value="{{old('budget')}}" class="form-control" placeholder="Enter Your Proposal Amount">
 									<input type="hidden" name="budget_receive" form="propsalSubmit" value="">
 									<input type="hidden" name="service_fee" form="propsalSubmit" value="">
 									<a href="javascript:void(0);" class="collapsed" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fal fa-chevron-up"></i></a>
@@ -242,7 +242,7 @@
 								</div>
 								@endif -->
 								<div class="form-group">
-									<textarea class="form-control" name="cover_letter" placeholder="Add Description*"></textarea>
+									<textarea class="form-control" name="cover_letter" placeholder="Add Description*">{{old('cover_letter')}}</textarea>
 								</div>
 							</fieldset>
 							
