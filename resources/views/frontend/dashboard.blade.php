@@ -1339,6 +1339,11 @@
 		var title = $('#job_title'+id).val();
 		var start = $('#start_date'+id).val();
 		var end = $('#end_date'+id).val();
+		var checkbox_value = "off";
+		var ischecked = $('#present_job'+id).is(":checked");
+    if (ischecked) {
+        checkbox_value = $('#present_job'+id).val();
+    }
    	$.ajax({
 	    url:"{{ url('edit-experience') }}",
 	    method: 'POST',
@@ -1348,7 +1353,7 @@
         "company_title": $('#company_title'+id).val(),
         "start_date": $('#start_date'+id).val(),
         "end_date": $('#end_date'+id).val(),
-        "present_job": $('#present_job'+id).val(),
+        "present_job": checkbox_value,
         "job_title": $('#job_title'+id).val(),
         "job_description": $('#job_description'+id).val(),
       },
@@ -1365,6 +1370,11 @@
 		// alert(degree);
 		var start = $('#start_date_edu'+id).val();
 		var end = $('#end_date_edu'+id).val();
+		var checkbox_value = "off";
+		var ischecked = $('#continue_study'+id).is(":checked");
+    if (ischecked) {
+        checkbox_value = $('#continue_study'+id).val();
+    }
    	$.ajax({
 	    url:"{{ url('edit-education') }}",
 	    method: 'POST',
@@ -1374,7 +1384,7 @@
         "institute": $('#institute'+id).val(),
         "start_date": $('#start_date_edu'+id).val(),
         "end_date": $('#end_date_edu'+id).val(),
-        "continue_study": $('#continue_study'+id).val(),
+        "continue_study": checkbox_value,
         "degree": $('#degree_edu'+id).val(),
         "area_of_study": $('#area_of_study'+id).val()
       },
