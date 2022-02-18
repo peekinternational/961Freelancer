@@ -720,6 +720,7 @@ export default {
            $('#o2ovideocall').modal('hide');
               $('#videocallReceiver').modal('hide');
               $('#videocallReceiver').removeClass('show');
+              $('#videocallReceiver').css('display','none');
               this.isO2Ocall=false;
               var x = document.getElementById("outgoingcall"); console.log(x);
               x.pause();
