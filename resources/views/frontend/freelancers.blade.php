@@ -88,18 +88,13 @@
 							</span>
 						</div>
 						<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar">
-							<div class="wt-widget wt-effectiveholder">
+							<!-- <div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Tags</h2>
 								</div>
 								<div class="wt-widgetcontent">
 									<form class="wt-formtheme wt-formsearch">
-										<!-- <fieldset>
-											<div class="form-group">
-												<input type="text" name="Search" class="form-control" placeholder="Search Category">
-												<a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-											</div>
-										</fieldset> -->
+										
 										<fieldset>
 											<div class="wt-checkboxholder wt-verticalscrollbar">
 												<span class="wt-radio">
@@ -142,7 +137,7 @@
 										</fieldset>
 									</form>
 								</div>
-							</div>
+							</div> -->
 							<div class="wt-widget wt-effectiveholder">
 								<div class="wt-widgettitle">
 									<h2>Location</h2>

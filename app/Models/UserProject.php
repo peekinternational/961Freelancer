@@ -13,6 +13,8 @@ class UserProject extends Model
       'project_title',
       'project_url',
       'project_img',
+      'pdf_files',
+      'youtube_link',
       'project_desc',
     ];
 

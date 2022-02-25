@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\View;
 use App\Models\User;
 use App\Models\Job;
 use App\Models\Countries;
+use App\Models\Transaction;
+use App\Models\Chart;
 use Hash;
 use Session;
 use Mail;
 use Redirect;
+use DB;
 
 class AdminController extends Controller
 {
@@ -25,6 +28,39 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function main(Request $request){
+      $transaction = Transaction::all();
+      $monthUser = User::groupBy('date')
+        ->orderBy('date', 'desc')
+        ->take(6)
+        ->get([
+            DB::raw('MONTH(created_at) as date'),
+            DB::raw('count(id) as total')
+        ])
+        ->pluck('total', 'date');
+        // dd($monthUser);
+        $groups = DB::table('users')
+                          ->select('account_type',DB::raw('count(*) as total'))
+                          ->groupBy('account_type')
+                          ->pluck('total','account_type')->all();
+        // Generate random colours for the groups
+        for ($i=0; $i<=count($groups); $i++) {
+                    $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+                }
+        // Prepare the data for returning with the view
+        $chart = new Chart;
+                $chart->labels = (array_keys($groups));
+                $chart->dataset = (array_values($groups));
+                $chart->colours = $colours;
+        // return view('charts.index', compact('chart'));
+
+
+      return View::make('admin.index')->with([
+        'transactions' => $transaction,
+        'chart' => $chart
+      ]);
+    }
     public function index(Request $request)
     { 
         $freelancers = User::with('userSkills','saveInfo')->whereaccount_type('Freelancer')->get();
@@ -40,10 +76,10 @@ class AdminController extends Controller
       if(Auth::guard('admin')->check()){
           // dd(Auth::guard('tech')->user()->name );
         $freelancers = User::with('userSkills','saveInfo')->whereaccount_type('Freelancer')->get();
-        return View::make('admin.freelancers-list')->with([
-            'freelancers' => $freelancers
-        ]);
-          // return redirect(RouteServiceProvider::ADMIN);
+        // return View::make('admin.freelancers-list')->with([
+        //     'freelancers' => $freelancers
+        // ]);
+          return redirect(RouteServiceProvider::ADMIN);
 
               }
           }

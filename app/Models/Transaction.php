@@ -24,4 +24,14 @@ class Transaction extends Model
     // public function job(){
     //   return $this->belongsTo(Job::class, 'job_id', 'job_id');
     // }
+    public function totalFee(){
+      return Transaction::sum('fee_amt');
+    }
+    public function totalAmount(){
+      return Transaction::sum('gross_amt');
+    }
+    public function avgAmount(){
+      return Transaction::avg('gross_amt');
+    }
+
 }

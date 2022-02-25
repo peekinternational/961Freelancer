@@ -230,9 +230,10 @@ Route::name('admin.')->namespace('Admin')->prefix('admin')->group(function(){
 	  });
   	Route::namespace('Auth')->middleware('auth:admin')->group(function(){
 
-      Route::get('/', function(){
-        return view('admin.index');
-      });
+      // Route::get('/', function(){
+      //   return view('admin.index');
+      // });
+      Route::get('/', [AdminController::class, 'main']);
 
       Route::resource('users','\App\Http\Controllers\Admin\AdminController');
       Route::get('/freelancers-list', [AdminController::class, 'index'])->name('freelancers-list');

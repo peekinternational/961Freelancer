@@ -270,6 +270,19 @@
 								              <span class='sr-only'>Next</span>
 								            </a>
 								          </div>
+								          <div class="p-3">
+								          	<h5>{{$project->project_title}}</h5>
+								          	<p>{{$project->project_desc}}</p>
+								          	@if($project->youtube_link != '')
+								          	<h5 class="mb-0">Youtube Link</h5>
+								          	<a href="{{$project->youtube_link}}" target="_blank">{{$project->youtube_link}}</a>
+								          	@endif
+								          	<br>
+								          	@if($project->pdf_files != '')
+								          	<h5 class="mt-3 mb-0">Files</h5>
+								          	<a href="{{asset('assets/images/projects/'.$project->pdf_files)}}" target="_blank" download>{{$project->pdf_files}}</a>
+								          	@endif
+								          </div>
 								        </div>
 								        <!-- <div class="modal-footer">
 								          <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>

@@ -617,7 +617,7 @@
 								  						<input type="text" name="project_title" class="form-control" placeholder="Project Title">
 								  					</div>
 								  					<div class="form-group form-group-half">
-								  						<input type="text" name="project_url" pattern="(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}" title="please enter a valid url" class="form-control" placeholder="Please enter valid url or leave empty">
+								  						<input type="text" name="project_url" pattern="[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)" title="please enter a valid url" class="form-control" placeholder="Please enter valid url or leave empty">
 								  					</div>
 								  					<div class="form-group form-group-label wt-infouploading">
 								  						<div class="wt-labelgroup">
@@ -637,6 +637,28 @@
 								  							</li> -->
 								  						</ul>
 								  					</div>
+								  					<div class="form-group form-group-label wt-infouploading">
+								  						<div class="wt-labelgroup">
+								  							<label for="pdffilen">
+								  								<span class="wt-btn">Select Pdf File</span>
+								  								<input type="file" name="pdf_files" onchange="projectFIle(this);" id="pdffilen" accept="application/pdf">
+								  							</label>
+								  							<span>Files Upload</span>
+								  							<!-- <em class="wt-fileuploading">Uploading</em> -->
+								  						</div>
+								  					</div>
+								  					<div class="form-group">
+								  						<ul class="wt-attachfile" id="portfolio-file">
+								  							<li class="wt-uploaded">
+								  								<span id="projectFile_name"></span>
+								  								<em>File size: <span id="projectFIle_size"></span></em>
+								  							</li>
+								  						</ul>
+								  					</div>
+								  					<div class="form-group">
+								  						<input type="text" name="youtube_link"  title="please enter a youtube link url" class="form-control" placeholder="Please enter valid youtube link or leave empty">
+								  					</div>
+								  					
 								  					<div class="form-group">
 								  						<textarea name="project_desc" class="form-control" placeholder="Project Description" minlength="50"></textarea>
 								  						<span>(Minimum 50 Character)</span>
@@ -693,6 +715,27 @@
 								  									</li>
 								  									@endforeach
 								  								</ul>
+								  							</div>
+								  							<div class="form-group form-group-label wt-infouploading">
+								  								<div class="wt-labelgroup">
+								  									<label for="pdffilen{{$project->id}}">
+								  										<span class="wt-btn">Select Pdf File</span>
+								  										<input type="file" name="pdf_files" onchange="projectFIleEdit(this,{{$project->id}});" id="pdffilen{{$project->id}}" accept="application/pdf">
+								  									</label>
+								  									<span>Files Upload</span>
+								  									<!-- <em class="wt-fileuploading">Uploading</em> -->
+								  								</div>
+								  							</div>
+								  							<div class="form-group">
+								  								<ul class="wt-attachfile" id="portfolio-file{{$project->id}}">
+								  									<li class="wt-uploaded">
+								  										<span id="projectFile_name{{$project->id}}">{{$project->pdf_files}}</span>
+								  										<em>File size: <span id="projectFIle_size{{$project->id}}"></span></em>
+								  									</li>
+								  								</ul>
+								  							</div>
+								  							<div class="form-group">
+								  								<input type="text" name="youtube_link" id="youtube_link{{$project->id}}" title="please enter a youtube link url" value="{{$project->youtube_link == '' ? '' : $project->youtube_link}}" class="form-control" placeholder="Please enter valid youtube link or leave empty">
 								  							</div>
 								  							<div class="form-group">
 								  								<textarea name="project_desc" id="project_desc{{$project->id}}" class="form-control" placeholder="Project Description" minlength="50">{{$project->project_desc}}</textarea>
@@ -1086,7 +1129,7 @@
 						// alert(single_img[1]);
 
 	    		 $.notify(response.message , 'success'  );
-	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+single_img[0]+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+project_link+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
+	    	      $('#projects-list').append('<li id="projecList'+response.data.id+'"><div class="wt-accordioninnertitle"><div class="wt-projecttitle collapsed" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'" aria-expanded="false" aria-controls="innerproject'+response.data.id+'"><figure><img src="/assets/images/projects/'+single_img[0]+'" alt="img description"></figure><h3><font id="projectName'+response.data.id+'">'+response.data.project_title+'</font><span id="projectUrl'+response.data.id+'">'+project_link+'</span></h3></div><div class="wt-rightarea"><a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" data-bs-toggle="collapse" data-bs-target="#innerproject'+response.data.id+'"><i class="fal fa-pencil"></i></a><a href="javascript:void(0);" onclick="deleteProject('+response.data.id+')" class="wt-deleteinfo"><i class="fal fa-trash-alt"></i></a></div></div><div class="wt-collapseexp collapse" id="innerproject'+response.data.id+'" aria-labelledby="accordioninnerproject'+response.data.id+'" data-bs-parent="#accordion"><div class="wt-formtheme wt-userform wt-formprojectinfo"><fieldset><div class="form-group form-group-half"><input type="text" id="project_title'+response.data.id+'" name="project_title" class="form-control" placeholder="Project Title" value="'+response.data.project_title+'"></div><div class="form-group form-group-half"><input type="text" name="project_url" id="project_url'+response.data.id+'" class="form-control" placeholder="Project URL" value="'+response.data.project_url+'"></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="filen'+response.data.id+'"><span class="wt-btn">Select Files</span><input type="file" name="project_img" onchange="projectImageEdit(this,'+response.data.id+');" id="filen'+response.data.id+'"></label><span>Drop files here to upload</span></div></div><div class="form-group"><ul class="wt-attachfile"><li class="wt-uploaded"><span id="projectimg_name'+response.data.id+'">'+response.data.project_img+'</span><em>File size: <span id="projectImg_size'+response.data.id+'">300 kb</span></em></li></ul></div><div class="form-group form-group-label wt-infouploading"><div class="wt-labelgroup"><label for="pdffilen'+response.data.id+'"><span class="wt-btn">Select Pdf File</span><input type="file" name="pdf_files" onchange="projectFIleEdit(this);" id="pdffilen'+response.data.id+'" accept="application/pdf"></label><span>Files Upload</span></div></div><div class="form-group"><ul class="wt-attachfile" id="portfolio-file'+response.data.id+'"><li class="wt-uploaded"><span id="projectFile_name'+response.data.id+'">'+response.data.pdf_files+'</span><em>File size: <span id="projectFIle_size'+response.data.id+'"></span></em></li></ul></div><div class="form-group"><input type="text" name="youtube_link" id="youtube_link'+response.data.id+'" title="please enter a youtube link url" value="'+response.data.youtube_link+'" class="form-control" placeholder="Please enter valid youtube link or leave empty"></div><div class="form-group"><textarea name="project_desc" id="project_desc'+response.data.id+'" class="form-control" placeholder="Project Description" minlength="50">'+response.data.project_desc+'</textarea><span>(Minimum 50 Character)</span></div><div class="form-group wt-btnarea text-end"><button onclick="editProject('+response.data.id+')" class="wt-btn">Edit Project</button></div></fieldset></div></div></li>');
 	    		 	   
 	    	    $('#portfolio-imgs').html('');
 	    	    $('#portfolio-imgs').remove();
@@ -1269,8 +1312,34 @@
     // $('#projectimg_name').html(filename);
     
 	}
+
+	 	function projectFIle(input) {
+	 		var fi = input;
+	 		
+
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        console.log(reader);
+	        reader.onload = function (e) {
+	            $('#pdffilen')
+	                .attr('src', e.target.result);
+	        };
+
+	        reader.readAsDataURL(input.files[0]);
+
+	        var _size = input.files[0].size;
+	          var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+	      		i=0;while(_size>900){_size/=1024;i++;}
+	          var exactSize = (Math.round(_size*100)/100)+' '+fSExt[i];
+	      	$('#projectFIle_size').html(exactSize)
+	    }
+	    var filename = $('#pdffilen').val().split('\\').pop();
+	    $('#projectFile_name').html(filename);
+	    
+		}
+
  	function projectImageEdit(input,id) {
- 		alert(input);
+ 		// alert(input);
  				var fi = input;
  				if (fi.files.length > 0) {
 
@@ -1320,6 +1389,27 @@
     // var filename = $('#filen'+id).val().split('\\').pop();
     // $('#projectimg_name'+id).html(filename);
     
+	}
+
+	function projectFIleEdit(input,id) {
+		if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        console.log(reader);
+		        reader.onload = function (e) {
+		            $('#pdffilen'+id)
+		                .attr('src', e.target.result);
+		        };
+
+		        reader.readAsDataURL(input.files[0]);
+
+		        var _size = input.files[0].size;
+		          var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+		      		i=0;while(_size>900){_size/=1024;i++;}
+		          var exactSize = (Math.round(_size*100)/100)+' '+fSExt[i];
+		      	$('#projectFIle_size'+id).html(exactSize)
+		    }
+		    var filename = $('#pdffilen'+id).val().split('\\').pop();
+		    $('#projectFile_name'+id).html(filename);
 	}
 
 	function deleteExperience(id){
@@ -1441,11 +1531,14 @@
 		postData.append('id',id);
 		postData.append('project_title',$('#project_title'+id).val());
 		postData.append('project_url',$('#project_url'+id).val());
+		postData.append('youtube_link',$('#youtube_link'+id).val());
 		var totalfiles = $('#filen'+id).get(0).files.length;
 		for (var index = 0; index < totalfiles; index++) {
       postData.append("project_img[]", $('#filen'+id).get(0).files[index]);
    	}
-		// postData.append('project_img',img);
+   	var file = $('#pdffilen'+id)[0].files[0];
+   	// alert(file);
+		postData.append('pdf_files',file);
 		postData.append('project_desc',$('#project_desc'+id).val());
    	$.ajax({
 	    url:"{{ url('edit-project') }}",

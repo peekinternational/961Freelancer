@@ -321,6 +321,7 @@ class ProfileController extends Controller
       $project->user_id = $user_id;
       $project->project_title = $request->input('project_title');
       $project->project_url = $request->input('project_url');
+      $project->youtube_link = $request->input('youtube_link');
 
       $images=array();
       if($files=$request->file('project_img')){
@@ -338,16 +339,16 @@ class ProfileController extends Controller
       $project->project_img = implode(",",$images);
 
       
-      // $project_image = $request->file('project_img');
-      // if($project_image != ''){
-      //   $filename= $project_image->getClientOriginalName();
-      //   $imagename= 'project-'.rand(000000,999999).'.'.$project_image->getClientOriginalExtension();
-      //   $extension= $project_image->getClientOriginalExtension();
-      //   // $imagename= $filename;
-      //   $destinationpath= public_path('assets/images/projects/');
-      //   $project_image->move($destinationpath, $imagename);
-      //   $project->project_img = $imagename;
-      // }
+      $project_file = $request->file('pdf_files');
+      if($project_file != ''){
+        $filename= $project_file->getClientOriginalName();
+        $pdfName= 'project-'.rand(000000,999999).'.'.$project_file->getClientOriginalExtension();
+        $extension= $project_file->getClientOriginalExtension();
+        // $pdfName= $filename;
+        $destinationpath= public_path('assets/images/projects/');
+        $project_file->move($destinationpath, $pdfName);
+        $project->pdf_files = $pdfName;
+      }
       $project->project_desc = $request->input('project_desc');
       
       if ($project->save()) {
@@ -365,16 +366,19 @@ class ProfileController extends Controller
       $project = UserProject::find($id);
       $project->project_title = $request->input('project_title');
       $project->project_url = $request->input('project_url');
-      // $project_image = $request->file('project_img');
-      // if($project_image != ''){
-      //   $filename= $project_image->getClientOriginalName();
-      //   $imagename= 'project-'.rand(000000,999999).'.'.$project_image->getClientOriginalExtension();
-      //   $extension= $project_image->getClientOriginalExtension();
-      //   // $imagename= $filename;
-      //   $destinationpath= public_path('assets/images/projects/');
-      //   $project_image->move($destinationpath, $imagename);
-      //   $project->project_img = $imagename;
-      // }
+      $project->youtube_link = $request->input('youtube_link');
+      $project_file = $request->file('pdf_files');
+      if($project_file != ''){
+        $filename= $project_file->getClientOriginalName();
+        $pdfName= 'project-'.rand(000000,999999).'.'.$project_file->getClientOriginalExtension();
+        $extension= $project_file->getClientOriginalExtension();
+        // $pdfName= $filename;
+        $destinationpath= public_path('assets/images/projects/');
+        $project_file->move($destinationpath, $pdfName);
+        $project->pdf_files = $pdfName;
+      }else{
+        $project->pdf_files = $project->pdf_files;
+      }
 
       $images=array();
       $images[] = $project->project_img;
